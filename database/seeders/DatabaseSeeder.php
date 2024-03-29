@@ -25,7 +25,11 @@ class DatabaseSeeder extends Seeder
             kartuKeluargaSeeder::class,
             PendudukSeeder::class,
             RoleSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            UmkmSeeder::class,
+            PersuratanSeeder::class,
+            LaporanSeeder::class,
+            BansosSeeder::class
         ]);
     }
 }
