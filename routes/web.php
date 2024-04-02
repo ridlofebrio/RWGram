@@ -25,11 +25,12 @@ Route::get('/', function () {
 });
 
 
-Route::resource('bansos', BansosController::class);
-Route::resource('kas', KasController::class);
-Route::resource('umkm', UmkmController::class);
-Route::resource('penduduk', PendudukController::class);
-Route::resource('persuratan', PersuratanController::class);
-Route::resource('laporan', LaporanController::class);
-Route::resource('informasi', InformasiController::class);
+
+Route::resource('bansos', BansosController::class); //-> jo
+Route::resource('kas', KasController::class); //-> krisna
+Route::resource('umkm', UmkmController::class); //-> febrio
+Route::resource('penduduk', PendudukController::class); //-> krisna
+Route::resource('persuratan', PersuratanController::class); //->albian
+Route::resource('laporan', LaporanController::class); //-> albian
+Route::resource('informasi', InformasiController::class); //-> jo
 
