@@ -33,7 +33,6 @@ class PendudukSeeder extends Seeder
                     'pekerjaan' => $faker->jobTitle,
                     'status_tinggal' => 'tetap',
                     'status_kematian' => false,
-
                 ]
             );
 
