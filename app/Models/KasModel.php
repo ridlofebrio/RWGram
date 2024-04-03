@@ -11,4 +11,6 @@ class KasModel extends Model
 
     protected $table = "kas";
     protected $primaryKey = "kas_id";
+
+    protected $fillable = ['kartu_keluarga_id', 'jumlah_kas', 'tanggal_kas'];
 }
