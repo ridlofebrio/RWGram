@@ -23,7 +23,6 @@ class kartuKeluargaSeeder extends Seeder
             [
                 'rt_id' => 1,
                 'NKK' => $faker->randomNumber(),
-                'pendapatan' => 3000000,
                 'no_telepon' => $faker->phoneNumber,
                 'tanggal_kk' => now(),
                 'created_at' => date("Y-m-d H:i:s"),

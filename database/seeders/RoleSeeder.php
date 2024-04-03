@@ -16,17 +16,33 @@ class RoleSeeder extends Seeder
         //
 
         $roles = array('RT Admin', 'RW Admin', 'Karang Taruna');
-        $kode = array('RTA', 'RWA', 'KTR');
+        $kode = array('RT1A','RT2A','RT3A', "RT4A",'RWA', 'KTR');
         $i = 1;
-        foreach ($roles as $role) {
-            DB::table('role')->insert(
-                [
+        $j=0;
+        foreach ($kode as $kod) {
+            if($i<=4){
+                 DB::table('role')->insert(
+                    [
                     'role_id' => $i,
                     'kode' => $kode[$i - 1],
-                    'nama_role' => $role
-                ]
-            );
-            $i++;
+                    'nama_role' => $roles[$j]
+                    ]
+                 )  ;  
+                  
+            }else{
+                $j++;
+                DB::table('role')->insert(
+                    [
+                        'role_id' => $i,
+                        'kode' => $kode[$i - 1],
+                        'nama_role' => $roles[$j]
+                    ]
+                );
+            }
+            $i++;  
+
+           
+         
         }
     }
 }

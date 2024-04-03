@@ -29,7 +29,8 @@ class DatabaseSeeder extends Seeder
             UmkmSeeder::class,
             PersuratanSeeder::class,
             LaporanSeeder::class,
-            BansosSeeder::class
+            BansosSeeder::class,
+            KasSeeder::class
         ]);
     }
 }
