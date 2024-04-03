@@ -28,7 +28,7 @@ class AuthSessionController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            dd(Auth::user());
+            return redirect('/kas');
         }
 
         return back()->withErrors([

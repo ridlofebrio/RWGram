@@ -28,7 +28,7 @@ Route::get('/', function () {
 
 
 Route::resource('bansos', BansosController::class); //-> jo
-Route::resource('kas', KasController::class); //-> krisna
+Route::resource('kas', KasController::class)->middleware('auth'); //-> krisna
 Route::resource('umkm', UmkmController::class); //-> febrio
 Route::resource('penduduk', PendudukController::class); //-> krisna
 Route::resource('persuratan', PersuratanController::class); //->albian

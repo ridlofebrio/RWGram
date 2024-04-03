@@ -33,6 +33,13 @@ class KasController extends Controller
     public function store(Request $request)
     {
         //
+        KasModel::create([
+            'kartu_keluarga_id' => $request->kartu_keluarga,
+            'jumlah_kas' => $request->kas,
+            'tanggal_kas' => $request->tanggal
+        ]);
+
+        return redirect('/kas')->with('success', 'Data berhasil ditambah');
     }
 
     /**
@@ -40,7 +47,9 @@ class KasController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $kas = KasModel::find($id);
+
+        return view('kas.show', $data = ['data' => $kas]);
     }
 
     /**
@@ -49,6 +58,9 @@ class KasController extends Controller
     public function edit(string $id)
     {
         //
+        $kas = KasModel::find($id);
+
+        return view('kas.edit', $data = ['data' => $kas]);
     }
 
     /**
@@ -57,6 +69,15 @@ class KasController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $data = KasModel::find($id);
+
+        $data->update([
+            'kartu_keluarga_id' => $request->kartu_keluarga,
+            'jumlah_kas' => $request->kas,
+            'tanggal_kas' => $request->tanggal
+        ]);
+
+        return redirect('/kas')->with('success', 'Data berhasil diupdate');
     }
 
     /**
@@ -65,5 +86,13 @@ class KasController extends Controller
     public function destroy(string $id)
     {
         //
+
+        try {
+            KasModel::destroy($id);
+
+            return redirect('/kas')->with('success', 'Data berhasil dihapus');
+        } catch (e) {
+            return redirect('/kas')->with('error', 'Data Gagal dihapus');
+        }
     }
 }

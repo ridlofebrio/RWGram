@@ -7,27 +7,24 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>ini tambah</h1>
-
-   
-
-    <form action="/kas" method="POST">
+    <form action="{{url('/kas/'.$data->kas_id)}}" method="POST">
         @csrf
-        @method('POST')
+        @method('PUT')
         <div class="form-group">
             <label for="kartu_keluarga">Kartu Keluarga ID</label>
-            <input type="text" name="kartu_keluarga" id="">
+            <input type="text" name="kartu_keluarga"  value="{{$data->kartu_keluarga_id}}" id="">
         </div>
         <div class="form-group">
             <label for="kas">Jumlah Kas</label>
-            <input type="text" name="kas" id="">
+            <input type="text" name="kas" value="{{$data->jumlah_kas}}"  id="">
         </div>
-
+    
         <div class="form-group">
             <label for="tanggal">Tanggal Kas</label>
-            <input type="date" name="tanggal" id="">
+            <input type="date" name="tanggal" value="{{$data->tanggal_kas}}" id="">
         </div>
-
+      
+    
         <button type="submit">Submit</button>
 
     </form>

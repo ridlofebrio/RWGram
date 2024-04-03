@@ -17,12 +17,12 @@ return new class extends Migration {
             $table->string('NIK', 16)->unique();
             $table->string('nama_penduduk', 50);
             $table->date('tanggal_lahir');
-            $table->boolean('status_perkawinan');
+            $table->enum('status_perkawinan', ['kawin', 'belum kawin', 'cerai']);
             $table->char('jenis_kelamin', 1);
             $table->string('alamat', 100);
             $table->string('agama', 10);
             $table->string('pekerjaan', 40);
-            $table->string('status_tinggal', 10);
+            $table->enum('status_tinggal', ['tetap', 'kontrak']);
             $table->boolean('status_kematian');
             $table->timestamps();
         });
