@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PersuratanModel;
 use Illuminate\Http\Request;
 
 class PersuratanController extends Controller
@@ -11,7 +12,8 @@ class PersuratanController extends Controller
      */
     public function index()
     {
-        //
+        $persuratan = PersuratanModel::all();
+        return view('persuratan.index',compact('persuratan'))->with('i');
     }
 
     /**
@@ -19,7 +21,7 @@ class PersuratanController extends Controller
      */
     public function create()
     {
-        //
+        return view('persuratan.create');
     }
 
     /**
@@ -27,7 +29,15 @@ class PersuratanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'penduduk_id' => 'required',
+            'nomor_surat' => 'required',
+            'keterangan' => 'required',
+            'tanggal_persuratan' => 'required'
+        ]);
+
+        PersuratanModel::create($request->all());
+        return redirect()->route('persuratan.index');
     }
 
     /**
@@ -35,7 +45,8 @@ class PersuratanController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $persuratan = PersuratanModel::findOrFail($id);
+        return view('persuratan.show', compact('persuratan'));
     }
 
     /**
@@ -43,7 +54,8 @@ class PersuratanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $persuratan = PersuratanModel::find($id);
+        return view('persuratan.edit', compact('persuratan'));
     }
 
     /**
@@ -51,7 +63,15 @@ class PersuratanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'penduduk_id' => 'required',
+            'nomor_surat' => 'required',
+            'keterangan' => 'required',
+            'tanggal_persuratan' => 'required'
+        ]);
+
+        PersuratanModel::find($id)->update($request->all());
+        return redirect()->route('persuratan.index');
     }
 
     /**
@@ -59,6 +79,7 @@ class PersuratanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $laporan = PersuratanModel::findOrFail($id)->delete();
+        return redirect()->route('persuratan.index');
     }
 }
