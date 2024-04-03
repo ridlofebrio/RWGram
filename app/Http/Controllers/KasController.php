@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KasModel;
 use Illuminate\Http\Request;
 
 class KasController extends Controller
@@ -12,6 +13,9 @@ class KasController extends Controller
     public function index()
     {
         //
+        $data = KasModel::all();
+
+        return view("kas.index", $data = ['data' => $data]);
     }
 
     /**
@@ -20,6 +24,7 @@ class KasController extends Controller
     public function create()
     {
         //
+        return view("kas.create");
     }
 
     /**

@@ -7,6 +7,7 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\PersuratanController;
 use App\Http\Controllers\UmkmController;
+use App\Http\Controllers\Auth\AuthSessionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,9 @@ Route::resource('kas', KasController::class); //-> krisna
 Route::resource('umkm', UmkmController::class); //-> febrio
 Route::resource('penduduk', PendudukController::class); //-> krisna
 Route::resource('persuratan', PersuratanController::class); //->albian
-Route::resource('laporan', LaporanController::class); //-> albian
+Route::resource('laporan', LaporanController::class); //-> albian   
 Route::resource('informasi', InformasiController::class); //-> jo
 
+
+Route::get('login', [AuthSessionController::class, 'create'])->name('login');
+Route::post('login', [AuthSessionController::class, 'store']);

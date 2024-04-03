@@ -15,9 +15,15 @@ class BansosSeeder extends Seeder
     {
         DB::table('bansos')->insert([
             'bansos_id' => 1,
+            'kartu_keluarga_id' => 1,
             'tanggal_bansos' => now(),
-            'nama_bansos' => 'pemerintah',
-            'created_at' => now()
+            'jumlah_tanggungan' => 4,
+            'nama_pengaju' => 'tak awur',
+            'total_pendapatan' => 3000000,
+            'luas_rumah' => 12.5,
+            'luas_tanah' => 30.5,
+            'jumlah_kendaraan' => 2,
+            'jumlah_watt' => 90,
         ]);
     }
 }
