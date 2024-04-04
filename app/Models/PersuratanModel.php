@@ -11,4 +11,11 @@ class PersuratanModel extends Model
 
     protected $table = "persuratan";
     protected $primaryKey = "persuratan_id";
+
+    protected $fillable = [
+        'penduduk_id',
+        'nomor_surat',
+        'keterangan',
+        'tanggal_persuratan'
+    ];
 }

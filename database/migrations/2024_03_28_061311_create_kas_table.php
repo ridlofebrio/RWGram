@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('kartu_keluarga_id')->index();
             $table->foreign('kartu_keluarga_id')->references('kartu_keluarga_id')->on('kartu_keluarga');
             $table->integer('jumlah_kas');
-            $table->dateTime('tanggal_kas');
+            $table->date('tanggal_kas');
             $table->timestamps();
         });
     }

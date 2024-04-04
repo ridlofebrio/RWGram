@@ -12,4 +12,11 @@ class LaporanModel extends Model
     protected $table = "laporan";
     protected $primaryKey = "laporan_id";
 
+    protected $fillable =[
+        'penduduk_id',
+        'jenis_laporan',
+        'deskripsi_laporan',
+        'tanggal_laporan',
+        'status_laporan'
+    ];
 }

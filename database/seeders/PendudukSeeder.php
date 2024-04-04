@@ -26,7 +26,7 @@ class PendudukSeeder extends Seeder
                     'NIK' => $faker->randomNumber(),
                     'nama_penduduk' => $faker->name(),
                     'tanggal_lahir' => $faker->date(),
-                    'status_perkawinan' => $faker->boolean(),
+                    'status_perkawinan' => 'kawin',
                     'jenis_kelamin' => $faker->randomElement($array = array('L', 'P')),
                     'alamat' => $faker->streetAddress,
                     'agama' => 'islam',
