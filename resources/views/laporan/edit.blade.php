@@ -13,7 +13,7 @@
             <input type="text" name="deskripsi_laporan" id="deskripsi_laporan" value="{{ $laporan->deskripsi_laporan }}">
             <label for="tanggal_laporan"> Tanggal Laporan</label>
             <input type="datetime" name="tanggal_laporan" id="tanggal_laporan" value="{{ $laporan->tanggal_laporan }}">
-            <input type="text" name="status_laporan" id="status_laporan" value="Menunggu" ="{{ $laporan->status_laporan }}">
+            <input type="text" name="status_laporan" id="status_laporan" value="{{ $laporan->status_laporan }}">
             <button type="submit">Submit</button>
         </form>
     </div>
