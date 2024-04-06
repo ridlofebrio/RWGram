@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html> <form action="/penduduk" method="POST">
+@extends('layouts.template')
+
+@section('content')
+    <form action="/penduduk" method="POST">
     @csrf
     @method('POST')
     <div class="form-group">
@@ -91,3 +83,4 @@
     <button type="submit">Submit</button>
 
 </form>
+@endsection

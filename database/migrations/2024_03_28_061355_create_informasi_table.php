@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('user_id')->index();
             $table->foreign('user_id')->references('user_id')->on('user');
             $table->string('judul', 30);
-            $table->text('deskrisi_informasi');
+            $table->text('deskripsi_informasi');
             $table->string('foto_informasi', 250);
             $table->string('lokasi_informasi', 100);
             $table->dateTime('tanggal_informasi');

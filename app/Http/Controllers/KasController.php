@@ -41,7 +41,7 @@ class KasController extends Controller
 
         return redirect('/kas')->with('success', 'Data berhasil ditambah');
     }
-
+    
     /**
      * Display the specified resource.
      */
