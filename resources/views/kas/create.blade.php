@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>ini tambah</h1>
+    <h1>Tambah Kas</h1>
 
    
 
