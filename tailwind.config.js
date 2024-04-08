@@ -40,6 +40,7 @@ module.exports = {
             },
             dropShadow: {
                 button: "0 4px 4px rgba(0, 0, 0, 0.40)",
+                card: "0 4px 10px rgba(0, 0, 0, 0.25)",
             },
         },
     },

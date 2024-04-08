@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,30 +6,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    @vite('resources/css/app.css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
-<body>
-    
-    <h1>Login</h1>
-    <form action="/login" method="POST" >
-        @csrf
-        @method('POST')
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" name="username" id="">
+<body class="bg-dodger-blue-50" >  
+<div class="min-h-screen flex items-center justify-center">
+    <div class="w-full flex items-center flex-col max-w-md ">
+       
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
-        <div class="form-group">
-            <label for="password">Password</label>
+    @endif
+
+
+        <form class="bg-white md:h-[550px] md:w-[450px] w=[200px]  min-[350px]:w-[350px] flex flex-col justify-between  drop-shadow-card rounded-2xl px-8 pt-6 pb-8 md:pt-12 md:pb-12 mb-4" action="{{url('/login')}}" method="POST">
+            @csrf
+            @method('POST')
+
+            <div class="logo flex items-center flex-col ">
+                <img class="max-w-20 mb-3   " src="{{asset('asset/images/logo/Logo.png')}}" alt="">
+                <p href="#" class="text-dodger-blue-950 font-body font-bold text-2xl " > <span class="text-dodger-blue-700" >RW</span>GRAM</p>
+            </div>
             
-            <input type="password" name="password" id=""  >
-            @error('password')
 
-            <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
+            <div class="input mt-10">
+                <div class="mb-6">
+            
+                    <input class="shadow appearance-none border rounded-md w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" name="username" type="text" placeholder="Masukkan Username">
+                  </div>
+                  <div class="mb-6">
+                    <div class="flex  shadow appearance-none border rounded-md w-full py-3 px-4 text-gray-700 mb-3 leading-tight " >
+                        <input class="w-full focus:outline-none focus:shadow-outline"  id="password" type="password" name="password" placeholder="Masukkan Password">
+                        <button id="button_reveal" ><i id="eye" class="fa fa-eye"></i></button>
+                    </div>
+                   
+                  </div>
+            </div>
+         
+          <div class="flex items-center justify-between">
+            <button type="submit" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800  w-full text-center px-8 py-3 text-base font-medium rounded-full drop-shadow-button ">Masuk</button>
+            {{-- <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+              Forgot Password?
+            </a> --}}
+          </div>
+        </form>
+      
+      </div>
+</div>
 
-
-        </div>
-
-        <button type="submit">Login</button>
-    </form>
+<script src="{{asset('js/login.js')}}"></script>
 </body>
 </html>
