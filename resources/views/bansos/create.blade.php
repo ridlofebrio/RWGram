@@ -18,7 +18,7 @@
                     <h2>Pengajuan Penerimaan Bansos</h2>
                 </div>
                 <div class="float-right">
-                    <a class="btn btn-secondary" href="{{ route('bansos.index') }}">Kembali</a>
+                    <a class="btn btn-secondary" href="{{ route('bansos.penduduk.request') }}">Kembali</a>
                 </div>
             </div>
         </div>

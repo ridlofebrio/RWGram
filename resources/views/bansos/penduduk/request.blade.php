@@ -1,24 +1,6 @@
 @extends('layouts.template')
 
 @section('content')
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <title>Bansos</title>
-    <style>
-        .card {
-            box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-    </style>
-</head>
-
-<body class="bg-white-100">
     <header class="bg-white">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 text-center">
             <h1 class="text-3xl font-bold tracking-tight text-gray-900">Bantuan Sosial</h1>
@@ -43,7 +25,7 @@
                 text-base font-small rounded-full drop-shadow-button">Ajukan</a>
         </div>
         
-        <div class="max-w-6xl mx-auto card p-8">
+        <div class="max-w-6xl mx-auto card p-8" style="box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
             <form action="show" method="POST">
                 @csrf
                 <div class="sm:col-span-4">
@@ -74,17 +56,17 @@
     </main>
 
     <script>
+        let closeBtn = document.getElementById('close-btn');
+        let agreeCheckbox = document.getElementById('agree');
+        let submitBtn = document.getElementById('submitBtn');
+
         function resetForm() {
             document.getElementById("nomer_kk").value = ""; // Reset nilai input Nomor Kartu Keluarga
-            document.getElementById("agree").checked = false; // Uncheck checkbox
-            document.getElementById("submitBtn").disabled = true; // Disable tombol Kirim
-            document.getElementById("submitBtn").classList.remove('bg-blue-main'); // Hapus warna latar belakang tombol Kirim
-            document.getElementById("submitBtn").classList.add('bg-gray-400'); // Tambahkan warna latar belakang abu-abu pada tombol Kirim
+            agreeCheckbox.checked = false; // Uncheck checkbox
+            submitBtn.disabled = true; // Disable tombol Kirim
+            submitBtn.classList.remove('bg-blue-main'); // Hapus warna latar belakang tombol Kirim
+            submitBtn.classList.add('bg-gray-400'); // Tambahkan warna latar belakang abu-abu pada tombol Kirim
         }
-
-        var closeBtn = document.getElementById('close-btn');
-        const agreeCheckbox = document.getElementById('agree');
-        const submitBtn = document.getElementById('submitBtn');
 
         agreeCheckbox.addEventListener('change', function() {
             if (this.checked) {
@@ -100,7 +82,7 @@
 
         // Fungsi untuk menyembunyikan alert setelah 3 detik
         function hideAlert() {
-            var alert = document.getElementById('alert');
+            let alert = document.getElementById('alert');
             alert.style.display = 'none';
         }
 
@@ -110,7 +92,4 @@
 
         setTimeout(hideAlert, 3000);
     </script>
-</body>
-
-</html>
 @endsection
