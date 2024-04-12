@@ -8,9 +8,6 @@ use Illuminate\Http\Request;
 
 class BansosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $bansos = BansosModel::all();
@@ -18,17 +15,11 @@ class BansosController extends Controller
         return view('bansos.index', ['bansos' => $bansos]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('bansos.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $kartuKeluarga = KartuKeluargaModel::where('NKK', $request->nomer_kk)->first();
@@ -71,34 +62,35 @@ class BansosController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $bansos = BansosModel::findOrFail($id);
         return view('bansos.show', compact('bansos'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function request()
     {
-        //
+        return view('bansos.penduduk.request');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function showPenduduk(Request $request)
     {
-        //
+        $kartuKeluarga = KartuKeluargaModel::where('NKK', $request->nomer_kk)->first();
+
+        if ($kartuKeluarga !== null) {
+            $existingBansos = BansosModel::where('kartu_keluarga_id', $kartuKeluarga->kartu_keluarga_id)->first();
+
+            if ($existingBansos !== null) {
+                $bansos = $existingBansos;
+                return view('bansos.penduduk.show', compact('bansos'));
+            } else {
+                return redirect()->route('bansos.index')->with('error', 'Anda belum melakukan pengajuan bansos');
+            }
+        } else {
+            return redirect()->route('bansos.penduduk.request')->with('error', 'Kartu keluarga tidak ditemukan.');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $bansos = BansosModel::findOrFail($id)->delete();

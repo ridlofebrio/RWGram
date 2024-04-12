@@ -1,6 +1,3 @@
-@extends('layouts.template')
-
-@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,86 +12,82 @@
         <div class="row mt-5 mb-5">
             <div class="col-lg-12 margin-tb">
                 <div class="float-left">
-                    <h2>Pengajuan Penerimaan Bansos</h2>
+                    <h2>Detail Penerimaan Bansos</h2>
                 </div>
                 <div class="float-right">
                     <a class="btn btn-secondary" href="{{ route('bansos.penduduk.request') }}">Kembali</a>
                 </div>
             </div>
         </div>
-
-        @if ($message = Session::get('error'))
-        <div class="alert alert-danger">
-            <p>{{ $message }}</p>
-        </div>
-        @endif
     
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <strong>Ops</strong> Input gagal<br><br>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-    
-        <form action="{{ route('bansos.store') }}" method="POST">
-            @csrf
+        <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Nomor Kartu Keluarga:</strong>
-                    <input type="text" name="nomer_kk" class="form-control" placeholder="Masukkan Nomor Kartu Keluarga">
+                    <strong>ID:</strong>
+                    {{ $bansos->bansos_id }}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Nama Pengaju:</strong>
-                    <input type="text" name="nama_pengaju" class="form-control" placeholder="Masukkan Nama Pengaju">
+                    {{ $bansos->nama_pengaju }}
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Nomer KK:</strong>
+                    {{ $bansos->kartuKeluarga->NKK }}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Total Pendapatan:</strong>
-                    <input type="number" name="total_pendapatan" class="form-control" placeholder="Masukkan Total Pendapatan">
+                    {{ $bansos->total_pendapatan }}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Jumlah Tanggungan:</strong>
-                    <input type="number" name="jumlah_tanggungan" class="form-control" placeholder="Masukkan Jumlah Tanggungan">
+                    {{ $bansos->jumlah_tanggungan }}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Jumlah Kendaraan:</strong>
-                    <input type="number" name="jumlah_kendaraan" class="form-control" placeholder="Masukkan Jumlah Kendaraan">
+                    {{ $bansos->jumlah_kendaraan }}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Jumlah Watt Listrik:</strong>
-                    <input type="number" name="jumlah_watt" class="form-control" placeholder="Masukkan Jumlah Watt">
+                    <strong>Jumlah Watt:</strong>
+                    {{ $bansos->jumlah_watt }}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Luas Tanah (m^2):</strong>
-                    <input type="number" name="luas_tanah" class="form-control" placeholder="Masukkan Luas Tanah">
+                    <strong>Luas Tanah:</strong>
+                    {{ $bansos->luas_tanah }}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Luas Rumah (m^2):</strong>
-                    <input type="number" name="luas_rumah" class="form-control" placeholder="Masukkan Luas Rumah">
+                    <strong>Luas Rumah:</strong>
+                    {{ $bansos->luas_rumah }}
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-left">
-                <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Status:</strong>
+                    {{ $bansos->status }}
+                </div>
             </div>
-        </form>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Tanggal Pengajuan:</strong>
+                    {{ $bansos->tanggal_bansos }}
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
-@endsection
