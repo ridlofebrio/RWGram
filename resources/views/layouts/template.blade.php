@@ -7,6 +7,8 @@
     <title>Document</title>
     @vite('resources/css/app.css')
 </head>
+
+@stack('css')
 <body>
     @include('layouts.navbar')
 
