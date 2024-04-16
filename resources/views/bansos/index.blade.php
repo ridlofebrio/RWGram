@@ -14,9 +14,6 @@
                 <div class="float-left">
                     <h2>Data Penerimaan Bansos</h2>
                 </div>
-                {{-- <div class="float-right">
-                    <a class="btn btn-success" href="{{ url('bansos/create') }}">Add</a>
-                </div> --}}
             </div>
         </div>
 
@@ -57,7 +54,6 @@
                 <td class="text-center">
                     <form action="{{ route('bansos.destroy', $data->bansos_id) }}" method="POST">
                         <a class="btn btn-info btn-sm" href="{{ route('bansos.show', $data->bansos_id) }}">Show</a>
-                        {{-- <a class="btn btn-primary btn-sm" href="{{ route('bansos.edit', $data->bansos_id) }}">Edit</a> --}}
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>

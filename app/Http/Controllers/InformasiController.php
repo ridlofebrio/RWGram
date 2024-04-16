@@ -16,6 +16,18 @@ class InformasiController extends Controller
         return view('informasi.index', ['informasi' => $informasi]);
     }
 
+    public function indexPenduduk()
+    {
+        $informasi = InformasiModel::all();
+
+        foreach ($informasi as $info) {
+            // Mengonversi tanggal awal ke format yang diinginkan 'd F Y'
+            $info->tanggal_informasi = date('d F Y', strtotime($info->tanggal_informasi));
+        }
+
+        return view('informasi.penduduk.index', ['informasi' => $informasi]);
+    }
+
     public function create()
     {
         $user = User::all();
