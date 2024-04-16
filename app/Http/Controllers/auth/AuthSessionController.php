@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Validation\ValidationException;
 
 class AuthSessionController extends Controller
 {
@@ -32,10 +33,10 @@ class AuthSessionController extends Controller
             return redirect('/kas')->with('success', 'berhasil Login');
         }
 
-        return back()->withErrors([
-            'password' => ['The provided password does not match our records.']
-        ]);
+        throw ValidationException::withMessages([
+            'username' => trans('auth.failed'),
 
+        ]);
 
     }
 
