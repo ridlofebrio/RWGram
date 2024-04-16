@@ -42,6 +42,9 @@ Route::resource('umkm', UmkmController::class); //-> febrio
 Route::resource('penduduk', PendudukController::class); //-> krisna
 Route::resource('persuratan', PersuratanController::class); //->albian
 Route::resource('laporan', LaporanController::class); //-> albian   
+Route::group(['prefix' => 'pengaduan'], function(){
+    Route::get('/', [LaporanController::class, 'indexPenduduk'])->name('laporan.penduduk.index');
+});
 
 
 Route::get('login', [AuthSessionController::class, 'create'])->name('login');
