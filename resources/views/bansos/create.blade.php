@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <title>Bansos</title>
-</head>
-<body>
+@extends('layouts.template')
+
+@section('content')
+
+
     <div class="container">
         <div class="row mt-5 mb-5">
             <div class="col-lg-12 margin-tb">
@@ -15,7 +10,7 @@
                     <h2>Pengajuan Penerimaan Bansos</h2>
                 </div>
                 <div class="float-right">
-                    <a class="btn btn-secondary" href="{{ route('bansos.index') }}">Kembali</a>
+                    <a class="btn btn-secondary" href="{{ route('bansos.penduduk.request') }}">Kembali</a>
                 </div>
             </div>
         </div>
@@ -94,3 +89,4 @@
     </div>
 </body>
 </html>
+@endsection
