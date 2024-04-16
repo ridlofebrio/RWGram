@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="68" height="82" fill="none" viewBox="0 0 68 82">
+  <path fill="url(#a)" d="M28.474 39.602 9.385 50.779 7.797 32.488l39.706-13.066-19.496-2.052L26.51 0l36.289 8.067 1.654 19.102-35.978 12.433Z"/>
+  <path fill="url(#b)" d="m67.166 58.303-.531-6.04-16.6-1.484-49.2 14.67 1.42 16.358 64.911-23.504Z"/>
+  <path fill="url(#c)" d="m67.165 58.52-1.14-13.17-37.221-8.271-21.007-4.591L9.383 50.78l41.181 6.255 16.601 1.483Z"/>
+  <defs>
+    <linearGradient id="a" x1="3.366" x2="50.774" y1="55.113" y2="8.368" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E3A5D"/>
+      <stop offset=".457" stop-color="#157AA9"/>
+      <stop offset="1" stop-color="#1EC4FF"/>
+    </linearGradient>
+    <linearGradient id="b" x1="76.298" x2="-7.161" y1="47.099" y2="76.714" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E3A5D"/>
+      <stop offset=".03" stop-color="#0F456A"/>
+      <stop offset=".129" stop-color="#136792"/>
+      <stop offset=".235" stop-color="#1784B4"/>
+      <stop offset=".348" stop-color="#199BCF"/>
+      <stop offset=".469" stop-color="#1BADE4"/>
+      <stop offset=".604" stop-color="#1DBAF3"/>
+      <stop offset=".762" stop-color="#1EC2FC"/>
+      <stop offset="1" stop-color="#1EC4FF"/>
+    </linearGradient>
+    <linearGradient id="c" x1="7.796" x2="82.16" y1="45.504" y2="45.504" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E3A5D"/>
+      <stop offset=".118" stop-color="#0F4165"/>
+      <stop offset=".306" stop-color="#11557D"/>
+      <stop offset=".541" stop-color="#1575A2"/>
+      <stop offset=".81" stop-color="#1AA1D6"/>
+      <stop offset="1" stop-color="#1EC4FF"/>
+    </linearGradient>
+  </defs>
+</svg>

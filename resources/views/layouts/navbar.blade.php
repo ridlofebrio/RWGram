@@ -34,14 +34,35 @@
             <div class="flex items-center gap-8 font-main ">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <a href="#" class="text-neutral-10 hover:text-blue-main  rounded-md  text-base font-medium">Beranda</a>
-              <a href="#" class=" text-blue-main rounded-md  text-base font-medium" aria-current="page">Permohonan</a>
+              <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class=" text-blue-main rounded-md  text-base font-medium" aria-current="page">Permohonan <i class="fa fa-angle-down" ></i></button>
               <a href="#" class="text-neutral-10 hover:text-blue-main  rounded-md  text-base font-medium">Pengaduan</a>
-              <a href="#" class="text-neutral-10 hover:text-blue-main  rounded-md  text-base font-medium">Pengumuman</a>
+              <a href="#" class="text-neutral-10 hover:text-blue-main  rounded-md  text-base font-medium">Pengumuman </a>
               <a href="#" class="text-neutral-10 hover:text-blue-main  rounded-md  text-base font-medium">Data Diri</a>
               <a href="#" class="text-neutral-10 hover:text-blue-main  rounded-md  text-base font-medium">Tentang</a>
-              <a href="#" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-8 py-3 text-base font-medium rounded-full drop-shadow-button ">Masuk</a>
+              <a href="/login" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-8 py-3 text-base font-medium rounded-full drop-shadow-button ">Masuk</a>
             </div>
           </div>
+
+          <div id="dropdown" class="z-50 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 drop-shadow-card ">
+            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+              <li>
+                <a href="#" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">UMKM</a>
+              </li>
+              <li>
+                <a href="#" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Status Nikah</a>
+              </li>
+              <li>
+                <a href="#" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Status Tempat Tinggal</a>
+              </li>
+              <li>
+                <a href="#" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Status Meniggal</a>
+              </li>
+              <li>
+                <a href="#" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Bantuan Sosial</a>
+              </li>
+            </ul>
+        </div>
+
         </div>
        <!-- <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
