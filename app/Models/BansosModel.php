@@ -23,6 +23,12 @@ class BansosModel extends Model
         'luas_tanah',
         'jumlah_watt',
         'tanggal_bansos',
+        'foto_dapur',
+        'foto_depan_rumah',
+        'foto_kamar_mandi',
+        'foto_kamar_tidur',
+        'foto_kamar_tamu',
+        'status',
     ];
 
     public function kartuKeluarga(): BelongsTo

@@ -3,9 +3,9 @@
 @section('content')
     <header class="bg-white">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-3xl font-bold tracking-tight text-gray-900">Bantuan Sosial</h1>
+            <h1 class="text-3xl font-bold tracking-tight text-gray-900">Data Diri</h1>
             <p class="mt-1 text-sm leading-6 text-gray-600 max-w-xl mx-auto">Informasi ini berkaitan dengan 
-                bantuan sosial yang menampilkan informasi tentang penerimaan dan pengajuan bantuan sosial.</p>
+                data diri yang menampilkan informasi tentang data diri penduduk RW 06 Kelurahan Kalirejo Kecamatan Lawang.</p>
         </div>
     </header>
     <div class="container mx-auto mt-2">
@@ -28,23 +28,15 @@
     </div>
     <main class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <!-- Your content -->
-        <div class="max-w-6xl mx-auto flex justify-end mb-6">
-            <a href="{{ route('bansos.penduduk.create') }}" class="text-white bg-blue-main border border-blue-main px-8 py-1 
-                text-base font-small rounded-full drop-shadow-button">Ajukan</a>
-        </div>
-        
         <div class="max-w-6xl mx-auto card p-8 mb-12" style="box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
             <form action="show" method="POST">
                 @csrf
                 <div class="sm:col-span-4">
-                    <div class="mb-2">
-                        <p><span style="font-weight: 600;">Jika Anda ingin melihat status bantuan sosial Anda</span></p>
-                    </div>
-                    <label for="nomer_kk" class="block text-sm font-medium leading-6 text-gray-900">Nomor Kartu Keluarga</label>
+                    <label for="nik" class="block text-sm font-medium leading-6 text-gray-900">NIK Anda</label>
                     <div class="mt-2">
-                        <input id="nomer_kk" name="nomer_kk" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
+                        <input id="nik" name="nik" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
                             text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                            focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nomor Kartu Keluarga">
+                            focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nomor Induk Kependudukan">
                     </div>
                 </div>
                 <div class="flex items-center mt-4">
@@ -57,7 +49,7 @@
                     <button type="button" class="text-blue-main bg-grey hover:bg-blue-main hover:text-white hover:border-blue-main 
                     border border-blue-main px-20 py-1 text-base font-small rounded-full mr-8" onclick="resetForm()">Batal</button>
                     <button type="submit" id="submitBtn" disabled
-                        class="text-white bg-gray-400 px-20 py-1 text-base font-small rounded-full">Kirim</button>
+                        class="text-white bg-gray-400 px-20 py-1 text-base font-small rounded-full">Cari</button>
                 </div>
             </form>
         </div>
@@ -69,7 +61,7 @@
         let submitBtn = document.getElementById('submitBtn');
 
         function resetForm() {
-            document.getElementById("nomer_kk").value = ""; // Reset nilai input Nomor Kartu Keluarga
+            document.getElementById("nik").value = ""; // Reset nilai input Nomor Kartu Keluarga
             agreeCheckbox.checked = false; // Uncheck checkbox
             submitBtn.disabled = true; // Disable tombol Kirim
             submitBtn.classList.remove('bg-blue-main'); // Hapus warna latar belakang tombol Kirim

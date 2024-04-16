@@ -18,8 +18,6 @@ class PendudukController extends Controller
         $penduduk = PendudukModel::all();
 
         return view('penduduk.index', ['data' => $penduduk]);
-
-
     }
 
     /**
@@ -80,9 +78,22 @@ class PendudukController extends Controller
         return view('penduduk.show', ['data' => $penduduk]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    public function request()
+    {
+        return view('penduduk.penduduk.request');
+    }
+
+    public function showPenduduk(Request $request)
+    {
+        $penduduk = PendudukModel::where('NIK', $request->nik)->first();
+
+        if ($penduduk !== null) {
+            return view('penduduk.penduduk.show', compact('penduduk'));
+        } else {
+            return redirect()->route('data.penduduk.request')->with('error', 'Data diri tidak ditemukan.');
+        }
+    }
+
     public function edit(string $id)
     {
         //

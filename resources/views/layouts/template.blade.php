@@ -7,6 +7,9 @@
     <title>Document</title>
     @vite('resources/css/app.css')
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/min/dropzone.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/min/dropzone.min.js"></script>
 </head>
 <body>
     @include('layouts.navbar')
@@ -21,7 +24,7 @@
 
 
 
-@stack('js')
+    @stack('js')
 
 
 
