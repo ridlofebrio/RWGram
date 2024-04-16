@@ -21,8 +21,7 @@
     <main class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <!-- Your content -->
         <div class="max-w-6xl mx-auto flex justify-end mb-6">
-            <a href="{{ route('bansos.create') }}" class="text-white bg-blue-main border border-blue-main px-8 py-1 
-                text-base font-small rounded-full drop-shadow-button">Ajukan</a>
+            <a href="{{ route('bansos.create') }}" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-8 py-3 text-base font-medium rounded-full drop-shadow-button ">Ajukan</a>
         </div>
         
         <div class="max-w-6xl mx-auto card p-8" style="box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
@@ -65,6 +64,7 @@
             agreeCheckbox.checked = false; // Uncheck checkbox
             submitBtn.disabled = true; // Disable tombol Kirim
             submitBtn.classList.remove('bg-blue-main'); // Hapus warna latar belakang tombol Kirim
+            submitBtn.classList.remove('hover:bg-dodger-blue-800'); // Hapus warna latar belakang tombol Kirim
             submitBtn.classList.add('bg-gray-400'); // Tambahkan warna latar belakang abu-abu pada tombol Kirim
         }
 
@@ -72,10 +72,12 @@
             if (this.checked) {
                 submitBtn.disabled = false;
                 submitBtn.classList.remove('bg-gray-400');
+                submitBtn.classList.add('hover:bg-dodger-blue-800'); 
                 submitBtn.classList.add('bg-blue-main');
             } else {
                 submitBtn.disabled = true;
                 submitBtn.classList.remove('bg-blue-main');
+                submitBtn.classList.remove('hover:bg-dodger-blue-800'); 
                 submitBtn.classList.add('bg-gray-400');
             }
         });
