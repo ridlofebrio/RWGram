@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layouts.template');
+    return view('welcome');
 });
 
 Route::resource('bansos', BansosController::class); //-> jo
@@ -48,6 +48,9 @@ Route::resource('kas', KasController::class)->middleware('auth'); //-> krisna
 Route::resource('umkm', UmkmController::class); //-> febrio
 Route::resource('persuratan', PersuratanController::class); //->albian
 Route::resource('laporan', LaporanController::class); //-> albian   
+Route::group(['prefix' => 'pengaduan'], function(){
+    Route::get('/', [LaporanController::class, 'indexPenduduk'])->name('laporan.penduduk.index');
+});
 
 
 Route::get('login', [AuthSessionController::class, 'create'])->name('login');
