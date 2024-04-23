@@ -25,7 +25,7 @@
                             {{ $info->judul }}
                         </p>
                         <p class="text-sm text-neutral-500 dark:text-white text-black">
-                            {{ $info->deskrisi_informasi }}
+                            {{ $info->deskripsi_informasi }}
                         </p>
                         <div class="flex items-center mt-1 text-sm text-gray-500 dark:text-white">
                             <svg class="w-4 h-4 mr-1 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
