@@ -29,13 +29,14 @@ class PendudukSeeder extends Seeder
                     'status_perkawinan' => 'kawin',
                     'jenis_kelamin' => $faker->randomElement($array = array('L', 'P')),
                     'alamat' => $faker->streetAddress,
+                    'golongan_darah' => $faker->randomElement($array = array('A', 'B', 'AB', 'O')),
+                    'tempat_lahir' => $faker->city,
                     'agama' => 'islam',
                     'pekerjaan' => $faker->jobTitle,
                     'status_tinggal' => 'tetap',
                     'status_kematian' => false,
                 ]
             );
-
         }
     }
 }

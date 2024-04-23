@@ -29,6 +29,7 @@ Route::resource('bansos', BansosController::class); //-> jo
 Route::group(['prefix' => 'bansos-penduduk'], function () {
     Route::post('/show', [BansosController::class, 'showPenduduk'])->name('bansos.penduduk.show');
     Route::get('/request', [BansosController::class, 'request'])->name('bansos.penduduk.request');
+    Route::get('/create', [BansosController::class, 'create'])->name('bansos.penduduk.create');
 });
 
 Route::resource('informasi', InformasiController::class); //-> jo
@@ -37,9 +38,14 @@ Route::group(['prefix' => 'informasi-penduduk'], function () {
     Route::get('/index', [InformasiController::class, 'indexPenduduk'])->name('informasi.penduduk.index');
 });
 
+Route::resource('penduduk', PendudukController::class); //-> krisna
+Route::group(['prefix' => 'data-penduduk'], function () {
+    Route::post('/show', [PendudukController::class, 'showPenduduk'])->name('data.penduduk.show');
+    Route::get('/request', [PendudukController::class, 'request'])->name('data.penduduk.request');
+});
+
 Route::resource('kas', KasController::class)->middleware('auth'); //-> krisna
 Route::resource('umkm', UmkmController::class); //-> febrio
-Route::resource('penduduk', PendudukController::class); //-> krisna
 Route::resource('persuratan', PersuratanController::class); //->albian
 Route::resource('laporan', LaporanController::class); //-> albian   
 Route::group(['prefix' => 'pengaduan'], function(){

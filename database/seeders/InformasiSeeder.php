@@ -17,7 +17,7 @@ class InformasiSeeder extends Seeder
             [
                 'user_id' => 1,
                 'judul' => 'Buka Bersama',
-                'deskrisi_informasi' => 'Buka bersama di rumah pak rt',
+                'deskripsi_informasi' => 'Buka bersama di rumah pak rt',
                 'foto_informasi' => '',
                 'lokasi_informasi' => 'Jl. Lawang Barat Rumah Pak RT Budi',
                 'tanggal_informasi' => now()
@@ -25,7 +25,7 @@ class InformasiSeeder extends Seeder
             [
                 'user_id' => 1,
                 'judul' => 'Kerja Bakti',
-                'deskrisi_informasi' => 'Kerja bakti lingkungan RW',
+                'deskripsi_informasi' => 'Kerja bakti lingkungan RW',
                 'foto_informasi' => '',
                 'lokasi_informasi' => 'Jl. Lawang Barat',
                 'tanggal_informasi' => now()
@@ -33,7 +33,7 @@ class InformasiSeeder extends Seeder
             [
                 'user_id' => 1,
                 'judul' => 'Senam Sehat',
-                'deskrisi_informasi' => 'Senam sehat bugar bersama',
+                'deskripsi_informasi' => 'Senam sehat bugar bersama',
                 'foto_informasi' => '',
                 'lokasi_informasi' => 'Jl. Lawang Barat Lapangan Tennis Warga',
                 'tanggal_informasi' => now()
