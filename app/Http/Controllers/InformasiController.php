@@ -19,13 +19,16 @@ class InformasiController extends Controller
     public function indexPenduduk()
     {
         $informasi = InformasiModel::all();
-
+        $metadata = (object)[
+            'title' => 'Pengumuman',
+            'description' => 'Pengumuman untuk penduduk'
+        ];
         foreach ($informasi as $info) {
             // Mengonversi tanggal awal ke format yang diinginkan 'd F Y'
             $info->tanggal_informasi = date('d F Y', strtotime($info->tanggal_informasi));
         }
 
-        return view('informasi.penduduk.index', ['informasi' => $informasi, 'activeMenu' => 'pengumuman']);
+        return view('informasi.penduduk.index', ['informasi' => $informasi, 'activeMenu' => 'pengumuman', 'metadata' => $metadata]);
     }
 
     public function create()
