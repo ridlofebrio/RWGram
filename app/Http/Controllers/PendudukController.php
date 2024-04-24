@@ -80,7 +80,7 @@ class PendudukController extends Controller
 
     public function request()
     {
-        return view('penduduk.penduduk.request');
+        return view('penduduk.penduduk.request', ['activeMenu' => 'dataDiri']);
     }
 
     public function showPenduduk(Request $request)

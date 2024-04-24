@@ -25,7 +25,7 @@ class InformasiController extends Controller
             $info->tanggal_informasi = date('d F Y', strtotime($info->tanggal_informasi));
         }
 
-        return view('informasi.penduduk.index', ['informasi' => $informasi]);
+        return view('informasi.penduduk.index', ['informasi' => $informasi, 'activeMenu' => 'pengumuman']);
     }
 
     public function create()

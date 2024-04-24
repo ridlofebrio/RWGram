@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome')->with('activeMenu', 'beranda');
 });
 
 Route::resource('bansos', BansosController::class); //-> jo

@@ -18,8 +18,10 @@ class LaporanController extends Controller
 
     public function indexPenduduk()
     {
-        $laporan = LaporanModel::all();
-        return view('laporan.penduduk.index', compact('laporan'))->with('i');
+        $laporan = LaporanModel::leftJoin('penduduk', 'laporan.penduduk_id', '=', 'penduduk.penduduk_id')
+                            ->select('laporan.*', 'penduduk.nama_penduduk as nama_penduduk')
+                            ->get();
+        return view('laporan.penduduk.index', compact('laporan'));
     }
 
     /**
