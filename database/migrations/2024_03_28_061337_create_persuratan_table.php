@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('penduduk_id')->index();
             $table->foreign('penduduk_id')->references('penduduk_id')->on('penduduk');
             $table->string('nomor_surat', 30);
-            $table->string('keterangan', 50);
+            $table->string('keterangan', 200);
             $table->dateTime('tanggal_persuratan');
             $table->timestamps();
         });
