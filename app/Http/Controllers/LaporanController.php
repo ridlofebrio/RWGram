@@ -13,7 +13,12 @@ class LaporanController extends Controller
     public function index()
     {
         $laporan = LaporanModel::all();
-        return view('laporan.index', compact('laporan'))->with('i');
+        return $laporan;
+    }
+
+    public function keluhan()
+    {
+        return view('dashboard.pengaduan', ['data' => $this->index(), 'active' => 'pengaduan']);
     }
 
     public function indexPenduduk()
