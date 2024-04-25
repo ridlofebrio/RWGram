@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UmkmModel extends Model
 {
@@ -12,7 +13,7 @@ class UmkmModel extends Model
     protected $table = "umkm";
     protected $primaryKey = "umkm_id";
 
-    protected $fillable =[
+    protected $fillable = [
         'umkm_id',
         'penduduk_id',
         'nama_umkm',
@@ -22,4 +23,9 @@ class UmkmModel extends Model
         'lokasi_umkm',
         'tanggal_umkm',
     ];
+
+    public function penduduk(): BelongsTo
+    {
+        return $this->belongsTo(PendudukModel::class, 'penduduk_id', 'penduduk_id');
+    }
 }

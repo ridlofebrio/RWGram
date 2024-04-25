@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Validation\ValidationException;
 
+use Illuminate\Http\RedirectResponse;
+
+
 class AuthSessionController extends Controller
 {
     //
@@ -30,7 +33,7 @@ class AuthSessionController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect('/kas')->with('success', 'berhasil Login');
+            return redirect('/dashboard')->with('success', 'berhasil Login');
         }
 
         throw ValidationException::withMessages([
@@ -38,6 +41,18 @@ class AuthSessionController extends Controller
 
         ]);
 
+    }
+
+
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 
 
