@@ -10,7 +10,7 @@
     </header>
 
     <div class="bg-white-100 mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-        <h2 class="mt-2 mb-6 pt-2 font-semibold text-neutral-500 dark:text-white text-black text-2xl">
+        <h2 class="mt-2 mb-6 pt-2 font-semibold  dark:text-white text-black text-2xl">
             Pengumuman Terakhir
         </h2>
         @foreach ($informasi as $info)
@@ -21,10 +21,10 @@
                             alt="Generic placeholder image" />
                     </div>
                     <div class="ml-3 grow">
-                        <p class="mb-1 font-medium text-neutral-500 dark:text-white text-black">
+                        <p class="mb-1 font-medium  dark:text-white text-black">
                             {{ $info->judul }}
                         </p>
-                        <p class="text-sm text-neutral-500 dark:text-white text-black">
+                        <p class="text-sm  dark:text-white text-black">
                             {{ $info->deskrisi_informasi }}
                         </p>
                         <div class="flex items-center mt-1 text-sm text-gray-500 dark:text-white">

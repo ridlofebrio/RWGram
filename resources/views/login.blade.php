@@ -10,17 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
-<style>
-  input:focus{
-    outline:none !important;
-    outline-width: 0 !important;
-    box-shadow: none !important;
-    -moz-box-shadow: none!important;
-    -webkit-box-shadow: none!important;
-  }
 
-  
-</style>
   
 
 
