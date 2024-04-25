@@ -18,16 +18,48 @@ class kartuKeluargaSeeder extends Seeder
     public function run(): void
     {
 
-        $faker = Factory::create();
-        DB::table('kartu_keluarga')->insert(
+        $data = [
             [
                 'rt_id' => 1,
-                'NKK' => $faker->randomNumber(),
-                'pendapatan' => 3000000,
-                'no_telepon' => $faker->phoneNumber,
+                'NKK' => 3326160107400474,
+                'no_telepon' => '085399275281',
                 'tanggal_kk' => now(),
                 'created_at' => date("Y-m-d H:i:s"),
-            ]
+            ],
+            [
+                'rt_id' => 2,
+                'NKK' => 3326166004030022,
+                'no_telepon' => '081284123447',
+                'tanggal_kk' => now(),
+                'created_at' => date("Y-m-d H:i:s"),
+            ],
+            [
+                'rt_id' => 3,
+                'NKK' => 3326161606790002,
+                'no_telepon' => '082192013087',
+                'tanggal_kk' => now(),
+                'created_at' => date("Y-m-d H:i:s"),
+            ],
+            [
+                'rt_id' => 4,
+                'NKK' => 3326164410800003,
+                'no_telepon' => '085213200303',
+                'tanggal_kk' => now(),
+                'created_at' => date("Y-m-d H:i:s"),
+            ],
+            [
+                'rt_id' => 1,
+                'NKK' => 3326167001090001,
+                'no_telepon' => '085813221927',
+                'tanggal_kk' => now(),
+                'created_at' => date("Y-m-d H:i:s"),
+            ],
+
+        ];
+
+
+        DB::table('kartu_keluarga')->insert(
+            $data
         );
     }
 }

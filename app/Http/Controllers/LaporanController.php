@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LaporanModel;
 use Illuminate\Http\Request;
 
 class LaporanController extends Controller
@@ -11,7 +12,19 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        //
+        $laporan = LaporanModel::all();
+        return $laporan;
+    }
+
+    public function keluhan()
+    {
+        return view('dashboard.pengaduan', ['data' => $this->index(), 'active' => 'pengaduan']);
+    }
+
+    public function indexPenduduk()
+    {
+        $laporan = LaporanModel::all();
+        return view('laporan.penduduk.index', compact('laporan'))->with('i');
     }
 
     /**
@@ -19,7 +32,7 @@ class LaporanController extends Controller
      */
     public function create()
     {
-        //
+        return view('laporan.create');
     }
 
     /**
@@ -27,7 +40,16 @@ class LaporanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'penduduk_id' => 'required',
+            'jenis_laporan' => 'required',
+            'deskripsi_laporan' => 'required',
+            'tanggal_laporan' => 'required',
+            'status_laporan' => 'required'
+        ]);
+
+        LaporanModel::create($request->all());
+        return redirect()->route('laporan.index');
     }
 
     /**
@@ -35,7 +57,8 @@ class LaporanController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $laporan = LaporanModel::findOrFail($id);
+        return view('laporan.show', compact('laporan'));
     }
 
     /**
@@ -43,7 +66,8 @@ class LaporanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $laporan = LaporanModel::find($id);
+        return view('laporan.edit', compact('laporan'));
     }
 
     /**
@@ -51,7 +75,22 @@ class LaporanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'penduduk_id' => 'required',
+            'jenis_laporan' => 'required',
+            'deskripsi_laporan' => 'required',
+            'tanggal_laporan' => 'required',
+            'status_laporan' => 'required'
+        ]);
+
+        LaporanModel::find($id)->update([
+            'penduduk_id' => $request->penduduk_id,
+            'jenis_laporan' => $request->jenis_laporan,
+            'deskripsi_laporan' => $request->deskripsi_laporan,
+            'status_laporan' => $request->status_laporan,
+            'tanggal_laporan' => $request->tanggal_laporan
+        ]);
+        return redirect('/laporan');
     }
 
     /**
@@ -59,6 +98,7 @@ class LaporanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $laporan = LaporanModel::findOrFail($id)->delete();
+        return redirect()->route('laporan.index');
     }
 }

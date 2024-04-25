@@ -2,63 +2,110 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BansosModel;
+use App\Models\KartuKeluargaModel;
 use Illuminate\Http\Request;
 
 class BansosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $bansos = BansosModel::all();
+
+        return view('bansos.index', ['bansos' => $bansos]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('bansos.penduduk.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nomer_kk' => 'required',
+            'nama_pengaju' => 'required',
+            'total_pendapatan' => 'required|numeric',
+            'jumlah_tanggungan' => 'required|numeric',
+            'jumlah_kendaraan' => 'required|numeric',
+            'luas_rumah' => 'required|numeric',
+            'luas_tanah' => 'required|numeric',
+            'jumlah_watt' => 'required|numeric',
+        ]);
+
+        $kartuKeluarga = KartuKeluargaModel::where('NKK', $request->nomer_kk)->first();
+
+        if ($kartuKeluarga) {
+            $existingBansos = BansosModel::where('kartu_keluarga_id', $kartuKeluarga->kartu_keluarga_id)->first();
+
+            if ($existingBansos) {
+                // Jika bansos sudah ada, tambahkan jumlah bansos baru ke jumlah bansos yang sudah ada
+                $existingBansos->update([
+                    'nama_pengaju' => $request->nama_pengaju,
+                    'total_pendapatan' => $request->total_pendapatan,
+                    'jumlah_tanggungan' => $request->jumlah_tanggungan,
+                    'jumlah_kendaraan' => $request->jumlah_kendaraan,
+                    'luas_rumah' => $request->luas_rumah,
+                    'luas_tanah' => $request->luas_tanah,
+                    'jumlah_watt' => $request->jumlah_watt,
+                    'tanggal_bansos' => now(),
+                ]);
+            } else {
+                // Jika bansos belum ada, buat bansos baru
+                BansosModel::create([
+                    'kartu_keluarga_id' => $kartuKeluarga->kartu_keluarga_id,
+                    'nama_pengaju' => $request->nama_pengaju,
+                    'total_pendapatan' => $request->total_pendapatan,
+                    'jumlah_tanggungan' => $request->jumlah_tanggungan,
+                    'jumlah_kendaraan' => $request->jumlah_kendaraan,
+                    'luas_rumah' => $request->luas_rumah,
+                    'luas_tanah' => $request->luas_tanah,
+                    'jumlah_watt' => $request->jumlah_watt,
+                    'tanggal_bansos' => now(),
+                ]);
+            }
+            return redirect()->route('bansos.penduduk.request')
+                ->with('success', 'Data Berhasil Ditambahkan');
+        } else {
+            return redirect()->route('bansos.penduduk.create')
+                ->with('error', 'Kartu keluarga tidak ditemukan.');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        $bansos = BansosModel::findOrFail($id);
+        return view('bansos.show', compact('bansos'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function request()
     {
-        //
+        return view('bansos.penduduk.request');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function showPenduduk(Request $request)
     {
-        //
+        $kartuKeluarga = KartuKeluargaModel::where('NKK', $request->nomer_kk)->first();
+
+        if ($kartuKeluarga !== null) {
+            $existingBansos = BansosModel::where('kartu_keluarga_id', $kartuKeluarga->kartu_keluarga_id)->first();
+
+            if ($existingBansos !== null) {
+                $bansos = $existingBansos;
+                return view('bansos.penduduk.show', compact('bansos'));
+            } else {
+                return redirect()->route('bansos.index')->with('error', 'Anda belum melakukan pengajuan bansos');
+            }
+        } else {
+            return redirect()->route('bansos.penduduk.request')->with('error', 'Kartu keluarga tidak ditemukan.');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        $bansos = BansosModel::findOrFail($id)->delete();
+
+        return redirect()->route('bansos.index')
+            ->with('success', 'Data Berhasil Dihapus');
     }
 }
