@@ -16,6 +16,12 @@ class LaporanController extends Controller
         return view('laporan.index', compact('laporan'))->with('i');
     }
 
+    public function indexPenduduk()
+    {
+        $laporan = LaporanModel::all();
+        return view('laporan.penduduk.index', compact('laporan'))->with('i');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

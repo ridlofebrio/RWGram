@@ -9,19 +9,26 @@
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
+<style>
+  input:focus{
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none !important;
+    -moz-box-shadow: none!important;
+    -webkit-box-shadow: none!important;
+  }
+
+  
+</style>
+  
+
+
 <body class="bg-dodger-blue-50" >  
 <div class="min-h-screen flex items-center justify-center">
     <div class="w-full flex items-center flex-col max-w-md ">
        
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+      
 
 
         <form class="bg-white md:h-[550px] md:w-[450px] w=[200px]  min-[350px]:w-[350px] flex flex-col justify-between  drop-shadow-card rounded-2xl px-8 pt-6 pb-8 md:pt-12 md:pb-12 mb-4" action="{{url('/login')}}" method="POST">
@@ -36,15 +43,23 @@
 
             <div class="input mt-10">
                 <div class="mb-6">
-            
-                    <input class="shadow appearance-none border rounded-md w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" name="username" type="text" placeholder="Masukkan Username">
+                  <div class="flex  appearance-none border rounded-md w-full py-3 px-4 text-gray-700 mb-3 leading-tight ">
+                    <input  class=" appearance-none outline-none border-none   w-full  text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('username') is-invalid @enderror" id="username" name="username" type="text" placeholder="Masukkan Username" >
+                  </div>
+                  @error('username')
+    <div class="alert alert-danger">{{ $message }}</div>
+@enderror
+                   
                   </div>
                   <div class="mb-6">
-                    <div class="flex  shadow appearance-none border rounded-md w-full py-3 px-4 text-gray-700 mb-3 leading-tight " >
-                        <input class="w-full focus:outline-none focus:shadow-outline"  id="password" type="password" name="password" placeholder="Masukkan Password">
+                    <div class="flex  appearance-none border rounded-md w-full py-3 px-4 text-gray-700 mb-3 leading-tight " >
+                        <input class="w-full focus:outline-none  border-none focus:shadow-outline @error('password') is-invalid @enderror"  id="password" type="password" name="password" placeholder="Masukkan Password">
                         <button id="button_reveal" ><i id="eye" class="fa fa-eye"></i></button>
                     </div>
-                   
+                    @error('password')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                                 
                   </div>
             </div>
          
