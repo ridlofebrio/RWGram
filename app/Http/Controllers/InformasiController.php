@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\InformasiModel;
 use App\Models\informasi;
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -18,14 +19,31 @@ class InformasiController extends Controller
 
     public function indexPenduduk()
     {
-        $informasi = InformasiModel::all();
+        // Mendapatkan tanggal hari ini
+        $today = Carbon::today();
 
+        // Menghitung tanggal 7 hari ke belakang dari hari ini
+        $startDate = $today->copy()->subDays(7);
+
+        // Mengambil informasi yang memiliki tanggal antara 7 hari sebelum hari ini dan hari ini
+        $informasi = InformasiModel::whereDate('tanggal_informasi', '>=', $startDate)
+            ->whereDate('tanggal_informasi', '>=', $today)
+            ->get();
+
+        // Mengonversi format tanggal informasi
         foreach ($informasi as $info) {
-            // Mengonversi tanggal awal ke format yang diinginkan 'd F Y'
             $info->tanggal_informasi = date('d F Y', strtotime($info->tanggal_informasi));
         }
 
         return view('informasi.penduduk.index', ['informasi' => $informasi]);
+    }
+
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $informasi = InformasiModel::where('judul', 'like', "%$search%")->get();
+        return view('informasi.penduduk.index', compact('informasi'));
     }
 
     public function create()
@@ -56,6 +74,12 @@ class InformasiController extends Controller
     {
         $informasi = InformasiModel::findOrFail($id);
         return view('informasi.show', compact('informasi'));
+    }
+
+    public function showPenduduk($id)
+    {
+        $informasi = InformasiModel::findOrFail($id);
+        return view('informasi.penduduk.show', compact('informasi'));
     }
 
     public function edit(string $id)

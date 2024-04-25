@@ -4,7 +4,7 @@
     <header class="bg-white">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 text-center">
             <h1 class="text-3xl font-bold tracking-tight text-gray-900">Bantuan Sosial</h1>
-            <p class="mt-1 text-sm leading-6 text-gray-600 max-w-xl mx-auto">Informasi ini berkaitan dengan 
+            <p class="mt-2 text-base text-sm leading-6 text-gray-600 max-w-xl mx-auto">Informasi ini berkaitan dengan 
                 bantuan sosial yang menampilkan informasi tentang penerimaan dan pengajuan bantuan sosial.</p>
         </div>
     </header>
