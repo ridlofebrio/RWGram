@@ -13,7 +13,6 @@ module.exports = {
         extend: {
             colors: {
                 "blue-main": "#0096FF",
-                "blue-info-100": "#CCEAFF",
                 "dodger-blue-50": "#EDFCFF",
                 "dodger-blue-100": "#D6F6FF",
                 "dodger-blue-200": "#B5F2FF",

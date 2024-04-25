@@ -13,13 +13,38 @@ class KasSeeder extends Seeder
      */
     public function run(): void
     {
-        //
-        DB::table('kas')->insert(
+        
+        $data =[
             [
                 'kartu_keluarga_id' => 1,
                 'jumlah_kas' => 15000,
                 'tanggal_kas' => now()
-            ]
+            ],
+            [
+                'kartu_keluarga_id' => 2,
+                'jumlah_kas' => 15000,
+                'tanggal_kas' => now()
+            ],
+            [
+                'kartu_keluarga_id' => 3,
+                'jumlah_kas' => 15000,
+                'tanggal_kas' => now()
+            ],
+            [
+                'kartu_keluarga_id' => 4,
+                'jumlah_kas' => 15000,
+                'tanggal_kas' => now()
+            ],
+            [
+                'kartu_keluarga_id' => 5,
+                'jumlah_kas' => 15000,
+                'tanggal_kas' => now()
+            ],
+        ];
+
+
+        DB::table('kas')->insert(
+            $data
         );
     }
 }
