@@ -40,7 +40,7 @@ class InformasiController extends Controller
         $request->validate([
             'user_id' => 'required',
             'judul' => 'required|string',
-            'deskrisi_informasi' => 'required|string',
+            'deskripsi_informasi' => 'required|string',
             'foto_informasi' => 'required|string',
             'lokasi_informasi' => 'required|string',
             'tanggal_informasi' => 'required'
@@ -70,7 +70,7 @@ class InformasiController extends Controller
         $request->validate([
             'user_id' => 'required',
             'judul' => 'required|string',
-            'deskrisi_informasi' => 'required|string',
+            'deskripsi_informasi' => 'required|string',
             'foto_informasi' => 'required|string',
             'lokasi_informasi' => 'required|string',
             'tanggal_informasi' => 'required'

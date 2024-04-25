@@ -17,17 +17,27 @@ class BansosController extends Controller
 
     public function create()
     {
-        return view('bansos.create');
+        return view('bansos.penduduk.create');
     }
 
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'nomer_kk' => 'required',
+            'nama_pengaju' => 'required',
+            'total_pendapatan' => 'required|numeric',
+            'jumlah_tanggungan' => 'required|numeric',
+            'jumlah_kendaraan' => 'required|numeric',
+            'luas_rumah' => 'required|numeric',
+            'luas_tanah' => 'required|numeric',
+            'jumlah_watt' => 'required|numeric',
+        ]);
+
         $kartuKeluarga = KartuKeluargaModel::where('NKK', $request->nomer_kk)->first();
 
-        $existingBansos = BansosModel::where('kartu_keluarga_id', $kartuKeluarga->kartu_keluarga_id)
-            ->first();
-
         if ($kartuKeluarga) {
+            $existingBansos = BansosModel::where('kartu_keluarga_id', $kartuKeluarga->kartu_keluarga_id)->first();
+
             if ($existingBansos) {
                 // Jika bansos sudah ada, tambahkan jumlah bansos baru ke jumlah bansos yang sudah ada
                 $existingBansos->update([
@@ -54,10 +64,10 @@ class BansosController extends Controller
                     'tanggal_bansos' => now(),
                 ]);
             }
-            return redirect()->route('bansos.index')
+            return redirect()->route('bansos.penduduk.request')
                 ->with('success', 'Data Berhasil Ditambahkan');
         } else {
-            return redirect()->route('bansos.create')
+            return redirect()->route('bansos.penduduk.create')
                 ->with('error', 'Kartu keluarga tidak ditemukan.');
         }
     }

@@ -8,7 +8,7 @@
             <nav class="flex flex-col pt-10 gap-2 grow-[2]">
                 <h6 class="text-lg font-bold mb-2">Eksplor</h6> 
                 <a href="#" class="link link-hover">Tentang RWGRAM</a>
-                <a href="#" class="link link-hover">Playanan</a>
+                <a href="#" class="link link-hover">Pelayanan</a>
                 <a href="#" class="link link-hover">Tim Kami</a>
             </nav> 
             <nav class="flex flex-col pt-10 gap-2 text-sm grow">
