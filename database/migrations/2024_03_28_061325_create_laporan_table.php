@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->foreign('penduduk_id')->references('penduduk_id')->on('penduduk');
             $table->string('jenis_laporan', 20);
             $table->text('deskripsi_laporan');
+            $table->string('foto_laporan', 250)->nullable();
             $table->string('status_laporan', 15);
             $table->dateTime('tanggal_laporan');
             $table->timestamps();

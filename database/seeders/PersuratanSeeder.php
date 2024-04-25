@@ -14,19 +14,53 @@ class PersuratanSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Factory::create();
+        $data = [
+            [
+                'persuratan_id' => 1,
+                'penduduk_id' => 3,
+                'nomor_surat' => '14.011/DP-KM/X/2022',
+                'keterangan' => 'Permohonan Surat Keterangan Tidak Mampu (SKTM) untuk keperluan biaya kuliah',
+                'tanggal_persuratan' => '2024-04-10',
+                'created_at' => now()
+            ],
+            [
+                'persuratan_id' => 2,
+                'penduduk_id' => 2,
+                'nomor_surat' => '14.011/DP-KM/X/2022',
+                'keterangan' => 'Permohonan Surat Keterangan Domisili untuk keperluan administrasi pekerjaan',
+                'tanggal_persuratan' => '2024-03-25',
+                'created_at' => now()
+            ],
+            [
+                'persuratan_id' => 3,
+                'penduduk_id' => 4,
+                'nomor_surat' => '14.011/DP-KM/X/2022',
+                'keterangan' => 'Permohonan Surat Keterangan Usaha untuk keperluan pembukaan rekening bank',
+                'tanggal_persuratan' => '2024-04-05',
+                'created_at' => now()
+            ],
+            [
+                'persuratan_id' => 4,
+                'penduduk_id' => 5,
+                'nomor_surat' => '14.011/DP-KM/X/2022',
+                'keterangan' => 'Permohonan Surat Keterangan Beasiswa untuk keperluan pendaftaran program studi',
+                'tanggal_persuratan' => '2024-03-15',
+                'created_at' => now()
+            ],
+            [
+                'persuratan_id' => 5,
+                'penduduk_id' => 1,
+                'nomor_surat' => '14.011/DP-KM/X/2022',
+                'keterangan' => 'Permohonan Surat Keterangan Kelahiran untuk keperluan administrasi kependudukan',
+                'tanggal_persuratan' => '2024-04-20',
+                'created_at' => now()
+            ],
+        ];
+        
 
-        for ($i = 1; $i <= 3; $i++) {
             DB::table('persuratan')->insert(
-                [
-                    'persuratan_id' => $i,
-                    'penduduk_id' => 3,
-                    'nomor_surat' => $faker->randomNumber(),
-                    'keterangan' => 'Untuk KIP kuliah',
-                    'tanggal_persuratan' => now(),
-                    'created_at' => now()
-                ]
+                $data
             );
-        }
+        
     }
 }

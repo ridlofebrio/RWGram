@@ -17,7 +17,10 @@ class PendudukController extends Controller
         //
         $penduduk = PendudukModel::all();
 
-        return view('penduduk.index', ['data' => $penduduk]);
+        return view('dashboard.penduduk', ['data' => $penduduk, 'active' => 'penduduk']);
+
+
+
     }
 
     /**
@@ -32,6 +35,13 @@ class PendudukController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+    public function list()
+    {
+        $penduduk = PendudukModel::all();
+
+        return $penduduk;
+    }
     public function store(Request $request)
     {
         //  
