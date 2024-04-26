@@ -19,16 +19,13 @@ class InformasiController extends Controller
 
     public function indexPenduduk()
     {
-        // Mendapatkan tanggal hari ini
-        $today = Carbon::today();
+        // Mendapatkan tanggal 7 hari ke belakang dari hari ini
+        $sevenDaysAgo = Carbon::today()->subDays(7);
 
-        // Menghitung tanggal 7 hari ke belakang dari hari ini
-        $startDate = $today->copy()->subDays(7);
+        // Menghapus informasi yang memiliki tanggal lebih dari 7 hari sebelum hari ini
+        InformasiModel::whereDate('tanggal_informasi', '<', $sevenDaysAgo)->delete();
 
-        // Mengambil informasi yang memiliki tanggal antara 7 hari sebelum hari ini dan hari ini
-        $informasi = InformasiModel::whereDate('tanggal_informasi', '>=', $startDate)
-            ->whereDate('tanggal_informasi', '>=', $today)
-            ->get();
+        $informasi = InformasiModel::all();
 
         // Mengonversi format tanggal informasi
         foreach ($informasi as $info) {
@@ -37,7 +34,6 @@ class InformasiController extends Controller
 
         return view('informasi.penduduk.index', ['informasi' => $informasi]);
     }
-
 
     public function search(Request $request)
     {

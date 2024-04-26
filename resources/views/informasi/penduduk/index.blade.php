@@ -11,7 +11,7 @@
 
     <div class="bg-white-100 mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">        
         <div class="flex justify-between items-center mb-6">
-            <h2 class="font-semibold text-neutral-500 dark:text-white text-black text-2xl">
+            <h2 class="font-semibold text-neutral dark:text-white text-black text-2xl">
                 Pengumuman Terakhir
             </h2>
             <form action="{{ route('informasi.penduduk.search') }}" method="GET" class="flex items-center max-w-sm">   
@@ -36,10 +36,10 @@
                                 <img src="https://i.ibb.co/hX6pfms/img32.jpg" class="rounded-lg object-cover h-[200px] w-[320px]"/>
                             </div>
                             <div class="ml-3 grow">
-                                <p class="mb-1 font-medium text-lg text-neutral-500 dark:text-white text-black line-clamp-2">
+                                <p class="mb-1 font-medium text-lg text-neutral dark:text-white text-black line-clamp-2">
                                     {{ $info->judul }}
                                 </p>
-                                <p class="text-base text-neutral-500 dark:text-white text-black line-clamp-3">
+                                <p class="text-base text-neutral dark:text-white text-black line-clamp-3">
                                     {{ $info->deskripsi_informasi }}
                                 </p>                                
                                 <div class="text-base flex items-center mt-2 text-sm text-gray-500 dark:text-white">

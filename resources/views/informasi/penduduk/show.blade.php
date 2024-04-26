@@ -18,33 +18,33 @@
 
     <div class="bg-white-100 mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">        
         <img src="https://i.ibb.co/hX6pfms/img32.jpg" class="rounded-lg object-cover h-[420px] w-full mb-[24px]"/>
-        <p class="mb-4 font-medium text-xl text-neutral-500 dark:text-white text-black">
+        <p class="mb-4 font-medium text-xl text-neutral dark:text-white text-black">
             {{ $informasi->judul }}
         </p>       
         <p class="mb-4 font-medium text-sm text-gray-500 dark:text-gray-500">
             Diunggah pada {{ date('d F Y', strtotime($informasi->created_at)) }}
         </p>
         <div>
-            <p class="mb-1 font-medium text-lg text-neutral-500 dark:text-white text-black">
+            <p class="mb-1 font-medium text-lg text-neutral dark:text-white text-black">
                 Deskripsi
             </p>  
-            <p class="mb-4 font-small text-base text-neutral-500 dark:text-white text-black">
+            <p class="mb-4 font-small text-base text-neutral dark:text-white text-black">
                 {{ $informasi->deskripsi_informasi }}
             </p>  
         </div>
         <div>
-            <p class="mb-1 font-medium text-lg text-neutral-500 dark:text-white text-black">
+            <p class="mb-1 font-medium text-lg text-neutral dark:text-white text-black">
                 Tanggal Pelaksanaan
             </p>  
-            <p class="mb-4 font-small text-base text-neutral-500 dark:text-white text-black">
+            <p class="mb-4 font-small text-base text-neutral dark:text-white text-black">
                 {{ \Carbon\Carbon::parse($informasi->tanggal_informasi)->locale('id')->translatedFormat('l, j F Y') }}
             </p>              
         </div>
         <div>
-            <p class="mb-1 font-medium text-lg text-neutral-500 dark:text-white text-black">
+            <p class="mb-1 font-medium text-lg text-neutral dark:text-white text-black">
                 Tempat
             </p>  
-            <p class="mb-6 font-small text-base text-neutral-500 dark:text-white text-black">
+            <p class="mb-6 font-small text-base text-neutral dark:text-white text-black">
                 {{ ($informasi->lokasi_informasi) }}
             </p>              
         </div>
