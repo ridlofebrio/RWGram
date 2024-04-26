@@ -14,7 +14,7 @@ class RtSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+    
         for ($i = 1; $i <= 4; $i++) {
             DB::table('rt')->insert(
                 [

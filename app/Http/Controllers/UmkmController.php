@@ -13,8 +13,9 @@ class UmkmController extends Controller
      */
     public function index()
     {
-        $umkm = UmkmModel::all();
-        return view('umkm.index', compact('umkm'));
+        $umkm = UmkmModel::with('penduduk')->get();
+        $active = 'pengajuan';
+        return view('dashboard.pengajuan', compact('umkm', 'active'));
     }
 
     /**
@@ -36,10 +37,10 @@ class UmkmController extends Controller
             'lokasi_umkm' => 'required',
             'link_medsos' => 'required',
         ]);
-    UmkmModel::create($request->all() + ['tanggal_umkm' => now()]);
+        UmkmModel::create($request->all() + ['tanggal_umkm' => now()]);
 
         return redirect()->route('umkm.index')
-        ->with('success', 'UMKM Berhasil Ditambahkan');
+            ->with('success', 'UMKM Berhasil Ditambahkan');
     }
 
     /**
@@ -74,7 +75,7 @@ class UmkmController extends Controller
         ]);
         UmkmModel::find($id)->update($request->all());
         return redirect()->route('umkm.index')
-        ->with('success', 'Data Berhasil Diupdate');
+            ->with('success', 'Data Berhasil Diupdate');
     }
 
     /**
@@ -82,8 +83,8 @@ class UmkmController extends Controller
      */
     public function destroy(string $id)
     {
-        $umkm= UmkmModel::findOrFail($id)->delete();
+        $umkm = UmkmModel::findOrFail($id)->delete();
         return \redirect()->route('umkm.index')
-        -> with('success', 'data Berhasil Dihapus');
+            ->with('success', 'data Berhasil Dihapus');
     }
 }

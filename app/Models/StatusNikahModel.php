@@ -6,25 +6,26 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UmkmModel extends Model
+class StatusNikahModel extends Model
 {
     use HasFactory;
 
-    protected $table = "umkm";
-    protected $primaryKey = "umkm_id";
+    protected $table = "status_nikah";
+    protected $primaryKey = "id_status_nikah";
 
     protected $fillable = [
-        'umkm_id',
+        'id_status_nikah',
         'penduduk_id',
-        'nama_umkm',
-        'foto_umkm',
-        'link_medsos',
-        'deskripsi_umkm',
-        'lokasi_umkm',
-        'tanggal_umkm',
+        'nama_pengaju',
+        'NIK_pengaju',
+        'nama_pasangan',
+        'NIK_pasangan',
+        'foto_bukti',
+        'status',
+        'status_pengajuan'
     ];
 
-    public function penduduk(): BelongsTo
+    public function Penduduk(): BelongsTo
     {
         return $this->belongsTo(PendudukModel::class, 'penduduk_id', 'penduduk_id');
     }
