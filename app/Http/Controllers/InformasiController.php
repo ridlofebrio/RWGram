@@ -28,7 +28,7 @@ class InformasiController extends Controller
             $info->tanggal_informasi = date('d F Y', strtotime($info->tanggal_informasi));
         }
 
-        return view('informasi.penduduk.index', ['informasi' => $informasi, 'activeMenu' => 'pengumuman', 'metadata' => $metadata]);
+        return view('informasi.penduduk.index')->with(['informasi' => $informasi, 'activeMenu' => 'pengumuman', 'metadata' => $metadata]);
     }
 
     public function create()
@@ -65,7 +65,7 @@ class InformasiController extends Controller
     {
         $informasi = InformasiModel::find($id);
         $user = User::all();
-        return view('informasi.edit', ['informasi' => $informasi, 'user' => $user]);
+        return view('informasi.edit')->with(['informasi' => $informasi, 'user' => $user]);
     }
 
     public function update(Request $request, string $id)

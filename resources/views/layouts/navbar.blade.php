@@ -35,7 +35,7 @@
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <a href="/" class="{{ $activeMenu == 'beranda' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main  rounded-md  text-base font-medium">Beranda</a>
               <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class=" text-neutral-10 rounded-md  text-base font-medium" aria-current="page">Permohonan <i class="fa fa-angle-down" ></i></button>
-              <a href="#" class="{{ $activeMenu == 'pengaduan' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main  rounded-md  text-base font-medium">Pengaduan</a>
+              <a href="/pengaduan" class="{{ $activeMenu == 'pengaduan' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main  rounded-md  text-base font-medium">Pengaduan</a>
               <a href="/informasi-penduduk/index" class="{{ $activeMenu == 'pengumuman' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main  rounded-md  text-base font-medium">Pengumuman </a>
               <a href="/data-penduduk/request" class="{{ $activeMenu == 'dataDiri' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main  rounded-md  text-base font-medium">Data Diri</a>
               <a href="/tentang" class="{{ $activeMenu == 'tentang' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main  rounded-md  text-base font-medium">Tentang</a>

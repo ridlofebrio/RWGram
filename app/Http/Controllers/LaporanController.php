@@ -17,11 +17,12 @@ class LaporanController extends Controller
     }
 
     public function indexPenduduk()
-    {
-        $laporan = LaporanModel::leftJoin('penduduk', 'laporan.penduduk_id', '=', 'penduduk.penduduk_id')
-                            ->select('laporan.*', 'penduduk.nama_penduduk as nama_penduduk')
-                            ->get();
-        return view('laporan.penduduk.index', compact('laporan'));
+    {   $metadata = (object)[
+            'title' => 'Pengaduan',
+            'description' => 'Halaman Pengaduan Warga'
+        ];
+        $laporan = LaporanModel::with('penduduk')->get();
+        return view('laporan.penduduk.index', compact('laporan'))->with(['metadata' => $metadata, 'activeMenu' => 'pengaduan']);
     }
 
     /**
