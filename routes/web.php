@@ -22,7 +22,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $metadata = (object)[
+        'title' => 'Home',
+        'description' => 'Landing Page RWGram'
+    ];
+    return view('welcome',['activeMenu' => 'beranda', 'metadata' => $metadata]);
 });
 
 Route::resource('bansos', BansosController::class); //-> jo

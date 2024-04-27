@@ -27,12 +27,19 @@ class InformasiController extends Controller
 
         $informasi = InformasiModel::all();
 
+        $metadata = (object)[
+            'title' => 'Pengumuman',
+            'description' => 'Pengumuman untuk penduduk'
+        ];
+
+
         // Mengonversi format tanggal informasi
+
         foreach ($informasi as $info) {
             $info->tanggal_informasi = date('d F Y', strtotime($info->tanggal_informasi));
         }
 
-        return view('informasi.penduduk.index', ['informasi' => $informasi]);
+        return view('informasi.penduduk.index')->with(['informasi' => $informasi, 'activeMenu' => 'pengumuman', 'metadata' => $metadata]);
     }
 
     public function search(Request $request)
@@ -82,7 +89,7 @@ class InformasiController extends Controller
     {
         $informasi = InformasiModel::find($id);
         $user = User::all();
-        return view('informasi.edit', ['informasi' => $informasi, 'user' => $user]);
+        return view('informasi.edit')->with(['informasi' => $informasi, 'user' => $user]);
     }
 
     public function update(Request $request, string $id)
