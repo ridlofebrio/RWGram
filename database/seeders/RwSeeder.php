@@ -19,7 +19,8 @@ class RwSeeder extends Seeder
                 'nomor_rw' => '6',
                 'kelurahan' => 'Kalirejo',
                 'kecamatan' => 'Lawang',
-            ]
+            ],
+            
         );
     }
 }

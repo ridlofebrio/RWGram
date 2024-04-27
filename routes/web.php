@@ -49,10 +49,27 @@ Route::resource('kas', KasController::class)->middleware('auth'); //-> krisna
 Route::resource('umkm', UmkmController::class); //-> febrio
 Route::resource('persuratan', PersuratanController::class); //->albian
 Route::resource('laporan', LaporanController::class); //-> albian   
-Route::group(['prefix' => 'pengaduan'], function(){
+Route::group(['prefix' => 'pengaduan'], function () {
     Route::get('/', [LaporanController::class, 'indexPenduduk'])->name('laporan.penduduk.index');
 });
 
 
+Route::get('coba', [PendudukController::class, 'list']);
+
 Route::get('login', [AuthSessionController::class, 'create'])->name('login');
 Route::post('login', [AuthSessionController::class, 'store']);
+Route::get('logout', [AuthSessionController::class, 'logout']);
+
+
+Route::get('/dashboard', function () {
+    return view("dashboard");
+});
+Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
+    Route::get('/pengajuan', [UmkmController::class, 'index'])->name('laporan.penduduk.index');
+    Route::get('/pengaduan', [LaporanController::class, 'keluhan']);
+    Route::get('/penduduk', [PendudukController::class, 'index']);
+    Route::get('/', function () {
+        return view('dashboard', ['active' => 'beranda']);
+    });
+
+});

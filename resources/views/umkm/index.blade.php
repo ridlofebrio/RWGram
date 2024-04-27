@@ -1,5 +1,4 @@
 @extends('umkm/template')
-
 @section('content')
     <div class="row mt-5 mb-5">
         <div class="col-lg-12 margin-tb">
@@ -17,7 +16,7 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-
+    
     <table class="table table-bordered">
         <tr>
             <th width="20px" class="text-center">UMKM id</th>

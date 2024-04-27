@@ -3,7 +3,7 @@
 @section('content')
 <div id="indicators-carousel" class="relative  w-full" data-carousel="static">
   <!-- Carousel wrapper -->
-  <div class="relative  overflow-hidden h-[150px] sm:h-[250px]  md:h-[400px]  lg:h-[708px]">
+  <div class="relative  overflow-hidden h-[200px] sm:h-[250px]  md:h-[400px]  lg:h-[91vh]">
        <!-- Item 1 -->
       <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
 
@@ -105,9 +105,9 @@
 <div class="flex gap-12 flex-col md:flex-row w-full justify-center items-center h-full">
     <div class="img flex md:w-[300px] w-[200px] lg:w-[550px]  relative h-[350px]">
         
-        <img class="w-64 absolute left-[1rem] top-0 rounded-xl" src="{{asset('asset/images/homepage.jpg')}}" alt="">
-        <img class="w-64 absolute left-[3rem] bottom-[1rem] rounded-xl " src="{{asset('asset/images/homepage.jpg')}}" alt="">
-        <img class="w-64 absolute right-[5rem] top-[5rem] rounded-xl " src="{{asset('asset/images/homepage.jpg')}}" alt="">
+        <img class="w-32 sm:w-64 absolute left-[1rem] top-0 rounded-xl" src="{{asset('asset/images/homepage.jpg')}}" alt="">
+        <img class="w-32 sm:w-64 absolute left-[3rem] bottom-[1rem] rounded-xl " src="{{asset('asset/images/homepage.jpg')}}" alt="">
+        <img class="w-32 sm:w-64 absolute right-[5rem] top-[5rem] rounded-xl " src="{{asset('asset/images/homepage.jpg')}}" alt="">
         
     </div>
 
@@ -123,7 +123,7 @@
 
 <div class="statis bg-dodger-blue-900">
     <div class="about mx-auto max-w-7xl py-10 px-2 sm:px-6 lg:px-8 ">
-        <div class="flex flex-wrap text-white items-center h-full justify-between">
+        <div class="flex flex-col md:flex-row  text-white items-center h-full justify-between">
             <div class="info font-main font-bold">
                 <h2 class="text-dodger-blue-200 text-2xl">RT 01</h2>
                 <h1 class="text-white font-semibold text-2xl">231<span class="text-xl font-normal">penduduk</span></h1>
