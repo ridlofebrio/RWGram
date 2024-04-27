@@ -38,8 +38,9 @@ Route::group(['prefix' => 'bansos-penduduk'], function () {
 
 Route::resource('informasi', InformasiController::class); //-> jo
 Route::group(['prefix' => 'informasi-penduduk'], function () {
-    Route::post('/show', [InformasiController::class, 'showPenduduk'])->name('informasi.penduduk.show');
+    Route::get('/show/{id}', [InformasiController::class, 'showPenduduk'])->name('informasi.penduduk.show');
     Route::get('/index', [InformasiController::class, 'indexPenduduk'])->name('informasi.penduduk.index');
+    Route::get('/search', [InformasiController::class, 'search'])->name('informasi.penduduk.search');
 });
 
 Route::resource('penduduk', PendudukController::class); //-> krisna
