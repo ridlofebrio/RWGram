@@ -9,7 +9,7 @@ class StatusNikahController extends Controller
 {
     public function create()
     {
-        return view('');
+        return view('statusNikah.create');
     }
 
     public function store(Request $request)

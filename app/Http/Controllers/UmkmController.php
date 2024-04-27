@@ -23,7 +23,7 @@ class UmkmController extends Controller
      */
     public function create()
     {
-        return view('umkm.create');
+        return view('umkm.penduduk.create');
     }
 
     /**

@@ -9,7 +9,7 @@ class StatusHidupController extends Controller
 {
     public function create()
     {
-        return view('');
+        return view('statusHidup.create');
     }
     public function store(Request $request)
     {

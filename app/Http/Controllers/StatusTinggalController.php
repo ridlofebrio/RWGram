@@ -10,7 +10,7 @@ class StatusTinggalController extends Controller
     
     public function create()
     {
-        return view('');
+        return view('statusTinggal.create');
     }
 
     public function store(Request $request)
