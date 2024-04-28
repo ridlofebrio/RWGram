@@ -22,6 +22,7 @@ class StatusTinggalSeeder extends Seeder
             'alamat_pindah' => 'Jl. Baru No. 5',
             'status' => 'kontrak',
             'foto_bukti' => null,
+            'created_at' => now(),
             ],
             [
             'penduduk_id' => 2,
@@ -31,6 +32,7 @@ class StatusTinggalSeeder extends Seeder
             'alamat_pindah' => 'Jl. Baru No. 10',
             'status' => 'tetap',
             'foto_bukti' => null,
+            'created_at' => now(),
             ],
         ];
 

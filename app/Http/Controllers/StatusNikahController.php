@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class StatusNikahController extends Controller
 {
+    public function index()
+    {
+        $nikah = StatusNikahModel::all();
+        return view('statusNikah.index', compact('nikah'))->with('i');
+    }
     public function create()
     {
         return view('statusNikah.create');

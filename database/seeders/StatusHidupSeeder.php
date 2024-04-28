@@ -21,6 +21,7 @@ class StatusHidupSeeder extends Seeder
                 'nama_meninggal' => 'Budi Santoso',
                 'NIK_meninggal' => '3510110101010001',
                 'foto_bukti' =>null,
+                'created_at' => now(),
             ],
             [
                 'penduduk_id' => 3,
@@ -29,6 +30,7 @@ class StatusHidupSeeder extends Seeder
                 'nama_meninggal' => 'Budi Santoso',
                 'NIK_meninggal' => '3510110101010001',
                 'foto_bukti' => null,
+                'created_at' => now(),
             ],
         ];
         DB::table('status_hidup')->insert($data);

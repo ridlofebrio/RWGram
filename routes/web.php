@@ -60,14 +60,17 @@ Route::group(['prefix' => 'umkm-penduduk'], function () {
     Route::get('/create', [UmkmController::class, 'create'])->name('umkm.penduduk.create');
 });
 Route::group(['prefix' => 'nikah-penduduk'], function () {
+    Route::get('/', [StatusNikahController::class, 'index'])->name('nikah.penduduk.index');
     Route::get('/create', [StatusNikahController::class, 'create'])->name('nikah.penduduk.create');
     Route::get('/request', [StatusNikahController::class, 'request'])->name('nikah.penduduk.request');
 });
 Route::group(['prefix' => 'hidup-penduduk'], function () {
+    Route::get('/', [StatusHidupController::class, 'index'])->name('hidup.penduduk.index');
     Route::get('/create', [StatusHidupController::class, 'create'])->name('hidup.penduduk.create');
     Route::get('/request', [StatusHidupController::class, 'request'])->name('hidup.penduduk.request');
 });
 Route::group(['prefix' => 'tinggal-penduduk'], function () {
+    Route::get('/', [StatusTinggalController::class, 'index'])->name('tinggal.penduduk.index');
     Route::get('/create', [StatusTinggalController::class, 'create'])->name('tinggal.penduduk.create');
     Route::get('/request', [StatusTinggalController::class, 'request'])->name('tinggal.penduduk.request');
 });

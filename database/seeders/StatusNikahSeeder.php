@@ -21,6 +21,7 @@ class StatusNikahSeeder extends Seeder
                 'nama_pasangan' => 'Anya Geraldine',
                 'NIK_pasangan' => '3510110101010002',
                 'status' => 'kawin',
+                'created_at' => now(),
                 'foto_bukti' => null,
             ],
             [
@@ -30,6 +31,7 @@ class StatusNikahSeeder extends Seeder
                 'nama_pasangan' => 'Mas Bambang',
                 'NIK_pasangan' => '3510110101010002',
                 'status' => 'cerai',
+                'created_at' => now(),
                 'foto_bukti' => null,
             ],
         ];

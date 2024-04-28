@@ -25,7 +25,8 @@ class UmkmSeeder extends Seeder
                 'deskripsi_umkm' => 'Sambel Bakar menyajikan masakan khas Indonesia dengan rasa pedas yang lezat. Terbuat dari bahan-bahan segar dan rempah pilihan, Sambel Bakar siap memanjakan lidah Anda dengan cita rasa yang autentik. Nikmati sensasi pedasnya yang menggugah selera di setiap gigitannya!',
                 'lokasi_umkm' => 'Jl. Merdeka No. 123',
                 'tanggal_umkm' => '2024-04-23',
-                'created_at' => now()
+                'created_at' => now(),
+                'no_telp_umkm' => '081234567890'
             ],
             [
                 'umkm_id' => 2,
@@ -36,7 +37,8 @@ class UmkmSeeder extends Seeder
                 'deskripsi_umkm' => 'Warung Makan Padang menyajikan aneka masakan Padang dengan cita rasa yang otentik dan khas. Dari rendang, gulai ayam, sambal lado hijau, hingga gulai daun singkong, semua hidangan kami dibuat dengan bumbu rempah tradisional yang membuatnya lezat dan menggugah selera. Kunjungi kami sekarang dan rasakan nikmatnya masakan Padang!',
                 'lokasi_umkm' => 'Jl. Sudirman No. 45',
                 'tanggal_umkm' => '2024-04-20',
-                'created_at' => now()
+                'created_at' => now(),
+                'no_telp_umkm' => '083434567890'
             ],
             [
                 'umkm_id' => 3,
@@ -47,7 +49,8 @@ class UmkmSeeder extends Seeder
                 'deskripsi_umkm' => 'Bakso Pak Man menyajikan bakso dengan cita rasa yang autentik dan kenyal. Dibuat dari daging sapi pilihan yang diolah dengan resep turun-temurun, setiap suapan bakso akan memberikan pengalaman rasa yang tiada duanya. Jangan lewatkan sensasi kenikmatan bakso kami yang bikin ketagihan!',
                 'lokasi_umkm' => 'Jl. Ahmad Yani No. 67',
                 'tanggal_umkm' => '2024-04-18',
-                'created_at' => now()
+                'created_at' => now(),
+                'no_telp_umkm' => '0892849567890'
             ],
         ];
         
