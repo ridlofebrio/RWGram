@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('foto_umkm', 250)->nullable();
             $table->string('link_medsos', 250)->nullable();
             $table->text('deskripsi_umkm');
+            $table->string('no_telp_umkm', 15);
             $table->string('lokasi_umkm', 100);
             $table->dateTime('tanggal_umkm');
             $table->enum('status_pengajuan', ['diterima', 'menunggu','ditolak']) ->default('menunggu');
