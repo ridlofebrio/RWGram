@@ -29,7 +29,7 @@ Route::get('/', function () {
         'title' => 'Home',
         'description' => 'Landing Page RWGram'
     ];
-    return view('welcome',['activeMenu' => 'beranda', 'metadata' => $metadata]);
+    return view('welcome', ['activeMenu' => 'beranda', 'metadata' => $metadata]);
 });
 
 Route::resource('bansos', BansosController::class); //-> jo
@@ -56,6 +56,7 @@ Route::resource('kas', KasController::class)->middleware('auth'); //-> krisna
 
 Route::resource('umkm', UmkmController::class); //-> febrio
 Route::group(['prefix' => 'umkm-penduduk'], function () {
+    Route::get('/index', [UmkmController::class, 'indexPenduduk'])->name('umkm.penduduk.index');
     Route::get('/request', [UmkmController::class, 'request'])->name('umkm.penduduk.request');
     Route::get('/create', [UmkmController::class, 'create'])->name('umkm.penduduk.create');
 });
@@ -99,5 +100,4 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/', function () {
         return view('dashboard', ['active' => 'beranda']);
     });
-
 });

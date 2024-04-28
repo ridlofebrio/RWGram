@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
             StatusHidupSeeder::class,
             StatusNikahSeeder::class,
             StatusTinggalSeeder::class
+
         ]);
     }
 }

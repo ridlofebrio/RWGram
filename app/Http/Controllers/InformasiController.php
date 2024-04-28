@@ -32,9 +32,7 @@ class InformasiController extends Controller
             'description' => 'Pengumuman untuk penduduk'
         ];
 
-
         // Mengonversi format tanggal informasi
-
         foreach ($informasi as $info) {
             $info->tanggal_informasi = date('d F Y', strtotime($info->tanggal_informasi));
         }
@@ -82,7 +80,15 @@ class InformasiController extends Controller
     public function showPenduduk($id)
     {
         $informasi = InformasiModel::findOrFail($id);
-        return view('informasi.penduduk.show', compact('informasi'));
+
+        $metadata = (object) [
+            'title' => $informasi->judul,
+            'description' => $informasi->deskripsi_informasi,
+        ];
+
+        $activeMenu = 'pengumuman';
+
+        return view('informasi.penduduk.show', compact('informasi', 'metadata', 'activeMenu'));
     }
 
     public function edit(string $id)
