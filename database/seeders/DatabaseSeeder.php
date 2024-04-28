@@ -31,7 +31,11 @@ class DatabaseSeeder extends Seeder
             LaporanSeeder::class,
             BansosSeeder::class,
             KasSeeder::class,
-            InformasiSeeder::class
+            InformasiSeeder::class,
+            StatusHidupSeeder::class,
+            StatusNikahSeeder::class,
+            StatusTinggalSeeder::class
+
         ]);
     }
 }
