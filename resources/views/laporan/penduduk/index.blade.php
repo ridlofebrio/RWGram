@@ -49,11 +49,11 @@
             <button class="text-white bg-blue-main px-8 py-2 font-medium text-sm rounded-full shadow-lg">Ajukan</button>
         </div>
     
-        <div class="relative mt-5 overflow-x-auto shadow-md sm:rounded-lg mb-56">
-            <table class="text-sm text-left shadow-xl   w-full">
-                <thead class="text-xs text-white bg-dodger-blue-900 uppercase  ">
-                    <tr >
-                        <th class="px-6 py-3 ">
+        <div class="flex justify-center mb-56">
+            <table class="text-sm text-left shadow-xl w-full">
+                <thead class="text-xs text-white uppercase bg-dodger-blue-950">
+                    <tr>
+                        <th class="px-6 py-3">
                             No
                         </th>
                         <th class="px-6 py-3">
@@ -83,7 +83,7 @@
                             {{ $lap->tanggal_laporan }}
                         </td>
                         <td class="px-6 py-4">
-                            Susanto(contoh)
+                            {{ $lap->nama_penduduk}}
                         </td>
                         <td class="px-6 py-4 max-w-xl overflow-hidden">
                             <div class="line-clamp-4">{{ $lap->deskripsi_laporan }}</div>

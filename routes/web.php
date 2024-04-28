@@ -11,7 +11,6 @@ use App\Http\Controllers\StatusNikahController;
 use App\Http\Controllers\StatusTinggalController;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\Auth\AuthSessionController;
-use App\Models\UmkmModel;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +25,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $metadata = (object) [
+        'title' => 'Home',
+        'description' => 'Landing Page RWGram'
+    ];
+    return view('welcome', ['activeMenu' => 'beranda', 'metadata' => $metadata]);
 });
 
 Route::resource('bansos', BansosController::class); //-> jo
@@ -38,8 +41,9 @@ Route::group(['prefix' => 'bansos-penduduk'], function () {
 
 Route::resource('informasi', InformasiController::class); //-> jo
 Route::group(['prefix' => 'informasi-penduduk'], function () {
-    Route::post('/show', [InformasiController::class, 'showPenduduk'])->name('informasi.penduduk.show');
+    Route::get('/show/{id}', [InformasiController::class, 'showPenduduk'])->name('informasi.penduduk.show');
     Route::get('/index', [InformasiController::class, 'indexPenduduk'])->name('informasi.penduduk.index');
+    Route::get('/search', [InformasiController::class, 'search'])->name('informasi.penduduk.search');
 });
 
 Route::resource('penduduk', PendudukController::class); //-> krisna
@@ -49,7 +53,25 @@ Route::group(['prefix' => 'data-penduduk'], function () {
 });
 
 Route::resource('kas', KasController::class)->middleware('auth'); //-> krisna
+
 Route::resource('umkm', UmkmController::class); //-> febrio
+Route::group(['prefix' => 'umkm-penduduk'], function () {
+    Route::get('/request', [UmkmController::class, 'request'])->name('umkm.penduduk.request');
+    Route::get('/create', [UmkmController::class, 'create'])->name('umkm.penduduk.create');
+});
+Route::group(['prefix' => 'nikah-penduduk'], function () {
+    Route::get('/create', [StatusNikahController::class, 'create'])->name('nikah.penduduk.create');
+    Route::get('/request', [StatusNikahController::class, 'request'])->name('nikah.penduduk.request');
+});
+Route::group(['prefix' => 'hidup-penduduk'], function () {
+    Route::get('/create', [StatusHidupController::class, 'create'])->name('hidup.penduduk.create');
+    Route::get('/request', [StatusHidupController::class, 'request'])->name('hidup.penduduk.request');
+});
+Route::group(['prefix' => 'tinggal-penduduk'], function () {
+    Route::get('/create', [StatusTinggalController::class, 'create'])->name('tinggal.penduduk.create');
+    Route::get('/request', [StatusTinggalController::class, 'request'])->name('tinggal.penduduk.request');
+});
+
 Route::resource('persuratan', PersuratanController::class); //->albian
 Route::resource('laporan', LaporanController::class); //-> albian   
 Route::group(['prefix' => 'pengaduan'], function () {

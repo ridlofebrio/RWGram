@@ -4,7 +4,7 @@
     <header class="bg-white">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 text-center">
             <h1 class="text-3xl font-bold tracking-tight text-gray-900">Data Diri</h1>
-            <p class="mt-1 text-sm leading-6 text-gray-600 max-w-xl mx-auto">Informasi ini berkaitan dengan 
+            <p class="mt-2 text-base leading-6 text-gray-600 max-w-4xl mx-auto">Informasi ini berkaitan dengan 
                 data diri yang menampilkan informasi tentang data diri penduduk RW 06 Kelurahan Kalirejo Kecamatan Lawang.</p>
         </div>
     </header>

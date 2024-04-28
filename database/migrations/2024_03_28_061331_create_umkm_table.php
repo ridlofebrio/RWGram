@@ -20,6 +20,8 @@ return new class extends Migration {
             $table->text('deskripsi_umkm');
             $table->string('lokasi_umkm', 100);
             $table->dateTime('tanggal_umkm');
+            $table->enum('status_pengajuan', ['diterima', 'menunggu','ditolak']) ->default('menunggu');
+            $table->boolean('terbaca')->default(false);
             $table->timestamps();
         });
     }
