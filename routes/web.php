@@ -6,8 +6,12 @@ use App\Http\Controllers\KasController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\PersuratanController;
+use App\Http\Controllers\StatusHidupController;
+use App\Http\Controllers\StatusNikahController;
+use App\Http\Controllers\StatusTinggalController;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\Auth\AuthSessionController;
+use App\Models\UmkmModel;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,15 +64,29 @@ Route::post('login', [AuthSessionController::class, 'store']);
 Route::get('logout', [AuthSessionController::class, 'logout']);
 
 
-Route::get('/dashboard', function () {
-    return view("dashboard");
-});
+
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
-    Route::get('/pengajuan', [UmkmController::class, 'index'])->name('laporan.penduduk.index');
-    Route::get('/pengaduan', [LaporanController::class, 'keluhan']);
+    Route::get('/pengajuan', [UmkmController::class, 'index'])->name('laporan.penduduk.index')->middleware('RW');
+    Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/penduduk', [PendudukController::class, 'index']);
+    Route::get('/bansos', [BansosController::class, 'index']);
     Route::get('/', function () {
         return view('dashboard', ['active' => 'beranda']);
     });
 
 });
+
+
+Route::group(['prefix' => 'data'], function () {
+    Route::get('/umkm', [UmkmController::class, 'pengajuan']);
+    Route::get('/nikah', [StatusNikahController::class, 'pengajuan']);
+    Route::get('/tinggal', [StatusTinggalController::class, 'pengajuan']);
+    Route::get('/meninggal', [StatusHidupController::class, 'pengajuan']);
+
+});
+
+Route::get('/search/nikah/{value}', [StatusNikahController::class, 'find']);
+Route::get('/search/umkm/{value}', [UmkmController::class, 'find']);
+Route::get('/search/tinggal/{value}', [StatusTinggalController::class, 'find']);
+Route::get('/search/meninggal/{value}', [StatusHidupController::class, 'find']);
+

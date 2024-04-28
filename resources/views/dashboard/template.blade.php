@@ -11,6 +11,8 @@
     <script src="https://kit.fontawesome.com/e6bc1ebaee.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
 </head>
 @vite(['resources/css/app.css','resources/js/app.js'])
 @stack('css')
@@ -20,7 +22,7 @@
 <body>
     @include('dashboard.navbar')
     @include('dashboard.sidebar')
-    <div class="p-4 sm:ml-64 h-screen bg-neutral-03">
+    <div class="p-4 sm:ml-64 min-h-screen bg-neutral-03">
         <div class="p-4  w-full">
            <div class="grid gap-4 mb-4">
                 

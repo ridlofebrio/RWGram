@@ -7,10 +7,35 @@ use Illuminate\Http\Request;
 
 class StatusTinggalController extends Controller
 {
-    
+
     public function create()
     {
         return view('');
+    }
+
+
+
+    public function pengajuan()
+    {
+        $data = StatusTinggalModel::all();
+
+        return view('component.statusTinggal', ['data' => $data]);
+    }
+
+    public function find($value)
+    {
+        if ($value == 'kosong') {
+            $data = StatusTinggalModel::all();
+
+            return view('component.statusTinggal', ['data' => $data]);
+
+        } else {
+
+            $data = StatusTinggalModel::whereAny(['nama_pengaju', 'NIK'], 'like', '%' . $value . '%')->get();
+
+        }
+
+        return view('component.statusTinggal', ['data' => $data]);
     }
 
     public function store(Request $request)

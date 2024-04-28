@@ -19,7 +19,7 @@
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white  text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
         
     <div class="flex w-full justify-between items-center">
-        <h2>2 permohonan</h2>
+        <h2 class="text-xl ml-3" > {{count($data)}} Laporan</h2>
         <div class="filter flex">
             <button class="px-6 py-3 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> Filter</button>
             <div class="search border-2 border-neutral-400 rounded-full px-3">
@@ -73,9 +73,9 @@
                         {{$umkm->tanggal_laporan}}
                     </td>
                     <td class="px-6 py-4">
-                        <div class="px-2 py-2  bg-[#CCF1E5] rounded-full flex items-center gap-2 justify-center">
-                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
-                                <p class="font-body font-semibold text-green-400">
+                        <div class="px-2 py-2 w-[113px] {{$umkm->status_laporan=='selesai'? 'bg-[#CCF1E5]':'bg-[#FBF4CF]'}}  rounded-full flex items-center gap-2  justify-center">
+                                <div class="w-2 h-2 {{$umkm->status_laporan=='selesai'? 'bg-green-400':'bg-yellow-300'}} rounded-full"></div>
+                                <p class="font-body font-semibold {{$umkm->status_laporan=='selesai'? 'text-green-400':'text-yellow-300'}}">
 
                                         {{$umkm->status_laporan}}
 
@@ -84,9 +84,9 @@
                     </td>
                 
                     <td class="px-6 py-4 ">
-                        <a href="/login" class="text-red-500 border-2 border-red-500  hover:bg-red-500 hover:text-white   px-8 py-3 text-base font-medium rounded-full  ">Tolak</a>
-                        <a href="/login" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-5 py-3 text-base font-medium rounded-full  ">Konfirmasi</a>
-                        <a href="/login" class="hover:border-none hover:text-neutral-01 border-2 text-blue-main border-blue-main hover:bg-dodger-blue-800   px-5 py-3 text-base font-medium rounded-full  ">Detail</a>
+                        <a href="/login" class="text-red-500 border-2 border-red-500  hover:bg-red-500 hover:text-white   px-8 py-2 text-base font-medium rounded-full  ">Tolak</a>
+                        <a href="/login" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-5 py-2 text-base font-medium rounded-full  ">Konfirmasi</a>
+                        <a href="/login" class="hover:border-none   text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  ">Detail</a>
                     </td>
                     
                 </tr>
@@ -96,9 +96,8 @@
                
             </tbody>
         </table>
+       
     </div>
-</div>
-    
     <nav aria-label="Page navigation example" class="mt-5 text-right" >
         <ul class="inline-flex -space-x-px text-sm">
           <li>
@@ -118,6 +117,9 @@
           </li>
         </ul>
       </nav>
+</div>
+    
+  
     </div>
     
 

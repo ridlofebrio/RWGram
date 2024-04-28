@@ -69,6 +69,7 @@ class PendudukController extends Controller
             'alamat' => $request->alamat,
             'agama' => $request->agama,
             'pekerjaan' => $request->pekerjaan,
+            'tempat_lahir' => $request->tempat_lahir,
             'status_tinggal' => $request->status_tinggal,
             'status_kematian' => $request->status_kematian
         ]);

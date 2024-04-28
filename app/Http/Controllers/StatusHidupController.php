@@ -11,6 +11,31 @@ class StatusHidupController extends Controller
     {
         return view('');
     }
+
+
+    public function pengajuan()
+    {
+        $data = StatusHidupModel::all();
+
+        return view('component.statusHidup', ['data' => $data]);
+    }
+
+    public function find($value)
+    {
+        if ($value == 'kosong') {
+            $data = StatusHidupModel::all();
+
+            return view('component.statusHidup', ['data' => $data]);
+
+        } else {
+
+            $data = StatusHidupModel::whereAny(['nama_pengaju', 'NIK_pengaju'], 'like', '%' . $value . '%')->get();
+
+        }
+
+        return view('component.statusHidup', ['data' => $data]);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -42,7 +67,7 @@ class StatusHidupController extends Controller
 
         StatusHidupModel::find($id)->update($request->all());
         return redirect('');
-       
+
     }
     public function destroy(string $id)
     {
