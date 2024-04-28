@@ -28,7 +28,6 @@ return new class extends Migration {
             $table->longText('foto_kamar_tidur')->nullable();
             $table->longText('foto_kamar_tamu')->nullable();
             $table->string('status')->default('tidak menerima');
-            $table->boolean('terbaca')->default(false);
             $table->timestamps();
         });
     }
