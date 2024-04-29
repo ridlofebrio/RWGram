@@ -18,9 +18,6 @@ class PendudukController extends Controller
         $penduduk = PendudukModel::all();
 
         return view('dashboard.penduduk', ['data' => $penduduk, 'active' => 'penduduk']);
-
-
-
     }
 
     /**
@@ -91,15 +88,26 @@ class PendudukController extends Controller
 
     public function request()
     {
-        return view('penduduk.penduduk.request');
+        $metadata = (object)[
+            'title' => 'Data Diri',
+            'description' => 'Data Diri Penduduk'
+        ];
+        return view('penduduk.penduduk.request', ['activeMenu' => 'dataDiri', 'metadata' => $metadata]);
     }
 
     public function showPenduduk(Request $request)
     {
         $penduduk = PendudukModel::where('NIK', $request->nik)->first();
 
+        $metadata = (object) [
+            'title' => 'Data Penduduk',
+            'description' => $penduduk->nama_penduduk,
+        ];
+
+        $activeMenu = 'dataDiri';
+
         if ($penduduk !== null) {
-            return view('penduduk.penduduk.show', compact('penduduk'));
+            return view('penduduk.penduduk.show', compact('penduduk', 'metadata', 'activeMenu'));
         } else {
             return redirect()->route('data.penduduk.request')->with('error', 'Data diri tidak ditemukan.');
         }

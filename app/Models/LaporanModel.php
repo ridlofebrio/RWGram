@@ -19,4 +19,9 @@ class LaporanModel extends Model
         'tanggal_laporan',
         'status_laporan'
     ];
+
+    public function penduduk()
+    {
+        return $this->belongsTo(PendudukModel::class, 'penduduk_id');
+    }
 }

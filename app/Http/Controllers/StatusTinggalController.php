@@ -8,9 +8,17 @@ use Illuminate\Http\Request;
 class StatusTinggalController extends Controller
 {
 
+
+    
+    public function index()
+    {
+        $tinggal = StatusTinggalModel::all();
+        return view('statusTinggal.index', compact('tinggal'))->with('i');
+    }
+
     public function create()
     {
-        return view('');
+        return view('statusTinggal.create');
     }
 
 

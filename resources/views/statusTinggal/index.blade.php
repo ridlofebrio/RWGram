@@ -3,8 +3,8 @@
 @section('content')
     <header class="bg-white">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-3xl font-bold tracking-tight text-gray-900">Pengaduan</h1>
-            <p class="mt-1 text-sm leading-6 text-gray-600 max-w-xl mx-auto">Informasi ini berisikan pengaduan masyarakat mengenai rencana kegiatan, mempererat hubungan, meningkatkan kebersamaan, dan kualitas lingkungan.</p>
+            <h1 class="text-3xl font-bold tracking-tight text-gray-900">Status Tempat Tinggal</h1>
+            <p class="mt-1 text-sm leading-6 text-gray-600 max-w-xl mx-auto">Lorem ipsum dolor sit amet consectetur. Tincidunt varius non in vel eu pellentesque aliquam sodales porta. Hac consequat nisi arcu tortor mauris aliquet elit etiam. Vel vestibulum a scelerisque sagittis lacus porttitor. Sociis eget volutpat odio odio aliquet duis.</p>
         </div>
     </header>
 
@@ -46,21 +46,21 @@
                     </div>
                 
             </div>
-            <button class="text-white bg-blue-main px-8 py-2 font-medium text-sm rounded-full shadow-lg">Ajukan</button>
+            <a href="{{ route('tinggal.penduduk.create') }}" class="text-white bg-blue-main px-8 py-2 font-medium text-sm rounded-full shadow-lg">Ajukan</a>
         </div>
     
-        <div class="flex justify-center mb-56">
-            <table class="text-sm text-left shadow-xl w-full">
-                <thead class="text-xs text-white uppercase bg-dodger-blue-950">
-                    <tr>
-                        <th class="px-6 py-3">
+        <div class="relative mt-5 overflow-x-auto shadow-md sm:rounded-lg mb-56">
+            <table class="text-sm text-left shadow-xl   w-full">
+                <thead class="text-xs text-white bg-dodger-blue-900 uppercase  ">
+                    <tr >
+                        <th class="px-6 py-3 ">
                             No
                         </th>
                         <th class="px-6 py-3">
-                            Tanggal Pengajuan
+                            Nama Pengaju
                         </th>
                         <th class="px-6 py-3">
-                            Nama Pengaju
+                            Tanggal Pengajuan
                         </th>
                         <th class="px-6 py-3">
                             Deskripsi Pengaduan
@@ -74,28 +74,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($laporan as $lap) 
+                @foreach ($tinggal as $tinggal) 
                     <tr>
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $lap->laporan_id}}
+                            {{ $tinggal->id_status_tinggal}}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $lap->tanggal_laporan }}
+                            {{ $tinggal->nama_pengaju }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $lap->nama_penduduk}}
+                            {{ $tinggal->created_at }}
                         </td>
                         <td class="px-6 py-4 max-w-xl overflow-hidden">
-                            <div class="line-clamp-4">{{ $lap->deskripsi_laporan }}</div>
+                            <div class="line-clamp-4">{{ $tinggal->status }}</div>
                         </td>   
-                        @if ( $lap->status_laporan === 'Sukses')    
+                        @if ( $tinggal->status_pengajuan === 'Sukses')    
                             <td class="px-6 py-4">
                                 <div class="bg-green-100 text-green-600 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-1">
                                     <div class="bg-green-600 rounded-full w-2 h-2"></div>
                                     <p>Selesai</p>
                                 </div>
                             </td>
-                        @elseif ($lap->status_laporan === 'Proses')
+                        @elseif ($tinggal->status_pengajuan === 'Proses')
                             <td class="px-6 py-4">
                                 <div class="bg-blue-info-100 text-blue-main font-bold py-2 px-4 text-xs rounded-full flex items-center gap-1">
                                     <div class="bg-blue-main rounded-full w-2 h-2"></div>

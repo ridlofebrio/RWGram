@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 
 class StatusHidupController extends Controller
 {
+    public function index()
+    {
+        $hidup = StatusHidupModel::all();
+        return view('statusHidup.index', compact('hidup'))->with('i');
+    }
     public function create()
     {
-        return view('');
+        return view('statusHidup.create');
     }
 
 
