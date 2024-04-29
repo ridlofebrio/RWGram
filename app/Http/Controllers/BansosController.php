@@ -10,9 +10,9 @@ class BansosController extends Controller
 {
     public function index()
     {
-        $bansos = BansosModel::all();
+        $bansos = BansosModel::with('kartuKeluarga')->get();
 
-        return view('bansos.index', ['bansos' => $bansos]);
+        return view('dashboard.bansos', ['bansos' => $bansos, 'active' => 'bansos']);
     }
 
     public function create()

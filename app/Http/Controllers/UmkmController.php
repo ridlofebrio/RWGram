@@ -16,6 +16,34 @@ class UmkmController extends Controller
         return view('dashboard.pengajuan', compact('umkm', 'active'));
     }
 
+
+    public function pengajuan()
+    {
+        $umkm = UmkmModel::with('penduduk')->get();
+
+        return view('component.umkm', compact('umkm'));
+    }
+
+    public function find($value)
+    {
+
+        if ($value == 'kosong') {
+            $umkm = UmkmModel::all();
+
+            return view('component.umkm', compact('umkm'));
+
+        } else {
+
+            $umkm = UmkmModel::whereAny(['nama_umkm'], 'like', '%' . $value . '%')->get();
+
+        }
+        return view('component.umkm', compact('umkm'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+
     public function indexPenduduk(Request $request)
     {
         // Mendapatkan semua data UMKM
@@ -40,6 +68,7 @@ class UmkmController extends Controller
             'activeMenu' => 'beranda'
         ]);
     }
+
 
     public function create()
     {
