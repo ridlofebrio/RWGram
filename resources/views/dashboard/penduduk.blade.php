@@ -6,24 +6,7 @@
     Switch theme 
 </button> 
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white  text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
-        <ul class="flex overflow-x-auto -mb-px">
-            <li class="me-2">
-                <button href="#" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">UMKM</button>
-            </li>
-            <li class="me-2">
-                <button href="#"  class="tab inline-block p-4 text-blue-main border-b-2 border-blue-main rounded-t-lg active dark:text-blue-500 dark:border-blue-500" aria-current="page">Status Nikah</button>
-            </li>
-            <li class="me-2">
-                <button href="#" data="coba" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Status Tempat Tinggal</button>
-            </l px-3i>
-            <li class="me-2">
-                <button href="#" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Status Meninggal</button>
-            </li>
-            <li class="me-2">
-                <button href="#" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Bansos</button>
-            </li>
-
-        </ul>
+       
       
     <div class="flex mt-3 w-full justify-between items-center">
         
@@ -51,6 +34,10 @@
                         <div class="flex flex-col gap-1">
                             <label for="nkk">NKK</label>
                             <input type="text" name="nkk" id="">
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label for="tempat_lahir">Tempat Lahir</label>
+                            <input type="text" name="tempat_lahir" id="">
                         </div>
                      
                         <div class="flex flex-col gap-1">
@@ -202,8 +189,7 @@
                     </td>
                 
                     <td class="px-6 py-4 flex gap-2 ">
-                        <a href="/login" class="text-red-500 border-2 border-red-500  hover:bg-red-500 hover:text-white   px-8 py-2 text-base font-medium rounded-full  ">Tolak</a>
-                        <a href="/login" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-5 py-2 text-base font-medium rounded-full  ">Konfirmasi</a>
+                      
                         <a href="/login" class="hover:border-none   text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  ">Detail</a>
                     </td>
                     

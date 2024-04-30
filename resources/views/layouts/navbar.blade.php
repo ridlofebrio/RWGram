@@ -33,12 +33,12 @@
           <div class="hidden lg:block">
             <div class="flex items-center gap-8 font-main ">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="#" class="text-neutral-10 hover:text-blue-main  rounded-md  text-base font-medium">Beranda</a>
-              <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class=" text-blue-main rounded-md  text-base font-medium" aria-current="page">Permohonan <i class="fa fa-angle-down" ></i></button>
-              <a href="#" class="text-neutral-10 hover:text-blue-main  rounded-md  text-base font-medium">Pengaduan</a>
-              <a href="#" class="text-neutral-10 hover:text-blue-main  rounded-md  text-base font-medium">Pengumuman </a>
-              <a href="#" class="text-neutral-10 hover:text-blue-main  rounded-md  text-base font-medium">Data Diri</a>
-              <a href="#" class="text-neutral-10 hover:text-blue-main  rounded-md  text-base font-medium">Tentang</a>
+              <a href="/" class="{{ $activeMenu == 'beranda' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main  rounded-md  text-base font-medium">Beranda</a>
+              <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class=" text-neutral-10 rounded-md  text-base font-medium" aria-current="page">Permohonan <i class="fa fa-angle-down" ></i></button>
+              <a href="/pengaduan" class="{{ $activeMenu == 'pengaduan' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main  rounded-md  text-base font-medium">Pengaduan</a>
+              <a href="/informasi-penduduk/index" class="{{ $activeMenu == 'pengumuman' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main  rounded-md  text-base font-medium">Pengumuman </a>
+              <a href="/data-penduduk/request" class="{{ $activeMenu == 'dataDiri' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main  rounded-md  text-base font-medium">Data Diri</a>
+              <a href="/tentang" class="{{ $activeMenu == 'tentang' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main  rounded-md  text-base font-medium">Tentang</a>
               <a href="/login" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-8 py-3 text-base font-medium rounded-full drop-shadow-button ">Masuk</a>
             </div>
           </div>
@@ -46,7 +46,7 @@
           <div id="dropdown" class="z-50 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 drop-shadow-card ">
             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
               <li>
-                <a href="#" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">UMKM</a>
+                <a href="/umkm-penduduk/index" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">UMKM</a>
               </li>
               <li>
                 <a href="#" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Status Nikah</a>
