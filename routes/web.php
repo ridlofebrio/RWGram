@@ -88,7 +88,7 @@ Route::get('/dashboard', function () {
     return view("dashboard");
 });
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
-    Route::get('/pengajuan', [UmkmController::class, 'index'])->name('laporan.penduduk.index');
+    Route::get('/pengajuan', [UmkmController::class, 'index'])->name('laporan.admin.index');
     Route::get('/pengaduan', [LaporanController::class, 'keluhan']);
     Route::get('/penduduk', [PendudukController::class, 'index']);
     Route::get('/', function () {

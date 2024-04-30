@@ -28,14 +28,14 @@
         <div class="flex  flex-1 items-center justify-between sm:items-stretch ">
           <div class="flex flex-shrink-0 space-x-3 items-center">
             <img class="h-10 w-auto" src="{{asset('asset/images/logo/logo.png')}}" alt="Your Company">
-            <a href="#" class="text-dodger-blue-950 font-body font-bold text-xl " > <span class="text-dodger-blue-700" >RW</span>GRAM</a>
+            <a href="/" class="text-dodger-blue-950 font-body font-bold text-xl " > <span class="text-dodger-blue-700" >RW</span>GRAM</a>
           </div>
           <div class="hidden lg:block">
             <div class="flex items-center gap-8 font-main ">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="#" class="text-neutral-10 hover:text-blue-main  rounded-md  text-base font-medium">Beranda</a>
+              <a href="/" class="text-neutral-10 hover:text-blue-main  rounded-md  text-base font-medium">Beranda</a>
               <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class=" text-blue-main rounded-md  text-base font-medium" aria-current="page">Permohonan <i class="fa fa-angle-down" ></i></button>
-              <a href="#" class="text-neutral-10 hover:text-blue-main  rounded-md  text-base font-medium">Pengaduan</a>
+              <a href="{{ route('laporan.penduduk.index') }}" class="text-neutral-10 hover:text-blue-main  rounded-md  text-base font-medium">Pengaduan</a>
               <a href="#" class="text-neutral-10 hover:text-blue-main  rounded-md  text-base font-medium">Pengumuman </a>
               <a href="#" class="text-neutral-10 hover:text-blue-main  rounded-md  text-base font-medium">Data Diri</a>
               <a href="#" class="text-neutral-10 hover:text-blue-main  rounded-md  text-base font-medium">Tentang</a>
