@@ -10,19 +10,22 @@ class LaporanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($sort)
     {
-        $laporan = LaporanModel::all();
+        $laporan = LaporanModel::where('status_laporan', $sort)->get();
+
         return $laporan;
     }
 
-    public function keluhan()
+    public function keluhan($sort = 'Menunggu')
     {
-        return view('dashboard.pengaduan', ['data' => $this->index(), 'active' => 'pengaduan']);
+
+        return view('dashboard.pengaduan', ['data' => $this->index($sort), 'active' => 'pengaduan']);
     }
 
     public function indexPenduduk()
-    {   $metadata = (object)[
+    {
+        $metadata = (object) [
             'title' => 'Pengaduan',
             'description' => 'Halaman Pengaduan Warga'
         ];

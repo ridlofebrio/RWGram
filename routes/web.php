@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BansosController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\KasController;
 use App\Http\Controllers\LaporanController;
@@ -25,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $metadata = (object)[
+    $metadata = (object) [
         'title' => 'Home',
         'description' => 'Landing Page RWGram'
     ];
@@ -53,6 +54,7 @@ Route::group(['prefix' => 'data-penduduk'], function () {
 });
 
 Route::resource('kas', KasController::class)->middleware('auth'); //-> krisna
+
 
 Route::resource('umkm', UmkmController::class); //-> febrio
 Route::group(['prefix' => 'umkm-penduduk'], function () {
@@ -92,13 +94,21 @@ Route::get('logout', [AuthSessionController::class, 'logout']);
 
 
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
+    Route::get('/pengajuan/{sort}', [UmkmController::class, 'index'])->name('laporan.penduduk.index')->middleware('RW');
     Route::get('/pengajuan', [UmkmController::class, 'index'])->name('laporan.penduduk.index')->middleware('RW');
+    Route::get('/pengaduan/{sort}', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/penduduk', [PendudukController::class, 'index']);
     Route::get('/bansos', [BansosController::class, 'index']);
+<<<<<<< HEAD
+    Route::get('/persuratan', [PersuratanController::class, 'index']);
+    Route::get('/', [DashboardController::class, 'index']);
+
+=======
     Route::get('/', function () {
         return view('dashboard', ['active' => 'beranda']);
     });
+>>>>>>> be262757b25fd6212b805e29de027974823f5277
 });
 
 
@@ -107,6 +117,8 @@ Route::group(['prefix' => 'data'], function () {
     Route::get('/nikah', [StatusNikahController::class, 'pengajuan']);
     Route::get('/tinggal', [StatusTinggalController::class, 'pengajuan']);
     Route::get('/meninggal', [StatusHidupController::class, 'pengajuan']);
+    Route::get('/notif', [DashboardController::class, 'notif']);
+    Route::get('/notifcount', [DashboardController::class, 'notifcount']);
 
 });
 

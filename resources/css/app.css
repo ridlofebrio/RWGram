@@ -13,3 +13,7 @@ input:focus {
     background-color: rgb(12, 12, 23);
     color: white;
 }
+
+body {
+    font-family: "Manrope", sans-serif;
+}
