@@ -22,9 +22,12 @@ class LaporanController extends Controller
     }
 
     public function indexPenduduk()
-    {
-        $laporan = LaporanModel::all();
-        return view('laporan.penduduk.index', compact('laporan'))->with('i');
+    {   $metadata = (object)[
+            'title' => 'Pengaduan',
+            'description' => 'Halaman Pengaduan Warga'
+        ];
+        $laporan = LaporanModel::with('penduduk')->get();
+        return view('laporan.penduduk.index', compact('laporan'))->with(['metadata' => $metadata, 'activeMenu' => 'pengaduan']);
     }
 
     /**

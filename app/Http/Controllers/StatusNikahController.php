@@ -7,6 +7,29 @@ use Illuminate\Http\Request;
 
 class StatusNikahController extends Controller
 {
+
+    public function pengajuan()
+    {
+        $data = StatusNikahModel::all();
+
+        return view('component.statusNikah', ['data' => $data]);
+    }
+
+    public function find($value)
+    {
+        if ($value == 'kosong') {
+            $data = StatusNikahModel::all();
+
+            return view('component.statusNikah', ['data' => $data]);
+
+        } else {
+
+            $data = StatusNikahModel::whereAny(['nama_pengaju', 'nama_pasangan', 'status', 'id_status_nikah'], 'like', '%' . $value . '%')->get();
+
+        }
+
+        return view('component.statusNikah', ['data' => $data]);}
+
     public function index()
     {
         $nikah = StatusNikahModel::all();
@@ -15,6 +38,7 @@ class StatusNikahController extends Controller
     public function create()
     {
         return view('statusNikah.create');
+
     }
 
     public function store(Request $request)

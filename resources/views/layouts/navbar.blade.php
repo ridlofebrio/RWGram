@@ -46,7 +46,7 @@
           <div id="dropdown" class="z-50 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 drop-shadow-card ">
             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
               <li>
-                <a href="#" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">UMKM</a>
+                <a href="/umkm-penduduk/index" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">UMKM</a>
               </li>
               <li>
                 <a href="#" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Status Nikah</a>
