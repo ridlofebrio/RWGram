@@ -29,6 +29,7 @@ class StatusNikahController extends Controller
         }
 
         return view('component.statusNikah', ['data' => $data]);
+    }
 
     public function index()
     {
