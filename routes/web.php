@@ -92,8 +92,8 @@ Route::get('logout', [AuthSessionController::class, 'logout']);
 
 
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
-    Route::get('/pengajuan', [UmkmController::class, 'index'])->name('laporan.admin.index');
-    Route::get('/pengaduan', [LaporanController::class, 'keluhan']);
+    Route::get('/pengajuan', [UmkmController::class, 'index'])->name('laporan.penduduk.index')->middleware('RW');
+    Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/penduduk', [PendudukController::class, 'index']);
     Route::get('/bansos', [BansosController::class, 'index']);
     Route::get('/', function () {
