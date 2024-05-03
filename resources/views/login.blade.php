@@ -12,7 +12,14 @@
 
 
   
-
+<style>
+   
+      input::-ms-reveal,
+      input::-ms-clear {
+        display: none !important;
+      }
+    
+</style>
 
 <body class="bg-dodger-blue-50" >  
 <div class="min-h-screen flex items-center justify-center">

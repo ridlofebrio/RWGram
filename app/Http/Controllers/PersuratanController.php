@@ -13,7 +13,8 @@ class PersuratanController extends Controller
     public function index()
     {
         $persuratan = PersuratanModel::all();
-        return view('persuratan.index',compact('persuratan'))->with('i');
+        $active = 'persuratan';
+        return view('dashboard.persuratan', compact('persuratan', 'active'));
     }
 
     /**

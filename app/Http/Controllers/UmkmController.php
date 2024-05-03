@@ -11,9 +11,9 @@ class UmkmController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($sort = 'menunggu')
     {
-        $umkm = UmkmModel::with('penduduk')->get();
+        $umkm = UmkmModel::where('status_pengajuan', $sort)->with('penduduk')->get();
         $active = 'pengajuan';
         return view('dashboard.pengajuan', compact('umkm', 'active'));
     }

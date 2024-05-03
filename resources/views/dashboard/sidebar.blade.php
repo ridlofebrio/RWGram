@@ -1,7 +1,7 @@
 
 
  
- <aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+ <aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full md:translate-x-0" aria-label="Sidebar">
    <div class="h-full flex flex-col justify-between">
       <div class="h-full font-body flex flex-col justify-between text-sm px-3 py-10 overflow-y-auto bg-white dark:bg-gray-800">
          <div class="top">
@@ -54,7 +54,7 @@
                 </a>
              </li>
              <li>
-                <a href="#" class="{{$active == 'persuratan'? "bg-blue-main hover:bg-blue-main text-white":'hover:bg-gray-100'}} flex items-center p-2 text-black transition duration-75 rounded-lg  dark:hover:bg-gray-700 dark:text-white group">
+                <a href="{{url('persuratan')}}" class="{{$active == 'persuratan'? "bg-blue-main hover:bg-blue-main text-white":'hover:bg-gray-100'}} flex items-center p-2 text-black transition duration-75 rounded-lg  dark:hover:bg-gray-700 dark:text-white group">
                   <i class="fa-solid fa-envelope text-xl text-black transition duration-75" ></i>
                    <span class="ms-3">Persuratan</span>
                 </a>

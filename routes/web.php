@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BansosController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\KasController;
 use App\Http\Controllers\LaporanController;
@@ -54,6 +55,7 @@ Route::group(['prefix' => 'data-penduduk'], function () {
 
 Route::resource('kas', KasController::class)->middleware('auth'); //-> krisna
 
+
 Route::resource('umkm', UmkmController::class); //-> febrio
 Route::group(['prefix' => 'umkm-penduduk'], function () {
     Route::get('/request', [UmkmController::class, 'request'])->name('umkm.penduduk.request');
@@ -88,13 +90,14 @@ Route::get('logout', [AuthSessionController::class, 'logout']);
 
 
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
+    Route::get('/pengajuan/{sort}', [UmkmController::class, 'index'])->name('laporan.penduduk.index')->middleware('RW');
     Route::get('/pengajuan', [UmkmController::class, 'index'])->name('laporan.penduduk.index')->middleware('RW');
+    Route::get('/pengaduan/{sort}', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/penduduk', [PendudukController::class, 'index']);
     Route::get('/bansos', [BansosController::class, 'index']);
-    Route::get('/', function () {
-        return view('dashboard', ['active' => 'beranda']);
-    });
+    Route::get('/persuratan', [PersuratanController::class, 'index']);
+    Route::get('/', [DashboardController::class, 'index']);
 
 });
 
@@ -104,6 +107,8 @@ Route::group(['prefix' => 'data'], function () {
     Route::get('/nikah', [StatusNikahController::class, 'pengajuan']);
     Route::get('/tinggal', [StatusTinggalController::class, 'pengajuan']);
     Route::get('/meninggal', [StatusHidupController::class, 'pengajuan']);
+    Route::get('/notif', [DashboardController::class, 'notif']);
+    Route::get('/notifcount', [DashboardController::class, 'notifcount']);
 
 });
 

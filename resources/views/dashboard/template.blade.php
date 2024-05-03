@@ -19,10 +19,11 @@
 
 
 
-<body>
+<body class="font-main">
+    @include('component.flashcard')
     @include('dashboard.navbar')
     @include('dashboard.sidebar')
-    <div class="p-4 sm:ml-64 min-h-screen bg-neutral-03">
+    <div class="p-4 md:ml-64 min-h-screen bg-neutral-03">
         <div class="p-4  w-full">
            <div class="grid gap-4 mb-4">
                 
