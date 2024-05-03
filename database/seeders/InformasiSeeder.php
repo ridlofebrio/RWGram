@@ -38,7 +38,8 @@ class InformasiSeeder extends Seeder
                 'deskripsi_informasi' => 'Senam sehat bugar bersama. Ayo jaga kesehatan tubuh kita dengan berpartisipasi dalam acara senam sehat bugar bersama. Acara ini akan dilaksanakan setiap hari Minggu pukul 06.00 WIB di Lapangan Tennis Warga, Jl. Lawang Barat. Dengan senam yang teratur, kita bisa menjaga tubuh tetap bugar dan sehat.',
                 'foto_informasi' => 'null',
                 'lokasi_informasi' => 'Jl. Lawang Barat Lapangan Tennis Warga',
-                'tanggal_informasi' => now()
+                'tanggal_informasi' => now(),
+                'created_at' => now()
             ],
             [
                 'user_id' => 2,
@@ -46,7 +47,8 @@ class InformasiSeeder extends Seeder
                 'deskripsi_informasi' => 'Posyandu adalah tempat untuk memeriksa kesehatan ibu dan anak secara berkala. Di Posyandu, kita dapat melakukan pemeriksaan kesehatan rutin, mendapatkan imunisasi, serta mendapatkan edukasi tentang kesehatan ibu dan anak. Mari datang dan manfaatkan layanan Posyandu untuk kesehatan keluarga kita. Jadwal Posyandu adalah setiap hari Kamis pukul 09.00 - 12.00 WIB di Lapangan Tennis Warga, Jl. Lawang Barat.',
                 'foto_informasi' => 'null',
                 'lokasi_informasi' => 'Jl. Lawang Barat Lapangan Tennis Warga',
-                'tanggal_informasi' => now()
+                'tanggal_informasi' => now(),
+                'created_at' => now()
             ],
             [
                 'user_id' => 2,

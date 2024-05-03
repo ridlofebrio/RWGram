@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class StatusNikahController extends Controller
 {
+
     public function pengajuan()
     {
         $data = StatusNikahModel::all();
@@ -27,7 +28,17 @@ class StatusNikahController extends Controller
 
         }
 
-        return view('component.statusNikah', ['data' => $data]);
+        return view('component.statusNikah', ['data' => $data]);}
+
+    public function index()
+    {
+        $nikah = StatusNikahModel::all();
+        return view('statusNikah.index', compact('nikah'))->with('i');
+    }
+    public function create()
+    {
+        return view('statusNikah.create');
+
     }
 
     public function store(Request $request)

@@ -60,7 +60,25 @@
                       
                 
                     </div>
+
+                    <div x-data="{ open: false }">
+                        <button @click="open = ! open" class="hover:bg-blue-main">
+                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                        <div class="bg-blue-main z-30 absolute top-16 px-3 py-5 right-5 rounded-lg" x-show="open"
+                            @click.outside="open = false">
+
+                            <ul>
+                                <li><a href="">Setting</a></li>
+                                <hr>
+                                <li><a href="/logout">Log out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+
                 </div>
+            </div>
         </div>
 
     </div>

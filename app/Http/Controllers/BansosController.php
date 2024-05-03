@@ -17,7 +17,12 @@ class BansosController extends Controller
 
     public function create()
     {
-        return view('bansos.penduduk.create');
+        $metadata = (object)[
+            'title' => 'Bantuan Sosial',
+            'description' => 'Pengajuan Bantuan Sosial'
+        ];
+
+        return view('bansos.penduduk.create')->with(['activeMenu' => 'beranda', 'metadata' => $metadata]);
     }
 
     public function store(Request $request)

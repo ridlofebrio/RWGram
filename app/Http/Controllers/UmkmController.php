@@ -2,21 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PendudukModel;
 use Illuminate\Http\Request;
 use App\Models\UmkmModel;
 
 
 class UmkmController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
     public function index($sort = 'menunggu')
+
+   
+
     {
         $umkm = UmkmModel::where('status_pengajuan', $sort)->with('penduduk')->get();
         $active = 'pengajuan';
         return view('dashboard.pengajuan', compact('umkm', 'active'));
     }
+
 
     public function pengajuan()
     {
@@ -44,9 +50,41 @@ class UmkmController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+    public function indexPenduduk(Request $request)
+    {
+        // Mendapatkan semua data UMKM
+        $umkm = UmkmModel::query();
+
+        // Filter berdasarkan pencarian nama UMKM jika ada
+        if ($request->has('search')) {
+            $umkm->where('nama_umkm', 'like', '%' . $request->input('search') . '%');
+        }
+
+        // Ambil data UMKM setelah diterapkan filter
+        $umkm = $umkm->get();
+
+        $metadata = (object)[
+            'title' => 'UMKM',
+            'description' => 'UMKM untuk penduduk'
+        ];
+
+        return view('umkm.penduduk.index', [
+            'umkm' => $umkm,
+            'metadata' => $metadata,
+            'activeMenu' => 'beranda'
+        ]);
+    }
+
+
     public function create()
     {
-        return view('umkm.penduduk.create');
+        $metadata = (object)[
+            'title' => 'UMKM',
+            'description' => 'Daftar UMKM'
+        ];
+
+        return view('umkm.penduduk.create')->with(['activeMenu' => 'beranda', 'metadata' => $metadata]);
     }
 
     /**
@@ -58,12 +96,22 @@ class UmkmController extends Controller
             'nama_umkm' => 'required',
             'deskripsi_umkm' => 'required',
             'lokasi_umkm' => 'required',
+            'no_wa' => 'required',
             'link_medsos' => 'required',
+            'nama_medsos' => 'required',
         ]);
-        UmkmModel::create($request->all() + ['tanggal_umkm' => now()]);
 
-        return redirect()->route('umkm.index')
-            ->with('success', 'UMKM Berhasil Ditambahkan');
+        $penduduk = PendudukModel::where('NIK', $request->NIK)->first();
+
+        if ($penduduk) {
+            UmkmModel::create($request->all() + ['tanggal_umkm' => now(), 'penduduk_id' => $penduduk->penduduk_id]);
+
+            return redirect()->route('umkm.penduduk.index')
+                ->with('success', 'UMKM Berhasil Ditambahkan');
+        } else {
+            return redirect()->route('umkm.penduduk.create')
+                ->with('error', 'NIK Anda belum terdaftar sebagai warga.');
+        }
     }
 
     /**

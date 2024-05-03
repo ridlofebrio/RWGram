@@ -58,18 +58,22 @@ Route::resource('kas', KasController::class)->middleware('auth'); //-> krisna
 
 Route::resource('umkm', UmkmController::class); //-> febrio
 Route::group(['prefix' => 'umkm-penduduk'], function () {
+    Route::get('/index', [UmkmController::class, 'indexPenduduk'])->name('umkm.penduduk.index');
     Route::get('/request', [UmkmController::class, 'request'])->name('umkm.penduduk.request');
     Route::get('/create', [UmkmController::class, 'create'])->name('umkm.penduduk.create');
 });
 Route::group(['prefix' => 'nikah-penduduk'], function () {
+    Route::get('/', [StatusNikahController::class, 'index'])->name('nikah.penduduk.index');
     Route::get('/create', [StatusNikahController::class, 'create'])->name('nikah.penduduk.create');
     Route::get('/request', [StatusNikahController::class, 'request'])->name('nikah.penduduk.request');
 });
 Route::group(['prefix' => 'hidup-penduduk'], function () {
+    Route::get('/', [StatusHidupController::class, 'index'])->name('hidup.penduduk.index');
     Route::get('/create', [StatusHidupController::class, 'create'])->name('hidup.penduduk.create');
     Route::get('/request', [StatusHidupController::class, 'request'])->name('hidup.penduduk.request');
 });
 Route::group(['prefix' => 'tinggal-penduduk'], function () {
+    Route::get('/', [StatusTinggalController::class, 'index'])->name('tinggal.penduduk.index');
     Route::get('/create', [StatusTinggalController::class, 'create'])->name('tinggal.penduduk.create');
     Route::get('/request', [StatusTinggalController::class, 'request'])->name('tinggal.penduduk.request');
 });
@@ -96,9 +100,15 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/penduduk', [PendudukController::class, 'index']);
     Route::get('/bansos', [BansosController::class, 'index']);
+<<<<<<< HEAD
     Route::get('/persuratan', [PersuratanController::class, 'index']);
     Route::get('/', [DashboardController::class, 'index']);
 
+=======
+    Route::get('/', function () {
+        return view('dashboard', ['active' => 'beranda']);
+    });
+>>>>>>> be262757b25fd6212b805e29de027974823f5277
 });
 
 
