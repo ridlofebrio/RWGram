@@ -7,114 +7,82 @@
 </button> 
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white  text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
        
+       
+    <ul x-data="{active: 'umkm'}" class="flex overflow-x-auto -mb-px">
+        <li class="me-2">
+            <button   @click="active = 'umkm'"  :class="active=='umkm' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"   data="umkm" >UMKM</button>
+        </li>
+        <li class="me-2">
+            <button @click="active = 'nikah'"  data="nikah"  :class="active=='nikah' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"  data="umkm" aria-current="page">Status Nikah</button>
+        </li>
+        <li class="me-2">
+            <button @click="active = 'tinggal'"  data="tinggal" :class="active=='tinggal' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"  data="umkm">Status Tempat Tinggal</button>
+        </l px-3i>
+        <li class="me-2">
+            <button @click="active = 'meninggal'"  data="meninggal"  :class="active=='meninggal' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"  data="umkm">Status Meninggal</button>
+        </li>
+       
+
+    </ul>
       
     <div class="flex mt-3 w-full justify-between items-center">
         
         
-        <div x-data="{open:false}" >
-            <button @click="open= !open"   class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800    px-5 py-2 text-base font-medium rounded-full drop-shadow-button ">Tambah Penduduk +</button>
-                <div  x-show="open" @click.outside="open = false" class="absolute transition-all  pb-10 h-[750px] bg-white rounded-xl drop-shadow-card w-[650px] top-1/2 left-1/2 z-30 -translate-x-1/2 -translate-y-1/2">
-                    <h1 class="font-body text-3xl text-black ">ini modal</h1>
-                    <button @click="open = false" class="bg-blue-main  w-10 h-10 hover:bg-red-500  absolute border-2 border-white -top-5 -right-5  text-white rounded-full" >x</button>
-                  <div class="flex flex-wrap w-full p-3 justify-center overflow-y-auto overflow-x-hidden h-full items-center text-left">
-                    <form action="/penduduk" method="POST" class="flex font-body text-black  flex-col gap-5">
-                        @csrf
-                        @method('POST')
-                        <div class="flex flex-wrap gap-3">
-                            <div class="flex flex-col gap-1 ">
-                                <label for="nama"  >Nama</label>
-                                <input type="text" name="nama" id="">
-                            </div>
-                            <div class="flex flex-col gap-1">
-                                <label for="rt">RT</label>
-                                <input type="number" name="rt" id="">
-                            </div>
-                        </div>
-                     
-                        <div class="flex flex-col gap-1">
-                            <label for="nkk">NKK</label>
-                            <input type="text" name="nkk" id="">
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <label for="tempat_lahir">Tempat Lahir</label>
-                            <input type="text" name="tempat_lahir" id="">
-                        </div>
-                     
-                        <div class="flex flex-col gap-1">
-                            <label for="nik">NIK</label>
-                            <input type="text" name="nik" id="">
-                        </div>
-                    
-                        <div class="flex gap-3 w-full justify-between">
-                            <div class="flex w-1/2 flex-col gap-1">
-                                <label for="tanggal_lahir">tanggal lahir </label>
-                                <input type="date" name="tanggal_lahir" id="">
-                            </div>
-                           
-                        <div class="flex flex-col gap-1 w-1/2">
-                            <label for="perkawinan">status perkawinan </label>
-                            <select name="perkawinan" id="">
-                                <option value="kawin">Kawin </option>  
-                                <option value="belum kawin">Belum Kawin</option>  
-                                <option value="cerai">Cerai</option>  
-                    
-                            </select>
-                        </div>
-                    
-                        </div>
-                    
-                      
-                    
-                        <div class="flex flex-col gap-1">
-                            <label for="jenis_kelamin">Jenis Kelamin </label>
-                            <select name="jenis_kelamin" id="">
-                                <option value="L">Laki-laki</option>  
-                                <option value="P">Perempuan</option>  
-                            </select>
-                        </div>
-                    
-                        <div class="flex flex-col gap-1">
-                            <label for="alamat">Alamat</label>
-                            <input type="text" name="alamat" id="">
-                        </div>
-                    
-                        <div class="flex flex-col gap-1">
-                            <label for="agama">Agama </label>
-                            <input type="text" name="agama" id="">
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <label for="=no_telp">No Telepon </label>
-                            <input type="text" name="no_telp" id="">
-                        </div>
-                    
-                        <div class="flex flex-col gap-1">
-                            <label for="pekerjaan">Pekerjaan </label>
-                            <input type="text" name="pekerjaan" id="">
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <label for="status_tinggal">Status Tinggal </label>
-                            <select name="status_tinggal" id="">
-                                <option value="tetap">Tetap</option>  
-                                <option value="kontrak">Kontrak</option>  
-                            </select>
-                        </div>
-                    
-                        <div class="flex flex-col gap-1">
-                            <label for="status_kematian">Status Kematian </label>
-                            <select name="status_kematian" id="">
-                                <option value="1">Meninggal</option>  
-                                <option value="0">Hidup</option>  
-                            </select>
-                        </div>
-                    
-                    
-                        <button type="submit" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-5 py-2 text-base font-medium rounded-full  ">Konfirmasi</button>
-                    
-                    </form>
+        <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+            Toggle modal
+          </button>
+          
+          <!-- Main modal -->
+          <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+              <div class="relative p-4 w-full max-w-md max-h-full">
+                  <!-- Modal content -->
+                  <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                      <!-- Modal header -->
+                      <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                              Create New Product
+                          </h3>
+                          <button type="button" class="absolute -top-5 -right-4 bg-blue-main   text-white border-2 border-white hover:bg-gray-200 hover:text-gray-900 rounded-full text-sm w-8 h-8 ms-auto inline-flex justify-center items-center " data-modal-toggle="crud-modal">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                      </div>
+                      <!-- Modal body -->
+                      <form class="p-4 md:p-5">
+                          <div class="grid gap-4 mb-4 grid-cols-2">
+                              <div class="col-span-2">
+                                  <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                  <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
+                              </div>
+                              <div class="col-span-2 sm:col-span-1">
+                                  <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+                                  <input type="number" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999" required="">
+                              </div>
+                              <div class="col-span-2 sm:col-span-1">
+                                  <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                                  <select id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                      <option selected="">Select category</option>
+                                      <option value="TV">TV/Monitors</option>
+                                      <option value="PC">PC</option>
+                                      <option value="GA">Gaming/Console</option>
+                                      <option value="PH">Phones</option>
+                                  </select>
+                              </div>
+                              <div class="col-span-2">
+                                  <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Description</label>
+                                  <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write product description here"></textarea>                    
+                              </div>
+                          </div>
+                          <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                              <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                              Add new product
+                          </button>
+                      </form>
                   </div>
-                </div>
-        </div>
-           
+              </div>
+          </div> 
     
         <div class="filter flex space-x-2 items-center">
            
@@ -190,7 +158,61 @@
                 
                     <td class="px-6 py-4 flex gap-2 ">
                       
-                        <a href="/login" class="hover:border-none   text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  ">Detail</a>
+                        <button data-modal-target="crud-modal-{{$penduduk->penduduk_id}}" data-modal-toggle="crud-modal-{{$penduduk->penduduk_id}}" class="hover:border-none  before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  " type="button">
+                            Detail
+                          </button>
+                          
+                          <!-- Main modal -->
+                          <div id="crud-modal-{{$penduduk->penduduk_id}}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                              <div class="relative p-4 w-full max-w-md max-h-full">
+                                  <!-- Modal content -->
+                                  <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                      <!-- Modal header -->
+                                      <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                                            Detail
+                                          </h3>
+                                          <button type="button" class="absolute -top-5 -right-4 bg-blue-main   text-white border-2 border-white hover:bg-gray-200 hover:text-gray-900 rounded-full text-sm w-8 h-8 ms-auto inline-flex justify-center items-center " data-modal-toggle="crud-modal-{{$penduduk->penduduk_id}}">
+                                              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                              </svg>
+                                              <span class="sr-only">Close modal</span>
+                                          </button>
+                                      </div>
+                                      <!-- Modal body -->
+                                      <form class="p-4 md:p-5">
+                                          <div class="grid gap-4 mb-4 grid-cols-2">
+                                              <div class="col-span-2">
+                                                  <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                                  <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
+                                              </div>
+                                              <div class="col-span-2 sm:col-span-1">
+                                                  <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+                                                  <input type="number" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999" required="">
+                                              </div>
+                                              <div class="col-span-2 sm:col-span-1">
+                                                  <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                                                  <select id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                                      <option selected="">Select category</option>
+                                                      <option value="TV">TV/Monitors</option>
+                                                      <option value="PC">PC</option>
+                                                      <option value="GA">Gaming/Console</option>
+                                                      <option value="PH">Phones</option>
+                                                  </select>
+                                              </div>
+                                              <div class="col-span-2">
+                                                  <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Description</label>
+                                                  <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write product description here"></textarea>                    
+                                              </div>
+                                          </div>
+                                          <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                              <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                                              Add new product
+                                          </button>
+                                      </form>
+                                  </div>
+                              </div>
+                          </div> 
                     </td>
                     
                 </tr>

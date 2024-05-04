@@ -3,13 +3,15 @@
 @section('content')
 @if ( Session::has('errors'))
 <div class="absolute bg-white drop-shadow-card top-0 left-1/2 -translate-x-1/2">
-    <h1 class="text-red-500 font-body text-bold">{{$errors}}</h1>
+    <h1 class="text-red-500  text-bold">{{$errors}}</h1>
 </div>
 @endif
-    <div class="flex flex-wrap gap-5 justify-between font-body">
+
+
+    <div class="flex flex-wrap gap-5 justify-between ">
   
         <div class="left w-1/2 ">
-            <h1 class="font-body font-semibold text-black" >Ringkasan</h1>
+            <h1 class=" font-semibold text-black" >Ringkasan</h1>
             <div class="h-full flex w-full justify-around">
                     <div class="row-left flex flex-col justify-around">
                         <div class="card bg-white rounded-xl px-5 py-7">
@@ -81,7 +83,7 @@
      
         
 <div class="carousel w-[528px] ">
-    <h1 class="font-body font-semibold mb-5 text-black" >Pengumuman</h1>
+    <h1 class=" font-semibold mb-5 text-black" >Pengumuman</h1>
     <div id="default-carousel" class="relative w-full " data-carousel="slide">
         <!-- Carousel wrapper -->
         <div class="relative h-[326px]  overflow-hidden rounded-lg ">
@@ -134,21 +136,12 @@
     </div>
 </div>
 
-
-<div class="w-1/2 bg-white rounded-lg shadow dark:bg-gray-800">
-    <h1 class="font-body font-semibold mb-5 text-black" >Kas</h1>
+<div class="w-1/2 mt-5 ">
+  <h1 class=" font-semibold mb-5 text-black" >Kas</h1>
+  <div class="w-full bg-white rounded-lg shadow dark:bg-gray-800">
     <div class="flex justify-between p-4 md:p-6 pb-0 md:pb-0">
-      <div>
-        <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">$12,423</h5>
-        <p class="text-base font-normal text-gray-500 dark:text-gray-400">Sales this week</p>
-      </div>
-      <div
-        class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">
-        23%
-        <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4"/>
-        </svg>
-      </div>
+     
+      
     </div>
 
 
@@ -198,24 +191,34 @@
       </div>
     </div>
   </div>
-  
+
   
 
 
  
   
     </div>
+</div>
+
+
 
 @endsection
 
 @push('js')
 <script>
+var data1 = JSON.parse("{{ json_encode($data) }}");
+data1.push(0);
+var tgl = "{{ json_encode($tgl) }}"
+tgl=tgl.replace(/&quot;/g,'"');
+// tgl=tgl.replace(,'');
+console.log( )
+// console.log( JSON.parse(tgl))
 
 const options = {
 // set the labels option to true to show the labels on the X and Y axis
 xaxis: {
   show: true,
-  categories: ['01 Feb', '02 Feb', '03 Feb', '04 Feb', '05 Feb', '06 Feb', '07 Feb'],
+  categories:JSON.parse(tgl),
   labels: {
     show: true,
     style: {
@@ -239,21 +242,17 @@ yaxis: {
       cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
     },
     formatter: function (value) {
-      return '$' + value;
+      return 'Rp.' + value;
     }
   }
 },
 series: [
   {
-    name: "Developer Edition",
-    data: [150, 141, 145, 152, 135, 125],
+    name: "Pemasukan",
+    data: data1,
     color: "#1A56DB",
-  },
-  {
-    name: "Designer Edition",
-    data: [150, 13, 65, 12, 42, 73],
-    color: "#7E3BF2",
-  },
+  }
+ 
 ],
 chart: {
   sparkline: {

@@ -9,9 +9,16 @@ use App\Models\UmkmModel;
 
 class UmkmController extends Controller
 {
-    public function index()
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index($sort = 'menunggu')
+
+   
+
     {
-        $umkm = UmkmModel::with('penduduk')->get();
+        $umkm = UmkmModel::where('status_pengajuan', $sort)->with('penduduk')->get();
         $active = 'pengajuan';
         return view('dashboard.pengajuan', compact('umkm', 'active'));
     }
