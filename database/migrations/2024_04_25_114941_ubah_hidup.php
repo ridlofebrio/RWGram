@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('NIK_meninggal', 16);
             $table->longText('foto_bukti')->nullable();
             $table->enum('status_pengajuan', ['diterima', 'menunggu','ditolak'])->default('menunggu');
+            $table->boolean('terbaca')->default(false);
             $table->timestamps();
         });
     }

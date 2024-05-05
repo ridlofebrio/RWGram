@@ -8,7 +8,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5M12 5l-7 7 7 7" />
                         </svg>              
                     </a>
-                    <a href="/">
+                    <a href="{{ route('nikah.penduduk.index') }}">
                         <span class="text-blue-main text-md hover:text-blue-main">Permohonan Status Nikah</span>
                     </a>
                 </div>

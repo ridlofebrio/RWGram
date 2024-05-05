@@ -49,16 +49,16 @@
                 <a href="/umkm-penduduk/index" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">UMKM</a>
               </li>
               <li>
-                <a href="#" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Status Nikah</a>
+                <a href="{{ route('nikah.penduduk.index') }}" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Status Nikah</a>
               </li>
               <li>
-                <a href="#" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Status Tempat Tinggal</a>
+                <a href="{{ route('tinggal.penduduk.index') }}" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Status Tempat Tinggal</a>
               </li>
               <li>
-                <a href="#" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Status Meniggal</a>
+                <a href="{{ route('hidup.penduduk.index') }}" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Status Meniggal</a>
               </li>
               <li>
-                <a href="#" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Bantuan Sosial</a>
+                <a href="{{ route('bansos.penduduk.show') }}" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Bantuan Sosial</a>
               </li>
             </ul>
         </div>

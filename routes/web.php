@@ -100,15 +100,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/penduduk', [PendudukController::class, 'index']);
     Route::get('/bansos', [BansosController::class, 'index']);
-<<<<<<< HEAD
-    Route::get('/persuratan', [PersuratanController::class, 'index']);
-    Route::get('/', [DashboardController::class, 'index']);
-
-=======
     Route::get('/', function () {
         return view('dashboard', ['active' => 'beranda']);
     });
->>>>>>> be262757b25fd6212b805e29de027974823f5277
 });
 
 

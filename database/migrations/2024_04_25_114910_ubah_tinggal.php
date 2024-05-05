@@ -22,6 +22,7 @@ return new class extends Migration
             $table->enum('status', ['kontrak', 'tetap','keluar']);
             $table->longText('foto_bukti')->nullable();
             $table->enum('status_pengajuan', ['diterima', 'menunggu','ditolak']) ->default('menunggu');
+            $table->boolean('terbaca')->default(false);
             $table->timestamps();
         });
     }
