@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             StatusHidupSeeder::class,
             StatusNikahSeeder::class,
             StatusTinggalSeeder::class,
+            KepalaKeluargaSeeder::class,
             InformasiSeeder::class,
             UmkmSeeder::class
         ]);
