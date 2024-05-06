@@ -24,7 +24,7 @@
 
         <div class="flex gap-5 justify-end items-center h-full">
       
-            <div x-data="{ open: false }">
+            <div x-cloak x-data="{ open: false }">
                 <button @click="open = ! open" class="notif relative bg-neutral-03 hover:bg-blue-main hover:text-white px-3 py-2 rounded-full">
                    <div style="display:none;" id="dotred" class="p-1 bg-red-500 rounded-full absolute top-2 right-2"></div> 
                     <i class="fa-regular fa-bell"></i>
@@ -44,7 +44,7 @@
                             <h2 class=" font-medium text-xs text-neutral-400">{{Auth::user()->role_id == 5 ? 'RW Admin' : 'RT Admin'}}</h2>
                         </div>
                         
-                        <div x-data="{ open:false}">
+                        <div x-data="{ open:false}"  x-cloak>
                             <button  @click="open = ! open" class="hover:bg-blue-main">
                                 <i class="fa fa-chevron-down" aria-hidden="true"></i>
                             </button>

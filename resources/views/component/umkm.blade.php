@@ -51,8 +51,23 @@
                 </td>
             
                 <td class="px-6 py-4 flex gap-2 ">
-                    <a href="/login" class="text-red-500 border-2 border-red-500  hover:bg-red-500 hover:text-white   px-8 py-2 text-base font-medium rounded-full  ">Tolak</a>
-                    <button href="/login" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-5 py-2 text-base font-medium rounded-full " onclick="return alert('hello') " >Konfirmasi</button>
+                    
+                    <div x-data= "{open:false}">
+
+                        <button @click="open= true"  class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-5 py-2 text-base font-medium rounded-full disabled:bg-neutral-06 " {{$umkm->status_pengajuan=='diterima'?"disabled ":""}}>Konfirmasi</button>
+                        <div x-show="open"  class="overflow-y-auto overflow-x-hidden fixed  z-40 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                            <div @click.outside="open = false" class="absolute text-center w-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl  p-4 bg-white z-50">
+                                <h1 class="text-xl mb-5">Apakah anda yakin ingin mengkonfirmasi permohonan UMKM ini ?</h1>
+                               <div class="flex w-full space-x-7 justify-center">
+                                <button class="text-blue-main border-2 border-dodger-blue-800  hover:bg-dodger-blue-800  hover:text-white  px-5 py-2 text-base font-medium rounded-full">Lihat Detail</button>
+                                <button class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-5 py-2 text-base font-medium rounded-full">Konfirmasi</button>
+                               </div>
+
+                            </div>
+                            <div class="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40"></div> 
+                        </div>
+
+                    </div>
                     <div x-data="{ open: false }">
                         <button @click="open = true"  class="hover:border-none  before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  " type="button">
                             Detail
@@ -107,20 +122,7 @@
                                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Link Media Sosial</label>
                                             <input readonly type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" value="{{$umkm->link_medsos}}" required="">
                                         </div>
-                                            {{-- <div class="col-span-2 sm:col-span-1">
-                                                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                                                <input type="number" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999" required="">
-                                            </div>
-                                            <div class="col-span-2 sm:col-span-1">
-                                                <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                                                <select id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                                    <option selected="">Select category</option>
-                                                    <option value="TV">TV/Monitors</option>
-                                                    <option value="PC">PC</option>
-                                                    <option value="GA">Gaming/Console</option>
-                                                    <option value="PH">Phones</option>
-                                                </select>
-                                            </div> --}}
+                                           
                                            
                                         </div>
                                        

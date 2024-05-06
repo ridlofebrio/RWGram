@@ -8,13 +8,13 @@
 @endif
 
 
-    <div class="flex flex-wrap gap-5 justify-between ">
+    <div class="grid grid-cols-1  lg:grid-cols-2 gap-5  ">
   
-        <div class="left w-1/2 ">
-            <h1 class=" font-semibold text-black" >Ringkasan</h1>
-            <div class="h-full flex w-full justify-around">
-                    <div class="row-left flex flex-col justify-around">
-                        <div class="card bg-white rounded-xl px-5 py-7">
+        <div class="left justify-self-start w-full  self-center ">
+            <h1 class=" font-semibold mb-3 text-black" >Ringkasan</h1>
+            <div class="h-full flex  gap-2 flex-wrap w-full justify-around">
+                    <div class="row-left flex gap-2 flex-col justify-around">
+                        <div class="card bg-white rounded-xl px-2 py-3">
                                 <div class="flex space-x-3 items-center">
                                     <div class="icon bg-dodger-blue-100 px-3 py-2 rounded-xl">
                                         <img class="w-6" src="{{asset('asset/icon/bulk/people.svg')}}" alt="">
@@ -29,7 +29,7 @@
                                 
     
                         </div>
-                        <div class="card bg-white rounded-xl px-5 py-7">
+                        <div class="card bg-white rounded-xl px-3 py-5">
                             <div class="flex space-x-3 items-center">
                                 <div class="icon bg-dodger-blue-100 px-3 py-2 rounded-xl">
                                     <img class="w-6" src="{{asset('asset/icon/bulk/shop.svg')}}" alt="">
@@ -46,8 +46,8 @@
     
                     </div>
                     </div>
-                    <div class="row-right flex flex-col justify-around">
-                        <div class="card bg-white rounded-xl px-5 py-7">
+                    <div class="row-right flex flex-col  gap-2 justify-around">
+                        <div class="card bg-white rounded-xl px-3 py-5">
                             <div class="flex space-x-3 items-center">
                                 <div class="icon bg-dodger-blue-100 px-3 py-2 rounded-xl">
                                     <img  class="w-6" src="{{asset('asset/icon/bulk/messages-3.svg')}}" alt="">
@@ -62,7 +62,7 @@
                             
     
                     </div>
-                    <div class="card bg-white rounded-xl px-5 py-7">
+                    <div class="card bg-white rounded-xl px-3 py-5">
                         <div class="flex space-x-3 items-center">
                             <div class="icon bg-dodger-blue-100 px-3 py-2 rounded-xl">
                                 <img class="w-6" src="{{asset('asset/icon/bulk/directbox.svg')}}" alt="">
@@ -82,7 +82,7 @@
         </div>
      
         
-<div class="carousel w-[528px] ">
+<div class="justify-self-center col-span-1 carousel  w-[400px] xl:w-full">
     <h1 class=" font-semibold mb-5 text-black" >Pengumuman</h1>
     <div id="default-carousel" class="relative w-full " data-carousel="slide">
         <!-- Carousel wrapper -->
@@ -177,7 +177,7 @@
     </div>
 </div>
 
-<div class="w-1/2 mt-5 ">
+<div class=" mt-5 ">
   <h1 class=" font-semibold mb-5 text-black" >Kas</h1>
   <div class="w-full bg-white rounded-lg shadow dark:bg-gray-800">
     <div class="flex justify-between p-4 md:p-6 pb-0 md:pb-0">
