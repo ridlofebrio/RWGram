@@ -11,7 +11,7 @@
       -moz-box-shadow: none!important;
       -webkit-box-shadow: none!important;
     }
-  
+   
     
   </style>
 @endpush
@@ -21,7 +21,7 @@
     <div class="flex w-full justify-between items-center">
         <h2 class="text-xl ml-3" > {{count($data)}} Laporan</h2>
         <div class="filter flex">
-            <div x-data="{open:false}" class="relative " >
+            <div x-cloak x-data="{open:false}" class="relative " >
                 <button @click="open= !open" class="flex px-3 items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p>-semua-</p> <i class="fa fa-chevron-down"></i></button>
                 <div class="absolute mt-1  left-1/2 -translate-x-1/2 p-0 z-30 bg-white drop-shadow-card w-full" x-show="open" @click.outside="open=false" >
                    <ul>
@@ -39,6 +39,7 @@
             </div>
         </div>
     </div>        
+  
 <div class=" mt-5 overflow-x-auto shadow-md sm:rounded-lg ">
         <table id='umkm' class="w-full text-sm text-left rtl:text-right  text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-neutral-03 dark:bg-gray-700 dark:text-gray-400">
@@ -96,7 +97,7 @@
                     <td class="px-6 py-4 flex ">
                         <a href="/login" class="text-red-500 border-2 border-red-500  hover:bg-red-500 hover:text-white   px-8 py-2 text-base font-medium rounded-full  ">Tolak</a>
                         <a href="/login" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-5 py-2 text-base font-medium rounded-full  ">Konfirmasi</a>
-                        <div x-data="{ open: false }">
+                        <div x-cloak x-data="{ open: false }">
                             <button @click="open = true"  class="hover:border-none  before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  " type="button">
                                 Detail
                               </button>
@@ -199,6 +200,7 @@
         // let button = document.querySelectorAll('.tab');
         // console.log(button)
             $(document).ready(function(){
+               
                 $('.sort').click(function (index) {
                 
                     $.ajax({

@@ -39,7 +39,7 @@
               <a href="/informasi-penduduk/index" class="{{ $activeMenu == 'pengumuman' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main  rounded-md  text-base font-medium">Pengumuman </a>
               <a href="/data-penduduk/request" class="{{ $activeMenu == 'dataDiri' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main  rounded-md  text-base font-medium">Data Diri</a>
               <a href="/tentang" class="{{ $activeMenu == 'tentang' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main  rounded-md  text-base font-medium">Tentang</a>
-              <a href="/login" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-8 py-3 text-base font-medium rounded-full drop-shadow-button ">Masuk</a>
+            <a href="/login" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-8 py-3 text-base font-medium rounded-full drop-shadow-button ">Masuk</a>
             </div>
           </div>
 

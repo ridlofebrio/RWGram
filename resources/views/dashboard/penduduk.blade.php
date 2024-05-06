@@ -37,7 +37,7 @@
           
           <!-- Main modal -->
           <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-              <div class="relative p-4  w-[900px] h-[80vh]">
+              <div x-cloak class="relative p-4  w-[900px] h-[80vh]">
                   <!-- Modal content -->
                   <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                       <!-- Modal header -->
@@ -195,7 +195,7 @@
     
         <div class="filter flex space-x-2 items-center">
            
-            <div x-data="{open:false}" class="relative" >
+            <div  x-data="{open:false}" class="relative" x-cloak >
                 <button @click="open= !open" class="flex px-3 items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p>-semua-</p> <i class="fa fa-chevron-down"></i></button>
                 <div class="absolute left-1/2 -translate-x-1/2  px-3 py-3 z-30 bg-white drop-shadow-card" x-show="open" @click.outside="open=false" >
                    <ul>
@@ -266,7 +266,7 @@
                     </td>
                 
                     <td class="px-6 py-4 flex gap-2 ">
-                        <div x-data="{ open: false }">
+                        <div x-cloak x-data="{ open: false }">
                             <button @click="open = true"  class="hover:border-none  before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  " type="button">
                                 Detail
                               </button>
