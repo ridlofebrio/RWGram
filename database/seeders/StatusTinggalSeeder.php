@@ -16,9 +16,6 @@ class StatusTinggalSeeder extends Seeder
         $data = [
             [
             'penduduk_id' => 1,
-            'nama_pengaju' => 'Febrio',
-            'NIK' => '3326160608070197',
-            'alamat_asal' => 'Jl. Merdeka No. 10',
             'alamat_pindah' => 'Jl. Baru No. 5',
             'status' => 'kontrak',
             'foto_bukti' => null,
@@ -26,9 +23,6 @@ class StatusTinggalSeeder extends Seeder
             ],
             [
             'penduduk_id' => 2,
-            'nama_pengaju' => 'JO Bama',
-            'NIK' => '3326160902090003',
-            'alamat_asal' => 'Jl. Pahlawan No. 5',
             'alamat_pindah' => 'Jl. Baru No. 10',
             'status' => 'tetap',
             'foto_bukti' => null,
