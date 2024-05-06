@@ -33,12 +33,20 @@ class StatusNikahController extends Controller
 
     public function index()
     {
+        $metadata = (object) [
+            'title' => 'Status Nikah',
+            'description' => 'Halaman Ubah Status Warga'
+        ];
         $nikah = StatusNikahModel::all();
-        return view('statusNikah.index', compact('nikah'))->with('i');
+        return view('statusNikah.index', compact('nikah'))->with(['metadata' => $metadata, 'activeMenu' => 'nikah']);
     }
     public function create()
     {
-        return view('statusNikah.create');
+        $metadata = (object)[
+            'title' => 'Status Nikah',
+            'description' => 'Halaman Ubah Status Nikah Warga'
+        ];
+        return view('statusNikah.create',['activeMenu' => 'nikah', 'metadata' => $metadata]);
 
     }
 

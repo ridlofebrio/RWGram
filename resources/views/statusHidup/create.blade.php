@@ -1,4 +1,5 @@
 @extends('layouts.template')
+
 @section('content')
         <header class="bg-white">
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 text-left">
@@ -8,7 +9,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5M12 5l-7 7 7 7" />
                         </svg>              
                     </a>
-                    <a href="/">
+                    <a href="{{ route('hidup.penduduk.index') }}">
                         <span class="text-blue-main text-md hover:text-blue-main">Permohonan Pengajuan Status Meninggal</span>
                     </a>
                 </div>

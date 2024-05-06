@@ -100,8 +100,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/penduduk', [PendudukController::class, 'index']);
     Route::get('/bansos', [BansosController::class, 'index']);
+
     Route::get('/persuratan', [PersuratanController::class, 'index']);
     Route::get('/', [DashboardController::class, 'index']);
+
 
 });
 

@@ -9,12 +9,20 @@ class StatusHidupController extends Controller
 {
     public function index()
     {
+        $metadata = (object) [
+            'title' => 'Status Hidup',
+            'description' => 'Halaman Ubah Status Warga'
+        ];
         $hidup = StatusHidupModel::all();
-        return view('statusHidup.index', compact('hidup'))->with('i');
+        return view('statusHidup.index', compact('hidup'))->with(['metadata' => $metadata, 'activeMenu' => 'hidup']);
     }
     public function create()
     {
-        return view('statusHidup.create');
+        $metadata = (object)[
+            'title' => 'Status Hidup',
+            'description' => 'Halaman Ubah Status Hidup Warga'
+        ];
+        return view('statusHidup.create', ['activeMenu' => 'hidup', 'metadata' => $metadata]);
     }
 
 

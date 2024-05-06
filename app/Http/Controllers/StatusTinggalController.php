@@ -12,13 +12,21 @@ class StatusTinggalController extends Controller
     
     public function index()
     {
+        $metadata = (object) [
+            'title' => 'Status Tempat Tinggal',
+            'description' => 'Halaman Ubah Status Warga'
+        ];
         $tinggal = StatusTinggalModel::all();
-        return view('statusTinggal.index', compact('tinggal'))->with('i');
+        return view('statusTinggal.index', compact('tinggal'))->with(['metadata' => $metadata, 'activeMenu' => 'tinggal']);
     }
 
     public function create()
     {
-        return view('statusTinggal.create');
+        $metadata = (object) [
+            'title' => 'Status Tinggal',
+            'description' => 'Halaman Ubah tinggal Warga'
+        ];
+        return view('statusTinggal.create', ['activeMenu' => 'tinggal', 'metadata' => $metadata]);
     }
 
 
