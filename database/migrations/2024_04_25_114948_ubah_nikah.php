@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id('id_status_nikah');
             $table->unsignedBigInteger('penduduk_id')->index();
             $table->foreign('penduduk_id')->references('penduduk_id')->on('penduduk');
-            $table->string('nama_pengaju', 50);
-            $table->string('NIK_pengaju', 16);
             $table->string('nama_pasangan', 50);
             $table->string('NIK_pasangan', 16);
             $table->enum('status', ['kawin', 'cerai']);

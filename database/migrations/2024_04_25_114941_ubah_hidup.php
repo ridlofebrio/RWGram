@@ -15,10 +15,8 @@ return new class extends Migration
             $table->id('id_status_hidup');
             $table->unsignedBigInteger('penduduk_id')->index();
             $table->foreign('penduduk_id')->references('penduduk_id')->on('penduduk');
-            $table->string('nama_pengaju', 50);
-            $table->string('NIK_pengaju', 16);
-            $table->string('nama_meninggal', 50);
-            $table->string('NIK_meninggal', 16);
+            $table->unsignedBigInteger('id_penduduk_meninggal')->index();
+            $table->foreign('id_penduduk_meninggal')->references('penduduk_id')->on('penduduk');
             $table->longText('foto_bukti')->nullable();
             $table->enum('status_pengajuan', ['diterima', 'menunggu','ditolak'])->default('menunggu');
             $table->boolean('terbaca')->default(false);
