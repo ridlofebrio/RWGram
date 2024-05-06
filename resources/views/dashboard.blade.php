@@ -50,7 +50,7 @@
                         <div class="card bg-white rounded-xl px-5 py-7">
                             <div class="flex space-x-3 items-center">
                                 <div class="icon bg-dodger-blue-100 px-3 py-2 rounded-xl">
-                                    <img class="w-6" src="{{asset('asset/icon/bulk/messages-3.svg')}}" alt="">
+                                    <img  class="w-6" src="{{asset('asset/icon/bulk/messages-3.svg')}}" alt="">
                                 </div>
                                 <h1 class="text-neutral-06" >Jumlah Pengaduan</h1>
                             </div>
@@ -88,24 +88,65 @@
         <!-- Carousel wrapper -->
         <div class="relative h-[326px]  overflow-hidden rounded-lg ">
              <!-- Item 1 -->
+             
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
+              <div class="absolute font-main  w-full z-50 h-full">
+                <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
+                    <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
+                    <h1 class=" text-md  font-bold text-white w-3/4" >Ayo ramaikan buka bersama puasa Ramadhan 1445H di Rumah Pak Sohib, pukul 15.00  </h1>
+                   
+            </div>
+          </div>
+          <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
                 <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
             <!-- Item 2 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+              <div class="absolute font-main  w-full z-50 h-full">
+                <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
+                    <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
+                    <h1 class=" text-md  font-bold text-white w-3/4" >Ayo ramaikan buka bersama puasa Ramadhan 1445H di Rumah Pak Sohib, pukul 15.00  </h1>
+                   
+            </div>
+          </div>
+          <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
+                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
             <!-- Item 3 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+              <div class="absolute font-main  w-full z-50 h-full">
+                <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
+                    <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
+                    <h1 class=" text-md  font-bold text-white w-3/4" >Ayo ramaikan buka bersama puasa Ramadhan 1445H di Rumah Pak Sohib, pukul 15.00  </h1>
+                   
+            </div>
+          </div>
+          <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
+                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
             <!-- Item 4 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+              <div class="absolute font-main  w-full z-50 h-full">
+                <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
+                    <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
+                    <h1 class=" text-md  font-bold text-white w-3/4" >Ayo ramaikan buka bersama puasa Ramadhan 1445H di Rumah Pak Sohib, pukul 15.00  </h1>
+                   
+            </div>
+          </div>
+          <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
+                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
             <!-- Item 5 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{asset('asset/images/profil.jpeg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+              <div class="absolute font-main  w-full z-50 h-full">
+                <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
+                    <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
+                    <h1 class=" text-md  font-bold text-white w-3/4" >Ayo ramaikan buka bersama puasa Ramadhan 1445H di Rumah Pak Sohib, pukul 15.00  </h1>
+                   
+            </div>
+          </div>
+          <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
+                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
         </div>
         <!-- Slider indicators -->
