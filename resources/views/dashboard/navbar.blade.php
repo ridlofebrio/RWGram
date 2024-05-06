@@ -16,9 +16,9 @@
             <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
             </svg>
          </button>
-         <div class="flex ml-0 md:ml-72 flex-col  text-xl  font-main">
-             <h1 class="text-neutral-07">{{$i[$num]}}, {{date('d F Y',strtotime(now()))}}</h1>
-            <h1 class="font-bold text-2xl" >{{$active}}</h1>
+         <div class="flex ml-0 md:ml-72 flex-col    font-main">
+             <h1 class="text-neutral-07 text-lg">{{$i[$num]}}, {{date('d F Y',strtotime(now()))}}</h1>
+            <h1 class="font-bold text-lg" >{{$active}}</h1>
          </div>
 
 
@@ -41,7 +41,7 @@
                     <div class="info flex justify-center items-center gap-3">
                         <div class="detail">
                             <h1 class=" font-medium text-lg">{{Auth::user()->nama_user}}</h1>
-                            <h2 class=" font-medium text-xs text-neutral-400">{{Auth::user()->role_id == 1 ? 'RW Admin' : 'RT Admin'}}</h2>
+                            <h2 class=" font-medium text-xs text-neutral-400">{{Auth::user()->role_id == 5 ? 'RW Admin' : 'RT Admin'}}</h2>
                         </div>
                         
                         <div x-data="{ open:false}">
@@ -61,20 +61,6 @@
                 
                     </div>
 
-                    <div x-data="{ open: false }">
-                        <button @click="open = ! open" class="hover:bg-blue-main">
-                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                        </button>
-                        <div class="bg-blue-main z-30 absolute top-16 px-3 py-5 right-5 rounded-lg" x-show="open"
-                            @click.outside="open = false">
-
-                            <ul>
-                                <li><a href="">Setting</a></li>
-                                <hr>
-                                <li><a href="/logout">Log out</a></li>
-                            </ul>
-                        </div>
-                    </div>
 
 
                 </div>

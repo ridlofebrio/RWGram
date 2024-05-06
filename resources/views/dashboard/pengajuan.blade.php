@@ -45,7 +45,7 @@
             </div>
         </div>
     </div>        
-    <div id="loading-image" class="absolute top-1/2 left-1/2 flex justify-center items-center -translate-x-1/2 -translate-y-1/2 z-40 w-screen h-screen bg-black opacity-70" style="display: none;" ><h1 class=" bg-white px-5 py-5" >Loading</h1></div>
+    <div id="loading-image" class="fixed top-1/2 left-1/2 flex justify-center items-center -translate-x-1/2 -translate-y-1/2 z-40 w-screen h-screen bg-black opacity-70" style="display: none;" ><h1 class=" bg-white px-5 py-5" >Loading</h1></div>
 <div class="relative mt-5 overflow-x-auto shadow-md sm:rounded-lg ">
     <table id='umkm' class="w-full text-sm text-left rtl:text-right  text-gray-500 dark:text-gray-400">
    
@@ -132,13 +132,14 @@
 
                 })
 
-                $('.sort').click(function () {
+                $('.sort').click(function (index) {
+                   
                     $.ajax({
-                        url: "http://127.0.0.1:8000/dashboard/pengajuan/"+document.querySelector('.sort').getAttribute('data'),
+                        url: "http://127.0.0.1:8000/dashboard/pengajuan/"+index.currentTarget.getAttribute('data'),
                         method:"GET",
                         success: function (data) {
                             
-                            $('body').html(data);
+                            $('#umkm').html(data);
                         }
                         
                     })

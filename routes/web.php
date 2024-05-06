@@ -47,7 +47,7 @@ Route::group(['prefix' => 'informasi-penduduk'], function () {
     Route::get('/search', [InformasiController::class, 'search'])->name('informasi.penduduk.search');
 });
 
-Route::resource('penduduk', PendudukController::class); //-> krisna
+
 Route::group(['prefix' => 'data-penduduk'], function () {
     Route::post('/show', [PendudukController::class, 'showPenduduk'])->name('data.penduduk.show');
     Route::get('/request', [PendudukController::class, 'request'])->name('data.penduduk.request');
@@ -94,15 +94,17 @@ Route::get('logout', [AuthSessionController::class, 'logout']);
 
 
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
-    Route::get('/pengajuan/{sort}', [UmkmController::class, 'index'])->name('laporan.penduduk.index')->middleware('RW');
+    Route::get('/pengajuan/{sort}', [UmkmController::class, 'sort'])->name('laporan.penduduk.index')->middleware('RW');
     Route::get('/pengajuan', [UmkmController::class, 'index'])->name('laporan.penduduk.index')->middleware('RW');
     Route::get('/pengaduan/{sort}', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/penduduk', [PendudukController::class, 'index']);
     Route::get('/bansos', [BansosController::class, 'index']);
-    Route::get('/', function () {
-        return view('dashboard', ['active' => 'beranda']);
-    });
+
+    Route::get('/persuratan', [PersuratanController::class, 'index']);
+    Route::get('/', [DashboardController::class, 'index']);
+
+
 });
 
 
@@ -120,4 +122,10 @@ Route::get('/search/nikah/{value}', [StatusNikahController::class, 'find']);
 Route::get('/search/umkm/{value}', [UmkmController::class, 'find']);
 Route::get('/search/tinggal/{value}', [StatusTinggalController::class, 'find']);
 Route::get('/search/meninggal/{value}', [StatusHidupController::class, 'find']);
+Route::get('/search/penduduk/{value}', [PendudukController::class, 'find']);
+
+Route::group(['prefix' => 'penduduk'], function () {
+    Route::delete('{id}', [PendudukController::class, 'destroy']);
+    Route::get('{id}', [PendudukController::class, 'find']);
+});
 
