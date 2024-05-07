@@ -1,16 +1,17 @@
 <?php
 
 use App\Http\Controllers\BansosController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\KasController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\PersuratanController;
-use App\Http\Controllers\UmkmController;
-use App\Http\Controllers\Auth\AuthSessionController;
 use App\Http\Controllers\StatusHidupController;
 use App\Http\Controllers\StatusNikahController;
 use App\Http\Controllers\StatusTinggalController;
+use App\Http\Controllers\UmkmController;
+use App\Http\Controllers\Auth\AuthSessionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $metadata = (object)[
+    $metadata = (object) [
         'title' => 'Home',
         'description' => 'Landing Page RWGram'
     ];
@@ -46,13 +47,14 @@ Route::group(['prefix' => 'informasi-penduduk'], function () {
     Route::get('/search', [InformasiController::class, 'search'])->name('informasi.penduduk.search');
 });
 
-Route::resource('penduduk', PendudukController::class); //-> krisna
+
 Route::group(['prefix' => 'data-penduduk'], function () {
     Route::post('/show', [PendudukController::class, 'showPenduduk'])->name('data.penduduk.show');
     Route::get('/request', [PendudukController::class, 'request'])->name('data.penduduk.request');
 });
 
 Route::resource('kas', KasController::class)->middleware('auth'); //-> krisna
+
 
 Route::resource('umkm', UmkmController::class); //-> febrio
 Route::group(['prefix' => 'umkm-penduduk'], function () {
@@ -90,14 +92,40 @@ Route::post('login', [AuthSessionController::class, 'store']);
 Route::get('logout', [AuthSessionController::class, 'logout']);
 
 
-Route::get('/dashboard', function () {
-    return view("dashboard");
-});
+
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
-    Route::get('/pengajuan', [UmkmController::class, 'index'])->name('laporan.penduduk.index');
-    Route::get('/pengaduan', [LaporanController::class, 'keluhan']);
+    Route::get('/pengajuan/{sort}', [UmkmController::class, 'sort'])->name('laporan.penduduk.index')->middleware('RW');
+    Route::get('/pengajuan', [UmkmController::class, 'index'])->name('laporan.penduduk.index')->middleware('RW');
+    Route::get('/pengaduan/{sort}', [LaporanController::class, 'keluhan'])->middleware('RW');
+    Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/penduduk', [PendudukController::class, 'index']);
-    Route::get('/', function () {
-        return view('dashboard', ['active' => 'beranda']);
-    });
+    Route::get('/bansos', [BansosController::class, 'index']);
+
+    Route::get('/persuratan', [PersuratanController::class, 'index']);
+    Route::get('/', [DashboardController::class, 'index']);
+
+
 });
+
+
+Route::group(['prefix' => 'data'], function () {
+    Route::get('/umkm', [UmkmController::class, 'pengajuan']);
+    Route::get('/nikah', [StatusNikahController::class, 'pengajuan']);
+    Route::get('/tinggal', [StatusTinggalController::class, 'pengajuan']);
+    Route::get('/meninggal', [StatusHidupController::class, 'pengajuan']);
+    Route::get('/notif', [DashboardController::class, 'notif']);
+    Route::get('/notifcount', [DashboardController::class, 'notifcount']);
+
+});
+
+Route::get('/search/nikah/{value}', [StatusNikahController::class, 'find']);
+Route::get('/search/umkm/{value}', [UmkmController::class, 'find']);
+Route::get('/search/tinggal/{value}', [StatusTinggalController::class, 'find']);
+Route::get('/search/meninggal/{value}', [StatusHidupController::class, 'find']);
+Route::get('/search/penduduk/{value}', [PendudukController::class, 'find']);
+
+Route::group(['prefix' => 'penduduk'], function () {
+    Route::delete('{id}', [PendudukController::class, 'destroy']);
+    Route::get('{id}', [PendudukController::class, 'find']);
+});
+

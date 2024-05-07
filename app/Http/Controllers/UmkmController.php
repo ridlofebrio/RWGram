@@ -9,12 +9,51 @@ use App\Models\UmkmModel;
 
 class UmkmController extends Controller
 {
-    public function index()
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index($sort = 'menunggu')
     {
-        $umkm = UmkmModel::with('penduduk')->get();
+        $umkm = UmkmModel::where('status_pengajuan', $sort)->with('penduduk')->get();
         $active = 'pengajuan';
         return view('dashboard.pengajuan', compact('umkm', 'active'));
     }
+
+    public function sort($sort = 'menunggu')
+    {
+        $umkm = UmkmModel::where('status_pengajuan', $sort)->with('penduduk')->get();
+        $active = 'pengajuan';
+        return view('component.umkm', compact('umkm'));
+    }
+
+
+    public function pengajuan()
+    {
+        $umkm = UmkmModel::with('penduduk')->get();
+
+        return view('component.umkm', compact('umkm'));
+    }
+
+    public function find($value)
+    {
+
+        if ($value == 'kosong') {
+            $umkm = UmkmModel::all();
+
+            return view('component.umkm', compact('umkm'));
+
+        } else {
+
+            $umkm = UmkmModel::whereAny(['nama_umkm'], 'like', '%' . $value . '%')->get();
+
+        }
+        return view('component.umkm', compact('umkm'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
 
     public function indexPenduduk(Request $request)
     {
@@ -29,7 +68,7 @@ class UmkmController extends Controller
         // Ambil data UMKM setelah diterapkan filter
         $umkm = $umkm->get();
 
-        $metadata = (object)[
+        $metadata = (object) [
             'title' => 'UMKM',
             'description' => 'UMKM untuk penduduk'
         ];
@@ -41,9 +80,10 @@ class UmkmController extends Controller
         ]);
     }
 
+
     public function create()
     {
-        $metadata = (object)[
+        $metadata = (object) [
             'title' => 'UMKM',
             'description' => 'Daftar UMKM'
         ];

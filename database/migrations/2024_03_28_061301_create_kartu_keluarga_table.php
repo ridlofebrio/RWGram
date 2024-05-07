@@ -12,7 +12,6 @@ return new class extends Migration {
     {
         Schema::create('kartu_keluarga', function (Blueprint $table) {
             $table->id('kartu_keluarga_id');
-
             $table->unsignedBigInteger('rt_id')->index();
             $table->foreign('rt_id')->references('rt_id')->on('rt');
             $table->string('NKK', 16)->unique();

@@ -17,10 +17,14 @@
     <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('public/asset/css/dropzone.css') }}">
     <script src="{{ asset('public/asset/js/dropzone.js') }}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
 
 </head>
 @vite(['resources/css/app.css','resources/js/app.js'])
 @stack('css')
+
 
 
 

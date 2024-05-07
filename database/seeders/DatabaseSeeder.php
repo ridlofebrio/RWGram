@@ -26,16 +26,16 @@ class DatabaseSeeder extends Seeder
             PendudukSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
-            UmkmSeeder::class,
             PersuratanSeeder::class,
             LaporanSeeder::class,
             BansosSeeder::class,
             KasSeeder::class,
-            InformasiSeeder::class,
             StatusHidupSeeder::class,
             StatusNikahSeeder::class,
-            StatusTinggalSeeder::class
-
+            StatusTinggalSeeder::class,
+            KepalaKeluargaSeeder::class,
+            InformasiSeeder::class,
+            UmkmSeeder::class
         ]);
     }
 }

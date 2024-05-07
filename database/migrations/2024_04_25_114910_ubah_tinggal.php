@@ -15,13 +15,11 @@ return new class extends Migration
             $table->id('id_status_tinggal');
             $table->unsignedBigInteger('penduduk_id')->index();
             $table->foreign('penduduk_id')->references('penduduk_id')->on('penduduk');
-            $table->string('nama_pengaju', 50);
-            $table->string('NIK', 16);
-            $table->string('alamat_asal', 50);
             $table->string('alamat_pindah', 50);
             $table->enum('status', ['kontrak', 'tetap','keluar']);
             $table->longText('foto_bukti')->nullable();
             $table->enum('status_pengajuan', ['diterima', 'menunggu','ditolak']) ->default('menunggu');
+            $table->boolean('terbaca')->default(false);
             $table->timestamps();
         });
     }

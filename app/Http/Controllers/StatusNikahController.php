@@ -7,14 +7,47 @@ use Illuminate\Http\Request;
 
 class StatusNikahController extends Controller
 {
+
+    public function pengajuan()
+    {
+        $data = StatusNikahModel::all();
+
+        return view('component.statusNikah', ['data' => $data]);
+    }
+
+    public function find($value)
+    {
+        if ($value == 'kosong') {
+            $data = StatusNikahModel::all();
+
+            return view('component.statusNikah', ['data' => $data]);
+
+        } else {
+
+            $data = StatusNikahModel::whereAny(['nama_pengaju', 'nama_pasangan', 'status', 'id_status_nikah'], 'like', '%' . $value . '%')->get();
+
+        }
+
+        return view('component.statusNikah', ['data' => $data]);
+    }
+
     public function index()
     {
+        $metadata = (object) [
+            'title' => 'Status Nikah',
+            'description' => 'Halaman Ubah Status Warga'
+        ];
         $nikah = StatusNikahModel::all();
-        return view('statusNikah.index', compact('nikah'))->with('i');
+        return view('statusNikah.index', compact('nikah'))->with(['metadata' => $metadata, 'activeMenu' => 'nikah']);
     }
     public function create()
     {
-        return view('statusNikah.create');
+        $metadata = (object)[
+            'title' => 'Status Nikah',
+            'description' => 'Halaman Ubah Status Nikah Warga'
+        ];
+        return view('statusNikah.create',['activeMenu' => 'nikah', 'metadata' => $metadata]);
+
     }
 
     public function store(Request $request)
@@ -55,3 +88,4 @@ class StatusNikahController extends Controller
         $laporan = StatusNikahModel::findOrFail($id)->delete();
     }
 }
+

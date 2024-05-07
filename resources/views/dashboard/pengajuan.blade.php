@@ -1,118 +1,75 @@
 @extends('dashboard.template')
 
 @section('content')
+@push('css')
+<style>
+    /* HTML: <div class="loader"></div> */
+    .loader {
+
+width: 90px;
+height: 14px;
+--c:#0096FF 92%,white;
+background: 
+  radial-gradient(circle 7px at bottom,var(--c)) 0 0,
+  radial-gradient(circle 7px at top   ,var(--c)) 0 100%;
+background-size: calc(100%/4) 50%;
+background-repeat: repeat-x;
+animation: l11 1s infinite;
+}
+@keyframes l11 {
+  80%,100% {background-position: calc(100%/3) 0,calc(100%/-3) 100%}
+}
+</style>
+@endpush
 
 
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white  text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
-        <ul class="flex overflow-x-auto -mb-px">
+        <ul x-data="{active: 'umkm'}" class="flex overflow-x-auto -mb-px">
             <li class="me-2">
-                <button href="#" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">UMKM</button>
+                <button   @click="active = 'umkm'"  :class="active=='umkm' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"   data="umkm" >UMKM</button>
             </li>
             <li class="me-2">
-                <button href="#"  class="tab inline-block p-4 text-blue-main border-b-2 border-blue-main rounded-t-lg active dark:text-blue-500 dark:border-blue-500" aria-current="page">Status Nikah</button>
+                <button @click="active = 'nikah'"  data="nikah"  :class="active=='nikah' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"  data="umkm" aria-current="page">Status Nikah</button>
             </li>
             <li class="me-2">
-                <button href="#" data="coba" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Status Tempat Tinggal</button>
+                <button @click="active = 'tinggal'"  data="tinggal" :class="active=='tinggal' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"  data="umkm">Status Tempat Tinggal</button>
             </l px-3i>
             <li class="me-2">
-                <button href="#" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Status Meninggal</button>
+                <button @click="active = 'meninggal'"  data="meninggal"  :class="active=='meninggal' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"  data="umkm">Status Meninggal</button>
             </li>
-            <li class="me-2">
-                <button href="#" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Bansos</button>
-            </li>
+           
 
         </ul>
 
     <div class="flex w-full justify-between items-center">
         <h2>2 permohonan</h2>
-        <div class="filter flex">
-           
-            <div x-data="{open:false}" class="relative" >
+        <div class="filter flex space-x-2">
+               
+            <div x-data="{open:false}" class="relative " >
                 <button @click="open= !open" class="flex px-3 items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p>-semua-</p> <i class="fa fa-chevron-down"></i></button>
-                <div class="absolute left-1/2 -translate-x-1/2  px-3 py-3 z-30 bg-white drop-shadow-card" x-show="open" @click.outside="open=false" >
+                <div class="absolute mt-1  left-1/2 -translate-x-1/2 p-0 z-30 bg-white drop-shadow-card w-full" x-show="open" @click.outside="open=false" >
                    <ul>
-                    <li><button>date</button></li>
-                    <li><button>status</button></li>
-                    <li><button>1</button></li>
+                    <li><button class="hover:bg-blue-main px-5 py-2 w-full sort" data="diterima"  >selesai</button></li>
+                    <li><button class="hover:bg-blue-main px-5 py-2 w-full sort " data="ditolak"  >ditolak</button></li>
+                    <li><button class="hover:bg-blue-main px-5 py-2 w-full sort"  data="menunggu" >menunggu</button></li>
                     
                    </ul>
                 </div>
             </div>
           
-            <div class="search border-2 bg-neutral-04 rounded-full px-3">
+            <div class="border-2 bg-neutral-04 rounded-full px-3">
                 <i class="fa-solid fa-magnifying-glass"></i>
 
-                <input type="text" class="border-none bg-transparent" placeholder="cari apapun">  
+                <input type="text" id="search" data='umkm' class="border-none bg-transparent" placeholder="cari apapun">  
             </div>
         </div>
     </div>        
+    <div id="loading-image" class="fixed top-1/2 left-1/2 flex justify-center items-center -translate-x-1/2 -translate-y-1/2 z-40 w-screen h-screen bg-white opacity-70" style="display: none;" ><div class="  loader " ></div></div>
 <div class="relative mt-5 overflow-x-auto shadow-md sm:rounded-lg ">
-        <table id='umkm' class="w-full text-sm text-left rtl:text-right  text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-neutral-03 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        No
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Tanggal
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Nama
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Nama UMKM
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Status
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                       Aksi
-                    </th>
-                </tr>
-            </thead>
-            <tbody id="body">
-                
-                    @foreach ($umkm as $umkm)
-                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{$umkm->umkm_id}}
-                    </th>
-                    <td class="px-6 py-4">
-                        {{$umkm->tanggal_umkm}}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{$umkm->penduduk->nama_penduduk}}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{$umkm->nama_umkm}}
-                    </td>
-                    <td class="px-6 py-4">
-                        <div class="px-2 py-2  bg-[#CCF1E5] rounded-full flex items-center gap-2 justify-center">
-                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
-                                <p class="font-body font-semibold text-green-400">
-
-                                        Selesai
-
-                                </p>
-                        </div>
-                    </td>
-                
-                    <td class="px-6 py-4 flex gap-2 ">
-                        <a href="/login" class="text-red-500 border-2 border-red-500  hover:bg-red-500 hover:text-white   px-8 py-2 text-base font-medium rounded-full  ">Tolak</a>
-                        <a href="/login" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-5 py-2 text-base font-medium rounded-full  ">Konfirmasi</a>
-                        <a href="/login" class="hover:border-none   text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  ">Detail</a>
-                    </td>
-                    
-                </tr>
-                    @endforeach
-                  
-             
-               
-            </tbody>
-        </table>
+    <table id='umkm' class="w-full text-sm text-left rtl:text-right  text-gray-500 dark:text-gray-400">
+   
+    </table>
     </div>
-</div>
-    
     <nav aria-label="Page navigation example" class="mt-5 text-right" >
         <ul class="inline-flex -space-x-px text-sm">
           <li>
@@ -132,6 +89,9 @@
           </li>
         </ul>
       </nav>
+</div>
+    
+ 
     </div>
     
 
@@ -142,21 +102,65 @@
         // let button = document.querySelectorAll('.tab');
         // console.log(button)
             $(document).ready(function(){
-                $('.tab').click(function(index){
-                    console.log(index.currentTarget);
-                    console.log(index.currentTarget.getAttribute('data'))
-                     
 
-                    $.ajax({
-                        url: "http://127.0.0.1:8000/coba"
+                $.ajax({
+                        url: "http://127.0.0.1:8000/data/umkm",
+                        beforeSend: function() {
+              $("#loading-image").show();
+           },
                         
                     }).done(function (data) {
-                        $('#umkm').css({
-                        "display":"table"
+                    
+                        $('#umkm').replaceWith(data);
+                        $("#loading-image").hide();
+                        $('#search').attr("data",index.currentTarget.getAttribute('data'));
                     })
-                    data.forEach(element => {
-                        $('#body').append('<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"><td class="px-6 py-4" >'+element.nama_penduduk+'</td></tr>');
-                    });
+                    
+
+                $('.tab').click(function(index){
+                    $.ajax({
+                        url: "http://127.0.0.1:8000/data/"+index.currentTarget.getAttribute('data'),
+                        beforeSend: function() {
+              $("#loading-image").show();
+           },
+                        
+                    }).done(function (data) {
+                    
+                        $('#umkm').replaceWith(data);
+                        $("#loading-image").hide();
+                        $('#search').attr("data",index.currentTarget.getAttribute('data'));
+                    })
+                    
+                })
+
+                $('#search').keyup(function () {
+                    let data = ($(this).val())
+                    if(data == null || data == ""){
+                        data='kosong';
+                    }
+                    console.log(data);
+                    
+                  
+                    $.ajax({
+                        url: "http://127.0.0.1:8000/search/"+document.querySelector('#search').getAttribute('data')+'/'+data,
+                        async:true,
+                        
+                    }).done(function (data) {    
+                        $('#umkm').html(data)   
+                    })
+
+                })
+
+                $('.sort').click(function (index) {
+                   
+                    $.ajax({
+                        url: "http://127.0.0.1:8000/dashboard/pengajuan/"+index.currentTarget.getAttribute('data'),
+                        method:"GET",
+                        success: function (data) {
+                            
+                            $('#umkm').html(data);
+                        }
+                        
                     })
                 })
                 

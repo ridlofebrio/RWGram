@@ -9,13 +9,46 @@ class StatusHidupController extends Controller
 {
     public function index()
     {
+        $metadata = (object) [
+            'title' => 'Status Hidup',
+            'description' => 'Halaman Ubah Status Warga'
+        ];
         $hidup = StatusHidupModel::all();
-        return view('statusHidup.index', compact('hidup'))->with('i');
+        return view('statusHidup.index', compact('hidup'))->with(['metadata' => $metadata, 'activeMenu' => 'hidup']);
     }
     public function create()
     {
-        return view('statusHidup.create');
+        $metadata = (object)[
+            'title' => 'Status Hidup',
+            'description' => 'Halaman Ubah Status Hidup Warga'
+        ];
+        return view('statusHidup.create', ['activeMenu' => 'hidup', 'metadata' => $metadata]);
     }
+
+
+    public function pengajuan()
+    {
+        $data = StatusHidupModel::all();
+
+        return view('component.statusHidup', ['data' => $data]);
+    }
+
+    public function find($value)
+    {
+        if ($value == 'kosong') {
+            $data = StatusHidupModel::all();
+
+            return view('component.statusHidup', ['data' => $data]);
+
+        } else {
+
+            $data = StatusHidupModel::whereAny(['nama_pengaju', 'NIK_pengaju'], 'like', '%' . $value . '%')->get();
+
+        }
+
+        return view('component.statusHidup', ['data' => $data]);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -47,7 +80,7 @@ class StatusHidupController extends Controller
 
         StatusHidupModel::find($id)->update($request->all());
         return redirect('');
-       
+
     }
     public function destroy(string $id)
     {

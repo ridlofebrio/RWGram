@@ -16,19 +16,13 @@ class StatusHidupSeeder extends Seeder
         $data = [
             [
                 'penduduk_id' => 2,
-                'nama_pengaju' => 'Joe Bama',
-                'NIK_pengaju' => '3326160902090003',
-                'nama_meninggal' => 'Budi Santoso',
-                'NIK_meninggal' => '3510110101010001',
+                'id_penduduk_meninggal' => 1,
                 'foto_bukti' =>null,
                 'created_at' => now(),
             ],
             [
                 'penduduk_id' => 3,
-                'nama_pengaju' => 'Dewa Krisna',
-                'NIK_pengaju' => '3326160105070023',
-                'nama_meninggal' => 'Budi Santoso',
-                'NIK_meninggal' => '3510110101010001',
+                'id_penduduk_meninggal' => 2, 
                 'foto_bukti' => null,
                 'created_at' => now(),
             ],

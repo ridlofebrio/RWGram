@@ -16,8 +16,6 @@ class StatusNikahSeeder extends Seeder
         $data = [
             [
                 'penduduk_id' => 1,
-                'nama_pengaju' => 'Febrio',
-                'NIK_pengaju' => '3326160608070197',
                 'nama_pasangan' => 'Anya Geraldine',
                 'NIK_pasangan' => '3510110101010002',
                 'status' => 'kawin',
@@ -26,8 +24,6 @@ class StatusNikahSeeder extends Seeder
             ],
             [
                 'penduduk_id' => 2,
-                'nama_pengaju' => 'JO Bama',
-                'NIK_pengaju' => '3326160902090003',
                 'nama_pasangan' => 'Mas Bambang',
                 'NIK_pasangan' => '3510110101010002',
                 'status' => 'cerai',

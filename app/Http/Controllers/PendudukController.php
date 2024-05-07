@@ -15,7 +15,9 @@ class PendudukController extends Controller
     public function index()
     {
         //
-        $penduduk = PendudukModel::all();
+        $penduduk = PendudukModel::with('kartuKeluarga', 'kartuKeluarga.rt')->get();
+
+
 
         return view('dashboard.penduduk', ['data' => $penduduk, 'active' => 'penduduk']);
     }
@@ -23,6 +25,23 @@ class PendudukController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+
+    public function find($value)
+    {
+        if ($value == 'kosong') {
+            $data = PendudukModel::all();
+
+            return view('dashboard.penduduk', ['data' => $data, 'active' => 'penduduk']);
+
+        } else {
+
+            $data = PendudukModel::whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->get();
+
+        }
+
+        return view('dashboard.penduduk', ['data' => $data, 'active' => 'penduduk']);
+    }
     public function create()
     {
         //
@@ -66,6 +85,7 @@ class PendudukController extends Controller
             'alamat' => $request->alamat,
             'agama' => $request->agama,
             'pekerjaan' => $request->pekerjaan,
+            'tempat_lahir' => $request->tempat_lahir,
             'status_tinggal' => $request->status_tinggal,
             'status_kematian' => $request->status_kematian
         ]);
@@ -87,7 +107,7 @@ class PendudukController extends Controller
 
     public function request()
     {
-        $metadata = (object)[
+        $metadata = (object) [
             'title' => 'Data Diri',
             'description' => 'Data Diri Penduduk'
         ];
@@ -183,9 +203,9 @@ class PendudukController extends Controller
 
         try {
             PendudukModel::destroy($id);
-            return redirect('/penduduk')->with('success', 'Data berhasil dihapus');
+            return redirect('dashboard/penduduk')->with('flash', ['success', 'Data berhasil dihapus']);
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect('/penduduk')->with('error', 'Data Gagal dihapus karena data terkait dengan tabel lain');
+            return redirect('dashboard/penduduk')->with('flash', ['error', 'Data Gagal dihapus karena data terkait dengan tabel lain']);
         }
     }
 }

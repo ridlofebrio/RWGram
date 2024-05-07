@@ -1,13 +1,20 @@
 @extends('dashboard.template')
 
 @section('content')
+@if ( Session::has('errors'))
+<div class="absolute bg-white drop-shadow-card top-0 left-1/2 -translate-x-1/2">
+    <h1 class="text-red-500  text-bold">{{$errors}}</h1>
+</div>
+@endif
 
-    <div class="flex gap-5 justify-between font-body">
-        <div class="left w-1/2 ">
-            <h1 class="font-body font-semibold text-black" >Ringkasan</h1>
-            <div class="h-full flex w-full justify-around">
-                    <div class="row-left flex flex-col justify-around">
-                        <div class="card bg-white rounded-xl px-5 py-7">
+
+    <div class="grid grid-cols-1  lg:grid-cols-2 gap-5  ">
+  
+        <div class="left justify-self-start w-full  self-center ">
+            <h1 class=" font-semibold mb-3 text-black" >Ringkasan</h1>
+            <div class="h-full flex  gap-2 flex-wrap w-full justify-around">
+                    <div class="row-left flex gap-2 flex-col justify-around">
+                        <div class="card bg-white rounded-xl px-2 py-3">
                                 <div class="flex space-x-3 items-center">
                                     <div class="icon bg-dodger-blue-100 px-3 py-2 rounded-xl">
                                         <img class="w-6" src="{{asset('asset/icon/bulk/people.svg')}}" alt="">
@@ -22,7 +29,7 @@
                                 
     
                         </div>
-                        <div class="card bg-white rounded-xl px-5 py-7">
+                        <div class="card bg-white rounded-xl px-3 py-5">
                             <div class="flex space-x-3 items-center">
                                 <div class="icon bg-dodger-blue-100 px-3 py-2 rounded-xl">
                                     <img class="w-6" src="{{asset('asset/icon/bulk/shop.svg')}}" alt="">
@@ -39,11 +46,11 @@
     
                     </div>
                     </div>
-                    <div class="row-right flex flex-col justify-around">
-                        <div class="card bg-white rounded-xl px-5 py-7">
+                    <div class="row-right flex flex-col  gap-2 justify-around">
+                        <div class="card bg-white rounded-xl px-3 py-5">
                             <div class="flex space-x-3 items-center">
                                 <div class="icon bg-dodger-blue-100 px-3 py-2 rounded-xl">
-                                    <img class="w-6" src="{{asset('asset/icon/bulk/messages-3.svg')}}" alt="">
+                                    <img  class="w-6" src="{{asset('asset/icon/bulk/messages-3.svg')}}" alt="">
                                 </div>
                                 <h1 class="text-neutral-06" >Jumlah Pengaduan</h1>
                             </div>
@@ -55,7 +62,7 @@
                             
     
                     </div>
-                    <div class="card bg-white rounded-xl px-5 py-7">
+                    <div class="card bg-white rounded-xl px-3 py-5">
                         <div class="flex space-x-3 items-center">
                             <div class="icon bg-dodger-blue-100 px-3 py-2 rounded-xl">
                                 <img class="w-6" src="{{asset('asset/icon/bulk/directbox.svg')}}" alt="">
@@ -75,30 +82,71 @@
         </div>
      
         
-<div class="carousel w-1/2 ">
-    <h1 class="font-body font-semibold mb-5 text-black" >Pengumuman</h1>
+<div class="justify-self-center col-span-1 carousel  w-[400px] xl:w-full">
+    <h1 class=" font-semibold mb-5 text-black" >Pengumuman</h1>
     <div id="default-carousel" class="relative w-full " data-carousel="slide">
         <!-- Carousel wrapper -->
-        <div class="relative h-56  overflow-hidden rounded-lg md:h-96">
+        <div class="relative h-[326px]  overflow-hidden rounded-lg ">
              <!-- Item 1 -->
+             
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+              <div class="absolute font-main  w-full z-50 h-full">
+                <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
+                    <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
+                    <h1 class=" text-md  font-bold text-white w-3/4" >Ayo ramaikan buka bersama puasa Ramadhan 1445H di Rumah Pak Sohib, pukul 15.00  </h1>
+                   
+            </div>
+          </div>
+          <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
+                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
             <!-- Item 2 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+              <div class="absolute font-main  w-full z-50 h-full">
+                <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
+                    <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
+                    <h1 class=" text-md  font-bold text-white w-3/4" >Ayo ramaikan buka bersama puasa Ramadhan 1445H di Rumah Pak Sohib, pukul 15.00  </h1>
+                   
+            </div>
+          </div>
+          <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
+                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
             <!-- Item 3 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+              <div class="absolute font-main  w-full z-50 h-full">
+                <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
+                    <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
+                    <h1 class=" text-md  font-bold text-white w-3/4" >Ayo ramaikan buka bersama puasa Ramadhan 1445H di Rumah Pak Sohib, pukul 15.00  </h1>
+                   
+            </div>
+          </div>
+          <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
+                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
             <!-- Item 4 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+              <div class="absolute font-main  w-full z-50 h-full">
+                <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
+                    <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
+                    <h1 class=" text-md  font-bold text-white w-3/4" >Ayo ramaikan buka bersama puasa Ramadhan 1445H di Rumah Pak Sohib, pukul 15.00  </h1>
+                   
+            </div>
+          </div>
+          <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
+                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
             <!-- Item 5 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{asset('asset/images/profil.jpeg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+              <div class="absolute font-main  w-full z-50 h-full">
+                <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
+                    <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
+                    <h1 class=" text-md  font-bold text-white w-3/4" >Ayo ramaikan buka bersama puasa Ramadhan 1445H di Rumah Pak Sohib, pukul 15.00  </h1>
+                   
+            </div>
+          </div>
+          <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
+                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
         </div>
         <!-- Slider indicators -->
@@ -129,8 +177,173 @@
     </div>
 </div>
 
-
-
+<div class=" mt-5 ">
+  <h1 class=" font-semibold mb-5 text-black" >Kas</h1>
+  <div class="w-full bg-white rounded-lg shadow dark:bg-gray-800">
+    <div class="flex justify-between p-4 md:p-6 pb-0 md:pb-0">
+     
+      
     </div>
 
+
+    <div id="labels-chart" class="px-2.5"></div>
+    <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between mt-5 p-4 md:p-6 pt-0 md:pt-0">
+      <div class="flex justify-between items-center pt-5">
+        <!-- Button -->
+        <button
+          id="dropdownDefaultButton"
+          data-dropdown-toggle="lastDaysdropdown"
+          data-dropdown-placement="bottom"
+          class="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 text-center inline-flex items-center dark:hover:text-white"
+          type="button">
+          Last 7 days
+          <svg class="w-2.5 m-2.5 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+          </svg>
+        </button>
+        <!-- Dropdown menu -->
+        <div id="lastDaysdropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Yesterday</a>
+              </li>
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Today</a>
+              </li>
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 7 days</a>
+              </li>
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 30 days</a>
+              </li>
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 90 days</a>
+              </li>
+            </ul>
+        </div>
+        <a
+          href="#"
+          class="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-blue-600 hover:text-blue-700 dark:hover:text-blue-500  hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2">
+          Sales Report
+          <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+ 
+  
+    </div>
+</div>
+
+
+
 @endsection
+
+@push('js')
+<script>
+var data1 = JSON.parse("{{ json_encode($data) }}");
+data1.push(0);
+var tgl = "{{ json_encode($tgl) }}"
+tgl=tgl.replace(/&quot;/g,'"');
+// tgl=tgl.replace(,'');
+console.log( )
+// console.log( JSON.parse(tgl))
+
+const options = {
+// set the labels option to true to show the labels on the X and Y axis
+xaxis: {
+  show: true,
+  categories:JSON.parse(tgl),
+  labels: {
+    show: true,
+    style: {
+      fontFamily: "Inter, sans-serif",
+      cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
+    }
+  },
+  axisBorder: {
+    show: false,
+  },
+  axisTicks: {
+    show: false,
+  },
+},
+yaxis: {
+  show: true,
+  labels: {
+    show: true,
+    style: {
+      fontFamily: "Inter, sans-serif",
+      cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
+    },
+    formatter: function (value) {
+      return 'Rp.' + value;
+    }
+  }
+},
+series: [
+  {
+    name: "Pemasukan",
+    data: data1,
+    color: "#1A56DB",
+  }
+ 
+],
+chart: {
+  sparkline: {
+    enabled: false
+  },
+  height: "100%",
+  width: "100%",
+  type: "area",
+  fontFamily: "Inter, sans-serif",
+  dropShadow: {
+    enabled: false,
+  },
+  toolbar: {
+    show: false,
+  },
+},
+tooltip: {
+  enabled: true,
+  x: {
+    show: false,
+  },
+},
+fill: {
+  type: "gradient",
+  gradient: {
+    opacityFrom: 0.55,
+    opacityTo: 0,
+    shade: "#1C64F2",
+    gradientToColors: ["#1C64F2"],
+  },
+},
+dataLabels: {
+  enabled: false,
+},
+stroke: {
+  width: 6,
+},
+legend: {
+  show: false
+},
+grid: {
+  show: false,
+},
+}
+
+if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined') {
+const chart = new ApexCharts(document.getElementById("labels-chart"), options);
+chart.render();
+}
+
+
+</script>
+@endpush

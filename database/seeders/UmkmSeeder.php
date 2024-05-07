@@ -28,7 +28,6 @@ class UmkmSeeder extends Seeder
                 'lokasi_umkm' => 'Jl. Merdeka No. 123',
                 'tanggal_umkm' => '2024-04-23',
                 'created_at' => now(),
-                'no_telp_umkm' => '081234567890'
             ],
             [
                 'umkm_id' => 2,
@@ -42,7 +41,6 @@ class UmkmSeeder extends Seeder
                 'lokasi_umkm' => 'Jl. Sudirman No. 45',
                 'tanggal_umkm' => '2024-04-20',
                 'created_at' => now(),
-                'no_telp_umkm' => '083434567890'
             ],
             [
                 'umkm_id' => 3,
@@ -95,7 +93,6 @@ class UmkmSeeder extends Seeder
                 'lokasi_umkm' => 'Jl. Ahmad Yani No. 67',
                 'tanggal_umkm' => '2024-04-18',
                 'created_at' => now(),
-                'no_telp_umkm' => '0892849567890'
             ],
         ];
         DB::table('umkm')->insert($data);

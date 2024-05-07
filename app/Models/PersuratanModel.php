@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PersuratanModel extends Model
 {
@@ -18,4 +19,9 @@ class PersuratanModel extends Model
         'keterangan',
         'tanggal_persuratan'
     ];
+
+    public function penduduk(): BelongsTo
+    {
+        return $this->belongsTo(PendudukModel::class, 'penduduk_id');
+    }
 }
