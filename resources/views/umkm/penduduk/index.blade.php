@@ -10,11 +10,11 @@
     </header>
 
     <div class="bg-white-100 mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">        
-        <div class="flex justify-between my-4 mb-8">
+        <div class="flex justify-between my-4 mb-4">
             <div class="flex gap-3 drop-shadow-lg">
                 <form action="{{ route('umkm.penduduk.index') }}" method="GET" class="max-w-sm mx-auto">
                     <div class="relative">
-                        <input type="text" name="search" class="pl-8 block w-full p-2 border border-gray-300 rounded-full bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari UMKM" required />
+                        <input type="text" name="search" class="pl-10 block w-full p-2 border border-gray-300 rounded-full bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari UMKM" required />
                         <div class="absolute inset-y-0 start-0 flex items-center pl-3 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
@@ -34,7 +34,7 @@
                     <p class="mb-[8px] font-medium text-lg text-neutral dark:text-white text-black line-clamp-2">
                         {{ $data->nama_umkm }}
                     </p>
-                    <p class="mb-[20px] text-base text-neutral dark:text-white text-black line-clamp-5">
+                    <p class="mb-[20px] text-base text-neutral dark:text-white text-black line-clamp-3">
                         {{ $data->deskripsi_umkm }}
                     </p>                                
                     <div class="mb-[12px] text-base flex items-center text-neutral dark:text-white text-black">
