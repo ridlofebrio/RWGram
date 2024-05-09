@@ -12,6 +12,7 @@ use App\Http\Controllers\StatusNikahController;
 use App\Http\Controllers\StatusTinggalController;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\Auth\AuthSessionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -100,11 +101,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/penduduk', [PendudukController::class, 'index']);
     Route::get('/bansos', [BansosController::class, 'index']);
-
+    Route::get('/akun', [UserController::class, 'index']);
     Route::get('/persuratan', [PersuratanController::class, 'index']);
     Route::get('/', [DashboardController::class, 'index']);
-
-
 });
 
 
@@ -124,8 +123,18 @@ Route::get('/search/tinggal/{value}', [StatusTinggalController::class, 'find']);
 Route::get('/search/meninggal/{value}', [StatusHidupController::class, 'find']);
 Route::get('/search/penduduk/{value}', [PendudukController::class, 'find']);
 
+
+Route::group(['prefix' => 'akun'], function () {
+    Route::delete('{id}', [UserController::class, 'destroy']);
+
+});
+
 Route::group(['prefix' => 'penduduk'], function () {
+    Route::post('/', [PendudukController::class, 'store']);
+    Route::put('/{id}', [PendudukController::class, 'update']);
     Route::delete('{id}', [PendudukController::class, 'destroy']);
     Route::get('{id}', [PendudukController::class, 'find']);
+    Route::get('/sort/{sort}', [PendudukController::class, 'sort']);
 });
+
 

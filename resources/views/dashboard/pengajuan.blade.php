@@ -1,26 +1,7 @@
 @extends('dashboard.template')
 
 @section('content')
-@push('css')
-<style>
-    /* HTML: <div class="loader"></div> */
-    .loader {
 
-width: 90px;
-height: 14px;
---c:#0096FF 92%,white;
-background: 
-  radial-gradient(circle 7px at bottom,var(--c)) 0 0,
-  radial-gradient(circle 7px at top   ,var(--c)) 0 100%;
-background-size: calc(100%/4) 50%;
-background-repeat: repeat-x;
-animation: l11 1s infinite;
-}
-@keyframes l11 {
-  80%,100% {background-position: calc(100%/3) 0,calc(100%/-3) 100%}
-}
-</style>
-@endpush
 
 
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white  text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
