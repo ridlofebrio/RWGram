@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PendudukModel;
 use App\Models\StatusHidupModel;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,7 @@ class StatusHidupController extends Controller
     }
     public function create()
     {
-        $metadata = (object)[
+        $metadata = (object) [
             'title' => 'Status Hidup',
             'description' => 'Halaman Ubah Status Hidup Warga'
         ];
@@ -28,7 +29,7 @@ class StatusHidupController extends Controller
 
     public function pengajuan()
     {
-        $data = StatusHidupModel::all();
+        $data = StatusHidupModel::with('Penduduk', 'PendudukM')->get();
 
         return view('component.statusHidup', ['data' => $data]);
     }
@@ -42,7 +43,9 @@ class StatusHidupController extends Controller
 
         } else {
 
-            $data = StatusHidupModel::whereAny(['nama_pengaju', 'NIK_pengaju'], 'like', '%' . $value . '%')->get();
+            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->first();
+
+            $data = StatusHidupModel::whereAny(['penduduk_id', 'id_penduduk_meninggal'], $id->penduduk_id)->get();
 
         }
 

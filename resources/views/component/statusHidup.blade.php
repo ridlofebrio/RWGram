@@ -29,10 +29,10 @@
                 {{$status->id_status_hidup}}
             </th>
             <td class="px-6 py-4">
-                {{$status->nama_pengaju}}
+                {{$status->penduduk->nama_penduduk}}
             </td>
             <td class="px-6 py-4">
-                {{$status->nama_meninggal}}
+                {{$status->pendudukM->nama_penduduk}}
             </td>
             <td class="px-6 py-4">
                 {{$status->NIK_meninggal}}

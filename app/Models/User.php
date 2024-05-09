@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -46,10 +47,11 @@ class User extends Authenticatable
 
     public function Role(): BelongsTo
     {
-        return $this->belongsTo(RoleModel::class);
+        return $this->belongsTo(RoleModel::class, "role_id");
     }
 
-    public function getRole(){
+    public function getRole()
+    {
         $role = $this->role()->first()->name;
         return $role;
     }

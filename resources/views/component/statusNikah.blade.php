@@ -29,7 +29,7 @@
                 {{$status->id_status_nikah}}
             </th>
             <td class="px-6 py-4">
-                {{$status->nama_pengaju}}
+                {{$status->penduduk->nama_penduduk}}
             </td>
             <td class="px-6 py-4">
                 {{$status->nama_pasangan}}
