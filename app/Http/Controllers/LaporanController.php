@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LaporanModel;
+use App\Models\PendudukModel;
 use Illuminate\Http\Request;
 
 class LaporanController extends Controller
@@ -12,7 +13,7 @@ class LaporanController extends Controller
      */
     public function index($sort)
     {
-        $laporan = LaporanModel::where('status_laporan', $sort)->get();
+        $laporan = LaporanModel::with('penduduk')->where('status_laporan', $sort)->get();
 
         return $laporan;
     }
@@ -58,6 +59,25 @@ class LaporanController extends Controller
         return redirect()->route('laporan.index');
     }
 
+
+    public function find($value)
+    {
+        if ($value == 'kosong') {
+            $data = LaporanModel::all();
+
+            return view('dashboard.pengaduan', ['data' => $data, 'active' => 'pengaduan']);
+
+        } else {
+
+            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->get();
+            $data = LaporanModel::findMany($id);
+
+        }
+
+        return view('dashboard.pengaduan', ['data' => $data, 'active' => 'pengaduan']);
+    }
+
+
     /**
      * Display the specified resource.
      */
@@ -83,7 +103,12 @@ class LaporanController extends Controller
     {
 
 
-        LaporanModel::find($id)->update($request->all());
+        $laporan = LaporanModel::find($id);
+        $laporan->status_laporan = $request->status_laporan;
+        if (isset($request->pesan)) {
+            $laporan->pesan = $request->pesan;
+        }
+        $laporan->save();
         return redirect('/dashboard/pengaduan')->with('flash', ['success', 'Data berhasil Dikonfirmasi']);
     }
 
