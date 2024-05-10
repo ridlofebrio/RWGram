@@ -122,6 +122,7 @@ Route::get('/search/umkm/{value}', [UmkmController::class, 'find']);
 Route::get('/search/tinggal/{value}', [StatusTinggalController::class, 'find']);
 Route::get('/search/meninggal/{value}', [StatusHidupController::class, 'find']);
 Route::get('/search/penduduk/{value}', [PendudukController::class, 'find']);
+Route::get('/search/pengaduan/{value}', [LaporanController::class, 'find']);
 
 
 Route::group(['prefix' => 'akun'], function () {
