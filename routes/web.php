@@ -137,4 +137,11 @@ Route::group(['prefix' => 'penduduk'], function () {
     Route::get('/sort/{sort}', [PendudukController::class, 'sort']);
 });
 
+Route::group(['prefix' => 'pengaduan'], function () {
+
+    Route::put('/konfirmasi/{id}', [LaporanController::class, 'update']);
+
+});
+
+
 
