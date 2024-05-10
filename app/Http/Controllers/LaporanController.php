@@ -81,22 +81,10 @@ class LaporanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'penduduk_id' => 'required',
-            'jenis_laporan' => 'required',
-            'deskripsi_laporan' => 'required',
-            'tanggal_laporan' => 'required',
-            'status_laporan' => 'required'
-        ]);
 
-        LaporanModel::find($id)->update([
-            'penduduk_id' => $request->penduduk_id,
-            'jenis_laporan' => $request->jenis_laporan,
-            'deskripsi_laporan' => $request->deskripsi_laporan,
-            'status_laporan' => $request->status_laporan,
-            'tanggal_laporan' => $request->tanggal_laporan
-        ]);
-        return redirect('/laporan');
+
+        LaporanModel::find($id)->update($request->all());
+        return redirect('/dashboard/pengaduan')->with('flash', ['success', 'Data berhasil Dikonfirmasi']);
     }
 
     /**
