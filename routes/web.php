@@ -104,6 +104,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/akun', [UserController::class, 'index']);
     Route::get('/persuratan', [PersuratanController::class, 'index']);
     Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/detail-akun', [UserController::class, 'show']);
+
 });
 
 

@@ -51,7 +51,7 @@
                             <div class="bg-blue-main z-30 absolute top-16 px-3 py-5 right-5 rounded-lg" x-show="open" @click.outside="open = false">
                                
                                 <ul>
-                                    <li><a href="">Setting</a></li>
+                                    <li><a href="{{url('dashboard/detail-akun')}}">Setting</a></li>
                                     <hr>
                                     <li><a href="/logout">Log out</a></li>
                                 </ul>

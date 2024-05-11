@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\KasModel;
+use App\Models\LaporanModel;
+use App\Models\StatusHidupModel;
+use App\Models\StatusNikahModel;
+use App\Models\StatusTinggalModel;
 use App\Models\UmkmModel;
 use Illuminate\Http\Request;
 
@@ -26,8 +30,13 @@ class DashboardController extends Controller
 
     public function notif()
     {
-        $data = UmkmModel::where('terbaca', 0)->with('penduduk')->get();
-        return view('component.notif', compact('data'));
+        $umkm = UmkmModel::where('terbaca', 0)->with('penduduk')->get();
+        $hidup = StatusHidupModel::where('terbaca', 0)->with('penduduk')->get();
+        $nikah = StatusNikahModel::where('terbaca', 0)->with('penduduk')->get();
+        $tinggal = StatusTinggalModel::where('terbaca', 0)->with('penduduk')->get();
+        $laporan = LaporanModel::where('terbaca', 0)->with('penduduk')->get();
+        $jumlah = count($umkm) + count($hidup) + count($nikah) + count($tinggal) + count($laporan);
+        return view('component.notif', compact('umkm', 'hidup', 'nikah', 'tinggal', 'laporan', 'jumlah'));
     }
     public function notifcount()
     {
