@@ -34,14 +34,14 @@ Route::get('/', function () {
     return view('welcome', ['activeMenu' => 'beranda', 'metadata' => $metadata]);
 });
 
-Route::resource('bansos', BansosController::class); //-> jo
+
 Route::group(['prefix' => 'bansos-penduduk'], function () {
     Route::post('/show', [BansosController::class, 'showPenduduk'])->name('bansos.penduduk.show');
     Route::get('/request', [BansosController::class, 'request'])->name('bansos.penduduk.request');
     Route::get('/create', [BansosController::class, 'create'])->name('bansos.penduduk.create');
 });
 
-Route::resource('informasi', InformasiController::class); //-> jo
+
 Route::group(['prefix' => 'informasi-penduduk'], function () {
     Route::get('/show/{id}', [InformasiController::class, 'showPenduduk'])->name('informasi.penduduk.show');
     Route::get('/index', [InformasiController::class, 'indexPenduduk'])->name('informasi.penduduk.index');
@@ -54,10 +54,7 @@ Route::group(['prefix' => 'data-penduduk'], function () {
     Route::get('/request', [PendudukController::class, 'request'])->name('data.penduduk.request');
 });
 
-Route::resource('kas', KasController::class)->middleware('auth'); //-> krisna
 
-
-Route::resource('umkm', UmkmController::class); //-> febrio
 Route::group(['prefix' => 'umkm-penduduk'], function () {
     Route::get('/index', [UmkmController::class, 'indexPenduduk'])->name('umkm.penduduk.index');
     Route::get('/request', [UmkmController::class, 'request'])->name('umkm.penduduk.request');
@@ -79,8 +76,8 @@ Route::group(['prefix' => 'tinggal-penduduk'], function () {
     Route::get('/request', [StatusTinggalController::class, 'request'])->name('tinggal.penduduk.request');
 });
 
-Route::resource('persuratan', PersuratanController::class); //->albian
-Route::resource('laporan', LaporanController::class); //-> albian   
+
+
 Route::group(['prefix' => 'pengaduan'], function () {
     Route::get('/', [LaporanController::class, 'indexPenduduk'])->name('laporan.penduduk.index');
 });
@@ -100,9 +97,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/pengaduan/{sort}', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/penduduk', [PendudukController::class, 'index']);
-    Route::get('/bansos', [BansosController::class, 'index']);
-    Route::get('/akun', [UserController::class, 'index']);
-    Route::get('/persuratan', [PersuratanController::class, 'index']);
+    Route::get('/bansos', [BansosController::class, 'index'])->middleware('RW');
+    Route::get('/akun', [UserController::class, 'index'])->middleware('RW');
+    Route::get('/persuratan', [PersuratanController::class, 'index'])->middleware('RW');
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/detail-akun', [UserController::class, 'show']);
 

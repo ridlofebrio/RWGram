@@ -20,6 +20,6 @@ class IsRW
         if ($user->role_id == 5) {
             return $next($request);
         }
-        return redirect(url('dashboard/'))->with('errors', 'Anda Tidak Punya Izin');
+        return redirect(url('dashboard/'))->with('flash', ['error', 'Anda Tidak Punya Izin']);
     }
 }
