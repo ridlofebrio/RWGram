@@ -77,7 +77,7 @@
                             {{ $nikah->id_status_nikah}}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $nikah->nama_pengaju }}
+                            {{ $nikah->penduduk->nama_penduduk }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $nikah->created_at }}
