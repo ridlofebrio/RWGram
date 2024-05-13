@@ -59,20 +59,24 @@ Route::group(['prefix' => 'umkm-penduduk'], function () {
     Route::get('/index', [UmkmController::class, 'indexPenduduk'])->name('umkm.penduduk.index');
     Route::get('/request', [UmkmController::class, 'request'])->name('umkm.penduduk.request');
     Route::get('/create', [UmkmController::class, 'create'])->name('umkm.penduduk.create');
+    Route::post('/store', [UmkmController::class, 'store'])->name('umkm.penduduk.store');
 });
 Route::group(['prefix' => 'nikah-penduduk'], function () {
     Route::get('/', [StatusNikahController::class, 'index'])->name('nikah.penduduk.index');
     Route::get('/create', [StatusNikahController::class, 'create'])->name('nikah.penduduk.create');
     Route::get('/request', [StatusNikahController::class, 'request'])->name('nikah.penduduk.request');
+    Route::post('/store', [StatusNikahController::class, 'store'])->name('nikah.penduduk.store');
 });
 Route::group(['prefix' => 'hidup-penduduk'], function () {
     Route::get('/', [StatusHidupController::class, 'index'])->name('hidup.penduduk.index');
     Route::get('/create', [StatusHidupController::class, 'create'])->name('hidup.penduduk.create');
     Route::get('/request', [StatusHidupController::class, 'request'])->name('hidup.penduduk.request');
+    Route::post('/store', [StatusHidupController::class, 'store'])->name('hidup.penduduk.store');
 });
 Route::group(['prefix' => 'tinggal-penduduk'], function () {
     Route::get('/', [StatusTinggalController::class, 'index'])->name('tinggal.penduduk.index');
     Route::get('/create', [StatusTinggalController::class, 'create'])->name('tinggal.penduduk.create');
+    Route::post('/store', [StatusTinggalController::class, 'store'])->name('tinggal.penduduk.store');
     Route::get('/request', [StatusTinggalController::class, 'request'])->name('tinggal.penduduk.request');
 });
 
