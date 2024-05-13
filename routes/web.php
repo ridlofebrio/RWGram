@@ -137,11 +137,16 @@ Route::group(['prefix' => 'penduduk'], function () {
     Route::get('/sort/{sort}', [PendudukController::class, 'sort']);
 });
 
-Route::group(['prefix' => 'pengaduan'], function () {
+Route::group(['prefix' => 'konfirmasi', 'middleware' => 'auth'], function () {
 
-    Route::put('/konfirmasi/{id}', [LaporanController::class, 'update']);
+    Route::put('/pengaduan/{id}', [LaporanController::class, 'update'])->middleware('RW');
+    Route::put('/umkm/{id}', [UmkmController::class, 'update'])->middleware('RW');
+    Route::put('/nikah/{id}', [StatusNikahController::class, 'update'])->middleware('RW');
+    Route::put('/tinggal/{id}', [StatusTinggalController::class, 'update'])->middleware('RW');
+    Route::put('/hidup/{id}', [StatusHidupController::class, 'update'])->middleware('RW');
 
 });
+
 
 
 

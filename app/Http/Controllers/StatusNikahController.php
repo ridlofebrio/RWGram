@@ -72,16 +72,11 @@ class StatusNikahController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama_pengaju' => 'required',
-            'NIK_pasangan' => 'required',
-            'nama_pasangan' => 'required',
-            'NIK_pengaju' => 'required',
-            'status' => 'required',
-            'foto_bukti' => 'required',
+            'status_pengajuan' => 'required'
         ]);
 
         StatusNikahModel::find($id)->update($request->all());
-        return redirect('');
+        return redirect('dashboard/pengajuan')->with('flash', ['success', 'Data berhasil dikonfirmasi']);
     }
     public function destroy(string $id)
     {

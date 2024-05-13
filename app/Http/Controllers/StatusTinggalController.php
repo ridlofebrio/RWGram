@@ -80,16 +80,11 @@ class StatusTinggalController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama_pengaju' => 'required',
-            'NIK' => 'required',
-            'alamat_asal' => 'required',
-            'alamat_pindah' => 'required',
-            'status' => 'required',
-            'foto_bukti' => 'required',
+            'status_pengajuan' => 'required'
         ]);
 
         StatusTinggalModel::find($id)->update($request->all());
-        return redirect('');
+        return redirect('dashboard/pengajuan')->with('flash', ['success', 'Data berhasil dikonfirmasi']);
     }
     public function destroy(string $id)
     {

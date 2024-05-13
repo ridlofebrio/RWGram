@@ -149,7 +149,7 @@
                                                     Lihat Detail
                                                   </button>
 
-                                                  <form action="{{url('pengaduan/konfirmasi/'.$umkm->laporan_id)}}" method="POST">
+                                                  <form action="{{url('konfirmasi/pengaduan'.$umkm->laporan_id)}}" method="POST">
                                                     @csrf
                                                     @method('PUT')
                                                     <input type="hidden" name="status_laporan" value="selesai">
