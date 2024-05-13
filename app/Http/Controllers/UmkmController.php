@@ -14,13 +14,17 @@ class UmkmController extends Controller
      * Display a listing of the resource.
      */
     public function index($sort = 'menunggu')
-
-   
-
     {
         $umkm = UmkmModel::where('status_pengajuan', $sort)->with('penduduk')->get();
         $active = 'pengajuan';
         return view('dashboard.pengajuan', compact('umkm', 'active'));
+    }
+
+    public function sort($sort = 'menunggu')
+    {
+        $umkm = UmkmModel::where('status_pengajuan', $sort)->with('penduduk')->get();
+        $active = 'pengajuan';
+        return view('component.umkm', compact('umkm'));
     }
 
 
@@ -64,7 +68,7 @@ class UmkmController extends Controller
         // Ambil data UMKM setelah diterapkan filter
         $umkm = $umkm->get();
 
-        $metadata = (object)[
+        $metadata = (object) [
             'title' => 'UMKM',
             'description' => 'UMKM untuk penduduk'
         ];
@@ -79,7 +83,7 @@ class UmkmController extends Controller
 
     public function create()
     {
-        $metadata = (object)[
+        $metadata = (object) [
             'title' => 'UMKM',
             'description' => 'Daftar UMKM'
         ];

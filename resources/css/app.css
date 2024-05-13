@@ -9,6 +9,11 @@ input:focus {
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
 }
+
+[x-cloak] {
+    display: none !important;
+}
+
 .dark-mode {
     background-color: rgb(12, 12, 23);
     color: white;

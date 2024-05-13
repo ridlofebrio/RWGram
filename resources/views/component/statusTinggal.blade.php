@@ -29,10 +29,10 @@
                 {{$status->id_status_tinggal}}
             </th>
             <td class="px-6 py-4">
-                {{$status->nama_pengaju}}
+                {{$status->penduduk->nama_penduduk}}
             </td>
             <td class="px-6 py-4">
-                {{$status->alamat_asal}}
+                {{$status->penduduk->alamat}}
             </td>
             <td class="px-6 py-4">
                 {{$status->status}}
@@ -49,7 +49,7 @@
             </td>
         
             <td class="px-6 py-4 flex gap-2 ">
-                <a href="/login" class="text-red-500 border-2 border-red-500  hover:bg-red-500 hover:text-white   px-8 py-2 text-base font-medium rounded-full  ">Tolak</a>
+
                 <a href="/login" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-5 py-2 text-base font-medium rounded-full  ">Konfirmasi</a>
                 <div x-data="{ open: false }">
                     <button @click="open = true"  class="hover:border-none  before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  " type="button">

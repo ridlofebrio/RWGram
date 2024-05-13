@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PendudukModel;
 use App\Models\StatusTinggalModel;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,7 @@ class StatusTinggalController extends Controller
 {
 
 
-    
+
     public function index()
     {
         $metadata = (object) [
@@ -33,7 +34,7 @@ class StatusTinggalController extends Controller
 
     public function pengajuan()
     {
-        $data = StatusTinggalModel::all();
+        $data = StatusTinggalModel::with('penduduk')->get();
 
         return view('component.statusTinggal', ['data' => $data]);
     }
@@ -47,7 +48,8 @@ class StatusTinggalController extends Controller
 
         } else {
 
-            $data = StatusTinggalModel::whereAny(['nama_pengaju', 'NIK'], 'like', '%' . $value . '%')->get();
+            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->get();
+            $data = StatusTinggalModel::findMany($id);
 
         }
 

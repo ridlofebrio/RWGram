@@ -10,7 +10,7 @@ class StatusNikahController extends Controller
 
     public function pengajuan()
     {
-        $data = StatusNikahModel::all();
+        $data = StatusNikahModel::with('penduduk')->get();
 
         return view('component.statusNikah', ['data' => $data]);
     }
@@ -24,11 +24,12 @@ class StatusNikahController extends Controller
 
         } else {
 
-            $data = StatusNikahModel::whereAny(['nama_pengaju', 'nama_pasangan', 'status', 'id_status_nikah'], 'like', '%' . $value . '%')->get();
+            $data = StatusNikahModel::whereAny(['penduduk_id', 'nama_pasangan', 'status', 'id_status_nikah'], 'like', '%' . $value . '%')->get();
 
         }
 
-        return view('component.statusNikah', ['data' => $data]);}
+        return view('component.statusNikah', ['data' => $data]);
+    }
 
     public function index()
     {
@@ -41,11 +42,11 @@ class StatusNikahController extends Controller
     }
     public function create()
     {
-        $metadata = (object)[
+        $metadata = (object) [
             'title' => 'Status Nikah',
             'description' => 'Halaman Ubah Status Nikah Warga'
         ];
-        return view('statusNikah.create',['activeMenu' => 'nikah', 'metadata' => $metadata]);
+        return view('statusNikah.create', ['activeMenu' => 'nikah', 'metadata' => $metadata]);
 
     }
 
@@ -87,3 +88,4 @@ class StatusNikahController extends Controller
         $laporan = StatusNikahModel::findOrFail($id)->delete();
     }
 }
+
