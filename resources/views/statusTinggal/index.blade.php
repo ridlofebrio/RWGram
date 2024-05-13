@@ -80,7 +80,7 @@
                             {{ $tinggal->id_status_tinggal}}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $tinggal->nama_pengaju }}
+                            {{ $tinggal->penduduk->nama_penduduk }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $tinggal->created_at }}
