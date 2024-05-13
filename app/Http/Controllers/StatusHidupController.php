@@ -73,16 +73,12 @@ class StatusHidupController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama_pengaju' => 'required',
-            'NIK_pengaju' => 'required',
-            'nama_meninggal' => 'required',
-            'NIK_meninggal' => 'required',
-            'foto_bukti' => 'required',
             'status_pengajuan' => 'required'
         ]);
 
+
         StatusHidupModel::find($id)->update($request->all());
-        return redirect('');
+        return redirect('dashboard/pengajuan')->with('flash', ['success', 'Data berhasil dikonfirmasi']);
 
     }
     public function destroy(string $id)

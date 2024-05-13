@@ -60,7 +60,12 @@
                                 <h1 class="text-xl mb-5">Apakah anda yakin ingin mengkonfirmasi permohonan UMKM ini ?</h1>
                                <div class="flex w-full space-x-7 justify-center">
                                 <button class="text-blue-main border-2 border-dodger-blue-800  hover:bg-dodger-blue-800  hover:text-white  px-5 py-2 text-base font-medium rounded-full">Lihat Detail</button>
-                                <button class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-5 py-2 text-base font-medium rounded-full">Konfirmasi</button>
+                               <form action="{{url('konfirmasi/umkm/'.$umkm->umkm_id)}}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                    <input type="hidden" name="status_pengajuan" value="diterima">
+                                <button type="submit" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-5 py-2 text-base font-medium rounded-full">Konfirmasi</button>
+                               </form>
                                </div>
 
                             </div>
