@@ -45,7 +45,7 @@ class LaporanController extends Controller
             'title' => 'Pengaduan',
             'description' => 'Halaman Pengajuan Pengaduan'
         ];
-        
+
         return view('laporan.penduduk.create')->with(['metadata' => $metadata, 'activeMenu' => 'pengaduan']);
     }
 
@@ -55,23 +55,28 @@ class LaporanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_pengaju' => 'required',
             'NIK_pengaju' => 'required',
-            'jenis_keluhan' => 'required',
-            'deskripsi' => 'required',
+            'deskripsi_laporan' => 'required',
         ]);
-        $penduduk_id = PendudukModel::where('NIK', $request->NIK_pengaju)->first();
-        $data =[
-            'penduduk_id' => $penduduk_id->penduduk_id,
-            'jenis_laporan' => $request->jenis_keluhan,
-            'deskripsi_laporan' => $request->deskripsi,
-            'status_laporan' => 'Menunggu',
-            'tanggal_laporan'=> now()
-        ];
-        LaporanModel::create($data);
-        return redirect()->route('laporan.penduduk.index');
-    }
 
+        $penduduk = PendudukModel::where('NIK', $request->NIK_pengaju)->first();
+
+        if ($penduduk) {
+            $data = [
+                'penduduk_id' => $penduduk->penduduk_id,
+                'deskripsi_laporan' => $request->deskripsi_laporan,
+                'status_laporan' => 'menunggu',
+                'tanggal_laporan' => now()
+            ];
+
+            LaporanModel::create($data);
+            return redirect()->route('laporan.penduduk.index')
+                ->with('success', 'Data Berhasil Ditambahkan');
+        } else {
+            return redirect()->route('laporan.penduduk.create')
+                ->with('error', 'NIK Anda tidak ditemukan.');
+        }
+    }
 
     public function find($value)
     {
@@ -79,12 +84,10 @@ class LaporanController extends Controller
             $data = LaporanModel::paginate(3);
 
             return view('dashboard.pengaduan', ['data' => $data, 'active' => 'pengaduan']);
-
         } else {
 
             $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->paginate(3);
             $data = LaporanModel::findMany($id);
-
         }
 
         return view('dashboard.pengaduan', ['data' => $data, 'active' => 'pengaduan']);

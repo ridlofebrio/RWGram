@@ -8,6 +8,24 @@
         </div>
     </header>
 
+    <div class="container mx-auto mt-2">
+        @if ($message = Session::get('error'))
+            <div id="alert" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mx-auto w-1/2" role="alert">
+                <strong class="font-bold">Ops!</strong>
+                <span class="block sm:inline">{{ $message }}</span>
+                <!-- Tombol Close -->
+                <span id="close-btn" class="absolute top-0 right-0 px-2 py-1 cursor-pointer">&times;</span>
+            </div>
+        @endif
+        @if ($message = Session::get('success'))
+            <div id="alert" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mx-auto w-1/2" role="alert">
+                <strong class="font-bold">Berhasil!</strong>
+                <span class="block sm:inline">{{ $message }}</span>
+                <!-- Tombol Close -->
+                <span id="close-btn" class="absolute top-0 right-0 px-2 py-1 cursor-pointer">&times;</span>
+            </div>
+        @endif
+    </div>
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="flex justify-between my-4">
             <div class="flex gap-3 drop-shadow-lg">
@@ -83,7 +101,7 @@
                             {{ $lap->tanggal_laporan }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $lap->nama_penduduk}}
+                            {{ $lap->penduduk->nama_penduduk}}
                         </td>
                         <td class="px-6 py-4 max-w-xl overflow-hidden">
                             <div class="line-clamp-4">{{ $lap->deskripsi_laporan }}</div>
@@ -126,4 +144,26 @@
         </div>
     </div>
 
+    <script>
+        // Fungsi untuk menyembunyikan alert setelah 5 detik
+        function hideAlert() {
+            let alert = document.getElementById('alert');
+            if (alert) {
+                alert.style.display = 'none';
+            }
+        }
+
+        // Tambahkan event listener untuk tombol close alert
+        document.addEventListener('DOMContentLoaded', function() {
+            let closeBtn = document.getElementById('close-btn');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    hideAlert();
+                });
+            }
+
+            // Sembunyikan alert setelah 5 detik
+            setTimeout(hideAlert, 5000);
+        });
+    </script>
 @endsection
