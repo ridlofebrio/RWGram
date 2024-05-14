@@ -30,7 +30,7 @@ class UmkmController extends Controller
 
     public function pengajuan()
     {
-        $umkm = UmkmModel::with('penduduk')->get();
+        $umkm = UmkmModel::with('penduduk')->paginate(3);
 
         return view('component.umkm', compact('umkm'));
     }
@@ -39,13 +39,13 @@ class UmkmController extends Controller
     {
 
         if ($value == 'kosong') {
-            $umkm = UmkmModel::all();
+            $umkm = UmkmModel::with('penduduk')->paginate(3);
 
             return view('component.umkm', compact('umkm'));
 
         } else {
 
-            $umkm = UmkmModel::whereAny(['nama_umkm'], 'like', '%' . $value . '%')->get();
+            $umkm = UmkmModel::whereAny(['nama_umkm'], 'like', '%' . $value . '%')->paginate(3);
 
         }
         return view('component.umkm', compact('umkm'));
@@ -141,16 +141,12 @@ class UmkmController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'penduduk_id' => 'string|max:20',
-            'nama_umkm' => 'required',
-            'deskripsi_umkm' => 'required',
-            'lokasi_umkm' => 'required',
-            'link_medsos' => 'required',
-        ]);
-        UmkmModel::find($id)->update($request->all());
-        return redirect()->route('umkm.index')
-            ->with('success', 'Data Berhasil Diupdate');
+
+        $umkm = UmkmModel::find($id);
+        $umkm->status_pengajuan = $request->status_pengajuan;
+        $umkm->save();
+        return redirect('/dashboard/pengajuan')->
+            with('flash', ['success', 'Data berhasil Dikonfirmasi']);
     }
 
     /**

@@ -11,7 +11,7 @@ class StatusNikahController extends Controller
 
     public function pengajuan()
     {
-        $data = StatusNikahModel::all();
+        $data = StatusNikahModel::with('penduduk')->paginate(3);
 
         return view('component.statusNikah', ['data' => $data]);
     }
@@ -19,12 +19,12 @@ class StatusNikahController extends Controller
     public function find($value)
     {
         if ($value == 'kosong') {
-            $data = StatusNikahModel::all();
+            $data = StatusNikahModel::paginate(3);
 
             return view('component.statusNikah', ['data' => $data]);
         } else {
 
-            $data = StatusNikahModel::whereAny(['nama_pengaju', 'nama_pasangan', 'status', 'id_status_nikah'], 'like', '%' . $value . '%')->get();
+            $data = StatusNikahModel::whereAny(['penduduk_id', 'nama_pasangan', 'status', 'id_status_nikah'], 'like', '%' . $value . '%')->paginate(3);
         }
 
         return view('component.statusNikah', ['data' => $data]);
@@ -42,7 +42,7 @@ class StatusNikahController extends Controller
 
     public function create()
     {
-        $metadata = (object)[
+        $metadata = (object) [
             'title' => 'Status Nikah',
             'description' => 'Halaman Ubah Status Nikah Warga'
         ];
@@ -85,16 +85,11 @@ class StatusNikahController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama_pengaju' => 'required',
-            'NIK_pasangan' => 'required',
-            'nama_pasangan' => 'required',
-            'NIK_pengaju' => 'required',
-            'status' => 'required',
-            'foto_bukti' => 'required',
+            'status_pengajuan' => 'required'
         ]);
 
         StatusNikahModel::find($id)->update($request->all());
-        return redirect('');
+        return redirect('dashboard/pengajuan')->with('flash', ['success', 'Data berhasil dikonfirmasi']);
     }
 
     public function destroy(string $id)

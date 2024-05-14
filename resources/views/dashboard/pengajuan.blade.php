@@ -1,26 +1,7 @@
 @extends('dashboard.template')
 
 @section('content')
-@push('css')
-<style>
-    /* HTML: <div class="loader"></div> */
-    .loader {
 
-width: 90px;
-height: 14px;
---c:#0096FF 92%,white;
-background: 
-  radial-gradient(circle 7px at bottom,var(--c)) 0 0,
-  radial-gradient(circle 7px at top   ,var(--c)) 0 100%;
-background-size: calc(100%/4) 50%;
-background-repeat: repeat-x;
-animation: l11 1s infinite;
-}
-@keyframes l11 {
-  80%,100% {background-position: calc(100%/3) 0,calc(100%/-3) 100%}
-}
-</style>
-@endpush
 
 
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white  text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
@@ -65,44 +46,30 @@ animation: l11 1s infinite;
         </div>
     </div>        
     <div id="loading-image" class="fixed top-1/2 left-1/2 flex justify-center items-center -translate-x-1/2 -translate-y-1/2 z-40 w-screen h-screen bg-white opacity-70" style="display: none;" ><div class="  loader " ></div></div>
-<div class="relative mt-5 overflow-x-auto shadow-md sm:rounded-lg ">
-    <table id='umkm' class="w-full text-sm text-left rtl:text-right  text-gray-500 dark:text-gray-400">
+<div  class="relative  mt-5 overflow-x-auto shadow-md sm:rounded-lg ">
+    <table id="umkm" class="w-full text-sm text-left rtl:text-right  text-gray-500 dark:text-gray-400">
    
     </table>
     </div>
-    <nav aria-label="Page navigation example" class="mt-5 text-right" >
-        <ul class="inline-flex -space-x-px text-sm">
-          <li>
-            <a href="#" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><i class="fa-solid fa-chevron-left"></i></a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center justify-center px-3 h-8 bg-blue-main leading-tight  text-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center justify-center px-3 h-8  leading-tight  text-gray-500 border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><i class="fa-solid fa-chevron-right"></i></a>
-          </li>
-        </ul>
-      </nav>
+    <div class="page"></div>
 </div>
-    
- 
+
     </div>
     
-
+  
+ 
 @endsection
 
 @push('js')
     <script>
         // let button = document.querySelectorAll('.tab');
         // console.log(button)
-            $(document).ready(function(){
 
+    
+
+
+            $(document).ready(function(){
+                
                 $.ajax({
                         url: "http://127.0.0.1:8000/data/umkm",
                         beforeSend: function() {
@@ -111,13 +78,20 @@ animation: l11 1s infinite;
                         
                     }).done(function (data) {
                     
-                        $('#umkm').replaceWith(data);
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(data, 'text/html');    
+                        const table = doc.getElementById('umkm');
+                        const page =doc.querySelector('.Page');
+                        console.log(doc);
+                           $('#umkm').html(table);
+                           $('.page').html(page);
                         $("#loading-image").hide();
-                        $('#search').attr("data",index.currentTarget.getAttribute('data'));
+                        
                     })
+                 
                     
-
                 $('.tab').click(function(index){
+                    
                     $.ajax({
                         url: "http://127.0.0.1:8000/data/"+index.currentTarget.getAttribute('data'),
                         beforeSend: function() {
@@ -125,11 +99,16 @@ animation: l11 1s infinite;
            },
                         
                     }).done(function (data) {
-                    
-                        $('#umkm').replaceWith(data);
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(data, 'text/html');    
+                        const table = doc.getElementById('umkm');
+                        const page =doc.querySelector('.page');
+                           $('#umkm').html(table);
+                           $('.page').html(page);
                         $("#loading-image").hide();
-                        $('#search').attr("data",index.currentTarget.getAttribute('data'));
+                       
                     })
+                    
                     
                 })
 
@@ -163,7 +142,31 @@ animation: l11 1s infinite;
                         
                     })
                 })
+
+               
+               
                 
             })
+
+            function page(event,link) {
+               
+        event.preventDefault()
+        $.ajax({
+                        url: link,
+                        beforeSend: function() {
+              $("#loading-image").show();
+           },
+           success:function(data){
+            const parser = new DOMParser();
+                        const doc = parser.parseFromString(data, 'text/html');    
+                        const table = doc.getElementById('umkm');
+                        const page =doc.querySelector('.page');
+                           $('#umkm').html(table);
+                           $('.page').html(page);
+                        $("#loading-image").hide();
+           }
+                        
+                    })
+       } 
     </script>
 @endpush

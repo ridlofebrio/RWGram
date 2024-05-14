@@ -59,7 +59,7 @@
             </thead>
             <tbody id="body">
                 
-                    @foreach ($bansos as $bansos)
+                    @foreach ($data as $bansos)
                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{$bansos->bansos_id}}
@@ -199,17 +199,17 @@
         </table>
        
     </div>
-    <nav aria-label="Page navigation example" class="mt-5 text-right" >
+    <nav aria-label="page navigation example" class="page mt-5 text-right" >
         <ul class="inline-flex -space-x-px text-sm">
           <li>
-            <a href="#" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><i class="fa-solid fa-chevron-left"></i></a>
+            <button {{$data->previousPageUrl()?'':'disabled'}} onclick="page(event,'{{$data->previousPageUrl()}}')" class="pagination disabled:bg-neutral-04  flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><i class="fa-solid fa-chevron-left"></i></button>
           </li>
           <li>
-            <a href="#" class="flex items-center justify-center px-3 h-8 bg-blue-main leading-tight  text-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+            <a href="#" class=" flex items-center justify-center px-3 h-8 bg-blue-main leading-tight  text-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{$data->currentPage()}}</a>
           </li>
-       
+         
           <li>
-            <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><i class="fa-solid fa-chevron-right"></i></a>
+            <button  {{$data->nextPageUrl()?'':'disabled'}}  onclick="page(event,'{{$data->nextPageUrl()}}')" class="pagination disabled:bg-neutral-04  flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><i class="fa-solid fa-chevron-right"></i></button>
           </li>
         </ul>
       </nav>
@@ -219,5 +219,31 @@
     </div>
     
 
+  
 @endsection
 
+@push('js')
+<script>
+    function page(event,link) {
+               
+               event.preventDefault()
+               $.ajax({
+                               url: link,
+                               beforeSend: function() {
+                     $("#loading-image").show();
+                  },
+                  success:function(data){
+                   const parser = new DOMParser();
+                               const doc = parser.parseFromString(data, 'text/html');    
+                               const table = doc.getElementById('umkm');
+                               const page =doc.querySelector('.page');
+                               console.log(page);
+                                  $('#umkm').html(table);
+                                  $('.page').html(page);
+                               $("#loading-image").hide();
+                  }
+                               
+                           })
+              } 
+</script>
+@endpush

@@ -19,6 +19,9 @@ return new class extends Migration {
             $table->string('foto_laporan', 250)->nullable();
             $table->string('status_laporan', 15);
             $table->dateTime('tanggal_laporan');
+            $table->text('pesan')->nullable();
+            $table->boolean('terbaca')->default(0);
+
             $table->timestamps();
         });
     }

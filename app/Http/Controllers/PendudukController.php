@@ -15,12 +15,29 @@ class PendudukController extends Controller
     public function index()
     {
         //
-        $penduduk = PendudukModel::with('kartuKeluarga', 'kartuKeluarga.rt')->get();
+        $penduduk = PendudukModel::where('isDelete', '=', '0')->with('kartuKeluarga', 'kartuKeluarga.rt')->paginate(3);
 
 
 
         return view('dashboard.penduduk', ['data' => $penduduk, 'active' => 'penduduk']);
     }
+
+    public function sort($sort)
+    {
+        //
+
+        if ($sort == 'semua') {
+            return $this->index();
+        }
+        $penduduk = PendudukModel::where([['isDelete', '=', '0'], ['jenis_kelamin', '=', $sort]])->with('kartuKeluarga', 'kartuKeluarga.rt')->get();
+
+
+
+
+        return view('dashboard.penduduk', ['data' => $penduduk, 'active' => 'penduduk']);
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -30,13 +47,13 @@ class PendudukController extends Controller
     public function find($value)
     {
         if ($value == 'kosong') {
-            $data = PendudukModel::all();
+            $data = PendudukModel::paginate(3);
 
             return view('dashboard.penduduk', ['data' => $data, 'active' => 'penduduk']);
 
         } else {
 
-            $data = PendudukModel::whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->get();
+            $data = PendudukModel::whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->paginate(3);
 
         }
 
@@ -62,35 +79,36 @@ class PendudukController extends Controller
     {
         //  
 
-        $kk = KartuKeluargaModel::where('NKK', '=', $request->nkk)->first();
+        $kk = KartuKeluargaModel::where('NKK', '=', $request->NKK)->first();
 
         if ($kk == null) {
             KartuKeluargaModel::create([
-                'NKK' => $request->nkk,
+                'nkk' => $request->NKK,
                 'rt_id' => RtModel::where('nomor_rt', '=', $request->rt)->first()->rt_id,
-                'no_telepon' => $request->no_telp,
                 'tanggal_kk' => now()
             ]);
         }
 
-        $kk = KartuKeluargaModel::where('NKK', '=', $request->nkk)->first();
+        $kk = KartuKeluargaModel::where('NKK', '=', $request->NKK)->first();
 
         PendudukModel::create([
             'kartu_keluarga_id' => $kk->kartu_keluarga_id,
-            'NIK' => $request->nik,
+            'NIK' => $request->NIK,
             'nama_penduduk' => $request->nama,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'status_perkawinan' => $request->perkawinan,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'alamat' => $request->alamat,
-            'agama' => $request->agama,
-            'pekerjaan' => $request->pekerjaan,
             'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'golongan_darah' => $request->golongan_darah,
+            'agama' => $request->agama,
+            'alamat' => $request->alamat,
+            'status_perkawinan' => $request->status_kawin,
+            'pekerjaan' => $request->pekerjaan,
             'status_tinggal' => $request->status_tinggal,
-            'status_kematian' => $request->status_kematian
+            'status_kematian' => $request->status_meninggal
+
         ]);
 
-        return redirect('/penduduk')->with('success', 'Data berhasil ditambah');
+        return redirect('/dashboard/penduduk')->with('flash', ['success', 'Data berhasil ditambah']);
     }
 
     /**
@@ -153,11 +171,11 @@ class PendudukController extends Controller
     {
         //
         $penduduk = PendudukModel::find($id);
-        $kk = KartuKeluargaModel::where('NKK', '=', $request->nkk)->first();
+        $kk = KartuKeluargaModel::where('NKK', '=', $request->NKK)->first();
         $kkCek = false;
         if ($kk == null) {
             KartuKeluargaModel::create([
-                'NKK' => $request->nkk,
+                'NKK' => $request->NKK,
                 'rt_id' => RtModel::where('nomor_rt', '=', $request->rt)->first()->rt_id,
                 'no_telepon' => $request->no_telp,
                 'tanggal_kk' => now()
@@ -166,32 +184,34 @@ class PendudukController extends Controller
             $kkCek = true;
         }
 
-        $kk = KartuKeluargaModel::where('NKK', '=', $request->nkk)->first();
+        $kk = KartuKeluargaModel::where('NKK', '=', $request->NKK)->first();
 
         $penduduk->update([
             'kartu_keluarga_id' => $kk->kartu_keluarga_id,
-            'NIK' => $request->nik,
+            'NIK' => $request->NIK,
             'nama_penduduk' => $request->nama,
+            'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
-            'status_perkawinan' => $request->perkawinan,
             'jenis_kelamin' => $request->jenis_kelamin,
-            'alamat' => $request->alamat,
+            'golongan_darah' => $request->golongan_darah,
             'agama' => $request->agama,
+            'alamat' => $request->alamat,
+            'status_perkawinan' => $request->status_kawin,
             'pekerjaan' => $request->pekerjaan,
             'status_tinggal' => $request->status_tinggal,
-            'status_kematian' => $request->status_kematian
+            'status_kematian' => $request->status_meninggal
+
         ]);
 
         if (!$kkCek) {
             $kk->update([
-                'NKK' => $request->nkk,
+                'NKK' => $request->NKK,
                 'rt_id' => RtModel::where('nomor_rt', '=', $request->rt)->first()->rt_id,
-                'no_telepon' => $request->no_telp,
                 'tanggal_kk' => now()
             ]);
         }
 
-        return redirect('/penduduk')->with('success', 'data berhasil diupdate');
+        return redirect('/dashboard/penduduk')->with('flash', ['success', 'data berhasil diupdate']);
     }
 
     /**
@@ -202,7 +222,11 @@ class PendudukController extends Controller
         //
 
         try {
-            PendudukModel::destroy($id);
+            $penduduk = PendudukModel::findOrFail($id);
+            $penduduk->isDelete = '1';
+            $penduduk->save();
+
+
             return redirect('dashboard/penduduk')->with('flash', ['success', 'Data berhasil dihapus']);
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect('dashboard/penduduk')->with('flash', ['error', 'Data Gagal dihapus karena data terkait dengan tabel lain']);
