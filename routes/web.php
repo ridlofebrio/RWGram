@@ -84,6 +84,8 @@ Route::group(['prefix' => 'tinggal-penduduk'], function () {
 
 Route::group(['prefix' => 'pengaduan'], function () {
     Route::get('/', [LaporanController::class, 'indexPenduduk'])->name('laporan.penduduk.index');
+    Route::get('/create', [LaporanController::class, 'create'])->name('laporan.penduduk.create');
+    Route::post('/create', [LaporanController::class, 'store'])->name('laporan.store');
 });
 
 
@@ -96,8 +98,8 @@ Route::get('logout', [AuthSessionController::class, 'logout']);
 
 
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
-    Route::get('/pengajuan/{sort}', [UmkmController::class, 'sort'])->name('laporan.penduduk.index')->middleware('RW');
-    Route::get('/pengajuan', [UmkmController::class, 'index'])->name('laporan.penduduk.index')->middleware('RW');
+    Route::get('/pengajuan/{sort}', [UmkmController::class, 'sort'])->middleware('RW');
+    Route::get('/pengajuan', [UmkmController::class, 'index'])->middleware('RW');
     Route::get('/pengaduan/{sort}', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/penduduk', [PendudukController::class, 'index']);

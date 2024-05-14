@@ -38,7 +38,7 @@ class StatusNikahController extends Controller
             'description' => 'Halaman Ubah Status Warga'
         ];
         $nikah = StatusNikahModel::all();
-        return view('statusNikah.index', compact('nikah'))->with(['metadata' => $metadata, 'activeMenu' => 'nikah']);
+        return view('statusNikah.index', compact('nikah'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
     }
     public function create()
     {
