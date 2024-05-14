@@ -101,7 +101,7 @@
 </div>
 
 
-<div class="about mx-auto max-w-7xl py-32 px-2 sm:px-6 lg:px-8 bg-white">
+<div class="about mx-auto max-w-7xl py-32 px-2 sm:px-6 lg:px-8 bg-white" id="tentang">
 <div class="flex gap-12 flex-col md:flex-row w-full justify-center items-center h-full">
     <div class="img flex md:w-[300px] w-[200px] lg:w-[550px]  relative h-[350px]">
         
