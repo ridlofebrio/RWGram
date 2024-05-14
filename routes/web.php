@@ -39,6 +39,7 @@ Route::group(['prefix' => 'bansos-penduduk'], function () {
     Route::post('/show', [BansosController::class, 'showPenduduk'])->name('bansos.penduduk.show');
     Route::get('/request', [BansosController::class, 'request'])->name('bansos.penduduk.request');
     Route::get('/create', [BansosController::class, 'create'])->name('bansos.penduduk.create');
+    Route::post('/store', [BansosController::class, 'store'])->name('bansos.penduduk.store');
 });
 
 

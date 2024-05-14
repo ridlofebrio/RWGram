@@ -43,31 +43,20 @@
                         </div>
                     </div>
                     <div class="sm:col-span-4">
-                        <label for="nama_pengaju" class="block text-sm font-medium leading-6 text-gray-900">Nama Anda</label>
-                        <div class="mt-1 mb-4">
-                            <input id="nama_pengaju" name="nama_pengaju" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                                text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                                focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nama Anda" value="{{ old('nama_pengaju') }}">
-                            @error('nama_pengaju')
-                                <span class="text-red-500 text-xs">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="sm:col-span-4">
-                        <label for="nama-umkm" class="block text-sm font-medium leading-6 text-gray-900">Nama UMKM</label>
+                        <label for="nama_umkm" class="block text-sm font-medium leading-6 text-gray-900">Nama UMKM</label>
                         <div class="mt-1 mb-4">
                             <input id="nama_umkm" name="nama_umkm" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
                                 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
                                 focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nama UMKM Anda" value="{{ old('nama_umkm') }}">
-                            @error('nama-umkm')
+                            @error('nama_umkm')
                                 <span class="text-red-500 text-xs">{{ $message }}</span>
                             @enderror    
                         </div>
                     </div>
                     <div class="sm:col-span-4">
-                        <label for="lokasi-umkm" class="block text-sm font-medium leading-6 text-gray-900">Alamat UMKM</label>
+                        <label for="lokasi_umkm" class="block text-sm font-medium leading-6 text-gray-900">Alamat UMKM</label>
                         <div class="mt-1 mb-4">
-                            <input id="lokasi-umkm" name="lokasi_umkm" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
+                            <input id="lokasi_umkm" name="lokasi_umkm" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
                                 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
                                 focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Alamat UMKM Anda" value="{{ old('lokasi_umkm') }}">
                             @error('lokasi_umkm')
@@ -76,9 +65,9 @@
                         </div>
                     </div>
                     <div class="sm:col-span-4">
-                        <label for="no-whatsapp" class="block text-sm font-medium leading-6 text-gray-900">Nomor WhatsApp</label>
+                        <label for="no_whatsapp" class="block text-sm font-medium leading-6 text-gray-900">Nomor WhatsApp</label>
                         <div class="mt-1 mb-4">
-                            <input id="no-whatsapp" name="no_whatsapp" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
+                            <input id="no_whatsapp" name="no_whatsapp" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
                                 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
                                 focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nomor WhatsApp Anda" value="{{ old('no_whatsapp') }}">
                             @error('no_whatsapp')
@@ -87,9 +76,9 @@
                         </div>
                     </div>
                     <div class="sm:col-span-4">
-                        <label for="nama-medsos" class="block text-sm font-medium leading-6 text-gray-900">Nama Akun Media Sosial</label>
+                        <label for="nama_medsos" class="block text-sm font-medium leading-6 text-gray-900">Nama Akun Media Sosial</label>
                         <div class="mt-1 mb-4">
-                            <input id="nama-medsos" name="nama_medsos" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
+                            <input id="nama_medsos" name="nama_medsos" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
                                 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:border-blue-600
                                 focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nama Sosial Media Anda" value="{{ old('nama_medsos') }}">
                             @error('nama_medsos')
@@ -98,9 +87,9 @@
                         </div>
                     </div>                    
                     <div class="sm:col-span-4">
-                        <label for="link-medsos" class="block text-sm font-medium leading-6 text-gray-900">Link Media Sosial</label>
+                        <label for="link_medsos" class="block text-sm font-medium leading-6 text-gray-900">Link Media Sosial</label>
                         <div class="mt-1 mb-4">
-                            <input id="link-medsos" name="link_medsos" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
+                            <input id="link_medsos" name="link_medsos" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
                                 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:border-blue-600
                                 focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Link Sosial Media Anda" value="{{ old('link_medsos') }}">
                             @error('link_medsos')
@@ -109,9 +98,9 @@
                         </div>
                     </div>                    
                     <div class="sm:col-span-4">
-                        <label for="deskripsi-umkm" class="block text-sm font-medium leading-6 text-gray-900">Deskripsi UMKM</label>
+                        <label for="deskripsi_umkm" class="block text-sm font-medium leading-6 text-gray-900">Deskripsi UMKM</label>
                         <div class="mt-1 mb-4">
-                            <textarea id="deskripsi-umkm" name="deskripsi_umkm" type="text" autocomplete="off" 
+                            <textarea id="deskripsi_umkm" name="deskripsi_umkm" type="text" autocomplete="off" 
                             class="block w-full h-40 rounded-md border-gray-300 shadow-sm focus:border-blue-600 focus:ring-blue-600 sm:text-sm" 
                             placeholder="Masukkan Deskripsi UMKM Anda">{{ old('deskripsi_umkm') }}</textarea>
                             @error('deskripsi_umkm')
@@ -148,13 +137,12 @@
         function resetForm() {
             // Reset nilai input
             document.getElementById("NIK").value = ""; 
-            document.getElementById("nama_pengaju").value = "";
-            document.getElementById("nama-umkm").value = "";
-            document.getElementById("lokasi-umkm").value = "";
-            document.getElementById("no-whatsapp").value = "";
-            document.getElementById("link-medsos").value = "";
-            document.getElementById("nama-medsos").value = "";
-            document.getElementById("deskripsi-umkm").value = "";
+            document.getElementById("nama_umkm").value = "";
+            document.getElementById("lokasi_umkm").value = "";
+            document.getElementById("no_whatsapp").value = "";
+            document.getElementById("link_medsos").value = "";
+            document.getElementById("nama_medsos").value = "";
+            document.getElementById("deskripsi_umkm").value = "";
             agreeCheckbox.checked = false; // Uncheck checkbox
             submitBtn.disabled = true; // Disable tombol Kirim
             submitBtn.classList.remove('bg-blue-main'); // Hapus warna latar belakang tombol Kirim

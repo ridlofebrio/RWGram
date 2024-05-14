@@ -16,12 +16,8 @@ class StatusHidupModel extends Model
     protected $fillable = [
         'id_status_hidup',
         'penduduk_id',
-        'nama_pengaju',
-        'NIK_pengaju',
-        'nama_meninggal',
-        'NIK_meninggal',
+        'id_penduduk_meninggal',
         'foto_bukti',
-        'status_pengajuan'
     ];
 
     public function Penduduk(): BelongsTo
@@ -31,6 +27,6 @@ class StatusHidupModel extends Model
 
     public function PendudukM(): BelongsTo
     {
-        return $this->belongsTo(PendudukModel::class, 'id_penduduk_meninggal');
+        return $this->belongsTo(PendudukModel::class, 'id_penduduk_meninggal', 'penduduk_id');
     }
 }

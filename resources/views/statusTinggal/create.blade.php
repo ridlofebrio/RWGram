@@ -13,7 +13,7 @@
                     </a>
                 </div>
                 <h1 class="text-3xl font-bold tracking-tight text-gray-900">Form Permohonan Ubah Status Tempat Tinggal</h1>
-                <p class="mt-2 text-base leading-6 text-gray-600 max-w-xl">Silakan mengisi form permohonan ubah status tempat tinggal dengan benar, ya!</p>
+                <p class="mt-2 text-base leading-6 text-gray-600 max-w-2xl">Silakan mengisi form permohonan ubah status tempat tinggal dengan benar, ya!</p>
             </div>                
         </header>
         <div class="container mx-auto">
@@ -43,34 +43,12 @@
                         </div>
                     </div>
                     <div class="sm:col-span-4">
-                        <label for="nama_pengaju" class="block text-sm font-medium leading-6 text-gray-900">Nama Anda</label>
+                        <label for="alamat_pindah" class="block text-sm font-medium leading-6 text-gray-900">Alamat Pindah</label>
                         <div class="mt-1 mb-4">
-                            <input id="nama_pengaju" name="nama_pengaju" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
+                            <input id="alamat_pindah" name="alamat_pindah" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
                                 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                                focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nama Anda" value="{{ old('nama_pengaju') }}">
-                            @error('nama_pengaju')
-                                <span class="text-red-500 text-xs">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="sm:col-span-4">
-                        <label for="alamat-asal" class="block text-sm font-medium leading-6 text-gray-900">Alamat Asal</label>
-                        <div class="mt-1 mb-4">
-                            <input id="alamat-asal" name="alamat-asal" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                                text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                                focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan alamat asal Anda" value="{{ old('alamat-asal') }}">
-                            @error('alamat-asal')
-                                <span class="text-red-500 text-xs">{{ $message }}</span>
-                            @enderror    
-                        </div>
-                    </div>
-                    <div class="sm:col-span-4">
-                        <label for="alamat-pindah" class="block text-sm font-medium leading-6 text-gray-900">Alamat Pindah</label>
-                        <div class="mt-1 mb-4">
-                            <input id="alamat-pindah" name="alamat-pindah" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                                text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                                focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan alamatpindah Anda" value="{{ old('alamat-pindah') }}">
-                            @error('alamat-pindah')
+                                focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Alamat Pindah Anda" value="{{ old('alamat_pindah') }}">
+                            @error('alamat_pindah')
                                 <span class="text-red-500 text-xs">{{ $message }}</span>
                             @enderror
                         </div>
@@ -131,14 +109,28 @@
         function resetForm() {
             // Reset nilai input
             document.getElementById("NIK").value = ""; 
-            document.getElementById("nama_pengaju").value = "";
-            document.getElementById("alamat-asal").value = "";
-            document.getElementById("alamat-pindah").value = "";
-            document.getElementById("status").value = "";
+            document.getElementById("alamat_pindah").value = "";
+            document.querySelector('input[name="status"]:checked').checked = false;
             agreeCheckbox.checked = false; // Uncheck checkbox
             submitBtn.disabled = true; // Disable tombol Kirim
             submitBtn.classList.remove('bg-blue-main'); // Hapus warna latar belakang tombol Kirim
             submitBtn.classList.add('bg-gray-400'); // Tambahkan warna latar belakang abu-abu pada tombol Kirim
         }
+
+        // Fungsi untuk menyembunyikan alert setelah 5 detik
+        function hideAlert() {
+            let alert = document.getElementById('alert');
+            if (alert) {
+                alert.style.display = 'none';
+            }
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                hideAlert();
+            });
+        }
+
+        setTimeout(hideAlert, 5000);
         </script>
 @endsection

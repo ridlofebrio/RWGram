@@ -22,6 +22,8 @@ class UmkmModel extends Model
         'deskripsi_umkm',
         'lokasi_umkm',
         'tanggal_umkm',
+        'no_wa',
+        'nama_medsos',
     ];
 
     public function penduduk(): BelongsTo

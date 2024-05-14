@@ -17,6 +17,7 @@ class StatusHidupController extends Controller
         $hidup = StatusHidupModel::all();
         return view('statusHidup.index', compact('hidup'))->with(['metadata' => $metadata, 'activeMenu' => 'hidup']);
     }
+
     public function create()
     {
         $metadata = (object) [
@@ -40,13 +41,11 @@ class StatusHidupController extends Controller
             $data = StatusHidupModel::paginate(3);
 
             return view('component.statusHidup', ['data' => $data]);
-
         } else {
 
             $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->first();
 
             $data = StatusHidupModel::whereAny(['penduduk_id', 'id_penduduk_meninggal'], $id->penduduk_id)->paginate(3);
-
         }
 
         return view('component.statusHidup', ['data' => $data]);
@@ -55,16 +54,28 @@ class StatusHidupController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_pengaju' => 'required',
             'NIK_pengaju' => 'required',
-            'nama_meninggal' => 'required',
             'NIK_meninggal' => 'required',
-            'foto_bukti' => 'required',
-            'status_pengajuan' => 'required'
+            // 'foto_bukti' => 'required', // Uncomment if needed
         ]);
 
-        StatusHidupModel::create($request->all());
+        $penduduk_pengaju = PendudukModel::where('NIK', $request->NIK_pengaju)->first();
+        $penduduk_meninggal = PendudukModel::where('NIK', $request->NIK_meninggal)->first();
+
+        if ($penduduk_pengaju && $penduduk_meninggal) {
+            StatusHidupModel::create([
+                'penduduk_id' => $penduduk_pengaju->penduduk_id,
+                'id_penduduk_meninggal' => $penduduk_meninggal->penduduk_id,
+            ]);
+
+            return redirect()->route('hidup.penduduk.index')
+                ->with('success', 'Data Berhasil Ditambahkan');
+        } else {
+            $error = !$penduduk_pengaju ? 'NIK Anda tidak ditemukan.' : 'NIK orang yang meninggal tidak ditemukan.';
+            return redirect()->route('hidup.penduduk.create')->with('error', $error);
+        }
     }
+
     public function edit(string $id)
     {
         $laporan = StatusHidupModel::find($id);
@@ -79,8 +90,8 @@ class StatusHidupController extends Controller
 
         StatusHidupModel::find($id)->update($request->all());
         return redirect('dashboard/pengajuan')->with('flash', ['success', 'Data berhasil dikonfirmasi']);
-
     }
+
     public function destroy(string $id)
     {
         $laporan = StatusHidupModel::findOrFail($id)->delete();

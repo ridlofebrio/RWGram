@@ -27,10 +27,10 @@
             </div>
         @endif
     </div>
-    <form action="{{ route('bansos.store') }}" name="demoform" id="demoform" method="POST" class="dropzone" enctype="multipart/form-data">
+    <form action="{{ route('bansos.penduduk.store') }}" name="demoform" id="demoform" method="POST" class="dropzone" enctype="multipart/form-data">
         <div class="form-wrapper py-5">
             <!-- form starts -->
-            <form action="{{ route('bansos.store') }}" name="demoform" id="demoform" method="POST" class="dropzone" enctype="multipart/form-data" style="box-shadow: 0px 2px 20px 0px #f2f2f2; border-radius: 10px;">
+            <form action="{{ route('bansos.penduduk.store') }}" name="demoform" id="demoform" method="POST" class="dropzone" enctype="multipart/form-data" style="box-shadow: 0px 2px 20px 0px #f2f2f2; border-radius: 10px;">
                 @csrf 
                 <div class="form-group">
                     <input type="hidden" class="userid" name="userid" id="userid" value="">
@@ -58,7 +58,7 @@
         <!-- Your content -->    
             
         <div class="max-w-7xl mx-auto card p-8 mb-12" style="box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
-            <form action="{{ route('bansos.store') }}" name="demoform" id="demoform" method="POST" class="dropzone" enctype="multipart/form-data">
+            <form action="{{ route('bansos.penduduk.store') }}" name="demoform" id="demoform" method="POST" class="dropzone" enctype="multipart/form-data">
                 @csrf
                 <div class="sm:col-span-4">
                     <label for="nomer_kk" class="block text-sm font-medium leading-6 text-gray-900">Nomor Kartu Keluarga Anda</label>
@@ -205,7 +205,7 @@
                     <div class="col-md-12">
                         <h3>Drag and Drop with Dropzone JS - CamoTutorial.com</h3>
                         <h4>Upload Multiple Images</h4>
-                        <form action="{{ route('bansos.store') }}" method="post" enctype="multipart/form-data" id="image-upload" class="dropzone">
+                        <form action="{{ route('bansos.penduduk.store') }}" method="post" enctype="multipart/form-data" id="image-upload" class="dropzone">
                             @csrf
                         </form>
                     </div>

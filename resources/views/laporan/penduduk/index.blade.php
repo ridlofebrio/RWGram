@@ -4,7 +4,7 @@
     <header class="bg-white">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 text-center">
             <h1 class="text-3xl font-bold tracking-tight text-gray-900">Pengaduan</h1>
-            <p class="mt-1 text-sm leading-6 text-gray-600 max-w-xl mx-auto">Informasi ini berisikan pengaduan masyarakat mengenai rencana kegiatan, mempererat hubungan, meningkatkan kebersamaan, dan kualitas lingkungan.</p>
+            <p class="mt-1 text-base leading-6 text-gray-600 max-w-4xl mx-auto">Formulir ini dirancang untuk warga RW 04 Kalirejo yang ingin mengajukan laporan pengaduan atau memberikan saran terkait masalah yang dihadapi, seperti fasilitas umum, keamanan, atau isu-isu lainnya. Melalui formulir ini, warga dapat memberikan informasi secara lengkap dan terstruktur, yang akan membantu dalam proses penyelesaian masalah dan peningkatan kualitas pelayanan di wilayah RW 04 Kalirejo.</p>
         </div>
     </header>
 

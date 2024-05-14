@@ -5,10 +5,9 @@
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 text-center">
             <h1 class="text-3xl font-bold tracking-tight text-gray-900">Pengumuman</h1>
             <p class="mt-2 text-base leading-6 text-gray-600 max-w-4xl mx-auto">Informasi ini berisikan pengumuman mengenai kegiatan yang akan dilaksanakan di lingkungan RW. 
-                Kegiatan tersebut bertujuan untuk mempererat hubungan antarwarga, meningkatkan kebersamaan, serta meningkatkan kualitas lingkungan RW.</p>
+                Kegiatan tersebut bertujuan untuk mempererat hubungan antarwarga, meningkatkan kebersamaan, serta meningkatkan kualitas lingkungan RW 04 Kalirejo.</p>
         </div>
     </header>
-
 
     <div class="bg-white-100 mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">        
         <div class="flex justify-between items-center mb-6">
