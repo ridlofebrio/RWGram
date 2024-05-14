@@ -32,8 +32,11 @@
     @include('layouts.navbar')
 
     @yield('content')
-
-    @include('layouts.footer')
+    
+    @if ($activeMenu == 'beranda')
+        @include('layouts.footer')
+    @endif
+    
 
 
 

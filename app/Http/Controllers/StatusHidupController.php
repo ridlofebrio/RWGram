@@ -15,7 +15,7 @@ class StatusHidupController extends Controller
             'description' => 'Halaman Ubah Status Warga'
         ];
         $hidup = StatusHidupModel::all();
-        return view('statusHidup.index', compact('hidup'))->with(['metadata' => $metadata, 'activeMenu' => 'hidup']);
+        return view('statusHidup.index', compact('hidup'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
     }
 
     public function create()

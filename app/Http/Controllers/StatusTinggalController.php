@@ -15,7 +15,7 @@ class StatusTinggalController extends Controller
             'description' => 'Halaman Ubah Status Warga'
         ];
         $tinggal = StatusTinggalModel::all();
-        return view('statusTinggal.index', compact('tinggal'))->with(['metadata' => $metadata, 'activeMenu' => 'tinggal']);
+        return view('statusTinggal.index', compact('tinggal'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
     }
 
     public function create()

@@ -74,7 +74,7 @@ class UmkmController extends Controller
         return view('umkm.penduduk.index', [
             'umkm' => $umkm,
             'metadata' => $metadata,
-            'activeMenu' => 'beranda'
+            'activeMenu' => 'permohonan'
         ]);
     }
 

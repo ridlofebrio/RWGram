@@ -16,6 +16,8 @@ return new class extends Migration {
             $table->foreign('kartu_keluarga_id')->references('kartu_keluarga_id')->on('kartu_keluarga');
             $table->integer('jumlah_kas');
             $table->date('tanggal_kas');
+            $table->unsignedBigInteger('bulan_membayar')->index();
+            $table->foreign('bulan_Membayar')->references('id_waktu')->on('waktu');
             $table->timestamps();
         });
     }
