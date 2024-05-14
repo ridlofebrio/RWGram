@@ -13,7 +13,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $data = User::with('Role')->get();
+        $data = User::with('Role')->paginate(3);
         $active = 'akun';
         return view('dashboard.akun', compact('data', 'active'));
     }

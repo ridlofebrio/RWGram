@@ -10,7 +10,7 @@ class StatusNikahController extends Controller
 
     public function pengajuan()
     {
-        $data = StatusNikahModel::with('penduduk')->get();
+        $data = StatusNikahModel::with('penduduk')->paginate(3);
 
         return view('component.statusNikah', ['data' => $data]);
     }
@@ -18,13 +18,13 @@ class StatusNikahController extends Controller
     public function find($value)
     {
         if ($value == 'kosong') {
-            $data = StatusNikahModel::all();
+            $data = StatusNikahModel::paginate(3);
 
             return view('component.statusNikah', ['data' => $data]);
 
         } else {
 
-            $data = StatusNikahModel::whereAny(['penduduk_id', 'nama_pasangan', 'status', 'id_status_nikah'], 'like', '%' . $value . '%')->get();
+            $data = StatusNikahModel::whereAny(['penduduk_id', 'nama_pasangan', 'status', 'id_status_nikah'], 'like', '%' . $value . '%')->paginate(3);
 
         }
 

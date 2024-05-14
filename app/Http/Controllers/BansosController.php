@@ -10,14 +10,14 @@ class BansosController extends Controller
 {
     public function index()
     {
-        $bansos = BansosModel::with('kartuKeluarga')->get();
+        $bansos = BansosModel::with('kartuKeluarga')->paginate(3);
 
-        return view('dashboard.bansos', ['bansos' => $bansos, 'active' => 'bansos']);
+        return view('dashboard.bansos', ['data' => $bansos, 'active' => 'bansos']);
     }
 
     public function create()
     {
-        $metadata = (object)[
+        $metadata = (object) [
             'title' => 'Bantuan Sosial',
             'description' => 'Pengajuan Bantuan Sosial'
         ];

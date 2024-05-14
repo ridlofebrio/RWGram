@@ -15,7 +15,7 @@ class PendudukController extends Controller
     public function index()
     {
         //
-        $penduduk = PendudukModel::where('isDelete', '=', '0')->with('kartuKeluarga', 'kartuKeluarga.rt')->get();
+        $penduduk = PendudukModel::where('isDelete', '=', '0')->with('kartuKeluarga', 'kartuKeluarga.rt')->paginate(3);
 
 
 
@@ -27,7 +27,7 @@ class PendudukController extends Controller
         //
 
         if ($sort == 'semua') {
-          return $this->index();
+            return $this->index();
         }
         $penduduk = PendudukModel::where([['isDelete', '=', '0'], ['jenis_kelamin', '=', $sort]])->with('kartuKeluarga', 'kartuKeluarga.rt')->get();
 
@@ -47,13 +47,13 @@ class PendudukController extends Controller
     public function find($value)
     {
         if ($value == 'kosong') {
-            $data = PendudukModel::all();
+            $data = PendudukModel::paginate(3);
 
             return view('dashboard.penduduk', ['data' => $data, 'active' => 'penduduk']);
 
         } else {
 
-            $data = PendudukModel::whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->get();
+            $data = PendudukModel::whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->paginate(3);
 
         }
 
