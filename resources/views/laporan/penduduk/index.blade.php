@@ -46,7 +46,7 @@
                     </div>
                 
             </div>
-            <button class="text-white bg-blue-main px-8 py-2 font-medium text-sm rounded-full shadow-lg">Ajukan</button>
+            <a href="{{ route('laporan.penduduk.create') }}" class="text-white bg-blue-main px-8 py-2 font-medium text-sm rounded-full shadow-lg">Ajukan</a>
         </div>
     
         <div class="flex justify-center mb-56">

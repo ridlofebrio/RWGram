@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LaporanModel;
+use App\Models\PendudukModel;
 use Illuminate\Http\Request;
 
 class LaporanController extends Controller
@@ -30,6 +31,7 @@ class LaporanController extends Controller
             'description' => 'Halaman Pengaduan Warga'
         ];
         $laporan = LaporanModel::with('penduduk')->get();
+
         return view('laporan.penduduk.index', compact('laporan'))->with(['metadata' => $metadata, 'activeMenu' => 'pengaduan']);
     }
 
@@ -38,7 +40,12 @@ class LaporanController extends Controller
      */
     public function create()
     {
-        return view('laporan.create');
+        $metadata = (object) [
+            'title' => 'Pengaduan',
+            'description' => 'Halaman Pengajuan Pengaduan'
+        ];
+        
+        return view('laporan.penduduk.create')->with(['metadata' => $metadata, 'activeMenu' => 'pengaduan']);
     }
 
     /**
@@ -47,15 +54,21 @@ class LaporanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'penduduk_id' => 'required',
-            'jenis_laporan' => 'required',
-            'deskripsi_laporan' => 'required',
-            'tanggal_laporan' => 'required',
-            'status_laporan' => 'required'
+            'nama_pengaju' => 'required',
+            'NIK_pengaju' => 'required',
+            'jenis_keluhan' => 'required',
+            'deskripsi' => 'required',
         ]);
-
-        LaporanModel::create($request->all());
-        return redirect()->route('laporan.index');
+        $penduduk_id = PendudukModel::where('NIK', $request->NIK_pengaju)->first();
+        $data =[
+            'penduduk_id' => $penduduk_id->penduduk_id,
+            'jenis_laporan' => $request->jenis_keluhan,
+            'deskripsi_laporan' => $request->deskripsi,
+            'status_laporan' => 'Menunggu',
+            'tanggal_laporan'=> now()
+        ];
+        LaporanModel::create($data);
+        return redirect()->route('laporan.penduduk.index');
     }
 
     /**
