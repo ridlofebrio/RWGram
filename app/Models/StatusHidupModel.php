@@ -28,4 +28,9 @@ class StatusHidupModel extends Model
     {
         return $this->belongsTo(PendudukModel::class, 'penduduk_id', 'penduduk_id');
     }
+
+    public function PendudukM(): BelongsTo
+    {
+        return $this->belongsTo(PendudukModel::class, 'id_penduduk_meninggal');
+    }
 }

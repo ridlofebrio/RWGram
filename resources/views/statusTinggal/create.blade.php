@@ -29,7 +29,7 @@
         <main class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <!-- Your content -->        
             <div class="max-w-7xl mx-auto card p-8 mb-12" style="box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
-                <form action="{{ route('bansos.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('tinggal.penduduk.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="sm:col-span-4">
                         <label for="NIK" class="block text-sm font-medium leading-6 text-gray-900">NIK Anda</label>

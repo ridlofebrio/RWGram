@@ -73,7 +73,7 @@
                  </a>
               </li>
               <li>
-                 <a href="{{url('persuratan')}}" class="{{$active == 'persuratan'? "bg-blue-main hover:bg-blue-main text-white":'hover:bg-gray-100'}} flex items-center p-2 text-black transition duration-75 rounded-lg  dark:hover:bg-gray-700 dark:text-white group">
+                 <a href="{{url('/dashboard/persuratan')}}" class="{{$active == 'persuratan'? "bg-blue-main hover:bg-blue-main text-white":'hover:bg-gray-100'}} flex items-center p-2 text-black transition duration-75 rounded-lg  dark:hover:bg-gray-700 dark:text-white group">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                      <path fill="{{$active == 'persuratan'?'white':'#1B1B1B'}}" d="M15 22.75H9c-5.43 0-7.75-2.32-7.75-7.75V9c0-5.43 2.32-7.75 7.75-7.75h5c.41 0 .75.34.75.75s-.34.75-.75.75H9C4.39 2.75 2.75 4.39 2.75 9v6c0 4.61 1.64 6.25 6.25 6.25h6c4.61 0 6.25-1.64 6.25-6.25v-5c0-.41.34-.75.75-.75s.75.34.75.75v5c0 5.43-2.32 7.75-7.75 7.75Z"/>
                      <path fill="{{$active == 'persuratan'?'white':'#1B1B1B'}}" d="M22 10.75h-4c-3.42 0-4.75-1.33-4.75-4.75V2c0-.3.18-.58.46-.69.28-.12.6-.05.82.16l8 8a.751.751 0 0 1-.53 1.28Zm-7.25-6.94V6c0 2.58.67 3.25 3.25 3.25h2.19l-5.44-5.44ZM13 13.75H7c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h6c.41 0 .75.34.75.75s-.34.75-.75.75Zm-2 4H7c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h4c.41 0 .75.34.75.75s-.34.75-.75.75Z"/>
@@ -82,7 +82,7 @@
                  </a>
               </li>
               <li>
-                 <a href="#" class="{{$active == 'akun'? "bg-blue-main hover:bg-blue-main text-white":'hover:bg-gray-100'}}  flex items-center p-2 text-black transition duration-75 rounded-lg  dark:hover:bg-gray-700 dark:text-white group">
+                 <a href="{{url('dashboard/akun')}}" class="{{$active == 'akun'? "bg-blue-main hover:bg-blue-main text-white":'hover:bg-gray-100'}}  flex items-center p-2 text-black transition duration-75 rounded-lg  dark:hover:bg-gray-700 dark:text-white group">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                      <path stroke="{{$active == 'akun'?'white':'#1B1B1B'}}" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12.12 12.78a.963.963 0 0 0-.24 0 3.27 3.27 0 0 1-3.16-3.27c0-1.81 1.46-3.28 3.28-3.28a3.276 3.276 0 0 1 .12 6.55Zm6.62 6.6A9.934 9.934 0 0 1 12 22c-2.6 0-4.96-.99-6.74-2.62.1-.94.7-1.86 1.77-2.58 2.74-1.82 7.22-1.82 9.94 0 1.07.72 1.67 1.64 1.77 2.58Z"/>
                      <path stroke="{{$active == 'akun'?'white':'#1B1B1B'}}" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z"/>
@@ -90,16 +90,7 @@
                     <span class="ms-3">Akun</span>
                  </a>
               </li>
-                <li>
-                <a href="#" class="{{$active == 'sandi'? "bg-blue-main hover:bg-blue-main text-white":'hover:bg-gray-100'}}  flex items-center p-2 text-black transition duration-75 rounded-lg  dark:hover:bg-gray-700 dark:text-white group">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                     <path stroke="{{$active == 'sandi'?'white':'#1B1B1B'}}" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 22h6c5 0 7-2 7-7V9c0-5-2-7-7-7H9C4 2 2 4 2 9v6c0 5 2 7 7 7Z"/>
-                     <path stroke="{{$active == 'sandi'?'white':'#1B1B1B'}}" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M16.28 13.61a4.147 4.147 0 0 1-4.18 1.03l-2.59 2.58c-.18.19-.55.31-.82.27l-1.2-.16c-.4-.05-.76-.43-.82-.82l-.16-1.2c-.04-.26.09-.63.27-.82l2.58-2.58c-.44-1.43-.1-3.05 1.03-4.18 1.62-1.62 4.26-1.62 5.89 0 1.62 1.61 1.62 4.25 0 5.88Zm-5.83 2.67-.85-.86"/>
-                     <path stroke="{{$active == 'sandi'?'white':'#1B1B1B'}}" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.395 10.7h.008"/>
-                  </svg>
-                   <span class="ms-3">Ubah Sandi</span>
-                </a>
-             </li>
+                
            </ul>
           </div>
  

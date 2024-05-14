@@ -54,7 +54,7 @@ class PendudukSeeder extends Seeder
                 'NIK' => 3326160105070023,
                 'nama_penduduk' => 'Dewa Krisna',
                 'tanggal_lahir' => '1982-11-10',
-                'status_perkawinan' => 'cerai',
+                'status_perkawinan' => 'cerai hidup',
                 'jenis_kelamin' => 'L',
                 'alamat' => 'Jl. Surya No. 8',
                 'golongan_darah' => 'A',
@@ -97,14 +97,14 @@ class PendudukSeeder extends Seeder
                 'status_kematian' => false,
             ],
         ];
-        
 
 
 
 
-            DB::table('penduduk')->insert(
-               $data
-            );
-        
+
+        DB::table('penduduk')->insert(
+            $data
+        );
+
     }
 }

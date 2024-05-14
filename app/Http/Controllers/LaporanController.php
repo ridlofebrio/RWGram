@@ -13,15 +13,16 @@ class LaporanController extends Controller
      */
     public function index($sort)
     {
-        $laporan = LaporanModel::where('status_laporan', $sort)->get();
+        $laporan = LaporanModel::with('penduduk')->where('status_laporan', $sort)->paginate(3);
 
         return $laporan;
     }
 
     public function keluhan($sort = 'Menunggu')
     {
+        $laporan = LaporanModel::with('penduduk')->where('status_laporan', $sort)->paginate(3);
 
-        return view('dashboard.pengaduan', ['data' => $this->index($sort), 'active' => 'pengaduan']);
+        return view('dashboard.pengaduan', ['data' => $laporan, 'active' => 'pengaduan']);
     }
 
     public function indexPenduduk()
@@ -71,6 +72,25 @@ class LaporanController extends Controller
         return redirect()->route('laporan.penduduk.index');
     }
 
+
+    public function find($value)
+    {
+        if ($value == 'kosong') {
+            $data = LaporanModel::paginate(3);
+
+            return view('dashboard.pengaduan', ['data' => $data, 'active' => 'pengaduan']);
+
+        } else {
+
+            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->paginate(3);
+            $data = LaporanModel::findMany($id);
+
+        }
+
+        return view('dashboard.pengaduan', ['data' => $data, 'active' => 'pengaduan']);
+    }
+
+
     /**
      * Display the specified resource.
      */
@@ -94,22 +114,15 @@ class LaporanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'penduduk_id' => 'required',
-            'jenis_laporan' => 'required',
-            'deskripsi_laporan' => 'required',
-            'tanggal_laporan' => 'required',
-            'status_laporan' => 'required'
-        ]);
 
-        LaporanModel::find($id)->update([
-            'penduduk_id' => $request->penduduk_id,
-            'jenis_laporan' => $request->jenis_laporan,
-            'deskripsi_laporan' => $request->deskripsi_laporan,
-            'status_laporan' => $request->status_laporan,
-            'tanggal_laporan' => $request->tanggal_laporan
-        ]);
-        return redirect('/laporan');
+
+        $laporan = LaporanModel::find($id);
+        $laporan->status_laporan = $request->status_laporan;
+        if (isset($request->pesan)) {
+            $laporan->pesan = $request->pesan;
+        }
+        $laporan->save();
+        return redirect('/dashboard/pengaduan')->with('flash', ['success', 'Data berhasil Dikonfirmasi']);
     }
 
     /**

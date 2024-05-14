@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PendudukModel;
 use App\Models\StatusTinggalModel;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,7 @@ class StatusTinggalController extends Controller
 {
 
 
-    
+
     public function index()
     {
         $metadata = (object) [
@@ -33,7 +34,7 @@ class StatusTinggalController extends Controller
 
     public function pengajuan()
     {
-        $data = StatusTinggalModel::all();
+        $data = StatusTinggalModel::with('penduduk')->paginate(3);
 
         return view('component.statusTinggal', ['data' => $data]);
     }
@@ -41,13 +42,14 @@ class StatusTinggalController extends Controller
     public function find($value)
     {
         if ($value == 'kosong') {
-            $data = StatusTinggalModel::all();
+            $data = StatusTinggalModel::paginate(3);
 
             return view('component.statusTinggal', ['data' => $data]);
 
         } else {
 
-            $data = StatusTinggalModel::whereAny(['nama_pengaju', 'NIK'], 'like', '%' . $value . '%')->get();
+            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->paginate(3);
+            $data = StatusTinggalModel::findMany($id);
 
         }
 
@@ -78,16 +80,11 @@ class StatusTinggalController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama_pengaju' => 'required',
-            'NIK' => 'required',
-            'alamat_asal' => 'required',
-            'alamat_pindah' => 'required',
-            'status' => 'required',
-            'foto_bukti' => 'required',
+            'status_pengajuan' => 'required'
         ]);
 
         StatusTinggalModel::find($id)->update($request->all());
-        return redirect('');
+        return redirect('dashboard/pengajuan')->with('flash', ['success', 'Data berhasil dikonfirmasi']);
     }
     public function destroy(string $id)
     {
