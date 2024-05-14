@@ -13,15 +13,16 @@ class LaporanController extends Controller
      */
     public function index($sort)
     {
-        $laporan = LaporanModel::with('penduduk')->where('status_laporan', $sort)->get();
+        $laporan = LaporanModel::with('penduduk')->where('status_laporan', $sort)->paginate(3);
 
         return $laporan;
     }
 
     public function keluhan($sort = 'Menunggu')
     {
+        $laporan = LaporanModel::with('penduduk')->where('status_laporan', $sort)->paginate(3);
 
-        return view('dashboard.pengaduan', ['data' => $this->index($sort), 'active' => 'pengaduan']);
+        return view('dashboard.pengaduan', ['data' => $laporan, 'active' => 'pengaduan']);
     }
 
     public function indexPenduduk()
@@ -63,13 +64,13 @@ class LaporanController extends Controller
     public function find($value)
     {
         if ($value == 'kosong') {
-            $data = LaporanModel::all();
+            $data = LaporanModel::paginate(3);
 
             return view('dashboard.pengaduan', ['data' => $data, 'active' => 'pengaduan']);
 
         } else {
 
-            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->get();
+            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->paginate(3);
             $data = LaporanModel::findMany($id);
 
         }

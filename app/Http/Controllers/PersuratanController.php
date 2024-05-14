@@ -12,9 +12,9 @@ class PersuratanController extends Controller
      */
     public function index()
     {
-        $persuratan = PersuratanModel::with('penduduk')->get();
+        $data = PersuratanModel::with('penduduk')->paginate(3);
         $active = 'persuratan';
-        return view('dashboard.persuratan', compact('persuratan', 'active'));
+        return view('dashboard.persuratan', compact('data', 'active'));
     }
 
     /**

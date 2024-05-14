@@ -30,7 +30,7 @@ class UmkmController extends Controller
 
     public function pengajuan()
     {
-        $umkm = UmkmModel::with('penduduk')->get();
+        $umkm = UmkmModel::with('penduduk')->paginate(3);
 
         return view('component.umkm', compact('umkm'));
     }
@@ -39,13 +39,13 @@ class UmkmController extends Controller
     {
 
         if ($value == 'kosong') {
-            $umkm = UmkmModel::all();
+            $umkm = UmkmModel::with('penduduk')->paginate(3);
 
             return view('component.umkm', compact('umkm'));
 
         } else {
 
-            $umkm = UmkmModel::whereAny(['nama_umkm'], 'like', '%' . $value . '%')->get();
+            $umkm = UmkmModel::whereAny(['nama_umkm'], 'like', '%' . $value . '%')->paginate(3);
 
         }
         return view('component.umkm', compact('umkm'));

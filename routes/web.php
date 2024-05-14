@@ -120,13 +120,19 @@ Route::group(['prefix' => 'data'], function () {
 
 });
 
-Route::get('/search/nikah/{value}', [StatusNikahController::class, 'find']);
-Route::get('/search/umkm/{value}', [UmkmController::class, 'find']);
-Route::get('/search/tinggal/{value}', [StatusTinggalController::class, 'find']);
-Route::get('/search/meninggal/{value}', [StatusHidupController::class, 'find']);
-Route::get('/search/penduduk/{value}', [PendudukController::class, 'find']);
-Route::get('/search/pengaduan/{value}', [LaporanController::class, 'find']);
 
+
+
+Route::group(['prefix' => 'search', 'middleware' => 'auth'], function () {
+
+    Route::get('/nikah/{value}', [StatusNikahController::class, 'find']);
+    Route::get('/umkm/{value}', [UmkmController::class, 'find']);
+    Route::get('/tinggal/{value}', [StatusTinggalController::class, 'find']);
+    Route::get('/meninggal/{value}', [StatusHidupController::class, 'find']);
+    Route::get('/penduduk/{value}', [PendudukController::class, 'find']);
+    Route::get('/pengaduan/{value}', [LaporanController::class, 'find']);
+
+});
 
 Route::group(['prefix' => 'akun'], function () {
     Route::delete('{id}', [UserController::class, 'destroy']);

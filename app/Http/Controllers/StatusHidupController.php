@@ -29,7 +29,7 @@ class StatusHidupController extends Controller
 
     public function pengajuan()
     {
-        $data = StatusHidupModel::with('Penduduk', 'PendudukM')->get();
+        $data = StatusHidupModel::with('Penduduk', 'PendudukM')->paginate(3);
 
         return view('component.statusHidup', ['data' => $data]);
     }
@@ -37,7 +37,7 @@ class StatusHidupController extends Controller
     public function find($value)
     {
         if ($value == 'kosong') {
-            $data = StatusHidupModel::all();
+            $data = StatusHidupModel::paginate(3);
 
             return view('component.statusHidup', ['data' => $data]);
 
@@ -45,7 +45,7 @@ class StatusHidupController extends Controller
 
             $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->first();
 
-            $data = StatusHidupModel::whereAny(['penduduk_id', 'id_penduduk_meninggal'], $id->penduduk_id)->get();
+            $data = StatusHidupModel::whereAny(['penduduk_id', 'id_penduduk_meninggal'], $id->penduduk_id)->paginate(3);
 
         }
 

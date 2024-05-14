@@ -34,7 +34,7 @@ class StatusTinggalController extends Controller
 
     public function pengajuan()
     {
-        $data = StatusTinggalModel::with('penduduk')->get();
+        $data = StatusTinggalModel::with('penduduk')->paginate(3);
 
         return view('component.statusTinggal', ['data' => $data]);
     }
@@ -42,13 +42,13 @@ class StatusTinggalController extends Controller
     public function find($value)
     {
         if ($value == 'kosong') {
-            $data = StatusTinggalModel::all();
+            $data = StatusTinggalModel::paginate(3);
 
             return view('component.statusTinggal', ['data' => $data]);
 
         } else {
 
-            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->get();
+            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->paginate(3);
             $data = StatusTinggalModel::findMany($id);
 
         }
