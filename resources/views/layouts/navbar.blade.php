@@ -58,7 +58,7 @@
                 <a href="{{ route('hidup.penduduk.index') }}" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Status Meniggal</a>
               </li>
               <li>
-                <a href="{{ route('bansos.penduduk.show') }}" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Bantuan Sosial</a>
+                <a href="{{ route('bansos.penduduk.request') }}" class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Bantuan Sosial</a>
               </li>
             </ul>
         </div>

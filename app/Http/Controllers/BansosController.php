@@ -112,6 +112,11 @@ class BansosController extends Controller
 
     public function showPenduduk(Request $request)
     {
+        $metadata = (object)[
+            'title' => 'Bantuan Sosial',
+            'description' => 'Cek Pengajuan Bantuan Sosial'
+        ];
+
         $kartuKeluarga = KartuKeluargaModel::where('NKK', $request->nomer_kk)->first();
 
         if ($kartuKeluarga !== null) {
@@ -119,9 +124,9 @@ class BansosController extends Controller
 
             if ($existingBansos !== null) {
                 $bansos = $existingBansos;
-                return view('bansos.penduduk.show', compact('bansos'));
+                return view('bansos.penduduk.show')->with(['bansos' => $bansos, 'activeMenu' => 'beranda', 'metadata' => $metadata]);
             } else {
-                return redirect()->route('bansos.index')->with('error', 'Anda belum melakukan pengajuan bansos');
+                return redirect()->route('bansos.penduduk.request')->with('error', 'Anda belum melakukan pengajuan bansos');
             }
         } else {
             return redirect()->route('bansos.penduduk.request')->with('error', 'Kartu keluarga tidak ditemukan.');

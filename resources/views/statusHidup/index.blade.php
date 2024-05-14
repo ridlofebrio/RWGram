@@ -77,7 +77,7 @@
                             {{ $hidup->id_status_hidup}}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $hidup->nama_pengaju }}
+                            {{ $hidup->penduduk->nama_penduduk }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $hidup->created_at }}
