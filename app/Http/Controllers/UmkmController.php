@@ -42,11 +42,9 @@ class UmkmController extends Controller
             $umkm = UmkmModel::with('penduduk')->paginate(3);
 
             return view('component.umkm', compact('umkm'));
-
         } else {
 
             $umkm = UmkmModel::whereAny(['nama_umkm'], 'like', '%' . $value . '%')->paginate(3);
-
         }
         return view('component.umkm', compact('umkm'));
     }
@@ -97,18 +95,29 @@ class UmkmController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'NIK' => 'required',
             'nama_umkm' => 'required',
             'deskripsi_umkm' => 'required',
             'lokasi_umkm' => 'required',
-            'no_wa' => 'required',
+            'no_whatsapp' => 'required',
             'link_medsos' => 'required',
             'nama_medsos' => 'required',
+            // 'foto_umkm' => 'required',
         ]);
 
         $penduduk = PendudukModel::where('NIK', $request->NIK)->first();
 
         if ($penduduk) {
-            UmkmModel::create($request->all() + ['tanggal_umkm' => now(), 'penduduk_id' => $penduduk->penduduk_id]);
+            UmkmModel::create([
+                'penduduk_id' => $penduduk->penduduk_id,
+                'nama_umkm' => $request->nama_umkm,
+                'no_wa' => $request->no_whatsapp,
+                'link_medsos' => $request->link_medsos,
+                'nama_medsos' => $request->nama_medsos,
+                'deskripsi_umkm' => $request->deskripsi_umkm,
+                'lokasi_umkm' => $request->lokasi_umkm,
+                'tanggal_umkm' => now(),
+            ]);
 
             return redirect()->route('umkm.penduduk.index')
                 ->with('success', 'UMKM Berhasil Ditambahkan');
@@ -145,8 +154,7 @@ class UmkmController extends Controller
         $umkm = UmkmModel::find($id);
         $umkm->status_pengajuan = $request->status_pengajuan;
         $umkm->save();
-        return redirect('/dashboard/pengajuan')->
-            with('flash', ['success', 'Data berhasil Dikonfirmasi']);
+        return redirect('/dashboard/pengajuan')->with('flash', ['success', 'Data berhasil Dikonfirmasi']);
     }
 
     /**

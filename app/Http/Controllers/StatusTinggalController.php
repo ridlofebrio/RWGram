@@ -8,9 +8,6 @@ use Illuminate\Http\Request;
 
 class StatusTinggalController extends Controller
 {
-
-
-
     public function index()
     {
         $metadata = (object) [
@@ -30,8 +27,6 @@ class StatusTinggalController extends Controller
         return view('statusTinggal.create', ['activeMenu' => 'tinggal', 'metadata' => $metadata]);
     }
 
-
-
     public function pengajuan()
     {
         $data = StatusTinggalModel::with('penduduk')->paginate(3);
@@ -45,12 +40,10 @@ class StatusTinggalController extends Controller
             $data = StatusTinggalModel::paginate(3);
 
             return view('component.statusTinggal', ['data' => $data]);
-
         } else {
 
             $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->paginate(3);
             $data = StatusTinggalModel::findMany($id);
-
         }
 
         return view('component.statusTinggal', ['data' => $data]);
@@ -59,17 +52,26 @@ class StatusTinggalController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_pengaju' => 'required',
             'NIK' => 'required',
-            'alamat_asal' => 'required',
             'alamat_pindah' => 'required',
             'status' => 'required',
-            'foto_bukti' => 'required',
+            // 'foto_bukti' => 'required',
         ]);
 
-        StatusTinggalModel::create($request->all());
-        return redirect()->route('');
+        $penduduk = PendudukModel::where('NIK', $request->NIK)->first();
 
+        if ($penduduk) {
+            StatusTinggalModel::create([
+                'penduduk_id' => $penduduk->penduduk_id,
+                'alamat_pindah' => $request->alamat_pindah,
+                'status' => $request->status,
+            ]);
+            return redirect()->route('tinggal.penduduk.index')
+                ->with('success', 'Data Berhasil Ditambahkan');
+        } else {
+            return redirect()->route('tinggal.penduduk.create')
+                ->with('error', 'NIK Anda tidak ditemukan.');
+        }
     }
 
     public function edit(string $id)
