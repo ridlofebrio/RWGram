@@ -6,15 +6,19 @@ use App\Models\PendudukModel;
 use App\Models\StatusTinggalModel;
 use Illuminate\Http\Request;
 
+
 class StatusTinggalController extends Controller
 {
     public function index()
     {
         $metadata = (object) [
-            'title' => 'Status Tempat Tinggal',
+            'title' => 'Status Tinggal',
             'description' => 'Halaman Ubah Status Warga'
         ];
-        $tinggal = StatusTinggalModel::all();
+    
+        // Menggunakan pagination, dengan 10 item per halaman
+        $tinggal = StatusTinggalModel::paginate(5);
+    
         return view('statusTinggal.index', compact('tinggal'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
     }
 

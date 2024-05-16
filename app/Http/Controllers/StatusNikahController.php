@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PendudukModel;
 use App\Models\StatusNikahModel;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 
 class StatusNikahController extends Controller
 {
@@ -30,15 +31,19 @@ class StatusNikahController extends Controller
         return view('component.statusNikah', ['data' => $data]);
     }
 
-    public function index()
-    {
+        public function index()
+        {
         $metadata = (object) [
             'title' => 'Status Nikah',
             'description' => 'Halaman Ubah Status Warga'
         ];
-        $nikah = StatusNikahModel::all();
+
+        $nikah = StatusNikahModel::paginate(5);
+
         return view('statusNikah.index', compact('nikah'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
-    }
+        }
+
+
 
     public function create()
     {

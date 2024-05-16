@@ -92,28 +92,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($tinggal as $tinggal) 
+                @foreach ($tinggal as $item) 
                     <tr>
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $tinggal->id_status_tinggal}}
+                            {{ $item->id_status_tinggal}}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $tinggal->penduduk->nama_penduduk }}
+                            {{ $item->penduduk->nama_penduduk }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $tinggal->created_at }}
+                            {{ $item->created_at }}
                         </td>
                         <td class="px-6 py-4 max-w-xl overflow-hidden">
                             <div class="line-clamp-4" style="text-transform: capitalize;">{{ $tinggal->status }}</div>
                         </td>   
-                        @if ( $tinggal->status_pengajuan === 'Sukses')    
+                        @if ( $item->status_pengajuan === 'Sukses')    
                             <td class="px-6 py-4">
                                 <div class="bg-green-100 text-green-600 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-1">
                                     <div class="bg-green-600 rounded-full w-2 h-2"></div>
                                     <p>Selesai</p>
                                 </div>
                             </td>
-                        @elseif ($tinggal->status_pengajuan === 'Proses')
+                        @elseif ($item->status_pengajuan === 'Proses')
                             <td class="px-6 py-4">
                                 <div class="bg-blue-info-100 text-blue-main font-bold py-2 px-4 text-xs rounded-full flex items-center gap-1">
                                     <div class="bg-blue-main rounded-full w-2 h-2"></div>
@@ -134,6 +134,11 @@
                 @endforeach
                 </tbody>
             </table>
+            <div class="card-footer">
+                <ul class="pagination">
+                    {{ $tinggal->links('vendor.pagination.tailwind') }}
+                  </ul>
+            </div>
         </div>
     </div>
 

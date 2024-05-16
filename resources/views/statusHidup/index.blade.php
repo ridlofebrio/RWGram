@@ -1,5 +1,4 @@
 @extends('layouts.template')
-
 @section('content')
     <header class="bg-white">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 text-center">
@@ -116,9 +115,9 @@
                 @endforeach
                 </tbody>
             </table>
-            <div class="">
+            <div class="card-footer">
                 <ul class="pagination">
-                    {{ $hidup->links() }}
+                    {{ $hidup->links('vendor.pagination.tailwind') }}
                   </ul>
             </div>
                 
