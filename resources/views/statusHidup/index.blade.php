@@ -68,46 +68,36 @@
         </div>
     
         <div class="mt-5 overflow-x-auto shadow-md sm:rounded-lg mb-56">
-            <table class="text-sm text-left shadow-xl   w-full">
-                <thead class="text-xs text-white bg-dodger-blue-900 uppercase  ">
-                    <tr >
-                        <th class="px-6 py-3 ">
-                            No
-                        </th>
-                        <th class="px-6 py-3">
-                            Nama Pengaju
-                        </th>
-                        <th class="px-6 py-3">
-                            Tanggal Pengajuan
-                        </th>
-                        <th class="px-6 py-3">
-                            Status
-                        </th>
-                        <th class="px-6 py-3">
-                            
-                        </th>
+            <table class="text-sm text-left shadow-xl w-full">
+                <thead class="text-xs text-white bg-dodger-blue-900 uppercase">
+                    <tr>
+                        <th class="px-6 py-3">No</th>
+                        <th class="px-6 py-3">Nama Pengaju</th>
+                        <th class="px-6 py-3">Tanggal Pengajuan</th>
+                        <th class="px-6 py-3">Status</th>
+                        <th class="px-6 py-3"></th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($hidup as $hidup) 
+                @foreach ($hidup as $item) 
                     <tr>
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $hidup->id_status_hidup}}
+                            {{ $item->id_status_hidup }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $hidup->penduduk->nama_penduduk }}
+                            {{ $item->penduduk->nama_penduduk }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $hidup->created_at }}
+                            {{ $item->created_at }}
                         </td> 
-                        @if ( $hidup->status_pengajuan === 'Sukses')    
+                        @if ($item->status_pengajuan === 'Sukses')    
                             <td class="px-6 py-4">
                                 <div class="bg-green-100 text-green-600 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-1">
                                     <div class="bg-green-600 rounded-full w-2 h-2"></div>
                                     <p>Selesai</p>
                                 </div>
                             </td>
-                        @elseif ($hidup->status_pengajuan === 'Proses')
+                        @elseif ($item->status_pengajuan === 'Proses')
                             <td class="px-6 py-4">
                                 <div class="bg-blue-info-100 text-blue-main font-bold py-2 px-4 text-xs rounded-full flex items-center gap-1">
                                     <div class="bg-blue-main rounded-full w-2 h-2"></div>
@@ -121,15 +111,20 @@
                                     <p>Menunggu</p>
                                 </div>
                             </td>
-                            
                         @endif                 
                     </tr>
-                    
                 @endforeach
                 </tbody>
             </table>
-        </div>
+            <div class="">
+                <ul class="pagination">
+                    {{ $hidup->links() }}
+                  </ul>
+            </div>
+                
+        </div>         
     </div>
+ 
 
     <script>
         // Fungsi untuk menyembunyikan alert setelah 5 detik
