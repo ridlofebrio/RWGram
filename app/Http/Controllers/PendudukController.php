@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\KartuKeluargaModel;
 use App\Models\PendudukModel;
 use App\Models\RtModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Validator;
 
 class PendudukController extends Controller
 {
@@ -35,6 +37,96 @@ class PendudukController extends Controller
 
 
         return view('dashboard.penduduk', ['data' => $penduduk, 'active' => 'penduduk']);
+    }
+
+
+    public function import(Request $request)
+    {
+        $file = $request->file('file');
+        $fileContents = file($file->getPathname());
+
+        $csv = array_map('str_getcsv', file($file));
+        array_walk($csv, function (&$a) use ($csv) {
+            $a = array_combine($csv[0], $a);
+        });
+        array_shift($csv);
+
+
+
+
+
+        foreach ($csv as $line) {
+
+
+            $validate = Validator::make($line, [
+                'NKK' => 'required',
+                'NIK' => 'required',
+                'nama' => 'required',
+                'Tempat_Lahir' => 'required',
+                'Tanggal_Lahir' => 'required',
+                'Jenis_Kelamin' => 'required',
+                'golongan_darah' => 'required',
+                'Agama' => 'required',
+                'Alamat' => 'required',
+                'rt' => 'required',
+                'Status_Perkawinan' => 'required',
+                'Pekerjaan' => 'required',
+                'status_tinggal' => 'required',
+
+            ]);
+
+
+            if ($validate->fails()) {
+                dd($validate->messages());
+            }
+
+
+
+            if (PendudukModel::where('NIK', '=', $line['NIK'])->first()) {
+
+                continue;
+            }
+
+
+
+            $kk = KartuKeluargaModel::where('NKK', '=', $line['NKK'])->first();
+
+            if ($kk == null) {
+                KartuKeluargaModel::create([
+                    'NKK' => $line['NKK'],
+                    'rt_id' => RtModel::where('nomor_rt', '=', $line['rt'])->first()->rt_id,
+                    'tanggal_kk' => now(),
+                    'no_telepon' => '+62'
+                ]);
+            }
+
+            $kk = KartuKeluargaModel::where('NKK', '=', $line['NKK'])->first();
+
+            $jenis_kelamin = $line['Jenis_Kelamin'] == 'Laki-laki' ? 'L' : 'P';
+
+            PendudukModel::create([
+                'kartu_keluarga_id' => $kk->kartu_keluarga_id,
+                'NIK' => $line['NIK'],
+                'nama_penduduk' => $line['nama'],
+                'tempat_lahir' => $line['Tempat_Lahir'],
+                'tanggal_lahir' => date('Y-m-d', strtotime($line['Tanggal_Lahir'])),
+                'jenis_kelamin' => $jenis_kelamin,
+                'golongan_darah' => $line['golongan_darah'],
+                'agama' => $line['Agama'],
+                'alamat' => $line['Alamat'],
+                'status_perkawinan' => $line['Status_Perkawinan'],
+                'pekerjaan' => $line['Pekerjaan'],
+                'status_tinggal' => $line['status_tinggal'],
+
+            ]);
+
+
+
+
+
+
+        }
+        return redirect()->back()->with('flash', ['success', 'Data CSV Berhasil Di import']);
     }
 
 
@@ -138,7 +230,7 @@ class PendudukController extends Controller
 
         $metadata = (object) [
             'title' => 'Data Penduduk',
-            'description' => $penduduk->nama_penduduk,
+            'description' => 'Data Penduduk',
         ];
 
         $activeMenu = 'dataDiri';
