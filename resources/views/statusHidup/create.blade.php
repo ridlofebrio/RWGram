@@ -33,47 +33,25 @@
                 <form action="{{ route('hidup.penduduk.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="sm:col-span-4">
-                        <label for="NIK-pengaju" class="block text-sm font-medium leading-6 text-gray-900">NIK Anda</label>
+                        <label for="NIK_pengaju" class="block text-sm font-medium leading-6 text-gray-900">NIK Anda</label>
                         <div class="mt-1 mb-4">
-                            <input id="NIK-pengaju" name="NIK-pengaju" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
+                            <input id="NIK_pengaju" name="NIK_pengaju" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
                                 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                                focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nomor Induk Anda" value="{{ old('NIK-pengaju') }}">
-                            @error('NIK-pengaju')
+                                focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nomor Induk Anda" value="{{ old('NIK_pengaju') }}">
+                            @error('NIK_pengaju')
                                 <span class="text-red-500 text-xs">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
                     <div class="sm:col-span-4">
-                        <label for="nama_pengaju" class="block text-sm font-medium leading-6 text-gray-900">Nama Anda</label>
+                        <label for="NIK_meninggal" class="block text-sm font-medium leading-6 text-gray-900">NIK Orang Yang Meninggal</label>
                         <div class="mt-1 mb-4">
-                            <input id="nama_pengaju" name="nama_pengaju" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
+                            <input id="NIK_meninggal" name="NIK_meninggal" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
                                 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                                focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nama Anda" value="{{ old('nama_pengaju') }}">
-                            @error('nama_pengaju')
-                                <span class="text-red-500 text-xs">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="sm:col-span-4">
-                        <label for="NIK-meninggal" class="block text-sm font-medium leading-6 text-gray-900">NIK Orang Yang Meninggal</label>
-                        <div class="mt-1 mb-4">
-                            <input id="NIK-meninggal" name="NIK-meninggal" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                                text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                                focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan NIK-meninggal Anda" value="{{ old('NIK-meninggal') }}">
-                            @error('NIK-meninggal')
+                                focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan NIK Orang yang Meninggal" value="{{ old('NIK_meninggal') }}">
+                            @error('NIK_meninggal')
                                 <span class="text-red-500 text-xs">{{ $message }}</span>
                             @enderror    
-                        </div>
-                    </div>
-                    <div class="sm:col-span-4">
-                        <label for="nama-meninggal" class="block text-sm font-medium leading-6 text-gray-900">Nama Orang Yang Meninggal</label>
-                        <div class="mt-1 mb-4">
-                            <input id="nama-meninggal" name="nama-meninggal" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                                text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                                focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan alamatpindah Anda" value="{{ old('nama-meninggal') }}">
-                            @error('nama-meninggal')
-                                <span class="text-red-500 text-xs">{{ $message }}</span>
-                            @enderror
                         </div>
                     </div>
                     {{-- <div class="card-body">
@@ -115,15 +93,28 @@
 
         function resetForm() {
             // Reset nilai input
-            document.getElementById("NIK-pengaju").value = ""; 
-            document.getElementById("nama_pengaju").value = "";
-            document.getElementById("NIK-meninggal").value = "";
-            document.getElementById("nama-meninggal").value = "";
-            document.getElementById("status").value = "";
+            document.getElementById("NIK_pengaju").value = ""; 
+            document.getElementById("NIK_meninggal").value = "";
             agreeCheckbox.checked = false; // Uncheck checkbox
             submitBtn.disabled = true; // Disable tombol Kirim
             submitBtn.classList.remove('bg-blue-main'); // Hapus warna latar belakang tombol Kirim
             submitBtn.classList.add('bg-gray-400'); // Tambahkan warna latar belakang abu-abu pada tombol Kirim
         }
+
+        // Fungsi untuk menyembunyikan alert setelah 5 detik
+        function hideAlert() {
+            let alert = document.getElementById('alert');
+            if (alert) {
+                alert.style.display = 'none';
+            }
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                hideAlert();
+            });
+        }
+
+        setTimeout(hideAlert, 5000);
         </script>
 @endsection

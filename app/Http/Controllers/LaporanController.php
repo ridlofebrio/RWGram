@@ -13,15 +13,16 @@ class LaporanController extends Controller
      */
     public function index($sort)
     {
-        $laporan = LaporanModel::with('penduduk')->where('status_laporan', $sort)->get();
+        $laporan = LaporanModel::with('penduduk')->where('status_laporan', $sort)->paginate(3);
 
         return $laporan;
     }
 
     public function keluhan($sort = 'Menunggu')
     {
+        $laporan = LaporanModel::with('penduduk')->where('status_laporan', $sort)->paginate(3);
 
-        return view('dashboard.pengaduan', ['data' => $this->index($sort), 'active' => 'pengaduan']);
+        return view('dashboard.pengaduan', ['data' => $laporan, 'active' => 'pengaduan']);
     }
 
     public function indexPenduduk()
@@ -31,6 +32,7 @@ class LaporanController extends Controller
             'description' => 'Halaman Pengaduan Warga'
         ];
         $laporan = LaporanModel::with('penduduk')->get();
+
         return view('laporan.penduduk.index', compact('laporan'))->with(['metadata' => $metadata, 'activeMenu' => 'pengaduan']);
     }
 
@@ -39,7 +41,12 @@ class LaporanController extends Controller
      */
     public function create()
     {
-        return view('laporan.create');
+        $metadata = (object) [
+            'title' => 'Pengaduan',
+            'description' => 'Halaman Pengajuan Pengaduan'
+        ];
+
+        return view('laporan.penduduk.create')->with(['metadata' => $metadata, 'activeMenu' => 'pengaduan']);
     }
 
     /**
@@ -48,30 +55,39 @@ class LaporanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'penduduk_id' => 'required',
-            'jenis_laporan' => 'required',
+            'NIK_pengaju' => 'required',
             'deskripsi_laporan' => 'required',
-            'tanggal_laporan' => 'required',
-            'status_laporan' => 'required'
         ]);
 
-        LaporanModel::create($request->all());
-        return redirect()->route('laporan.index');
-    }
+        $penduduk = PendudukModel::where('NIK', $request->NIK_pengaju)->first();
 
+        if ($penduduk) {
+            $data = [
+                'penduduk_id' => $penduduk->penduduk_id,
+                'deskripsi_laporan' => $request->deskripsi_laporan,
+                'status_laporan' => 'menunggu',
+                'tanggal_laporan' => now()
+            ];
+
+            LaporanModel::create($data);
+            return redirect()->route('laporan.penduduk.index')
+                ->with('success', 'Data Berhasil Ditambahkan');
+        } else {
+            return redirect()->route('laporan.penduduk.create')
+                ->with('error', 'NIK Anda tidak ditemukan.');
+        }
+    }
 
     public function find($value)
     {
         if ($value == 'kosong') {
-            $data = LaporanModel::all();
+            $data = LaporanModel::paginate(3);
 
             return view('dashboard.pengaduan', ['data' => $data, 'active' => 'pengaduan']);
-
         } else {
 
-            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->get();
+            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->paginate(3);
             $data = LaporanModel::findMany($id);
-
         }
 
         return view('dashboard.pengaduan', ['data' => $data, 'active' => 'pengaduan']);

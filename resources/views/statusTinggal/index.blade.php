@@ -4,10 +4,28 @@
     <header class="bg-white">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 text-center">
             <h1 class="text-3xl font-bold tracking-tight text-gray-900">Status Tempat Tinggal</h1>
-            <p class="mt-1 text-sm leading-6 text-gray-600 max-w-xl mx-auto">Lorem ipsum dolor sit amet consectetur. Tincidunt varius non in vel eu pellentesque aliquam sodales porta. Hac consequat nisi arcu tortor mauris aliquet elit etiam. Vel vestibulum a scelerisque sagittis lacus porttitor. Sociis eget volutpat odio odio aliquet duis.</p>
+            <p class="mt-1 text-base leading-6 text-gray-600 max-w-4xl mx-auto">Formulir ini dirancang untuk warga RW 04 Kalirejo yang ingin mengajukan perubahan status tempat tinggal. Melalui formulir ini, warga dapat memberikan informasi terkait perubahan status tempat tinggal yang diinginkan, seperti pindah tempat tinggal, perubahan alamat, atau perubahan status lainnya.</p>
         </div>
     </header>
 
+    <div class="container mx-auto mt-2">
+        @if ($message = Session::get('error'))
+            <div id="alert" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mx-auto w-1/2" role="alert">
+                <strong class="font-bold">Ops!</strong>
+                <span class="block sm:inline">{{ $message }}</span>
+                <!-- Tombol Close -->
+                <span id="close-btn" class="absolute top-0 right-0 px-2 py-1 cursor-pointer">&times;</span>
+            </div>
+        @endif
+        @if ($message = Session::get('success'))
+            <div id="alert" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mx-auto w-1/2" role="alert">
+                <strong class="font-bold">Berhasil!</strong>
+                <span class="block sm:inline">{{ $message }}</span>
+                <!-- Tombol Close -->
+                <span id="close-btn" class="absolute top-0 right-0 px-2 py-1 cursor-pointer">&times;</span>
+            </div>
+        @endif
+    </div>
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="flex justify-between my-4">
             <div class="flex gap-3 drop-shadow-lg">
@@ -86,7 +104,7 @@
                             {{ $tinggal->created_at }}
                         </td>
                         <td class="px-6 py-4 max-w-xl overflow-hidden">
-                            <div class="line-clamp-4">{{ $tinggal->status }}</div>
+                            <div class="line-clamp-4" style="text-transform: capitalize;">{{ $tinggal->status }}</div>
                         </td>   
                         @if ( $tinggal->status_pengajuan === 'Sukses')    
                             <td class="px-6 py-4">
@@ -111,13 +129,6 @@
                             </td>
                             
                         @endif                 
-                        <td class="px-6 py-4">
-                            <a href="#" class="flex gap-[2px]">
-                                <div class="border border-black rounded-full w-1 h-1"></div>
-                                <div class="border border-black rounded-full w-1 h-1"></div>
-                                <div class="border border-black rounded-full w-1 h-1"></div>
-                            </a>
-                        </td>
                     </tr>
                     
                 @endforeach
@@ -126,4 +137,26 @@
         </div>
     </div>
 
+    <script>
+        // Fungsi untuk menyembunyikan alert setelah 5 detik
+        function hideAlert() {
+            let alert = document.getElementById('alert');
+            if (alert) {
+                alert.style.display = 'none';
+            }
+        }
+
+        // Tambahkan event listener untuk tombol close alert
+        document.addEventListener('DOMContentLoaded', function() {
+            let closeBtn = document.getElementById('close-btn');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    hideAlert();
+                });
+            }
+
+            // Sembunyikan alert setelah 5 detik
+            setTimeout(hideAlert, 5000);
+        });
+    </script>
 @endsection

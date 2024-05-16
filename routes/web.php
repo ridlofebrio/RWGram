@@ -39,6 +39,7 @@ Route::group(['prefix' => 'bansos-penduduk'], function () {
     Route::post('/show', [BansosController::class, 'showPenduduk'])->name('bansos.penduduk.show');
     Route::get('/request', [BansosController::class, 'request'])->name('bansos.penduduk.request');
     Route::get('/create', [BansosController::class, 'create'])->name('bansos.penduduk.create');
+    Route::post('/store', [BansosController::class, 'store'])->name('bansos.penduduk.store');
 });
 
 
@@ -61,6 +62,7 @@ Route::group(['prefix' => 'umkm-penduduk'], function () {
     Route::get('/create', [UmkmController::class, 'create'])->name('umkm.penduduk.create');
     Route::post('/store', [UmkmController::class, 'store'])->name('umkm.penduduk.store');
 });
+
 Route::group(['prefix' => 'nikah-penduduk'], function () {
     Route::get('/', [StatusNikahController::class, 'index'])->name('nikah.penduduk.index');
     Route::get('/create', [StatusNikahController::class, 'create'])->name('nikah.penduduk.create');
@@ -84,6 +86,8 @@ Route::group(['prefix' => 'tinggal-penduduk'], function () {
 
 Route::group(['prefix' => 'pengaduan'], function () {
     Route::get('/', [LaporanController::class, 'indexPenduduk'])->name('laporan.penduduk.index');
+    Route::get('/create', [LaporanController::class, 'create'])->name('laporan.penduduk.create');
+    Route::post('/create', [LaporanController::class, 'store'])->name('laporan.store');
 });
 
 
@@ -96,8 +100,8 @@ Route::get('logout', [AuthSessionController::class, 'logout']);
 
 
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
-    Route::get('/pengajuan/{sort}', [UmkmController::class, 'sort'])->name('laporan.penduduk.index')->middleware('RW');
-    Route::get('/pengajuan', [UmkmController::class, 'index'])->name('laporan.penduduk.index')->middleware('RW');
+    Route::get('/pengajuan/{sort}', [UmkmController::class, 'sort'])->middleware('RW');
+    Route::get('/pengajuan', [UmkmController::class, 'index'])->middleware('RW');
     Route::get('/pengaduan/{sort}', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/penduduk', [PendudukController::class, 'index']);
@@ -106,7 +110,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/persuratan', [PersuratanController::class, 'index'])->middleware('RW');
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/detail-akun', [UserController::class, 'show']);
-
 });
 
 
@@ -117,20 +120,23 @@ Route::group(['prefix' => 'data'], function () {
     Route::get('/meninggal', [StatusHidupController::class, 'pengajuan']);
     Route::get('/notif', [DashboardController::class, 'notif']);
     Route::get('/notifcount', [DashboardController::class, 'notifcount']);
-
 });
 
-Route::get('/search/nikah/{value}', [StatusNikahController::class, 'find']);
-Route::get('/search/umkm/{value}', [UmkmController::class, 'find']);
-Route::get('/search/tinggal/{value}', [StatusTinggalController::class, 'find']);
-Route::get('/search/meninggal/{value}', [StatusHidupController::class, 'find']);
-Route::get('/search/penduduk/{value}', [PendudukController::class, 'find']);
-Route::get('/search/pengaduan/{value}', [LaporanController::class, 'find']);
 
+
+
+Route::group(['prefix' => 'search', 'middleware' => 'auth'], function () {
+
+    Route::get('/nikah/{value}', [StatusNikahController::class, 'find']);
+    Route::get('/umkm/{value}', [UmkmController::class, 'find']);
+    Route::get('/tinggal/{value}', [StatusTinggalController::class, 'find']);
+    Route::get('/meninggal/{value}', [StatusHidupController::class, 'find']);
+    Route::get('/penduduk/{value}', [PendudukController::class, 'find']);
+    Route::get('/pengaduan/{value}', [LaporanController::class, 'find']);
+});
 
 Route::group(['prefix' => 'akun'], function () {
     Route::delete('{id}', [UserController::class, 'destroy']);
-
 });
 
 Route::group(['prefix' => 'penduduk'], function () {
@@ -138,14 +144,4 @@ Route::group(['prefix' => 'penduduk'], function () {
     Route::put('/{id}', [PendudukController::class, 'update']);
     Route::delete('{id}', [PendudukController::class, 'destroy']);
     Route::get('{id}', [PendudukController::class, 'find']);
-    Route::get('/sort/{sort}', [PendudukController::class, 'sort']);
 });
-
-Route::group(['prefix' => 'pengaduan'], function () {
-
-    Route::put('/konfirmasi/{id}', [LaporanController::class, 'update']);
-
-});
-
-
-

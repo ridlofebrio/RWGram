@@ -10,14 +10,14 @@ class BansosController extends Controller
 {
     public function index()
     {
-        $bansos = BansosModel::with('kartuKeluarga')->get();
+        $bansos = BansosModel::with('kartuKeluarga')->paginate(3);
 
-        return view('dashboard.bansos', ['bansos' => $bansos, 'active' => 'bansos']);
+        return view('dashboard.bansos', ['data' => $bansos, 'active' => 'bansos']);
     }
 
     public function create()
     {
-        $metadata = (object)[
+        $metadata = (object) [
             'title' => 'Bantuan Sosial',
             'description' => 'Pengajuan Bantuan Sosial'
         ];
@@ -27,6 +27,10 @@ class BansosController extends Controller
 
     public function store(Request $request)
     {
+        $image = $request->file('file');
+        $imageName = time() . rand(1, 99) . '.' . $image->extension();
+        $image->move(public_path('images'), $imageName);
+
         $validatedData = $request->validate([
             'nomer_kk' => 'required',
             'nama_pengaju' => 'required',
@@ -36,6 +40,7 @@ class BansosController extends Controller
             'luas_rumah' => 'required|numeric',
             'luas_tanah' => 'required|numeric',
             'jumlah_watt' => 'required|numeric',
+            // 'file_upload.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $kartuKeluarga = KartuKeluargaModel::where('NKK', $request->nomer_kk)->first();
@@ -56,7 +61,18 @@ class BansosController extends Controller
                     'tanggal_bansos' => now(),
                 ]);
             } else {
-                // Jika bansos belum ada, buat bansos baru
+                // // Jika bansos belum ada, buat bansos baru
+                // if ($request->hasFile('file_upload')) {
+                //     foreach ($request->file('file_upload') as $file) {
+                //         // Simpan file ke dalam storage
+                //         $path = $file->store('public/images'); // Simpan di dalam folder 'images' di dalam direktori 'public'
+
+                //         // Anda juga bisa menyimpan path ke database jika diperlukan
+                //         $image = $path;
+                //         $image->save();
+                //     }
+                // }
+
                 BansosModel::create([
                     'kartu_keluarga_id' => $kartuKeluarga->kartu_keluarga_id,
                     'nama_pengaju' => $request->nama_pengaju,
@@ -67,6 +83,7 @@ class BansosController extends Controller
                     'luas_tanah' => $request->luas_tanah,
                     'jumlah_watt' => $request->jumlah_watt,
                     'tanggal_bansos' => now(),
+                    'foto_dapur' => $imageName,
                 ]);
             }
             return redirect()->route('bansos.penduduk.request')
@@ -85,11 +102,21 @@ class BansosController extends Controller
 
     public function request()
     {
-        return view('bansos.penduduk.request');
+        $metadata = (object)[
+            'title' => 'Bantuan Sosial',
+            'description' => 'Pengajuan Bantuan Sosial'
+        ];
+
+        return view('bansos.penduduk.request')->with(['activeMenu' => 'beranda', 'metadata' => $metadata]);
     }
 
     public function showPenduduk(Request $request)
     {
+        $metadata = (object)[
+            'title' => 'Bantuan Sosial',
+            'description' => 'Cek Pengajuan Bantuan Sosial'
+        ];
+
         $kartuKeluarga = KartuKeluargaModel::where('NKK', $request->nomer_kk)->first();
 
         if ($kartuKeluarga !== null) {
@@ -97,9 +124,9 @@ class BansosController extends Controller
 
             if ($existingBansos !== null) {
                 $bansos = $existingBansos;
-                return view('bansos.penduduk.show', compact('bansos'));
+                return view('bansos.penduduk.show')->with(['bansos' => $bansos, 'activeMenu' => 'beranda', 'metadata' => $metadata]);
             } else {
-                return redirect()->route('bansos.index')->with('error', 'Anda belum melakukan pengajuan bansos');
+                return redirect()->route('bansos.penduduk.request')->with('error', 'Anda belum melakukan pengajuan bansos');
             }
         } else {
             return redirect()->route('bansos.penduduk.request')->with('error', 'Kartu keluarga tidak ditemukan.');
