@@ -10,14 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('kas', function (Blueprint $table) {
-            $table->id('kas_id');
-            $table->unsignedBigInteger('kartu_keluarga_id')->index();
-            $table->foreign('kartu_keluarga_id')->references('kartu_keluarga_id')->on('kartu_keluarga');
+        Schema::create('detail_kas', function (Blueprint $table) {
+            $table->id('id_detail_kas');
+            $table->unsignedBigInteger('id_kas')->index();
+            $table->foreign('id_kas')->references('id_kas')->on('kas');
             $table->integer('jumlah_kas');
-            $table->date('tanggal_kas');
-            $table->unsignedBigInteger('bulan_membayar')->index();
-            $table->foreign('bulan_Membayar')->references('id_waktu')->on('waktu');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('kas');
+        Schema::dropIfExists('detail_kas');
     }
 };

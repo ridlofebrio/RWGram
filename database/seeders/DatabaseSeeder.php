@@ -20,17 +20,17 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            WaktuSeeder::class,
             RwSeeder::class,
             RtSeeder::class,
             kartuKeluargaSeeder::class,
+            Kas::class,
             PendudukSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
             PersuratanSeeder::class,
             LaporanSeeder::class,
             BansosSeeder::class,
-            KasSeeder::class,
+            DetailKas::class,
             StatusHidupSeeder::class,
             StatusNikahSeeder::class,
             StatusTinggalSeeder::class,

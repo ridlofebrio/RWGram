@@ -116,10 +116,13 @@
                 @endforeach
                 </tbody>
             </table>
-        </div>
-        <div class="mt-4">
-            {{ $hidup->links() }}
-        </div>
+            <div class="">
+                <ul class="pagination">
+                    {{ $hidup->links() }}
+                  </ul>
+            </div>
+                
+        </div>         
     </div>
  
 
