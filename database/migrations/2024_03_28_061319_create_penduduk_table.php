@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->string('agama', 10);
             $table->string('pekerjaan', 40);
             $table->enum('status_tinggal', ['tetap', 'kontrak', 'pindah']);
-            $table->boolean('status_kematian');
+            $table->boolean('status_kematian')->default(0);
             $table->boolean('isDelete')->default(false);
             $table->timestamps();
         });

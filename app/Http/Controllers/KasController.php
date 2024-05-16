@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KartuKeluargaModel;
 use App\Models\KasModel;
 use Illuminate\Http\Request;
 
@@ -13,9 +14,20 @@ class KasController extends Controller
     public function index()
     {
         //
-        $data = KasModel::all();
+        $data = KasModel::selectRaw('sum(jumlah_kas)')->groupBy('tanggal_kas')->pluck('sum(jumlah_kas)')->toArray();
+        $tgl = KasModel::selectRaw('DAYOFMONTH(tanggal_kas)')->groupBy('tanggal_kas')->pluck('DAYOFMONTH(tanggal_kas)')->toArray();
+        $jumlah = 0;
+        $data = array_map('intval', $data);
+        foreach ($data as $key) {
+            $jumlah += $key;
+        }
 
-        return view("kas.index", $data = ['data' => $data]);
+        $kas = KasModel::with('kartuKeluarga', 'waktu')->rightJoin('kartu_keluarga', 'kas.kartu_keluarga_id', '=', 'kartu_keluarga.kartu_keluarga_id')->get();
+        $kk = KartuKeluargaModel::all();
+
+
+        $active = 'kas';
+        return view("dashboard.kas", compact('data', 'active', 'tgl', 'jumlah', 'kas', 'kk'));
     }
 
     /**
@@ -41,7 +53,7 @@ class KasController extends Controller
 
         return redirect('/kas')->with('success', 'Data berhasil ditambah');
     }
-    
+
     /**
      * Display the specified resource.
      */

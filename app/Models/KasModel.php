@@ -13,4 +13,14 @@ class KasModel extends Model
     protected $primaryKey = "kas_id";
 
     protected $fillable = ['kartu_keluarga_id', 'jumlah_kas', 'tanggal_kas'];
+
+    public function kartuKeluarga()
+    {
+        return $this->belongsTo(KartuKeluargaModel::class, 'kartu_keluarga_id');
+    }
+
+    public function waktu()
+    {
+        return $this->belongsTo(waktuModel::class, 'bulan_membayar');
+    }
 }
