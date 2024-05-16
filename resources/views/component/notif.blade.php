@@ -30,14 +30,17 @@
 </style>
 
 <div class="scrollbar-sangar bg-white absolute w-[500px] p-3 z-50 overflow-y-auto h-[500px] right-0 drop-shadow-card rounded-xl top-2 ">
-    <h1 class="text-black font-bold" >{{$jumlah }} laporan Belum Dilihat</h1>
-    <hr class="mb-3 mt-3">
+  
+    
 
     @if($jumlah==0)
         <h1>Tidak Ada Laporan Baru</h1>
+        
+    @else
+    <h1 class="text-black font-bold" >{{$jumlah }} laporan Belum Dilihat</h1>
     @endif
    
-   
+    <hr class="mb-3 mt-3">
   @foreach ($umkm as $item)
      <ul>
         <li class="mb-3 hover:bg-blue-main hover:text-white p-2 rounded-lg">

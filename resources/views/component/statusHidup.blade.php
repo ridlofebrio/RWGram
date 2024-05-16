@@ -38,9 +38,9 @@
                 {{$status->NIK_meninggal}}
             </td>
             <td class="px-6 py-4">
-                <div class="px-2 py-2 w-[113px] {{$status->status_laporan=='selesai'? 'bg-[#CCF1E5]':'bg-[#FBF4CF]'}}  rounded-full flex items-center gap-2  justify-center">
-                    <div class="w-2 h-2 {{$status->status_laporan=='selesai'? 'bg-green-400':'bg-yellow-300'}} rounded-full"></div>
-                    <p class="font-body font-semibold {{$status->status_laporan=='selesai'? 'text-green-400':'text-yellow-300'}}">
+                <div class="px-2 py-2 w-[113px] {{$status->status_pengajuan=='diterima'? 'bg-[#CCF1E5]':'bg-[#FBF4CF]'}}  rounded-full flex items-center gap-2  justify-center">
+                    <div class="w-2 h-2 {{$status->status_pengajuan=='diterima'? 'bg-green-400':'bg-yellow-300'}} rounded-full"></div>
+                    <p class="font-body font-semibold {{$status->status_pengajuan=='diterima'? 'text-green-400':'text-yellow-300'}}">
 
                             {{$status->status_pengajuan}}
 
@@ -50,7 +50,27 @@
         
             <td class="px-6 py-4 flex gap-2 ">
                
-                <a href="/login" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-5 py-2 text-base font-medium rounded-full  ">Konfirmasi</a>
+                <div x-data= "{open:false}">
+
+                    <button @click="open= true"  class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-5 py-2 text-base font-medium rounded-full disabled:bg-neutral-06 " {{$status->status_pengajuan=='diterima'?"disabled ":""}}>Konfirmasi</button>
+                    <div x-show="open"  class="overflow-y-auto overflow-x-hidden fixed  z-40 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                        <div @click.outside="open = false" class="absolute text-center w-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl  p-4 bg-white z-50">
+                            <h1 class="text-xl mb-5">Apakah anda yakin ingin mengkonfirmasi permohonan ini ?</h1>
+                           <div class="flex w-full space-x-7 justify-center">
+                            <button class="text-blue-main border-2 border-dodger-blue-800  hover:bg-dodger-blue-800  hover:text-white  px-5 py-2 text-base font-medium rounded-full">Lihat Detail</button>
+                           <form action="{{url('konfirmasi/hidup/'.$status->id_status_hidup)}}" method="POST">
+                            @csrf
+                            @method('PUT')
+                                <input type="hidden" name="status_pengajuan" value="diterima">
+                            <button type="submit" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-5 py-2 text-base font-medium rounded-full">Konfirmasi</button>
+                           </form>
+                           </div>
+
+                        </div>
+                        <div class="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40"></div> 
+                    </div>
+
+                </div>
                 <div x-data="{ open: false }">
                     <button @click="open = true"  class="hover:border-none  before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  " type="button">
                         Detail
@@ -132,3 +152,19 @@
        
     </tbody>
 </table>
+
+
+<nav aria-label="page navigation example" class="page mt-5 text-right" >
+    <ul class="inline-flex -space-x-px text-sm">
+      <li>
+        <button {{$data->previousPageUrl()?'':'disabled'}} onclick="page(event,'{{$data->previousPageUrl()}}')" class="pagination disabled:bg-neutral-04  flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><i class="fa-solid fa-chevron-left"></i></button>
+      </li>
+      <li>
+        <a href="#" class=" flex items-center justify-center px-3 h-8 bg-blue-main leading-tight  text-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{$data->currentPage()}}</a>
+      </li>
+     
+      <li>
+        <button  {{$data->nextPageUrl()?'':'disabled'}}  onclick="page(event,'{{$data->nextPageUrl()}}')" class="pagination disabled:bg-neutral-04  flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><i class="fa-solid fa-chevron-right"></i></button>
+      </li>
+    </ul>
+  </nav>
