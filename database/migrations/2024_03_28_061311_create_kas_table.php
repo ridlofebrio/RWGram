@@ -15,6 +15,8 @@ return new class extends Migration {
             $table->unsignedBigInteger('id_kas')->index();
             $table->foreign('id_kas')->references('id_kas')->on('kas');
             $table->integer('jumlah_kas');
+            $table->date('tanggal_kas');
+
             $table->timestamps();
         });
     }
