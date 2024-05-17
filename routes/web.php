@@ -153,3 +153,8 @@ Route::group(['prefix' => 'penduduk'], function () {
     Route::delete('{id}', [PendudukController::class, 'destroy']);
     Route::get('{id}', [PendudukController::class, 'find']);
 });
+
+Route::group(['prefix' => 'kas'], function () {
+    Route::post('/', [KasController::class, 'store']);
+
+});
