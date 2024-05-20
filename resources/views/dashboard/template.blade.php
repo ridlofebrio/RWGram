@@ -32,6 +32,15 @@ animation: l11 1s infinite;
 @keyframes l11 {
   80%,100% {background-position: calc(100%/3) 0,calc(100%/-3) 100%}
 }
+
+input:focus{
+      outline:none !important;
+      outline-width: 0 !important;
+      box-shadow: none !important;
+      -moz-box-shadow: none!important;
+      -webkit-box-shadow: none!important;
+    }
+   
 </style>
 
 

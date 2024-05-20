@@ -109,9 +109,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/bansos', [BansosController::class, 'index'])->middleware('RW');
     Route::get('/akun', [UserController::class, 'index'])->middleware('RW');
     Route::get('/persuratan', [PersuratanController::class, 'index'])->middleware('RW');
+    Route::get('/kas', [KasController::class, 'index'])->middleware('RW');
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/detail-akun', [UserController::class, 'show']);
 });
+
+Route::post('/penduduk-import', [PendudukController::class, 'import'])->name('import');
 
 
 Route::group(['prefix' => 'data'], function () {
@@ -140,9 +143,19 @@ Route::group(['prefix' => 'akun'], function () {
     Route::delete('{id}', [UserController::class, 'destroy']);
 });
 
+Route::group(['prefix' => 'persuratan'], function () {
+    Route::post('/', [PersuratanController::class, 'store']);
+
+});
+
 Route::group(['prefix' => 'penduduk'], function () {
     Route::post('/', [PendudukController::class, 'store']);
     Route::put('/{id}', [PendudukController::class, 'update']);
     Route::delete('{id}', [PendudukController::class, 'destroy']);
     Route::get('{id}', [PendudukController::class, 'find']);
+});
+
+Route::group(['prefix' => 'kas'], function () {
+    Route::post('/', [KasController::class, 'store']);
+
 });
