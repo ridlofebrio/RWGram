@@ -29,17 +29,21 @@
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="flex justify-between my-4">
             <div class="flex gap-3 drop-shadow-lg">
-        <form class="max-w-sm mx-auto">   
+
+
+                <form class="max-w-sm mx-auto" action="{{ route('tinggal.penduduk.find') }}" method="GET">   
                     <div class="relative">
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                             </svg>
                         </div>
-                <input name="search" value="{{ request('search') }}" class="pl-8 block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari pengaduan" />
+                        <input name="search" value="{{ request('search') }}" class="pl-8 block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari pengaduan" />
                     </div>
                 </form>
                 
+
+
                 <div class="rounded-full shadow-lg">
                     <button id="doubleDropdownButton" data-dropdown-toggle="doubleDropdown" class="p-2 text-black font-medium text-sm px-5 text-center inline-flex items-center" type="button">-Semua-
                         <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -92,10 +96,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($tinggal as $item) 
+
+                @foreach ($tinggal as $item)
                     <tr>
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $item->id_status_tinggal}}
+                            {{$item->id_status_tinggal}}
                         </th>
                         <td class="px-6 py-4">
                             {{ $item->penduduk->nama_penduduk }}

@@ -100,4 +100,23 @@ class StatusHidupController extends Controller
     {
         $laporan = StatusHidupModel::findOrFail($id)->delete();
     }
+    public function indexFind(Request $request)
+    {
+        $metadata = (object) [
+            'title' => 'Status Meninggal',
+            'description' => 'Halaman Ubah Status Warga'
+        ];
+
+        $search = $request->input('search');
+        if (empty($search)) {
+            $data = StatusHidupModel::paginate(5);
+        } else {
+            $data = StatusHidupModel::whereHas('penduduk', function($query) use ($search) {
+                $query->where('nama_penduduk', 'like', '%' . $search . '%')
+                      ->orWhere('NIK', 'like', '%' . $search . '%');
+            })->paginate(3);
+        }
+
+        return view('statusHidup.index', ['hidup' => $data])->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
+    }
 }
