@@ -274,7 +274,7 @@ data1.push(0);
 var tgl = "{{ json_encode($tgl) }}"
 tgl=tgl.replace(/&quot;/g,'"');
 // tgl=tgl.replace(,'');
-console.log( )
+
 // console.log( JSON.parse(tgl))
 
 // start graph cart

@@ -16,8 +16,8 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $data = KasModel::selectRaw('sum(jumlah_kas)')->groupBy('tanggal_kas')->pluck('sum(jumlah_kas)')->toArray();
-        $tgl = KasModel::selectRaw('DAYOFMONTH(tanggal_kas)')->groupBy('tanggal_kas')->pluck('DAYOFMONTH(tanggal_kas)')->toArray();
+        $data = KasModel::selectRaw('sum(jumlah_kas)')->groupByRaw('Month(tanggal_kas)')->pluck('sum(jumlah_kas)')->toArray();
+        $tgl = KasModel::selectRaw('MONTH(tanggal_kas)')->groupByRaw('Month(tanggal_kas)')->pluck('MONTH(tanggal_kas)')->toArray();
         $jumlah = 0;
         $data = array_map('intval', $data);
         foreach ($data as $key) {

@@ -13,35 +13,40 @@ class DetailKas extends Seeder
      */
     public function run(): void
     {
-            $data =[
-                [
-                    'id_kas' => 1,
-                    'jumlah_kas' => 15000,
-                ],
-                [
-                    'id_kas' => 2,
-                    'jumlah_kas' => 15000,
-                ],
-                [
-                    'id_kas' => 3,
-                    'jumlah_kas' => 15000,
-                ],
-                [
-                    'id_kas' => 4,
-                    'jumlah_kas' => 15000,
-                ],
-                [
-                    'id_kas' => 5,
-                    'jumlah_kas' => 15000,
-                ],
-            ];
-    
-    
-            DB::table('detail_kas')->insert(
-                $data
-            );
+        $data = [
+            [
+                'id_kas' => 1,
+                'jumlah_kas' => 15000,
+                'tanggal_kas' => now(),
+            ],
+            [
+                'id_kas' => 2,
+                'jumlah_kas' => 15000,
+                'tanggal_kas' => now(),
+            ],
+            [
+                'id_kas' => 3,
+                'jumlah_kas' => 15000,
+                'tanggal_kas' => now(),
+            ],
+            [
+                'id_kas' => 4,
+                'jumlah_kas' => 15000,
+                'tanggal_kas' => now(),
+            ],
+            [
+                'id_kas' => 5,
+                'jumlah_kas' => 15000,
+                'tanggal_kas' => now(),
+            ],
+        ];
 
-            
-        }
-        
+
+        DB::table('detail_kas')->insert(
+            $data
+        );
+
+
     }
+
+}

@@ -18,7 +18,7 @@
          </button>
          <div class="flex ml-0 md:ml-72 flex-col    font-main">
              <h1 class="text-neutral-07 text-lg">{{$i[$num]}}, {{date('d F Y',strtotime(now()))}}</h1>
-            <h1 class="font-bold text-lg" >{{$active}}</h1>
+            <h1 class="font-bold text-lg" >{{ucwords($active)}}</h1>
          </div>
 
 
