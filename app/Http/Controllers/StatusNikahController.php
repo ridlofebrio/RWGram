@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\PendudukModel;
 use App\Models\StatusNikahModel;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\Paginator;
 
 class StatusNikahController extends Controller
 {
