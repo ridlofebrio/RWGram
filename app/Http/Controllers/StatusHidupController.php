@@ -15,7 +15,6 @@ class StatusHidupController extends Controller
             'description' => 'Halaman Ubah Status Warga'
         ];
     
-        // Menggunakan pagination, dengan 10 item per halaman
         $hidup = StatusHidupModel::paginate(1);
     
         return view('statusHidup.index', compact('hidup'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
@@ -60,7 +59,6 @@ class StatusHidupController extends Controller
         $request->validate([
             'NIK_pengaju' => 'required',
             'NIK_meninggal' => 'required',
-            // 'foto_bukti' => 'required', // Uncomment if needed
         ]);
 
         $penduduk_pengaju = PendudukModel::where('NIK', $request->NIK_pengaju)->first();
