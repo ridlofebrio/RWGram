@@ -38,7 +38,7 @@ class InformasiController extends Controller
 
         // Mengonversi format tanggal informasi
         foreach ($informasi as $info) {
-            $info->tanggal_informasi = date('d F Y', strtotime($info->tanggal_informasi));
+            $info = date('d F Y', strtotime($info->tanggal_informasi));
         }
 
         return view('informasi.penduduk.index')->with(['informasi' => $informasi, 'activeMenu' => 'pengumuman', 'metadata' => $metadata]);

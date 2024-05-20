@@ -66,7 +66,7 @@
             </div>
             <a href="{{ route('hidup.penduduk.create') }}" class="text-white bg-blue-main px-8 py-2 font-medium text-sm rounded-full shadow-lg">Ajukan</a>
         </div>
-    
+        
         <div class="mt-5 overflow-x-auto shadow-md sm:rounded-lg mb-56">
             <table class="text-sm text-left shadow-xl w-full">
                 <thead class="text-xs text-white bg-dodger-blue-900 uppercase">
@@ -79,6 +79,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                @if ($hidup->isEmpty())
+                    <tr>
+                        <td colspan="5" class="text-center py-4">Tidak ada data yang tersedia</td>
+                    </tr>
+                    
+                @endif
                 @foreach ($hidup as $item) 
                     <tr>
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
