@@ -17,7 +17,7 @@ class StatusTinggalController extends Controller
         ];
     
         // Menggunakan pagination, dengan 10 item per halaman
-        $tinggal = StatusTinggalModel::paginate(5);
+        $tinggal = StatusTinggalModel::paginate(1);
     
         return view('statusTinggal.index', compact('tinggal'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
     }

@@ -16,7 +16,7 @@ class StatusHidupController extends Controller
         ];
     
         // Menggunakan pagination, dengan 10 item per halaman
-        $hidup = StatusHidupModel::paginate(5);
+        $hidup = StatusHidupModel::paginate(1);
     
         return view('statusHidup.index', compact('hidup'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
     }

@@ -84,6 +84,7 @@ Route::group(['prefix' => 'tinggal-penduduk'], function () {
 
 
 
+
 Route::group(['prefix' => 'pengaduan'], function () {
     Route::get('/', [LaporanController::class, 'indexPenduduk'])->name('laporan.penduduk.index');
     Route::get('/create', [LaporanController::class, 'create'])->name('laporan.penduduk.create');

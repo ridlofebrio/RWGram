@@ -38,7 +38,7 @@ class StatusNikahController extends Controller
             'description' => 'Halaman Ubah Status Warga'
         ];
 
-        $nikah = StatusNikahModel::paginate(5);
+        $nikah = StatusNikahModel::paginate(1);
 
         return view('statusNikah.index', compact('nikah'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
         }
