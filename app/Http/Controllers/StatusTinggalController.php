@@ -18,6 +18,8 @@ class StatusTinggalController extends Controller
         return view('statusTinggal.index', compact('tinggal'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
     }
 
+
+
     public function create()
     {
         $metadata = (object) [
@@ -30,6 +32,16 @@ class StatusTinggalController extends Controller
     public function pengajuan()
     {
         $data = StatusTinggalModel::with('penduduk')->paginate(3);
+        StatusTinggalModel::where('terbaca', '=', '0')->update([
+            'terbaca' => 1
+        ]);
+
+        return view('component.statusTinggal', ['data' => $data]);
+    }
+
+    public function sort($sort = 'menunggu')
+    {
+        $data = StatusTinggalModel::where('status_pengajuan', $sort)->with('penduduk')->paginate(3);
 
         return view('component.statusTinggal', ['data' => $data]);
     }

@@ -88,7 +88,8 @@
                         url: "http://127.0.0.1:8000/data/notifcount",
                         
                         success:function(data){
-                         if(data.length != 0){
+                            
+                         if(data != 0){
                                 $('#dotred').css('display','block');
                          }
                         },

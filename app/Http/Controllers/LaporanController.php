@@ -21,7 +21,9 @@ class LaporanController extends Controller
     public function keluhan($sort = 'Menunggu')
     {
         $laporan = LaporanModel::with('penduduk')->where('status_laporan', $sort)->paginate(3);
-
+        LaporanModel::where('terbaca', '=', '0')->update([
+            'terbaca' => 1
+        ]);
         return view('dashboard.pengaduan', ['data' => $laporan, 'active' => 'pengaduan']);
     }
 

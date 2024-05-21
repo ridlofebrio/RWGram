@@ -22,12 +22,12 @@
         <h2 class="text-xl ml-3" > {{count($data)}} Laporan</h2>
         <div class="filter flex">
             <div x-cloak x-data="{open:false}" class="relative " >
-                <button @click="open= !open" class="flex px-3 items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p>-semua-</p> <i class="fa fa-chevron-down"></i></button>
+                <button  @click="open= !open" class="flex px-3 items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p id="sort">-semua-</p> <i class="fa fa-chevron-down"></i></button>
                 <div class="absolute mt-1  left-1/2 -translate-x-1/2 p-0 z-30 bg-white drop-shadow-card w-full" x-show="open" @click.outside="open=false" >
                    <ul>
-                    <li><button class="hover:bg-blue-main px-5 py-2 w-full sort" data="selesai"  >selesai</button></li>
-                    <li><button class="hover:bg-blue-main px-5 py-2 w-full sort " data="ditolak"  >ditolak</button></li>
-                    <li><button class="hover:bg-blue-main px-5 py-2 w-full sort"  data="Menunggu" >menunggu</button></li>
+                    <li><button  @click="open= !open" class="hover:bg-blue-main px-5 py-2 w-full sort" data="selesai"  >selesai</button></li>
+                    <li><button  @click="open= !open" class="hover:bg-blue-main px-5 py-2 w-full sort " data="ditolak"  >ditolak</button></li>
+                    <li><button  @click="open= !open" class="hover:bg-blue-main px-5 py-2 w-full sort"  data="Menunggu" >menunggu</button></li>
                     
                    </ul>
                 </div>
@@ -403,6 +403,7 @@ document.addEventListener('alpine:init', () => {
                         const doc = parser.parseFromString(data, 'text/html');    
                         const table = doc.getElementById('umkm');
                             $('#umkm').html(table);
+                            $("#sort").html(index.currentTarget.getAttribute('data'));
                         }
                         
                     })
