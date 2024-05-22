@@ -24,7 +24,7 @@ class StatusHidupController extends Controller
             'title' => 'Status Hidup',
             'description' => 'Halaman Ubah Status Hidup Warga'
         ];
-        return view('statusHidup.create', ['activeMenu' => 'hidup', 'metadata' => $metadata]);
+        return view('statusHidup.create', ['activeMenu' => 'permohonan', 'metadata' => $metadata]);
     }
 
 

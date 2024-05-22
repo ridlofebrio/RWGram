@@ -86,7 +86,7 @@ class UmkmController extends Controller
             'description' => 'Daftar UMKM'
         ];
 
-        return view('umkm.penduduk.create')->with(['activeMenu' => 'beranda', 'metadata' => $metadata]);
+        return view('umkm.penduduk.create')->with(['activeMenu' => 'permohonan', 'metadata' => $metadata]);
     }
 
     /**

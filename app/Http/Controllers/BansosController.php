@@ -22,7 +22,7 @@ class BansosController extends Controller
             'description' => 'Pengajuan Bantuan Sosial'
         ];
 
-        return view('bansos.penduduk.create')->with(['activeMenu' => 'beranda', 'metadata' => $metadata]);
+        return view('bansos.penduduk.create')->with(['activeMenu' => 'permohonan', 'metadata' => $metadata]);
     }
 
     public function store(Request $request)
@@ -107,7 +107,7 @@ class BansosController extends Controller
             'description' => 'Pengajuan Bantuan Sosial'
         ];
 
-        return view('bansos.penduduk.request')->with(['activeMenu' => 'beranda', 'metadata' => $metadata]);
+        return view('bansos.penduduk.request')->with(['activeMenu' => 'permohonan', 'metadata' => $metadata]);
     }
 
     public function showPenduduk(Request $request)
@@ -124,7 +124,7 @@ class BansosController extends Controller
 
             if ($existingBansos !== null) {
                 $bansos = $existingBansos;
-                return view('bansos.penduduk.show')->with(['bansos' => $bansos, 'activeMenu' => 'beranda', 'metadata' => $metadata]);
+                return view('bansos.penduduk.show')->with(['bansos' => $bansos, 'activeMenu' => 'permohonan', 'metadata' => $metadata]);
             } else {
                 return redirect()->route('bansos.penduduk.request')->with('error', 'Anda belum melakukan pengajuan bansos');
             }

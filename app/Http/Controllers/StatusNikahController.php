@@ -46,7 +46,7 @@ class StatusNikahController extends Controller
             'title' => 'Status Nikah',
             'description' => 'Halaman Ubah Status Nikah Warga'
         ];
-        return view('statusNikah.create', ['activeMenu' => 'nikah', 'metadata' => $metadata]);
+        return view('statusNikah.create', ['activeMenu' => 'permohonan', 'metadata' => $metadata]);
     }
 
     public function store(Request $request)

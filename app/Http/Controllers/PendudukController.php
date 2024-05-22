@@ -50,11 +50,9 @@ class PendudukController extends Controller
             $data = PendudukModel::paginate(3);
 
             return view('dashboard.penduduk', ['data' => $data, 'active' => 'penduduk']);
-
         } else {
 
             $data = PendudukModel::whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->paginate(3);
-
         }
 
         return view('dashboard.penduduk', ['data' => $data, 'active' => 'penduduk']);
@@ -138,7 +136,7 @@ class PendudukController extends Controller
 
         $metadata = (object) [
             'title' => 'Data Penduduk',
-            'description' => $penduduk->nama_penduduk,
+            'description' => 'Data Diri Penduduk',
         ];
 
         $activeMenu = 'dataDiri';

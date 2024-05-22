@@ -24,7 +24,7 @@ class StatusTinggalController extends Controller
             'title' => 'Status Tinggal',
             'description' => 'Halaman Ubah tinggal Warga'
         ];
-        return view('statusTinggal.create', ['activeMenu' => 'tinggal', 'metadata' => $metadata]);
+        return view('statusTinggal.create', ['activeMenu' => 'permohonan', 'metadata' => $metadata]);
     }
 
     public function pengajuan()
