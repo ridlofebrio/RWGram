@@ -25,8 +25,12 @@ class InformasiController extends Controller
         // Menghapus informasi yang memiliki tanggal lebih dari 7 hari sebelum hari ini
         InformasiModel::whereDate('tanggal_informasi', '<', $sevenDaysAgo)->delete();
 
-        $informasi = InformasiModel::all();
+        $informasi = InformasiModel::query();
+        if (request()->has('search')) {
+            $informasi->where('judul', 'like', '%' . request('search') . '%');
+        }
 
+        $informasi = $informasi->get();
         $metadata = (object)[
             'title' => 'Pengumuman',
             'description' => 'Pengumuman untuk penduduk'
@@ -34,7 +38,7 @@ class InformasiController extends Controller
 
         // Mengonversi format tanggal informasi
         foreach ($informasi as $info) {
-            $info->tanggal_informasi = date('d F Y', strtotime($info->tanggal_informasi));
+            $info = date('d F Y', strtotime($info->tanggal_informasi));
         }
 
         return view('informasi.penduduk.index')->with(['informasi' => $informasi, 'activeMenu' => 'pengumuman', 'metadata' => $metadata]);
