@@ -21,17 +21,27 @@ class LaporanController extends Controller
     public function keluhan($sort = 'Menunggu')
     {
         $laporan = LaporanModel::with('penduduk')->where('status_laporan', $sort)->paginate(3);
-
+        LaporanModel::where('terbaca', '=', '0')->update([
+            'terbaca' => 1
+        ]);
         return view('dashboard.pengaduan', ['data' => $laporan, 'active' => 'pengaduan']);
     }
 
-    public function indexPenduduk()
+    public function indexPenduduk(Request $requets)
     {
+        $laporan = LaporanModel::query();
+
+        if ($requets->has('search')) {
+            $laporan->whereHas('penduduk', function ($query) use ($requets) {
+            $query->where('nama_penduduk', 'like', '%' . $requets->search . '%');
+            });
+        }
+        $laporan = $laporan->get(); 
+
         $metadata = (object) [
             'title' => 'Pengaduan',
             'description' => 'Halaman Pengaduan Warga'
         ];
-        $laporan = LaporanModel::with('penduduk')->get();
 
         return view('laporan.penduduk.index', compact('laporan'))->with(['metadata' => $metadata, 'activeMenu' => 'pengaduan']);
     }

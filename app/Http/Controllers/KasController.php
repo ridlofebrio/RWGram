@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KartuKeluargaModel;
+use App\Models\KasDetailModel;
 use App\Models\KasModel;
 use Illuminate\Http\Request;
 
@@ -13,9 +15,24 @@ class KasController extends Controller
     public function index()
     {
         //
-        $data = KasModel::all();
 
-        return view("kas.index", $data = ['data' => $data]);
+        $data = KasModel::selectRaw('sum(jumlah_kas)')->groupByRaw('Month(tanggal_kas)')->pluck('sum(jumlah_kas)')->toArray();
+        $tgl = KasModel::selectRaw('MONTH(tanggal_kas)')->groupByRaw('Month(tanggal_kas)')->pluck('MONTH(tanggal_kas)')->toArray();
+        $jumlah = 0;
+        $data = array_map('intval', $data);
+        foreach ($data as $key) {
+            $jumlah += $key;
+        }
+
+
+        $kas = KasDetailModel::with('kartuKeluarga')->get();
+        // $kk = KartuKeluargaModel::all();
+
+
+
+
+        $active = 'kas';
+        return view("dashboard.kas", compact('data', 'active', 'tgl', 'jumlah', 'kas'));
     }
 
     /**
@@ -33,15 +50,28 @@ class KasController extends Controller
     public function store(Request $request)
     {
         //
-        KasModel::create([
-            'kartu_keluarga_id' => $request->kartu_keluarga,
-            'jumlah_kas' => $request->kas,
-            'tanggal_kas' => $request->tanggal
-        ]);
 
-        return redirect('/kas')->with('success', 'Data berhasil ditambah');
+        $kk = KartuKeluargaModel::where('NKK', '=', $request->NKK)->first();
+
+        $kas = KasDetailModel::findOrFail($kk->kartu_keluarga_id);
+
+        foreach ($request->cek as $key => $value) {
+
+
+            KasModel::create([
+                'id_kas' => $kas->id_kas,
+                'jumlah_kas' => $request->$value[2],
+                'tanggal_kas' => $request->$value[1]
+            ]);
+            $kas->$value = 1;
+            $kas->save();
+
+        }
+
+
+        return redirect('/dashboard/kas')->with('flash', ['success', 'Data berhasil ditambah']);
     }
-    
+
     /**
      * Display the specified resource.
      */

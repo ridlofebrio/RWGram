@@ -12,10 +12,18 @@ class StatusNikahController extends Controller
     public function pengajuan()
     {
         $data = StatusNikahModel::with('penduduk')->paginate(3);
-
+        StatusNikahModel::where('terbaca', '=', '0')->update([
+            'terbaca' => 1
+        ]);
         return view('component.statusNikah', ['data' => $data]);
     }
 
+    public function sort($sort = 'menunggu')
+    {
+        $data = StatusNikahModel::where('status_pengajuan', $sort)->with('penduduk')->paginate(3);
+
+        return view('component.statusNikah', ['data' => $data]);
+    }
     public function find($value)
     {
         if ($value == 'kosong') {
@@ -30,15 +38,19 @@ class StatusNikahController extends Controller
         return view('component.statusNikah', ['data' => $data]);
     }
 
-    public function index()
-    {
+        public function index()
+        {
         $metadata = (object) [
             'title' => 'Status Nikah',
             'description' => 'Halaman Ubah Status Warga'
         ];
-        $nikah = StatusNikahModel::all();
+
+        $nikah = StatusNikahModel::paginate(1);
+
         return view('statusNikah.index', compact('nikah'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
-    }
+        }
+
+
 
     public function create()
     {
@@ -95,5 +107,24 @@ class StatusNikahController extends Controller
     public function destroy(string $id)
     {
         $laporan = StatusNikahModel::findOrFail($id)->delete();
+    }
+    public function indexFind(Request $request)
+    {
+        $metadata = (object) [
+            'title' => 'Status Nikah',
+            'description' => 'Halaman Ubah Status Warga'
+        ];
+
+        $search = $request->input('search');
+        if (empty($search)) {
+            $data = StatusNikahModel::paginate(5);
+        } else {
+            $data = StatusNikahModel::whereHas('penduduk', function($query) use ($search) {
+                $query->where('nama_penduduk', 'like', '%' . $search . '%')
+                      ->orWhere('NIK', 'like', '%' . $search . '%');
+            })->paginate(3);
+        }
+
+        return view('statusNikah.index', ['nikah' => $data])->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
     }
 }

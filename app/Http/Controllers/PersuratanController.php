@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PendudukModel;
 use App\Models\PersuratanModel;
 use Illuminate\Http\Request;
+use Validator;
 
 class PersuratanController extends Controller
 {
@@ -30,15 +32,29 @@ class PersuratanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'penduduk_id' => 'required',
-            'nomor_surat' => 'required',
+        $validator = Validator::make($request->all(), [
+
+            'NIK' => 'required|min:16:max:16',
             'keterangan' => 'required',
-            'tanggal_persuratan' => 'required'
+
+        ], [
+            'keterangan.required' => 'Keterangan harus diisi'
         ]);
 
-        PersuratanModel::create($request->all());
-        return redirect()->route('persuratan.index');
+        if ($validator->fails()) {
+
+            return redirect()->back()->with('flash', ['error', $validator->messages()->get('keterangan')[0]]);
+        }
+        $penduduk = PendudukModel::select('penduduk_id')->where('NIK', $request->NIK)->first();
+
+
+        PersuratanModel::create([
+            'penduduk_id' => $penduduk->penduduk_id,
+            'nomor_surat' => '14.011/DP-KM/X/2022',
+            'keterangan' => $request->keterangan,
+            'tanggal_persuratan' => now()
+        ]);
+        return redirect('dashboard/persuratan')->with('flash', ['success', 'Data Berhasil Ditambah']);
     }
 
     /**

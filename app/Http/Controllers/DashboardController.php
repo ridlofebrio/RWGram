@@ -16,8 +16,8 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $data = KasModel::selectRaw('sum(jumlah_kas)')->groupBy('tanggal_kas')->pluck('sum(jumlah_kas)')->toArray();
-        $tgl = KasModel::selectRaw('DAYOFMONTH(tanggal_kas)')->groupBy('tanggal_kas')->pluck('DAYOFMONTH(tanggal_kas)')->toArray();
+        $data = KasModel::selectRaw('sum(jumlah_kas)')->groupByRaw('Month(tanggal_kas)')->pluck('sum(jumlah_kas)')->toArray();
+        $tgl = KasModel::selectRaw('MONTH(tanggal_kas)')->groupByRaw('Month(tanggal_kas)')->pluck('MONTH(tanggal_kas)')->toArray();
         $jumlah = 0;
         $data = array_map('intval', $data);
         foreach ($data as $key) {
@@ -36,12 +36,18 @@ class DashboardController extends Controller
         $tinggal = StatusTinggalModel::where('terbaca', 0)->with('penduduk')->get();
         $laporan = LaporanModel::where('terbaca', 0)->with('penduduk')->get();
         $jumlah = count($umkm) + count($hidup) + count($nikah) + count($tinggal) + count($laporan);
+
         return view('component.notif', compact('umkm', 'hidup', 'nikah', 'tinggal', 'laporan', 'jumlah'));
     }
     public function notifcount()
     {
-        $data = UmkmModel::where('terbaca', 0)->with('penduduk')->get();
+        $umkm = UmkmModel::where('terbaca', 0)->with('penduduk')->get();
+        $hidup = StatusHidupModel::where('terbaca', 0)->with('penduduk')->get();
+        $nikah = StatusNikahModel::where('terbaca', 0)->with('penduduk')->get();
+        $tinggal = StatusTinggalModel::where('terbaca', 0)->with('penduduk')->get();
+        $laporan = LaporanModel::where('terbaca', 0)->with('penduduk')->get();
+        $jumlah = count($umkm) + count($hidup) + count($nikah) + count($tinggal) + count($laporan);
 
-        return $data;
+        return $jumlah;
     }
 }

@@ -6,17 +6,23 @@ use App\Models\PendudukModel;
 use App\Models\StatusTinggalModel;
 use Illuminate\Http\Request;
 
+
 class StatusTinggalController extends Controller
 {
     public function index()
     {
         $metadata = (object) [
-            'title' => 'Status Tempat Tinggal',
+            'title' => 'Status Tinggal',
             'description' => 'Halaman Ubah Status Warga'
         ];
-        $tinggal = StatusTinggalModel::all();
+    
+        // Menggunakan pagination, dengan 10 item per halaman
+        $tinggal = StatusTinggalModel::paginate(1);
+    
         return view('statusTinggal.index', compact('tinggal'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
     }
+
+
 
     public function create()
     {
@@ -30,6 +36,16 @@ class StatusTinggalController extends Controller
     public function pengajuan()
     {
         $data = StatusTinggalModel::with('penduduk')->paginate(3);
+        StatusTinggalModel::where('terbaca', '=', '0')->update([
+            'terbaca' => 1
+        ]);
+
+        return view('component.statusTinggal', ['data' => $data]);
+    }
+
+    public function sort($sort = 'menunggu')
+    {
+        $data = StatusTinggalModel::where('status_pengajuan', $sort)->with('penduduk')->paginate(3);
 
         return view('component.statusTinggal', ['data' => $data]);
     }
@@ -92,4 +108,26 @@ class StatusTinggalController extends Controller
     {
         $laporan = StatusTinggalModel::findOrFail($id)->delete();
     }
+
+
+    public function indexFind(Request $request)
+    {
+        $metadata = (object) [
+            'title' => 'Status Tinggal',
+            'description' => 'Halaman Ubah Status Warga'
+        ];
+
+        $search = $request->input('search');
+        if (empty($search)) {
+            $data = StatusTinggalModel::paginate(5);
+        } else {
+            $data = StatusTinggalModel::whereHas('penduduk', function($query) use ($search) {
+                $query->where('nama_penduduk', 'like', '%' . $search . '%')
+                      ->orWhere('NIK', 'like', '%' . $search . '%');
+            })->paginate(3);
+        }
+
+        return view('statusTinggal.index', ['tinggal' => $data])->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
+    }
+
 }
