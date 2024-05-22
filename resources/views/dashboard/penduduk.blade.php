@@ -199,12 +199,12 @@
         <div class="filter flex space-x-2 items-center">
            
             <div  x-data="{open:false}" class="relative" x-cloak >
-                <button @click="open= !open" class="flex px-3 items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p>-semua-</p> <i class="fa fa-chevron-down"></i></button>
-                <div class="absolute left-1/2 -translate-x-1/2  px-3 py-3 z-30 bg-white drop-shadow-card" x-show="open" @click.outside="open=false" >
+                <button @click="open= !open" class="flex px-3 items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p id="sort">-semua-</p> <i class="fa fa-chevron-down"></i></button>
+                <div class="absolute  left-1/2 -translate-x-1/2 w-[200px]  z-30 bg-white drop-shadow-card" x-show="open"  @click.outside="open=false" >
                    <ul>
-                    <li><button data="semua" class="sort" >Semua</button></li>
-                    <li><button data="L" class="sort" >laki-laki</button></li>
-                    <li><button data='P' class="sort" >Perempuan</button></li>
+                    <li><button @click="open= !open"  data="semua" class="sort hover:bg-blue-main hover:text-white py-2 w-full" >Semua</button></li>
+                    <li><button @click="open= !open"  data="L" value="Laki-laki" class="sort hover:bg-blue-main hover:text-white py-2 w-full" >laki-laki</button></li>
+                    <li><button @click="open= !open"  data='P' value="Perempuan" class="sort hover:bg-blue-main hover:text-white py-2 w-full">Perempuan</button></li>
                     
                     
                    </ul>
@@ -740,8 +740,10 @@ document.addEventListener('alpine:init', () => {
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(data, 'text/html');    
                         const table = doc.getElementById('umkm');
+
                         
                            $('#umkm').html(table);
+                           $('#sort').html( index.currentTarget.getAttribute('value'));
                        }
                        
                    })

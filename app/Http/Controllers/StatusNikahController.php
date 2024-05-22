@@ -12,10 +12,18 @@ class StatusNikahController extends Controller
     public function pengajuan()
     {
         $data = StatusNikahModel::with('penduduk')->paginate(3);
-
+        StatusNikahModel::where('terbaca', '=', '0')->update([
+            'terbaca' => 1
+        ]);
         return view('component.statusNikah', ['data' => $data]);
     }
 
+    public function sort($sort = 'menunggu')
+    {
+        $data = StatusNikahModel::where('status_pengajuan', $sort)->with('penduduk')->paginate(3);
+
+        return view('component.statusNikah', ['data' => $data]);
+    }
     public function find($value)
     {
         if ($value == 'kosong') {
