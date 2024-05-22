@@ -25,13 +25,21 @@ class LaporanController extends Controller
         return view('dashboard.pengaduan', ['data' => $laporan, 'active' => 'pengaduan']);
     }
 
-    public function indexPenduduk()
+    public function indexPenduduk(Request $requets)
     {
+        $laporan = LaporanModel::query();
+
+        if ($requets->has('search')) {
+            $laporan->whereHas('penduduk', function ($query) use ($requets) {
+            $query->where('nama_penduduk', 'like', '%' . $requets->search . '%');
+            });
+        }
+        $laporan = $laporan->get(); 
+
         $metadata = (object) [
             'title' => 'Pengaduan',
             'description' => 'Halaman Pengaduan Warga'
         ];
-        $laporan = LaporanModel::with('penduduk')->get();
 
         return view('laporan.penduduk.index', compact('laporan'))->with(['metadata' => $metadata, 'activeMenu' => 'pengaduan']);
     }
