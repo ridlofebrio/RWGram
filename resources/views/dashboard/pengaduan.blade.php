@@ -381,6 +381,8 @@ document.addEventListener('alpine:init', () => {
                   
                     $.ajax({
                         url: "http://127.0.0.1:8000/search/pengaduan/"+data,
+                        type: "GET",
+                        datatype:'application/x-some-custom-type',
                         async:true,
                         
                     }).done(function (data) {    

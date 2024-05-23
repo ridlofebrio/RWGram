@@ -88,8 +88,10 @@ class LaporanController extends Controller
             return view('dashboard.pengaduan', ['data' => $data, 'active' => 'pengaduan']);
         } else {
 
-            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->paginate(3);
-            $data = LaporanModel::findMany($id);
+            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->first();
+
+            $data = LaporanModel::where('penduduk_id', '=', $id->penduduk_id)->paginate(3);
+
         }
 
         return view('dashboard.pengaduan', ['data' => $data, 'active' => 'pengaduan']);

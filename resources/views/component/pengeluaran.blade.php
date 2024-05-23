@@ -608,38 +608,6 @@
 @push('js')
 
 <script>
-$(document).ready(function () {
-
-
-
-
-
-
-
-
-  
-      $('.tab').click(function(index){
-                      console.log('halo');
-                    $.ajax({
-                        url: "http://127.0.0.1:8000/data/"+index.currentTarget.getAttribute('data'),
-                        beforeSend: function() {
-              $("#loading-image").show();
-           },
-                        
-                    }).done(function (data) {
-                        const parser = new DOMParser();
-                        
-                        const doc = parser.parseFromString(data, 'text/html');    
-                        const table = doc.querySelector('#umkm');
-                        $('#umkm').html(table);
-                        $("#loading-image").hide();
-                    })
-                    
-                    
-                })
-    })
-  
-
 var data1 = JSON.parse("{{ json_encode($data) }}");
 data1.push(0);
 var tgl = "{{ json_encode($tgl) }}"
@@ -734,8 +702,7 @@ if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined'
 const chart = new ApexCharts(document.getElementById("labels-chart"), options);
 chart.render();
 }
-
-
+       
 </script>
 
 @endpush
