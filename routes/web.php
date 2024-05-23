@@ -134,6 +134,8 @@ Route::group(['prefix' => 'data'], function () {
     Route::get('/meninggal', [StatusHidupController::class, 'pengajuan']);
     Route::get('/notif', [DashboardController::class, 'notif']);
     Route::get('/notifcount', [DashboardController::class, 'notifcount']);
+    Route::get('/pengeluaran', [KasController::class, 'pengeluaran']);
+    Route::get('/pemasukan', [KasController::class, 'index']);
 });
 
 
