@@ -23,7 +23,7 @@
                                 </div>
     
                                 <div class="flex w-full mt-10 space-x-44 items-center ">
-                                    <h1 class="text-3xl font-semibold" >636</h1>
+                                    <h1 class="text-3xl font-semibold" >{{$semua['penduduk']}}</h1>
                                     <a href="">show</a>
                                 </div>
                                 
@@ -39,7 +39,7 @@
                             </div>
     
                             <div class="flex w-full mt-10 space-x-44 items-center ">
-                                <h1 class="text-3xl font-semibold" >636</h1>
+                                <h1 class="text-3xl font-semibold" >{{$semua['umkm']}}</h1>
                                 <a href="">show</a>
                             </div>
                             
@@ -56,7 +56,7 @@
                             </div>
     
                             <div class="flex w-full mt-10 space-x-44 items-center ">
-                                <h1 class="text-3xl font-semibold" >636</h1>
+                                <h1 class="text-3xl font-semibold" >{{$semua['laporan']}}</h1>
                                 <a href="">show</a>
                             </div>
                             
@@ -71,7 +71,7 @@
                         </div>
     
                         <div class="flex w-full mt-10 space-x-44 items-center ">
-                            <h1 class="text-3xl font-semibold" >636</h1>
+                            <h1 class="text-3xl font-semibold" >{{$semua['pengajuan']}}</h1>
                             <a href="">show</a>
                         </div>
                         
@@ -271,8 +271,13 @@
 <script>
 var data1 = JSON.parse("{{ json_encode($data) }}");
 data1.push(0);
+var penduduk = "{{ $penduduk_laki }}"
+var penduduk1 = "{{ $penduduk_perempuan }}"
 var tgl = "{{ json_encode($tgl) }}"
 tgl=tgl.replace(/&quot;/g,'"');
+penduduk=penduduk.replace(/&quot;/g,'"');
+penduduk1=penduduk1.replace(/&quot;/g,'"');
+console.log(JSON.parse(penduduk));
 // tgl=tgl.replace(,'');
 
 // console.log( JSON.parse(tgl))
@@ -371,24 +376,13 @@ const options1 = {
     {
       name: "Laki-laki",
       color: "#55B9FF",
-      data: [
-        { x: "RT01", y: 231 },
-        { x: "RT02", y: 122 },
-        { x: "RT03", y: 63 },
-        { x: "RT04", y: 421 },
-       
-      ],
+      data:JSON.parse(penduduk),
     },
     {
       name: "Perempuan",
       color: "#AADCFF",
-      data: [
-        { x: "RT01", y: 231 },
-        { x: "RT02", y: 122 },
-        { x: "RT03", y: 63 },
-        { x: "RT04", y: 421 },
-       
-      ],
+      data: JSON.parse(penduduk1),
+        
     },
   ],
   chart: {

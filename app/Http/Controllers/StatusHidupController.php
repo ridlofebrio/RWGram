@@ -14,12 +14,14 @@ class StatusHidupController extends Controller
             'title' => 'Status Hidup',
             'description' => 'Halaman Ubah Status Warga'
         ];
+
     
         $hidup = StatusHidupModel::paginate(1);
     
+
         return view('statusHidup.index', compact('hidup'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
     }
-    
+
 
     public function create()
     {
@@ -34,6 +36,17 @@ class StatusHidupController extends Controller
     public function pengajuan()
     {
         $data = StatusHidupModel::with('Penduduk', 'PendudukM')->paginate(3);
+        $hidup = StatusHidupModel::paginate(3);
+        StatusHidupModel::where('terbaca', '=', '0')->update([
+            'terbaca' => 1
+        ]);
+        return view('component.statusHidup', ['data' => $data]);
+    }
+
+    public function sort($sort = 'menunggu')
+    {
+        $data = StatusHidupModel::where('status_pengajuan', $sort)->with('penduduk')->paginate(3);
+
 
         return view('component.statusHidup', ['data' => $data]);
     }
@@ -90,7 +103,9 @@ class StatusHidupController extends Controller
         ]);
 
 
-        StatusHidupModel::find($id)->update($request->all());
+        $status = StatusHidupModel::find($id);
+        $status->status_pengajuan = $request->status_pengajuan;
+        $status->save();
         return redirect('dashboard/pengajuan')->with('flash', ['success', 'Data berhasil dikonfirmasi']);
     }
 

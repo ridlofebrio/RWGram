@@ -104,7 +104,7 @@ Route::get('logout', [AuthSessionController::class, 'logout']);
 
 
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
-    Route::get('/pengajuan/{sort}', [UmkmController::class, 'sort'])->middleware('RW');
+
     Route::get('/pengajuan', [UmkmController::class, 'index'])->middleware('RW');
     Route::get('/pengaduan/{sort}', [LaporanController::class, 'keluhan'])->middleware('RW');
     Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
@@ -117,16 +117,25 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/detail-akun', [UserController::class, 'show']);
 });
 
+
+
+
 Route::post('/penduduk-import', [PendudukController::class, 'import'])->name('import');
 
 
 Route::group(['prefix' => 'data'], function () {
+    Route::get('/umkm/{sort}', [UmkmController::class, 'sort'])->middleware('RW');
     Route::get('/umkm', [UmkmController::class, 'pengajuan']);
+    Route::get('/nikah/{sort}', [StatusNikahController::class, 'sort'])->middleware('RW');
     Route::get('/nikah', [StatusNikahController::class, 'pengajuan']);
+    Route::get('/tinggal/{sort}', [StatusTinggalController::class, 'sort'])->middleware('RW');
     Route::get('/tinggal', [StatusTinggalController::class, 'pengajuan']);
+    Route::get('/meninggal/{sort}', [StatusHidupController::class, 'sort'])->middleware('RW');
     Route::get('/meninggal', [StatusHidupController::class, 'pengajuan']);
     Route::get('/notif', [DashboardController::class, 'notif']);
     Route::get('/notifcount', [DashboardController::class, 'notifcount']);
+    Route::get('/pengeluaran', [KasController::class, 'pengeluaran']);
+    Route::get('/pemasukan', [KasController::class, 'index']);
 });
 
 
@@ -156,9 +165,30 @@ Route::group(['prefix' => 'penduduk'], function () {
     Route::put('/{id}', [PendudukController::class, 'update']);
     Route::delete('{id}', [PendudukController::class, 'destroy']);
     Route::get('{id}', [PendudukController::class, 'find']);
+    Route::get('sort/{sort}', [PendudukController::class, 'sort']);
+
 });
 
 Route::group(['prefix' => 'kas'], function () {
     Route::post('/', [KasController::class, 'store']);
 
+});
+
+
+Route::group(['prefix' => 'konfirmasi'], function () {
+    Route::put('/umkm/{id}', [UmkmController::class, 'update']);
+    Route::put('/pengaduan/{id}', [LaporanController::class, 'update']);
+    Route::put('/nikah/{id}', [StatusNikahController::class, 'update']);
+    Route::put('/tinggal/{id}', [StatusTinggalController::class, 'update']);
+    Route::put('/hidup/{id}', [StatusHidupController::class, 'update']);
+});
+
+
+
+// percobaan
+Route::get('/auth/onedrive', [App\Http\Controllers\OneDriveController::class, 'redirectToProvider']);
+Route::get('callback', [App\Http\Controllers\OneDriveController::class, 'handleProviderCallback']);
+Route::post('upload', [App\Http\Controllers\OneDriveController::class, 'upload']);
+Route::get('upload', function () {
+    return view('coba');
 });

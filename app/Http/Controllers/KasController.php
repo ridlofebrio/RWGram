@@ -35,6 +35,29 @@ class KasController extends Controller
         return view("dashboard.kas", compact('data', 'active', 'tgl', 'jumlah', 'kas'));
     }
 
+
+    public function pengeluaran()
+    {
+        //
+
+        $data = KasModel::selectRaw('sum(jumlah_kas)')->groupByRaw('Month(tanggal_kas)')->pluck('sum(jumlah_kas)')->toArray();
+        $tgl = KasModel::selectRaw('MONTH(tanggal_kas)')->groupByRaw('Month(tanggal_kas)')->pluck('MONTH(tanggal_kas)')->toArray();
+        $jumlah = 0;
+        $data = array_map('intval', $data);
+        foreach ($data as $key) {
+            $jumlah += $key;
+        }
+
+
+        $kas = KasDetailModel::with('kartuKeluarga')->get();
+        // $kk = KartuKeluargaModel::all();
+
+
+
+
+        $active = 'kas';
+        return view("component.pengeluaran", compact('data', 'active', 'tgl', 'jumlah', 'kas'));
+    }
     /**
      * Show the form for creating a new resource.
      */

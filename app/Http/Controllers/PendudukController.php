@@ -6,6 +6,7 @@ use App\Models\KartuKeluargaModel;
 use App\Models\PendudukModel;
 use App\Models\RtModel;
 use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 use Validator;
 
@@ -17,11 +18,16 @@ class PendudukController extends Controller
     public function index()
     {
         //
-        $penduduk = PendudukModel::where('isDelete', '=', '0')->with('kartuKeluarga', 'kartuKeluarga.rt')->paginate(3);
+        try {
+            $penduduk = PendudukModel::where('isDelete', '=', '0')->with('kartuKeluarga', 'kartuKeluarga.rt')->paginate(3);
+            $kartuKeluarga = PendudukModel::where('isDelete', '=', '0')->with('kartuKeluarga', 'kartuKeluarga.rt')->paginate(3);
+        } catch (\Exception $error) {
+            dd($error);
+        }
 
 
 
-        return view('dashboard.penduduk', ['data' => $penduduk, 'active' => 'penduduk']);
+        return view('dashboard.penduduk', ['data' => $penduduk, 'active' => 'penduduk'], compact('kartuKeluarga'));
     }
 
     public function sort($sort)
@@ -31,7 +37,7 @@ class PendudukController extends Controller
         if ($sort == 'semua') {
             return $this->index();
         }
-        $penduduk = PendudukModel::where([['isDelete', '=', '0'], ['jenis_kelamin', '=', $sort]])->with('kartuKeluarga', 'kartuKeluarga.rt')->get();
+        $penduduk = PendudukModel::where([['isDelete', '=', '0'], ['jenis_kelamin', '=', $sort]])->with('kartuKeluarga', 'kartuKeluarga.rt')->paginate(3);
 
 
 
