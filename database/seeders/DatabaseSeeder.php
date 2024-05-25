@@ -36,7 +36,8 @@ class DatabaseSeeder extends Seeder
             StatusTinggalSeeder::class,
             KepalaKeluargaSeeder::class,
             InformasiSeeder::class,
-            UmkmSeeder::class
+            UmkmSeeder::class,
+            KasLogSeeder::class
         ]);
     }
 }
