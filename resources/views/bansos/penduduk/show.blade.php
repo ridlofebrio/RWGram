@@ -71,56 +71,6 @@
                     </div>
                 </div>
             @endforeach
-            {{-- <div class="sm:col-span-4">
-                <label class="block text-sm font-medium leading-6 text-gray-900">Total Pendapatan</label>
-                <div class="mt-1 mb-4">
-                    <div class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                        focus:ring-blue-600 sm:text-sm sm:leading-6" contenteditable="false">
-                        Rp{{ number_format($bansos->total_pendapatan, 0, ',', '.') }}
-                    </div>
-                </div>
-            </div>             --}}
-            {{-- <div class="sm:col-span-4">
-                <label class="block text-sm font-medium leading-6 text-gray-900">Jumlah Tanggungan</label>
-                <div class="mt-1 mb-4">
-                    <div class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                        focus:ring-blue-600 sm:text-sm sm:leading-6" contenteditable="false">{{ $bansos->jumlah_tanggungan }}</div>
-                </div>
-            </div>
-            <div class="sm:col-span-4">
-                <label class="block text-sm font-medium leading-6 text-gray-900">Jumlah Kendaraan</label>
-                <div class="mt-1 mb-4">
-                    <div class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                        focus:ring-blue-600 sm:text-sm sm:leading-6" contenteditable="false">{{ $bansos->jumlah_kendaraan }}</div>
-                </div>
-            </div>
-            <div class="sm:col-span-4">
-                <label class="block text-sm font-medium leading-6 text-gray-900">Jumlah Watt Listrik</label>
-                <div class="mt-1 mb-4">
-                    <div class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                        focus:ring-blue-600 sm:text-sm sm:leading-6" contenteditable="false">{{ $bansos->jumlah_watt }}</div>
-                </div>
-            </div>
-            <div class="sm:col-span-4">
-                <label class="block text-sm font-medium leading-6 text-gray-900">Luas Tanah</label>
-                <div class="mt-1 mb-4">
-                    <div class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                        focus:ring-blue-600 sm:text-sm sm:leading-6" contenteditable="false">{{ $bansos->luas_tanah }}</div>
-                </div>
-            </div>
-            <div class="sm:col-span-4">
-                <label class="block text-sm font-medium leading-6 text-gray-900">Luas Rumah</label>
-                <div class="mt-1 mb-4">
-                    <div class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                        focus:ring-blue-600 sm:text-sm sm:leading-6" contenteditable="false">{{ $bansos->luas_rumah }}</div>
-                </div>
-            </div> --}}
             <div class="sm:col-span-4">
                 <label class="block text-sm font-medium leading-6 text-gray-900">Tanggal Pengajuan</label>
                 <div class="mt-1 mb-4">
