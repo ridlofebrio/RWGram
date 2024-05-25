@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BansosModel;
 use App\Models\KartuKeluargaModel;
+use App\Models\Kriteria;
 use Illuminate\Http\Request;
 
 class BansosController extends Controller
@@ -11,8 +12,10 @@ class BansosController extends Controller
     public function index()
     {
         $bansos = BansosModel::with('kartuKeluarga')->paginate(3);
+        $allBansos = BansosModel::all();
+        $kriteria = Kriteria::all();
 
-        return view('dashboard.bansos', ['data' => $bansos, 'active' => 'bansos']);
+        return view('dashboard.bansos', ['data' => $bansos, 'allData' => $allBansos, 'kriteria' => $kriteria, 'active' => 'bansos']);
     }
 
     public function create()
@@ -21,25 +24,26 @@ class BansosController extends Controller
             'title' => 'Bantuan Sosial',
             'description' => 'Pengajuan Bantuan Sosial'
         ];
+        $kriteria = Kriteria::all();
 
-        return view('bansos.penduduk.create')->with(['activeMenu' => 'permohonan', 'metadata' => $metadata]);
+        return view('bansos.penduduk.create')->with(['activeMenu' => 'permohonan', 'kriteria' => $kriteria, 'metadata' => $metadata]);
     }
 
     public function store(Request $request)
     {
-        $image = $request->file('file');
-        $imageName = time() . rand(1, 99) . '.' . $image->extension();
-        $image->move(public_path('images'), $imageName);
+        // $image = $request->file('file');
+        // $imageName = time() . rand(1, 99) . '.' . $image->extension();
+        // $image->move(public_path('images'), $imageName);
 
         $validatedData = $request->validate([
             'nomer_kk' => 'required',
             'nama_pengaju' => 'required',
-            'total_pendapatan' => 'required|numeric',
-            'jumlah_tanggungan' => 'required|numeric',
-            'jumlah_kendaraan' => 'required|numeric',
-            'luas_rumah' => 'required|numeric',
-            'luas_tanah' => 'required|numeric',
-            'jumlah_watt' => 'required|numeric',
+            'c1' => 'required|numeric',
+            'c2' => 'required|numeric',
+            'c3' => 'required|numeric',
+            'c4' => 'required|numeric',
+            'c5' => 'required|numeric',
+            'c6' => 'required|numeric',
             // 'file_upload.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
@@ -52,12 +56,13 @@ class BansosController extends Controller
                 // Jika bansos sudah ada, tambahkan jumlah bansos baru ke jumlah bansos yang sudah ada
                 $existingBansos->update([
                     'nama_pengaju' => $request->nama_pengaju,
-                    'total_pendapatan' => $request->total_pendapatan,
-                    'jumlah_tanggungan' => $request->jumlah_tanggungan,
-                    'jumlah_kendaraan' => $request->jumlah_kendaraan,
-                    'luas_rumah' => $request->luas_rumah,
-                    'luas_tanah' => $request->luas_tanah,
-                    'jumlah_watt' => $request->jumlah_watt,
+                    'c1' => $request->c1,
+                    'c2' => $request->c2,
+                    'c3' => $request->c3,
+                    'c4' => $request->c4,
+                    'c5' => $request->c5,
+                    'c6' => $request->c6,
+                    'status' => 'menunggu',
                     'tanggal_bansos' => now(),
                 ]);
             } else {
@@ -76,14 +81,14 @@ class BansosController extends Controller
                 BansosModel::create([
                     'kartu_keluarga_id' => $kartuKeluarga->kartu_keluarga_id,
                     'nama_pengaju' => $request->nama_pengaju,
-                    'total_pendapatan' => $request->total_pendapatan,
-                    'jumlah_tanggungan' => $request->jumlah_tanggungan,
-                    'jumlah_kendaraan' => $request->jumlah_kendaraan,
-                    'luas_rumah' => $request->luas_rumah,
-                    'luas_tanah' => $request->luas_tanah,
-                    'jumlah_watt' => $request->jumlah_watt,
+                    'c1' => $request->c1,
+                    'c2' => $request->c2,
+                    'c3' => $request->c3,
+                    'c4' => $request->c4,
+                    'c5' => $request->c5,
+                    'c6' => $request->c6,
                     'tanggal_bansos' => now(),
-                    'foto_dapur' => $imageName,
+                    // 'foto_dapur' => $imageName,
                 ]);
             }
             return redirect()->route('bansos.penduduk.request')
@@ -92,6 +97,73 @@ class BansosController extends Controller
             return redirect()->route('bansos.penduduk.create')
                 ->with('error', 'Kartu keluarga tidak ditemukan.');
         }
+    }
+
+    public function normalize(Request $request)
+    {
+        // Ambil semua data bansos dan kriteria
+        $bansos = BansosModel::all();
+        $kriteria = Kriteria::all();
+
+        // Inisialisasi array untuk menyimpan nilai maksimum dan minimum dari setiap kriteria
+        $maxValues = [];
+        $minValues = [];
+
+        // Cari nilai maksimum dan minimum dari setiap kolom c1 hingga c6
+        foreach ($kriteria as $k) {
+            $key = 'c' . $k->kriteria_id; // Asumsi id kriteria sesuai dengan urutan kolom c1, c2, ..., c6
+            $maxValues[$key] = $bansos->max($key);
+            $minValues[$key] = $bansos->min($key);
+        }
+
+        // Normalisasi setiap item dan hitung WSM
+        foreach ($bansos as $item) {
+            $wsm = 0; // Inisialisasi nilai WSM
+
+            foreach ($kriteria as $k) {
+                $key = 'c' . $k->kriteria_id;
+
+                if ($k->attribut == 'cost') {
+                    // Normalisasi untuk attribut cost
+                    $normalizedValue = $item->$key != 0 ? $minValues[$key] / $item->$key : 0;
+                } else {
+                    // Normalisasi untuk attribut benefit
+                    $normalizedValue = $maxValues[$key] != 0 ? $item->$key / $maxValues[$key] : 0;
+                }
+
+                // Kalikan dengan bobot
+                $weightedValue = $normalizedValue * $k->bobot;
+
+                // Tambahkan ke nilai WSM
+                $wsm += $weightedValue;
+            }
+
+            // Simpan nilai WSM
+            $item->wsm = $wsm;
+            $item->save();
+        }
+
+        // Urutkan data berdasarkan nilai WSM secara descending
+        $bansos = $bansos->sortByDesc('wsm');
+
+        // Ubah status menjadi "menerima" untuk tiga item pertama
+        $count = 0;
+        foreach ($bansos as $item) {
+            $count++;
+            if ($count <= $request->jumlah_penerima) {
+                $item->status = 'menerima';
+                $item->save();
+            } else {
+                $item->status = 'tidak menerima';
+                $item->save();
+            }
+        }
+
+        $allBansos = BansosModel::all();
+        $bansos = BansosModel::with('kartuKeluarga')->paginate(3);
+
+        // Kembalikan hasil normalisasi
+        return view('dashboard.bansos', ['data' => $bansos, 'allData' => $allBansos, 'kriteria' => $kriteria, 'active' => 'bansos']);
     }
 
     public function show(string $id)
@@ -116,6 +188,7 @@ class BansosController extends Controller
             'title' => 'Bantuan Sosial',
             'description' => 'Cek Pengajuan Bantuan Sosial'
         ];
+        $kriteria = Kriteria::all();
 
         $kartuKeluarga = KartuKeluargaModel::where('NKK', $request->nomer_kk)->first();
 
@@ -124,7 +197,7 @@ class BansosController extends Controller
 
             if ($existingBansos !== null) {
                 $bansos = $existingBansos;
-                return view('bansos.penduduk.show')->with(['bansos' => $bansos, 'activeMenu' => 'permohonan', 'metadata' => $metadata]);
+                return view('bansos.penduduk.show')->with(['bansos' => $bansos, 'activeMenu' => 'permohonan', 'kriteria' => $kriteria, 'metadata' => $metadata]);
             } else {
                 return redirect()->route('bansos.penduduk.request')->with('error', 'Anda belum melakukan pengajuan bansos');
             }
