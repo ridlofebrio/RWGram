@@ -44,7 +44,7 @@
   <div class="filter flex space-x-2 mt-5 items-center">
      
       <div  x-data="{open:false}" class="relative" x-cloak >
-          <button @click="open= !open" class="flex px-3 items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p>-semua-</p> <i class="fa fa-chevron-down"></i></button>
+          <button @click="open= !open" class="flex px-3 w-[150px] hover:bg-blue-main hover:border-blue-main hover:text-white items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p>-semua-</p> <i class="fa fa-chevron-down"></i></button>
           <div class="absolute left-1/2 -translate-x-1/2  px-3 py-3 z-30 bg-white drop-shadow-card" x-show="open" @click.outside="open=false" >
              <ul>
               <li><button data="semua" class="sort" >Semua</button></li>
@@ -55,8 +55,7 @@
              </ul>
           </div>
       </div>
-    
-      <div class="search border-2 bg-neutral-04 rounded-full px-3">
+      <div class="search border w-[70%] focus-within:ring-2 focus-within:ring-blue-main flex items-center justify-between  bg-white rounded-full px-3">
           <i class="fa-solid fa-magnifying-glass"></i>
 
           <input id="search" type="text" class="border-none bg-transparent" placeholder="cari apapun">  

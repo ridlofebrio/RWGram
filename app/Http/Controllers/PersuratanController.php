@@ -97,6 +97,6 @@ class PersuratanController extends Controller
     public function destroy(string $id)
     {
         $laporan = PersuratanModel::findOrFail($id)->delete();
-        return redirect()->route('persuratan.index');
+        return redirect('dashboard/persuratan')->with('flash', ['success', 'Data Berhasil Dihapus']);
     }
 }
