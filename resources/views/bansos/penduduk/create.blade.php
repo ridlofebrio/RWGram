@@ -76,6 +76,62 @@
                         </div>
                     </div>
                 @endforeach
+                {{-- One Drive --}}
+                <div class="sm:col-span-4 relative">
+                    <label for="depan_rumah" class="block text-sm font-medium leading-6 text-gray-900">Foto Depan Rumah</label>
+                    <div class="mt-1 mb-4">
+                        <input id="depan_rumah" name="depan_rumah" type="file" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
+                            text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:border-blue-600
+                            focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nama Sosial Media Anda" value="{{ old('depan_rumah') }}">
+                        @error('depan_rumah')
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div> 
+                <div class="sm:col-span-4 relative">
+                    <label for="ruang_tamu" class="block text-sm font-medium leading-6 text-gray-900">Foto Ruang Tamu</label>
+                    <div class="mt-1 mb-4">
+                        <input id="ruang_tamu" name="ruang_tamu" type="file" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
+                            text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:border-blue-600
+                            focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nama Sosial Media Anda" value="{{ old('ruang_tamu') }}">
+                        @error('ruang_tamu')
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div> 
+                <div class="sm:col-span-4 relative">
+                    <label for="kamar_tidur" class="block text-sm font-medium leading-6 text-gray-900">Foto Kamar Tidur</label>
+                    <div class="mt-1 mb-4">
+                        <input id="kamar_tidur" name="kamar_tidur" type="file" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
+                            text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:border-blue-600
+                            focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nama Sosial Media Anda" value="{{ old('kamar_tidur') }}">
+                        @error('kamar_tidur')
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div> 
+                <div class="sm:col-span-4 relative">
+                    <label for="kamar_mandi" class="block text-sm font-medium leading-6 text-gray-900">Foto Kamar Mandi</label>
+                    <div class="mt-1 mb-4">
+                        <input id="kamar_mandi" name="kamar_mandi" type="file" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
+                            text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:border-blue-600
+                            focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nama Sosial Media Anda" value="{{ old('kamar_mandi') }}">
+                        @error('kamar_mandi')
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div> 
+                <div class="sm:col-span-4 relative h-24">
+                    <label for="dapur" class="block text-sm font-medium leading-6 text-gray-900">Foto Dapur</label>
+                    <div class="mt-1 mb-4">
+                        <input id="dapur" name="dapur" type="file" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
+                            text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:border-blue-600
+                            focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nama Sosial Media Anda" value="{{ old('dapur') }}">
+                        @error('dapur')
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div> 
                 <div class="flex items-center mt-6">
                     <input id="agree" type="checkbox" class="form-checkbox h-4 w-4 text-blue-600" />
                     <label for="agree" class="ml-2 block text-sm text-gray-900">
@@ -107,6 +163,12 @@
             document.getElementById("c4").value = "";
             document.getElementById("c5").value = "";
             document.getElementById("c6").value = "";
+            // Reset nilai input file
+            document.getElementById("depan_rumah").value = "";
+            document.getElementById("ruang_tamu").value = "";
+            document.getElementById("kamar_tidur").value = "";
+            document.getElementById("kamar_mandi").value = "";
+            document.getElementById("dapur").value = "";
             agreeCheckbox.checked = false; // Uncheck checkbox
             submitBtn.disabled = true; // Disable tombol Kirim
             submitBtn.classList.remove('bg-blue-main'); // Hapus warna latar belakang tombol Kirim

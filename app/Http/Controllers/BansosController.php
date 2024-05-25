@@ -31,10 +31,6 @@ class BansosController extends Controller
 
     public function store(Request $request)
     {
-        // $image = $request->file('file');
-        // $imageName = time() . rand(1, 99) . '.' . $image->extension();
-        // $image->move(public_path('images'), $imageName);
-
         $validatedData = $request->validate([
             'nomer_kk' => 'required',
             'nama_pengaju' => 'required',
@@ -44,8 +40,23 @@ class BansosController extends Controller
             'c4' => 'required|numeric',
             'c5' => 'required|numeric',
             'c6' => 'required|numeric',
-            // 'file_upload.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'depan_rumah' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'kamar_tidur' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'kamar_mandi' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'ruang_tamu' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'dapur' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        try {
+            $depanRumah = cloudinary()->upload($request->file('depan_rumah')->getRealPath())->getSecurePath();
+            $kamarTidur = cloudinary()->upload($request->file('kamar_tidur')->getRealPath())->getSecurePath();
+            $kamarMandi = cloudinary()->upload($request->file('kamar_mandi')->getRealPath())->getSecurePath();
+            $ruangTamu = cloudinary()->upload($request->file('ruang_tamu')->getRealPath())->getSecurePath();
+            $dapur = cloudinary()->upload($request->file('dapur')->getRealPath())->getSecurePath();
+        } catch (\Exception $e) {
+            dd($e);
+            return redirect()->back()->with('flash', ['error', $e]);
+        }
 
         $kartuKeluarga = KartuKeluargaModel::where('NKK', $request->nomer_kk)->first();
 
@@ -63,21 +74,14 @@ class BansosController extends Controller
                     'c5' => $request->c5,
                     'c6' => $request->c6,
                     'status' => 'menunggu',
+                    'foto_depan_rumah' => $depanRumah,
+                    'foto_kamar_tidur' => $kamarTidur,
+                    'foto_kamar_mandi' => $kamarMandi,
+                    'foto_ruang_tamu' => $ruangTamu,
+                    'foto_dapur' => $dapur,
                     'tanggal_bansos' => now(),
                 ]);
             } else {
-                // // Jika bansos belum ada, buat bansos baru
-                // if ($request->hasFile('file_upload')) {
-                //     foreach ($request->file('file_upload') as $file) {
-                //         // Simpan file ke dalam storage
-                //         $path = $file->store('public/images'); // Simpan di dalam folder 'images' di dalam direktori 'public'
-
-                //         // Anda juga bisa menyimpan path ke database jika diperlukan
-                //         $image = $path;
-                //         $image->save();
-                //     }
-                // }
-
                 BansosModel::create([
                     'kartu_keluarga_id' => $kartuKeluarga->kartu_keluarga_id,
                     'nama_pengaju' => $request->nama_pengaju,
@@ -87,8 +91,12 @@ class BansosController extends Controller
                     'c4' => $request->c4,
                     'c5' => $request->c5,
                     'c6' => $request->c6,
+                    'foto_depan_rumah' => $depanRumah,
+                    'foto_kamar_tidur' => $kamarTidur,
+                    'foto_kamar_mandi' => $kamarMandi,
+                    'foto_ruang_tamu' => $ruangTamu,
+                    'foto_dapur' => $dapur,
                     'tanggal_bansos' => now(),
-                    // 'foto_dapur' => $imageName,
                 ]);
             }
             return redirect()->route('bansos.penduduk.request')

@@ -27,7 +27,7 @@ class BansosModel extends Model
         'foto_depan_rumah',
         'foto_kamar_mandi',
         'foto_kamar_tidur',
-        'foto_kamar_tamu',
+        'foto_ruang_tamu',
         'status',
         'keterangan',
         'wsm'

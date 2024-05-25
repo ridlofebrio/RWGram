@@ -27,7 +27,7 @@ return new class extends Migration
             $table->longText('foto_depan_rumah')->nullable();
             $table->longText('foto_kamar_mandi')->nullable();
             $table->longText('foto_kamar_tidur')->nullable();
-            $table->longText('foto_kamar_tamu')->nullable();
+            $table->longText('foto_ruang_tamu')->nullable();
             $table->double('wsm')->default(0);
             $table->enum('status', ['menunggu', 'menerima', 'tidak menerima'])->default('menunggu');
             $table->timestamps();
