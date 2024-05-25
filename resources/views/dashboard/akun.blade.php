@@ -20,9 +20,15 @@
         
     <div class="flex w-full justify-between items-center">
         <h2 class="text-xl ml-3" > {{count($data)}} Laporan</h2>
-        <div class="filter flex">
+        <div class="filter flex space-x-3">
+           
+            <div class="search border  focus-within:ring-2 focus-within:ring-blue-main flex items-center justify-between  bg-white rounded-full px-3">
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input type="text" class="border-none bg-transparent" placeholder="search">  
+            </div>
             <div x-cloak x-data="{open:false}" class="relative " >
-                <button @click="open= !open" class="flex px-3 items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p>-semua-</p> <i class="fa fa-chevron-down"></i></button>
+                <button @click="open= !open" class="flex px-3 w-[150px] hover:bg-blue-main hover:border-blue-main hover:text-white items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p>-semua-</p> <i class="fa fa-chevron-down"></i></button>
                 <div class="absolute mt-1  left-1/2 -translate-x-1/2 p-0 z-30 bg-white drop-shadow-card w-full" x-show="open" @click.outside="open=false" >
                    <ul>
                     <li><button class="hover:bg-blue-main px-5 py-2 w-full sort" data="selesai"  >selesai</button></li>
@@ -31,11 +37,6 @@
                     
                    </ul>
                 </div>
-            </div>
-            <div class="search border-2 border-neutral-400 rounded-full px-3">
-                <i class="fa-solid fa-magnifying-glass"></i>
-
-                <input type="text" class="border-none bg-transparent" placeholder="search">  
             </div>
         </div>
     </div>        

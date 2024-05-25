@@ -33,6 +33,6 @@ class BansosModel extends Model
 
     public function kartuKeluarga(): BelongsTo
     {
-        return $this->belongsTo(KartuKeluargaModel::class, 'kartu_keluarga_id', 'kartu_keluarga_id');
+        return $this->belongsTo(KepalaKeluargaModel::class, 'kartu_keluarga_id', 'kartu_keluarga_id');
     }
 }
