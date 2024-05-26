@@ -126,22 +126,22 @@
         <div class="flex flex-col md:flex-row  text-white items-center h-full justify-between">
             <div class="info font-main font-bold">
                 <h2 class="text-dodger-blue-200 text-2xl">RT 01</h2>
-                <h1 class="text-white font-semibold text-2xl">231<span class="text-xl font-normal">penduduk</span></h1>
+                <h1 class="text-white font-semibold text-2xl">231<span class="text-xl font-normal"> Penduduk</span></h1>
             </div>
             |
             <div class="info font-main font-bold">
                 <h2 class="text-dodger-blue-200 text-2xl">RT 02</h2>
-                <h1 class="text-white font-semibold text-2xl">134<span class="text-xl font-normal">penduduk</span></h1>
+                <h1 class="text-white font-semibold text-2xl">134<span class="text-xl font-normal"> Penduduk</span></h1>
             </div>
             |
             <div class="info font-main font-bold">
                 <h2 class="text-dodger-blue-200 text-2xl">RT 03</h2>
-                <h1 class="text-white font-semibold text-2xl">59<span class="text-xl font-normal">penduduk</span></h1>
+                <h1 class="text-white font-semibold text-2xl">59<span class="text-xl font-normal"> Penduduk</span></h1>
             </div>
             |
             <div class="info font-main font-bold">
                 <h2 class="text-dodger-blue-200 text-2xl">RT 04</h2>
-                <h1 class="text-white font-semibold text-2xl">192<span class="text-xl font-normal">penduduk</span></h1>
+                <h1 class="text-white font-semibold text-2xl">192<span class="text-xl font-normal"> Penduduk</span></h1>
             </div>
         </div>
     </div>

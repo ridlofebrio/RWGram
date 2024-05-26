@@ -127,12 +127,6 @@ class PendudukController extends Controller
                 'status_tinggal' => $line['status_tinggal'],
 
             ]);
-
-
-
-
-
-
         }
         return redirect()->back()->with('flash', ['success', 'Data CSV Berhasil Di import']);
     }
@@ -151,9 +145,9 @@ class PendudukController extends Controller
             $data = PendudukModel::where('isDelete', '=', '0')->with('kartuKeluarga', 'kartuKeluarga.rt')->paginate(3);
             $kartuKeluarga = KepalaKeluargaModel::with('penduduk', 'kartuKeluarga')->paginate(3);
 
-            return view('dashboard.penduduk', ['data' => $data, 'active' => 'penduduk'], compact('kartuKeluarga'));
 
-        }
+            return view('dashboard.penduduk', ['data' => $data, 'active' => 'penduduk']);
+        } 
 
         if ($type == 'umkm') {
 
@@ -173,6 +167,7 @@ class PendudukController extends Controller
                 $kartuKeluarga = KepalaKeluargaModel::whereAny(['penduduk_id'], 0)->with('kartuKeluarga', 'kartuKeluarga.rt')->paginate(3);
             }
             return view('dashboard.penduduk', ['data' => $data, 'active' => 'penduduk'], compact('kartuKeluarga'));
+
         }
 
 
