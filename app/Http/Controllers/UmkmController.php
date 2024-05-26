@@ -105,7 +105,7 @@ class UmkmController extends Controller
     public function store(Request $request)
     {
 
-        dd($request);
+        // dd($request);
         $request->validate([
             'NIK' => 'required',
             'nama_umkm' => 'required',
@@ -121,7 +121,7 @@ class UmkmController extends Controller
 
 
         try {
-            $response = cloudinary()->upload($request->file('foto_umkm')->getRealPath())->getSecurePath();
+            $response = cloudinary()->upload($request->file('file')->getRealPath())->getSecurePath();
 
         } catch (\Exception $e) {
             dd($e);
@@ -147,9 +147,8 @@ class UmkmController extends Controller
 
 
 
-
-            return redirect()->route('umkm.penduduk.index')
-                ->with('success', 'UMKM Berhasil Ditambahkan');
+            
+        return $response;
         } else {
             return redirect()->route('umkm.penduduk.create')
                 ->with('error', 'NIK Anda belum terdaftar sebagai warga.');

@@ -33,10 +33,10 @@ class LaporanController extends Controller
 
         if ($requets->has('search')) {
             $laporan->whereHas('penduduk', function ($query) use ($requets) {
-            $query->where('nama_penduduk', 'like', '%' . $requets->search . '%');
+                $query->where('nama_penduduk', 'like', '%' . $requets->search . '%');
             });
         }
-        $laporan = $laporan->get(); 
+        $laporan = $laporan->get();
 
         $metadata = (object) [
             'title' => 'Pengaduan',
@@ -96,8 +96,14 @@ class LaporanController extends Controller
             return view('dashboard.pengaduan', ['data' => $data, 'active' => 'pengaduan']);
         } else {
 
-            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->paginate(3);
-            $data = LaporanModel::findMany($id);
+            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->first();
+            if ($id) {
+
+                $data = LaporanModel::where('penduduk_id', '=', $id->penduduk_id)->paginate(3);
+            } else {
+                $data = LaporanModel::where('penduduk_id', '=', 0)->paginate(3);
+            }
+
         }
 
         return view('dashboard.pengaduan', ['data' => $data, 'active' => 'pengaduan']);

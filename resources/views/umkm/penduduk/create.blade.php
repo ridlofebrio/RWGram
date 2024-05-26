@@ -124,7 +124,7 @@
                 
 <div>
     <div id="myId" class="h-52">
-        <input type="hidden" name="" id="lah" value="{{csrf_token()}}">
+        <input type="file" name="coba" id="lah" >
         Taruh File
     </div>
 </div>
@@ -160,14 +160,19 @@
 //     });
 // });
 
-let myDropzone = new Dropzone("div#myId", { url: '{{url('umkm-penduduk/store')}}', 
+let myDropzone = new Dropzone("div#myId", { 
+    url: '{{url('umkm-penduduk/store')}}', 
     headers:{
-        'x-csrf-token': document.querySelector('#lah').value,
+        'x-csrf-token': '{{csrf_token()}}',
     }
     ,error:function(file,response){
     console.log(response)
 
-} });
+},
+success:function(file,response) {
+    console.log(response)
+
+}});
 // Dropzone.options.coba= {
 //     // Configuration options go here
 //     addRemoveLinks:true,

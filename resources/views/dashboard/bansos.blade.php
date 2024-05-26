@@ -5,6 +5,7 @@
     <div class="flex mt-3 w-full justify-between items-center">
         <h2 class="text-xl ml-3">{{ $allData->where('status', 'menunggu')->count() }} Permohonan</h2>
         <div class="filter flex space-x-2 items-center">
+
             <div x-data="{ open: false }" class="relative">
                 <button @click="open= !open" class="flex w-[150px] hover:bg-blue-main hover:border-blue-main hover:text-white px-3 items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full"><i class="fa-solid fa-sliders"></i> <p>-semua-</p> <i class="fa fa-chevron-down"></i></button>
                 <div class="absolute left-1/2 -translate-x-1/2 px-3 py-3 z-30 bg-white drop-shadow-card" x-show="open" @click.outside="open=false">
@@ -23,6 +24,8 @@
                         <p>Normalize</p>
                     </button>
 
+           
+            
                     <!-- Main modal -->
                     <div x-show="open" x-cloak tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed z-40 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="absolute w-[400px] h-[30vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4 z-50">
@@ -81,6 +84,7 @@
                 </tr>
             </thead>
             <tbody id="body">
+
                 @foreach ($data as $bansos)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $loop->iteration }}</th>
@@ -147,8 +151,7 @@
                                                         <input readonly type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" value="{{ $bansos['c'.$count] }}" required="">
                                                     </div>
                                                 @endforeach
-                                                                              
-                                                <div class="col-span-2">
+                                                                                                                <div class="col-span-2">
                                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Dapur </label>
                                                     <img src="{{asset('images/'.$bansos->foto_dapur)}}" alt="Foto Bukti">
                                                 </div>

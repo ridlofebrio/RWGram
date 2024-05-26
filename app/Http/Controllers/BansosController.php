@@ -11,9 +11,13 @@ class BansosController extends Controller
 {
     public function index()
     {
-        $bansos = BansosModel::with('kartuKeluarga')->paginate(3);
+
+
         $allBansos = BansosModel::all();
         $kriteria = Kriteria::all();
+
+        $bansos = BansosModel::with('kartuKeluarga', 'kartuKeluarga.kartuKeluarga', 'kartuKeluarga.penduduk')->paginate(3);
+
 
         return view('dashboard.bansos', ['data' => $bansos, 'allData' => $allBansos, 'kriteria' => $kriteria, 'active' => 'bansos']);
     }
@@ -182,7 +186,7 @@ class BansosController extends Controller
 
     public function request()
     {
-        $metadata = (object)[
+        $metadata = (object) [
             'title' => 'Bantuan Sosial',
             'description' => 'Pengajuan Bantuan Sosial'
         ];
@@ -192,7 +196,7 @@ class BansosController extends Controller
 
     public function showPenduduk(Request $request)
     {
-        $metadata = (object)[
+        $metadata = (object) [
             'title' => 'Bantuan Sosial',
             'description' => 'Cek Pengajuan Bantuan Sosial'
         ];

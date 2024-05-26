@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('kas', function (Blueprint $table) {
             $table->id('id_kas');
+            $table->enum('pengelola', ['RT 01', 'RT 02','RT 03','RT 04','RW']);
             $table->unsignedBigInteger('kartu_keluarga_id')->index();
             $table->foreign('kartu_keluarga_id')->references('kartu_keluarga_id')->on('kartu_keluarga');
             $table->integer('tahun');

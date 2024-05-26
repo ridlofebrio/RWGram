@@ -23,7 +23,7 @@
                                 </div>
     
                                 <div class="flex w-full mt-10 space-x-44 items-center ">
-                                    <h1 class="text-3xl font-semibold" >636</h1>
+                                    <h1 class="text-3xl font-semibold" >{{$semua['penduduk']}}</h1>
                                     <a href="">show</a>
                                 </div>
                                 
@@ -39,7 +39,7 @@
                             </div>
     
                             <div class="flex w-full mt-10 space-x-44 items-center ">
-                                <h1 class="text-3xl font-semibold" >636</h1>
+                                <h1 class="text-3xl font-semibold" >{{$semua['umkm']}}</h1>
                                 <a href="">show</a>
                             </div>
                             
@@ -56,7 +56,7 @@
                             </div>
     
                             <div class="flex w-full mt-10 space-x-44 items-center ">
-                                <h1 class="text-3xl font-semibold" >636</h1>
+                                <h1 class="text-3xl font-semibold" >{{$semua['laporan']}}</h1>
                                 <a href="">show</a>
                             </div>
                             
@@ -71,7 +71,7 @@
                         </div>
     
                         <div class="flex w-full mt-10 space-x-44 items-center ">
-                            <h1 class="text-3xl font-semibold" >636</h1>
+                            <h1 class="text-3xl font-semibold" >{{$semua['pengajuan']}}</h1>
                             <a href="">show</a>
                         </div>
                         
@@ -177,11 +177,27 @@
     </div>
 </div>
 
+
+{{-- Jumlah Penduduk --}}
 <div class="mt-5">
   <h1 class=" font-semibold mb-5 text-black" >Jumlah Penduduk</h1>
   <div class=" w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
- 
-  
+    <div class="w-full flex justify-end">
+      <div class="flex flex-col">
+       <div class="flex w-full justify-between ">
+        <p>Laki-laki</p>
+        <div class="p-2 bg-blue-main"></div>
+       </div>
+       <div class="flex w-full justify-between">
+        <p>Perempuan</p>
+       <div class="p-2 bg-blue-main"></div>
+       </div>
+      </div>
+      <select name="" id="">
+        <option value="">tes</option>
+      </select>
+    </div>
+    
     <div id="column-chart">
       <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
         <div class="flex justify-between items-center pt-5">
@@ -219,8 +235,17 @@
 
   <h1 class=" font-semibold mb-5 text-black" >Kas</h1>
   <div class="w-full bg-white rounded-lg shadow dark:bg-gray-800">
+
     <div class="flex justify-between p-4 md:p-6 pb-0 md:pb-0">
-     
+      <div class="flex w-full justify-around">
+        <div class="flex space-x-2">
+         <button class="flex items-center justify-center gap-2 border border-black py-2 px-3 rounded-full hover:bg-blue-main"> <div class="p-[2px] rounded-full border-2 border-black "><div class="p-1 rounded-full bg-blue-main"></div></div>Pemasukan</button>
+         <button class="flex items-center justify-center gap-2 border border-black py-2 px-3 rounded-full hover:bg-blue-main"> <div class="p-[2px] rounded-full border-2 border-black "><div class="p-1 rounded-full bg-blue-main"></div></div> Pengeluaran</button>
+        </div>
+         <select name="" id="">
+           <option value="">tes</option>
+         </select>
+       </div>
       
     </div>
 
@@ -271,8 +296,13 @@
 <script>
 var data1 = JSON.parse("{{ json_encode($data) }}");
 data1.push(0);
+var penduduk = "{{ $penduduk_laki }}"
+var penduduk1 = "{{ $penduduk_perempuan }}"
 var tgl = "{{ json_encode($tgl) }}"
 tgl=tgl.replace(/&quot;/g,'"');
+penduduk=penduduk.replace(/&quot;/g,'"');
+penduduk1=penduduk1.replace(/&quot;/g,'"');
+console.log(JSON.parse(penduduk));
 // tgl=tgl.replace(,'');
 
 // console.log( JSON.parse(tgl))
@@ -371,24 +401,13 @@ const options1 = {
     {
       name: "Laki-laki",
       color: "#55B9FF",
-      data: [
-        { x: "RT01", y: 231 },
-        { x: "RT02", y: 122 },
-        { x: "RT03", y: 63 },
-        { x: "RT04", y: 421 },
-       
-      ],
+      data:JSON.parse(penduduk),
     },
     {
       name: "Perempuan",
       color: "#AADCFF",
-      data: [
-        { x: "RT01", y: 231 },
-        { x: "RT02", y: 122 },
-        { x: "RT03", y: 63 },
-        { x: "RT04", y: 421 },
-       
-      ],
+      data: JSON.parse(penduduk1),
+        
     },
   ],
   chart: {
