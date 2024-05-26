@@ -51,30 +51,7 @@ class BansosSeeder extends Seeder
                 'c5' => 2,
                 'c6' => 500,
             ],
-            [
-                'bansos_id' => 4,
-                'kartu_keluarga_id' => 4,
-                'tanggal_bansos' => now(),
-                'nama_pengaju' => 'Dewi Wulandari',
-                'c1' => 1800000,
-                'c2' => 6,
-                'c3' => 45,
-                'c4' => 95,
-                'c5' => 1,
-                'c6' => 400,
-            ],
-            [
-                'bansos_id' => 5,
-                'kartu_keluarga_id' => 5,
-                'tanggal_bansos' => now(),
-                'nama_pengaju' => 'Hadi Susilo',
-                'c1' => 2200000,
-                'c2' => 4,
-                'c3' => 35,
-                'c4' => 75,
-                'c5' => 1,
-                'c6' => 350,
-            ],
+
         ];
 
         DB::table('bansos')->insert($data);

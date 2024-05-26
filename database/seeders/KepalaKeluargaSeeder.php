@@ -13,27 +13,20 @@ class KepalaKeluargaSeeder extends Seeder
      */
     public function run(): void
     {
-        $data =[
+        $data = [
             [
                 'kartu_keluarga_id' => 1,
                 'penduduk_id' => 1,
             ],
             [
                 'kartu_keluarga_id' => 2,
-                'penduduk_id' => 2,
-            ],
-            [
-                'kartu_keluarga_id' => 3,
                 'penduduk_id' => 3,
             ],
             [
-                'kartu_keluarga_id' => 4,
-                'penduduk_id' => 4,
-            ],
-            [
-                'kartu_keluarga_id' => 5,
+                'kartu_keluarga_id' => 3,
                 'penduduk_id' => 5,
             ],
+
         ];
 
 
