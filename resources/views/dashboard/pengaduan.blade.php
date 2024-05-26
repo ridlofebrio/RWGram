@@ -367,7 +367,7 @@ document.addEventListener('alpine:init', () => {
                 return this.shouldDisable
             },
         }))
-    })
+})
 
             $(document).ready(function(){
 

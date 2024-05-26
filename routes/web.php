@@ -112,7 +112,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/bansos', [BansosController::class, 'index'])->middleware('RW');
     Route::get('/akun', [UserController::class, 'index'])->middleware('RW');
     Route::get('/persuratan', [PersuratanController::class, 'index'])->middleware('RW');
-    Route::get('/kas', [KasController::class, 'index'])->middleware('RW');
+    Route::get('/kas', [KasController::class, 'index']);
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/detail-akun', [UserController::class, 'show']);
 });
@@ -135,6 +135,7 @@ Route::group(['prefix' => 'data'], function () {
     Route::get('/notif', [DashboardController::class, 'notif']);
     Route::get('/notifcount', [DashboardController::class, 'notifcount']);
     Route::get('/pengeluaran', [KasController::class, 'pengeluaran']);
+    Route::get('/chart/pengeluaran', [KasController::class, 'pengeluaranChart']);
     Route::get('/pemasukan', [KasController::class, 'index']);
 });
 
@@ -149,6 +150,7 @@ Route::group(['prefix' => 'search', 'middleware' => 'auth'], function () {
     Route::get('/meninggal/{value}', [StatusHidupController::class, 'find']);
     Route::get('/penduduk/type/{type}/{value}', [PendudukController::class, 'find']);
     Route::get('/pengaduan/{value}', [LaporanController::class, 'find']);
+    Route::get('/kas/{value}', [KasController::class, 'find']);
 });
 
 Route::group(['prefix' => 'akun'], function () {
@@ -174,6 +176,10 @@ Route::group(['prefix' => 'penduduk'], function () {
 
 Route::group(['prefix' => 'kas'], function () {
     Route::post('/', [KasController::class, 'store']);
+    Route::get('/{kk}', [KasController::class, 'detailKas']);
+    Route::delete('pengeluaran/{kk}', [KasController::class, 'destroyPengeluaran']);
+    Route::delete('/{kk}', [KasController::class, 'destroy']);
+
 
 });
 

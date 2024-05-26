@@ -12,11 +12,15 @@ class KasModel extends Model
     protected $table = "detail_kas";
     protected $primaryKey = "id_detail_kas";
 
-    protected $fillable = ['jumlah_kas', 'id_kas', 'tanggal_kas'];
+    protected $fillable = ['jumlah_kas', 'id_kas', 'tanggal_kas', 'bulan'];
 
-    public function kartuKeluarga()
+
+
+    public function kas()
     {
-        return $this->belongsTo(KartuKeluargaModel::class, 'kartu_keluarga_id');
+        return $this->belongsTo(KasDetailModel::class, 'id_kas');
     }
+
+
 
 }

@@ -51,32 +51,9 @@ class BansosSeeder extends Seeder
                 'jumlah_kendaraan' => 2,
                 'jumlah_watt' => 500,
             ],
-            [
-                'bansos_id' => 4,
-                'kartu_keluarga_id' => 4,
-                'tanggal_bansos' => now(),
-                'jumlah_tanggungan' => 6,
-                'nama_pengaju' => 'Dewi Wulandari',
-                'total_pendapatan' => 1800000,
-                'luas_rumah' => 45,
-                'luas_tanah' => 95,
-                'jumlah_kendaraan' => 1,
-                'jumlah_watt' => 400,
-            ],
-            [
-                'bansos_id' => 5,
-                'kartu_keluarga_id' => 5,
-                'tanggal_bansos' => now(),
-                'jumlah_tanggungan' => 4,
-                'nama_pengaju' => 'Hadi Susilo',
-                'total_pendapatan' => 2200000,
-                'luas_rumah' => 35,
-                'luas_tanah' => 75,
-                'jumlah_kendaraan' => 1,
-                'jumlah_watt' => 350,
-            ],
+
         ];
-        
+
         DB::table('bansos')->insert($data);
     }
 }
