@@ -29,7 +29,7 @@
         <main class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <!-- Your content -->        
             <div class="max-w-7xl mx-auto card p-8 mb-12" style="box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
-                <form action="{{ route('umkm.penduduk.store') }}" method="POST" enctype="multipart/form-data">
+                <form  action="{{ route('umkm.penduduk.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="sm:col-span-4">
                         <label for="NIK" class="block text-sm font-medium leading-6 text-gray-900">NIK Anda</label>
@@ -108,11 +108,28 @@
                             @enderror
                         </div>
                     </div>
-                    {{-- <div class="card-body">
-                        <label>Drag and Drop Multiple Images (JPG, JPEG, PNG, .webp)</label>
-                        <div class="dropzone" id="myDragAndDropUploader"></div>
-                        <h5 id="message"></h5>
-                    </div> --}}
+
+                    {{-- One Drive --}}
+                    <div class="sm:col-span-4 relative h-52">
+                        <label for="nama_medsos" class="block text-sm font-medium leading-6 text-gray-900">Foto UMKM</label>
+                        <div class="mt-1 mb-4">
+                            <input id="nama_medsos" name="foto_umkm" type="file" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
+                                text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:border-blue-600
+                                focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nama Sosial Media Anda" value="{{ old('foto_umkm') }}">
+                            @error('foto_umkm')
+                                <span class="text-red-500 text-xs">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>    
+                
+<div>
+    <div id="myId" class="h-52">
+        <input type="file" name="coba" id="lah" >
+        Taruh File
+    </div>
+</div>
+                    
+
                     <div class="flex items-center mt-6">
                         <input id="agree" type="checkbox" class="form-checkbox h-4 w-4 text-blue-600" />
                         <label for="agree" class="ml-2 block text-sm text-gray-900">
@@ -127,9 +144,49 @@
                     </div>
                 </form>
             </div>
+           
+
         </main>
 
     <script type="text/javascript">
+
+// $(document).ready(function() {
+//     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+//     $("div#myId").dropzone({
+//         url: "{{ url('/upload') }}",
+//         headers: {
+//             'x-csrf-token': CSRF_TOKEN,
+//         },
+//     });
+// });
+
+let myDropzone = new Dropzone("div#myId", { 
+    url: '{{url('umkm-penduduk/store')}}', 
+    headers:{
+        'x-csrf-token': '{{csrf_token()}}',
+    }
+    ,error:function(file,response){
+    console.log(response)
+
+},
+success:function(file,response) {
+    console.log(response)
+
+}});
+// Dropzone.options.coba= {
+//     // Configuration options go here
+//     addRemoveLinks:true,
+//     url:'http://127.0.0.1:8000/umkm-penduduk/store',
+//     success: function(file, response)
+//                 {
+//                     console.log(response);
+//                 },
+//                 error: function(file, response)
+//                 {
+//                     console.log(response);
+//                 }
+//   };
+
         let closeBtn = document.getElementById('close-btn');
         let agreeCheckbox = document.getElementById('agree');
         let submitBtn = document.getElementById('submitBtn');
@@ -172,5 +229,6 @@
         });
 
         setTimeout(hideAlert, 5000);
+        
     </script>
 @endsection

@@ -3,11 +3,11 @@
 @section('content')
 
 
-
+<h1>Data Penduduk</h1>
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white  text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
        
        
-    <ul x-data="{active: 'umkm'}" class="flex overflow-x-auto -mb-px">
+    <ul x-data="{active: 'umkm'}" class="{{Auth::user()->user_id == '1'?'flex overflow-x-auto -mb-px':'hidden'}}">
         <li class="">
             <button   @click="active = 'umkm'"  :class="active=='umkm' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"   data="umkm" >Semua RT</button>
         </li>
@@ -196,29 +196,29 @@
           </div> 
           
     
-        <div class="filter flex space-x-2 items-center">
+        <div class="filter flex space-x-2  items-center">
            
+            <div class="search border w-[70%] focus-within:ring-2 focus-within:ring-blue-main flex items-center justify-between  bg-white rounded-full px-3">
+                
+                <input id="search" data='umkm' type="text" class=" border-none bg-transparent" placeholder="cari apapun">  
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
             <div  x-data="{open:false}" class="relative" x-cloak >
-                <button @click="open= !open" class="flex px-3 items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p>-semua-</p> <i class="fa fa-chevron-down"></i></button>
-                <div class="absolute left-1/2 -translate-x-1/2  px-3 py-3 z-30 bg-white drop-shadow-card" x-show="open" @click.outside="open=false" >
+                <button @click="open= !open" class="flex px-3 items-center hover:bg-blue-main hover:border-blue-main hover:text-white space-x-5 py-2 border-2 w-min border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p id="sort" class="w-[100px]">Filter</p> <i class="fa fa-chevron-down"></i></button>
+                <div class="absolute  left-1/2 -translate-x-1/2 w-min z-30 bg-white drop-shadow-card" x-show="open"  @click.outside="open=false" >
                    <ul>
-                    <li><button data="semua" class="sort" >Semua</button></li>
-                    <li><button data="L" class="sort" >laki-laki</button></li>
-                    <li><button data='P' class="sort" >Perempuan</button></li>
+                    <li><button @click="open= !open"  data="semua" value="Semua" class="sort hover:bg-blue-main hover:text-white py-2 w-[200px]" >Semua</button></li>
+                    <li><button @click="open= !open"  data="L" value="Laki-laki" class="sort hover:bg-blue-main hover:text-white py-2 w-[200px]" >laki-laki</button></li>
+                    <li><button @click="open= !open"  data='P' value="Perempuan" class="sort hover:bg-blue-main hover:text-white py-2 w-[200px]">Perempuan</button></li>
                     
                     
                    </ul>
                 </div>
             </div>
           
-            <div class="search border-2 bg-neutral-04 rounded-full px-3">
-                <i class="fa-solid fa-magnifying-glass"></i>
-
-                <input id="search" type="text" class="border-none bg-transparent" placeholder="cari apapun">  
-            </div>
         </div>
         <div class="flex space-x-1">
-            <div x-data="{ open: false }">
+            <div x-cloak x-data="{ open: false }">
                 
                 <button @click="open= ! open" type="submit"   class="flex border-2 px-8 py-2  rounded-full justify-between space-x-2 items-center hover:bg-blue-main hover:border-blue-main ">
     
@@ -230,9 +230,9 @@
                       <p class="text-black font-semibold">Import CSV</p>
                   </button>
                <!-- Main modal -->
-               <div  x-show="open"   tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed  z-40 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+               <div x-cloak x-show="open"   tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed  z-40 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                               
-                <div  class="absolute w-[920px] h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  p-4  z-50 ">
+                <div x-cloak  class="absolute w-[920px] h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  p-4  z-50 ">
                       <!-- Modal content -->
                       <div @click.outside="open = false" class="relative bg-white w-full  rounded-lg shadow dark:bg-gray-700">
                           <!-- Modal header -->
@@ -275,7 +275,7 @@
     
            </div>
     </div>        
-<div class="relative mt-5 overflow-x-auto shadow-md sm:rounded-lg ">
+    <div class="relative mt-5 overflow-x-auto shadow-md sm:rounded-lg ">
     
         <table id='umkm' class="w-full text-sm text-left rtl:text-right  text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-neutral-03 dark:bg-gray-700 dark:text-gray-400">
@@ -355,71 +355,71 @@
                                             <div class="grid gap-4 mb-4 grid-cols-2">
                                                 <div class="col-span-2">
                                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NKK</label>
-                                                    <input type="text" name="name" id="name" value="{{$penduduk->kartuKeluarga->NKK}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="NKK" required="">
+                                                    <input readonly type="text" name="name" id="name" value="{{$penduduk->kartuKeluarga->NKK}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="NKK" required="">
                                                 </div>
                                                 <div class="col-span-2 ">
                                                     <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK</label>
-                                                    <input type="text" name="price" id="price" value="{{$penduduk->NIK}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="NIK" required="">
+                                                    <input readonly type="text" name="price" id="price" value="{{$penduduk->NIK}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="NIK" required="">
                                                 </div>
                                                 <div class="col-span-2 ">
                                                   <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
-                                                  <input type="text" name="price" id="price" value="{{$penduduk->nama_penduduk}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama Lengkap" required="">
+                                                  <input readonly type="text" name="price" id="price" value="{{$penduduk->nama_penduduk}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama Lengkap" required="">
                                               </div>
                                               <div class="col-span-2 sm:col-span-1">
                                                   <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tempat Lahir</label>
-                                                  <input type="text" name="price" id="price" value={{$penduduk->tempat_lahir}} class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
+                                                  <input readonly type="text" name="price" id="price" value={{$penduduk->tempat_lahir}} class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
                                               </div>
                                               <div class="col-span-2 sm:col-span-1">
                                                   <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Lahir</label>
-                                                  <input type="date" name="price" id="price" value="{{$penduduk->tanggal_lahir}}"  class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
+                                                  <input readonly type="date" name="price" id="price" value="{{$penduduk->tanggal_lahir}}"  class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
                                               </div>
                                               <div class="col-span-2 sm:col-span-1 ">
                                                   <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Kelamin</label>
-                                                  <input type="text" name="price" id="price" value={{$penduduk->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan'}} class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
+                                                  <input readonly type="text" name="price" id="price" value={{$penduduk->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan'}} class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
                                               </div>
                                             
                                                 
                                            
                                                 <div class="col-span-2 sm:col-span-1">
                                                     <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Golongan Darah</label>
-                                                    <input type="text" name="price" id="price" value={{$penduduk->golongan_darah}} class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
+                                                    <input readonly type="text" name="price" id="price" value={{$penduduk->golongan_darah}} class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
                                                 </div>
                                                 
                                                 <div class="col-span-2 ">
                                                     <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
-                                                    <input type="text" name="price" id="price" value="{{$penduduk->alamat}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
+                                                    <input readonly type="text" name="price" id="price" value="{{$penduduk->alamat}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
                                                 </div>
                                                 
                                                 <div class="col-span-2 sm:col-span-1">
                                                     <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">RT</label>
-                                                    <input type="text" name="price" id="price" value={{$penduduk->kartuKeluarga->rt->nomor_rt}} class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
+                                                    <input readonly type="text" name="price" id="price" value={{$penduduk->kartuKeluarga->rt->nomor_rt}} class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
                                                 </div>
 
                                               
                                                 <div class="col-span-2 sm:col-span-1">
                                                     <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Agama</label>
-                                                    <input type="text" name="price" id="price" value={{$penduduk->agama}} class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
+                                                    <input readonly type="text" name="price" id="price" value={{$penduduk->agama}} class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
                                                 </div>
                                               
                                          
                                          <div class="col-span-2 sm:col-span-1">
                                              <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status Perkawinan</label>
-                                             <input type="text" name="price" id="price" value="{{$penduduk->status_perkawinan}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
+                                             <input readonly type="text" name="price" id="price" value="{{$penduduk->status_perkawinan}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
                                          </div>
     
                                               <div class="col-span-2 sm:col-span-1 ">
                                                 <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pekerjaan</label>
-                                                <input type="text" name="price" id="price" value="{{$penduduk->pekerjaan}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama Lengkap" required="">
+                                                <input readonly type="text" name="price" id="price" value="{{$penduduk->pekerjaan}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama Lengkap" required="">
                                             </div>
                   
                                             <div class="col-span-2 sm:col-span-1">
                                                 <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status Tinggal</label>
-                                                <input type="text" name="price" id="price" value={{$penduduk->status_tinggal}} class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
+                                                <input readonly type="text" name="price" id="price" value={{$penduduk->status_tinggal}} class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
                                             </div>
                                             
                                             <div class="col-span-2 sm:col-span-1">
                                                 <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status Hidup</label>
-                                                <input type="text" name="price" id="price" value={{$penduduk->status_kematian == "0" ? 'Hidup' : 'Meninggal'}} class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
+                                                <input readonly type="text" name="price" id="price" value={{$penduduk->status_kematian == "0" ? 'Hidup' : 'Meninggal'}} class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat Lahir" required="">
                                             </div>
                                              
                                             </div>
@@ -640,14 +640,14 @@
     <nav aria-label="page navigation example" class="page mt-5 text-right" >
         <ul class="inline-flex -space-x-px text-sm">
           <li>
-            <button {{$data->previousPageUrl()?'':'disabled'}} onclick="page(event,'{{$data->previousPageUrl()}}')" class="pagination disabled:bg-neutral-04  flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><i class="fa-solid fa-chevron-left"></i></button>
+            <button {{$data->previousPageUrl()?'':'disabled'}} onclick="page(event,'{{$data->previousPageUrl()}}','#umkm','page')" class="pagination disabled:bg-neutral-04  flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><i class="fa-solid fa-chevron-left"></i></button>
           </li>
           <li>
             <a href="#" class=" flex items-center justify-center px-3 h-8 bg-blue-main leading-tight  text-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{$data->currentPage()}}</a>
           </li>
          
           <li>
-            <button  {{$data->nextPageUrl()?'':'disabled'}}  onclick="page(event,'{{$data->nextPageUrl()}}')" class="pagination disabled:bg-neutral-04  flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><i class="fa-solid fa-chevron-right"></i></button>
+            <button  {{$data->nextPageUrl()?'':'disabled'}}  onclick="page(event,'{{$data->nextPageUrl()}}','#umkm','page')" class="pagination disabled:bg-neutral-04  flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><i class="fa-solid fa-chevron-right"></i></button>
           </li>
         </ul>
       </nav>
@@ -659,14 +659,250 @@
 
 
    
-  </div>
+</div>
+
+
+{{-- kartu Keluarga --}}
+<h1 class="my-3">Data Kartu Keluarga</h1>
+<div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white  text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+       
+       
+  
+  
+      
+    <div class="flex mt-3 w-full justify-between items-center">
+        
+        
+        
+          
+          <!-- Main modal -->
+          <div  id="crud-modal-1" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+              <div  class="relative p-4  w-[900px] h-[80vh]">
+                  <!-- Modal content -->
+                  <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                      <!-- Modal header -->
+                      <div class="flex items-center  justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                              Create New Product
+                          </h3>
+                          <button type="button" class="absolute -top-5 -right-4 bg-blue-main   text-white border-2 border-white hover:bg-gray-200 hover:text-gray-900 rounded-full text-sm w-8 h-8 ms-auto inline-flex justify-center items-center " data-modal-toggle="crud-modal-1">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                      </div>
+                      <!-- Modal body -->
+                      <form action="{{url('/penduduk/kepalaKeluarga')}}" method="POST" class="p-4 md:p-5 text-left">
+                        @csrf
+                        @method('POST')
+                          <div class="grid gap-4 mb-4 grid-cols-2">
+                              <div class="col-span-2">
+                                  <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NKK</label>
+                                  <input type="text" name="NKK" id="name" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="NKK" required="">
+                              </div>
+                              <div class="col-span-2 ">
+                                  <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK</label>
+                                  <input type="text" name="NIK" id="price" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="NIK" required="">
+                              </div>
+                             
+                              
+                          </div>
+                          <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                              <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                              Simpan
+                          </button>
+                      </form>
+                  </div>
+              </div>
+          </div> 
+          
+    {{-- Kepala Keluarga  --}}
+
+        <div class="filter flex space-x-2 items-center">
+           
+            
+            <div class="search border w-[70%] focus-within:ring-2 focus-within:ring-blue-main flex items-center justify-between  bg-white rounded-full px-3">
+                
+                <input id="search" data='umkm1' type="text" class="border-none bg-transparent" placeholder="cari apapun">  
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div  x-data="{open:false}" class="relative" x-cloak >
+                <button @click="open= !open" class="flex px-3 w-[130px] hover:bg-blue-main hover:border-blue-main hover:text-white items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p id="sort">Filter</p> <i class="fa fa-chevron-down"></i></button>
+                <div class="absolute  left-1/2 -translate-x-1/2 w-[200px]  z-30 bg-white drop-shadow-card" x-show="open"  @click.outside="open=false" >
+                   <ul>
+                    <li><button @click="open= !open"  data="semua" class="sort hover:bg-blue-main hover:text-white py-2 w-full" >Semua</button></li>
+                    <li><button @click="open= !open"  data="L" value="Laki-laki" class="sort hover:bg-blue-main hover:text-white py-2 w-full" >laki-laki</button></li>
+                    <li><button @click="open= !open"  data='P' value="Perempuan" class="sort hover:bg-blue-main hover:text-white py-2 w-full">Perempuan</button></li>
+                    
+                    
+                   </ul>
+                </div>
+            </div>
+        </div>
+        <div class="flex space-x-1">
+         
+         
+            <button data-modal-target="crud-modal-1" data-modal-toggle="crud-modal-1" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-8 py-2 text-base font-medium rounded-full  " type="button">
+                Tambah
+              </button>
+             
+    
+           </div>
+    </div>        
+    <div class="relative mt-5 overflow-x-auto shadow-md sm:rounded-lg ">
+    
+        <table id='umkm1' class="w-full text-sm text-left rtl:text-right  text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-neutral-03 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        No
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        RT
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        No Telepon
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Nama Kepala Keluarga
+                   
+                    <th scope="col" class="px-6 py-3">
+                       Aksi
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="body">
+                
+                    @foreach ($kartuKeluarga as $penduduk)
+                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ $loop->index }}
+                    </th>
+                    <td class="px-6 py-4">
+                        {{$penduduk->kartuKeluarga->rt_id}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{$penduduk->kartuKeluarga->no_telepon}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{$penduduk->penduduk->nama_penduduk}}
+                  
+                
+                    <td class="px-6 py-4 flex gap-2 ">
+                        <div x-cloak x-data="{ open: false }">
+                            <button @click="open = true"  class="hover:border-none  before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  " type="button">
+                                Detail
+                              </button>
+                              
+                              <!-- Main modal -->
+                              <div  x-show="open"  x-transition tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed  z-40 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                              
+                                <div  class="absolute w-[920px] h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  p-4  z-50 ">
+                                      <!-- Modal content -->
+                                      <div @click.outside="open = false" class="relative bg-white w-full  rounded-lg shadow dark:bg-gray-700">
+                                          <!-- Modal header -->
+                                          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                              <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                Detail
+                                              </h3>
+                                              <button type="button" @click="open = false" class="absolute -top-5 -right-4 bg-blue-main   text-white border-2 border-white hover:bg-gray-200 hover:text-gray-900 rounded-full text-sm w-8 h-8 ms-auto inline-flex justify-center items-center " >
+                                                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                  </svg>
+                                                  <span class="sr-only">Close modal</span>
+                                              </button>
+                                          </div>
+                                          <!-- Modal body -->
+                                          <form class="p-4 md:p-5 text-left">
+                                            <div class="grid gap-4 mb-4 grid-cols-2">
+                                            <div class="col-span-2">
+                                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NKK</label>
+                                                <input readonly type="text" name="NKK" id="name" value="{{$penduduk->kartuKeluarga->NKK}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="NKK" required="">
+                                            </div>
+                                            <div class="col-span-2">
+                                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Kepala Keluarga</label>
+                                                <input readonly type="text" name="NKK" id="name" value="{{$penduduk->penduduk->nama_penduduk}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="NKK" required="">
+                                            </div>
+                                            <div class="col-span-2">
+                                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomer Telepon</label>
+                                                <input readonly type="text" name="NKK" id="name" value="{{$penduduk->kartuKeluarga->no_telepon}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="NKK" required="">
+                                            </div>
+                                            <div class="col-span-2">
+                                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status Perkawinan</label>
+                                                <input readonly type="text" name="NKK" id="name" value="{{$penduduk->penduduk->pekerjaan}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="NKK" required="">
+                                            </div>
+                                            <div class="col-span-2">
+                                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status Perkawinan</label>
+                                                <input readonly type="text" name="NKK" id="name" value="{{$penduduk->penduduk->status_perkawinan}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="NKK" required="">
+                                            </div>
+                                            <div class="col-span-2">
+                                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status Tinggal</label>
+                                                <input readonly type="text" name="NKK" id="name" value="{{$penduduk->penduduk->status_tinggal}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="NKK" required="">
+                                            </div>
+                                            <div class="col-span-2">
+                                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status Kematian</label>
+                                                <input readonly type="text" name="NKK" id="name" value="{{$penduduk->penduduk->status_kematian  ? 'Mati':'Hidup'}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="NKK" required="">
+                                            </div>
+                                            
+                                        </div>
+                                        </form>
+                                      </div>
+                                  </div>
+                                  <div class="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40"></div> 
+                              </div> 
+                             
+                        </div>
+                        <form action="{{url('/penduduk/kepalaKeluarga/'.$penduduk->id_kepala_keluarga)}}" onsubmit="return alert('are You sure ?')" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="hover:border-none  hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  "><svg   xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path  stroke="#EE0B0B" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 5.98c-3.33-.33-6.68-.5-10.02-.5-1.98 0-3.96.1-5.94.3L3 5.98m5.5-1.01.22-1.31C8.88 2.71 9 2 10.69 2h2.62c1.69 0 1.82.75 1.97 1.67l.22 1.3m3.35 4.17-.65 10.07C18.09 20.78 18 22 15.21 22H8.79C6 22 5.91 20.78 5.8 19.21L5.15 9.14m5.18 7.36h3.33m-4.16-4h5"/>
+                              </svg>
+                            </button>
+                        </form>
+                        
+                    </td>
+                 <td>
+                 
+                </td>   
+                </tr>
+                
+                
+                    @endforeach
+                  
+             
+               
+            </tbody>
+        </table>
+    </div>
+    
+    <nav aria-label="page1 navigation example" class="page1 mt-5 text-right" >
+        <ul class="inline-flex -space-x-px text-sm">
+          <li>
+            <button {{$kartuKeluarga->previousPageUrl()?'':'disabled'}} onclick="page(event,'{{$kartuKeluarga->previousPageUrl()}}','umkm1','page1')" class="pagination disabled:bg-neutral-04  flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><i class="fa-solid fa-chevron-left"></i></button>
+          </li>
+          <li>
+            <a href="#" class=" flex items-center justify-center px-3 h-8 bg-blue-main leading-tight  text-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{$kartuKeluarga->currentPage()}}</a>
+          </li>
+         
+          <li>
+            <button  {{$kartuKeluarga->nextPageUrl()?'':'disabled'}}  onclick="page(event,'{{$kartuKeluarga->nextPageUrl()}}','umkm1','page1')" class="pagination disabled:bg-neutral-04  flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><i class="fa-solid fa-chevron-right"></i></button>
+          </li>
+        </ul>
+      </nav>
+      
+</div>
     
 
-    {{-- <div x-data="{ open: false }" @open-me.window="open=true">
-        <div @click="$dispatch('open-me')">Open Me</div>
-        <div x-show="open">I've been opened</div>
-    </div> --}}
- 
+</div> 
+
+
+   
+</div>
+    
+    
+
 @endsection
 
 @push('js')
@@ -682,7 +918,7 @@ const closeModal = (id) => {
     document.getElementById('modal-'+id).classList.add('hidden');
 }
 
-function page(event,link) {
+function page(event,link,target,pagination) {
                
                event.preventDefault()
                $.ajax({
@@ -691,13 +927,15 @@ function page(event,link) {
                      $("#loading-image").show();
                   },
                   success:function(data){
+                    
                    const parser = new DOMParser();
                                const doc = parser.parseFromString(data, 'text/html');    
-                               const table = doc.getElementById('umkm');
-                               const page =doc.querySelector('.page');
-                               console.log(page);
-                                  $('#umkm').html(table);
-                                  $('.page').html(page);
+                               const table = doc.getElementById(target);
+                      
+                               const page =doc.querySelector('.'+pagination);
+                            
+                                  $('#'+target).html(table);
+                                  $('.'+pagination).html(page);
                                $("#loading-image").hide();
                   }
                                
@@ -740,31 +978,35 @@ document.addEventListener('alpine:init', () => {
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(data, 'text/html');    
                         const table = doc.getElementById('umkm');
+
                         
                            $('#umkm').html(table);
+                           $('#sort').html( index.currentTarget.getAttribute('value'));
                        }
                        
                    })
                })
 
-    $('#search').change(function () {
+    $('.search input').change(function (index) {
+        
                     let data = ($(this).val())
                     if(data == null || data == ""){
                         data='kosong';
                     }
-                    console.log(data);
+                    
                     
                   
                     $.ajax({
-                        url: "http://127.0.0.1:8000/search/penduduk/"+data,
-                        async:true,
+                        url: "http://127.0.0.1:8000/search/penduduk/type/"+index.currentTarget.getAttribute('data')+'/'+data,
+                        method:'GET',
                         
                     }).done(function (data) {
                         const parser = new DOMParser();
-                        const doc = parser.parseFromString(data, 'text/html');    
-                        const table = doc.getElementById('umkm');
+                        const doc = parser.parseFromString(data, 'text/html');  
+                      
+                        const table = doc.getElementById(index.currentTarget.getAttribute('data'));
                         
-                        $('#umkm').html(table)   
+                        $('#'+index.currentTarget.getAttribute('data')).html(table)   
                     })
 
                 })

@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -16,18 +17,19 @@ return new class extends Migration {
             $table->string('nama_pengaju', 50);
             $table->unsignedBigInteger('kartu_keluarga_id');
             $table->foreign('kartu_keluarga_id')->references('kartu_keluarga_id')->on('kartu_keluarga');
-            $table->integer('total_pendapatan');
-            $table->integer('jumlah_tanggungan');
-            $table->decimal('luas_rumah');
-            $table->decimal('luas_tanah');
-            $table->integer('jumlah_kendaraan');
-            $table->decimal('jumlah_watt');
+            $table->double('c1');
+            $table->double('c2');
+            $table->double('c3');
+            $table->double('c4');
+            $table->double('c5');
+            $table->double('c6');
             $table->longText('foto_dapur')->nullable();
             $table->longText('foto_depan_rumah')->nullable();
             $table->longText('foto_kamar_mandi')->nullable();
             $table->longText('foto_kamar_tidur')->nullable();
-            $table->longText('foto_kamar_tamu')->nullable();
-            $table->string('status')->default('tidak menerima');
+            $table->longText('foto_ruang_tamu')->nullable();
+            $table->double('wsm')->default(0);
+            $table->enum('status', ['menunggu', 'menerima', 'tidak menerima'])->default('menunggu');
             $table->timestamps();
         });
     }

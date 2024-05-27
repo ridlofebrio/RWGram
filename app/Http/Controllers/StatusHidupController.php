@@ -14,13 +14,14 @@ class StatusHidupController extends Controller
             'title' => 'Status Hidup',
             'description' => 'Halaman Ubah Status Warga'
         ];
-    
-        // Menggunakan pagination, dengan 10 item per halaman
+
+
         $hidup = StatusHidupModel::paginate(1);
-    
+
+
         return view('statusHidup.index', compact('hidup'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
     }
-    
+
 
     public function create()
     {
@@ -28,13 +29,24 @@ class StatusHidupController extends Controller
             'title' => 'Status Hidup',
             'description' => 'Halaman Ubah Status Hidup Warga'
         ];
-        return view('statusHidup.create', ['activeMenu' => 'hidup', 'metadata' => $metadata]);
+        return view('statusHidup.create', ['activeMenu' => 'permohonan', 'metadata' => $metadata]);
     }
 
 
     public function pengajuan()
     {
         $data = StatusHidupModel::with('Penduduk', 'PendudukM')->paginate(3);
+        $hidup = StatusHidupModel::paginate(3);
+        StatusHidupModel::where('terbaca', '=', '0')->update([
+            'terbaca' => 1
+        ]);
+        return view('component.statusHidup', ['data' => $data]);
+    }
+
+    public function sort($sort = 'menunggu')
+    {
+        $data = StatusHidupModel::where('status_pengajuan', $sort)->with('penduduk')->paginate(3);
+
 
         return view('component.statusHidup', ['data' => $data]);
     }
@@ -48,8 +60,12 @@ class StatusHidupController extends Controller
         } else {
 
             $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->first();
+            if ($id) {
 
-            $data = StatusHidupModel::whereAny(['penduduk_id', 'id_penduduk_meninggal'], $id->penduduk_id)->paginate(3);
+                $data = StatusHidupModel::whereAny(['penduduk_id', 'id_penduduk_meninggal'], $id->penduduk_id)->paginate(3);
+            } else {
+                $data = StatusHidupModel::whereAny(['penduduk_id', 'id_penduduk_meninggal'], 0)->paginate(3);
+            }
         }
 
         return view('component.statusHidup', ['data' => $data]);
@@ -60,7 +76,6 @@ class StatusHidupController extends Controller
         $request->validate([
             'NIK_pengaju' => 'required',
             'NIK_meninggal' => 'required',
-            // 'foto_bukti' => 'required', // Uncomment if needed
         ]);
 
         $penduduk_pengaju = PendudukModel::where('NIK', $request->NIK_pengaju)->first();
@@ -92,12 +107,33 @@ class StatusHidupController extends Controller
         ]);
 
 
-        StatusHidupModel::find($id)->update($request->all());
+        $status = StatusHidupModel::find($id);
+        $status->status_pengajuan = $request->status_pengajuan;
+        $status->save();
         return redirect('dashboard/pengajuan')->with('flash', ['success', 'Data berhasil dikonfirmasi']);
     }
 
     public function destroy(string $id)
     {
         $laporan = StatusHidupModel::findOrFail($id)->delete();
+    }
+    public function indexFind(Request $request)
+    {
+        $metadata = (object) [
+            'title' => 'Status Meninggal',
+            'description' => 'Halaman Ubah Status Warga'
+        ];
+
+        $search = $request->input('search');
+        if (empty($search)) {
+            $data = StatusHidupModel::paginate(5);
+        } else {
+            $data = StatusHidupModel::whereHas('penduduk', function ($query) use ($search) {
+                $query->where('nama_penduduk', 'like', '%' . $search . '%')
+                    ->orWhere('NIK', 'like', '%' . $search . '%');
+            })->paginate(3);
+        }
+
+        return view('statusHidup.index', ['hidup' => $data])->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
     }
 }

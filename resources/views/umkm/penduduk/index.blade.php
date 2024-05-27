@@ -55,11 +55,13 @@
             @else
                 @foreach ($umkm as $data)
                     @if ($data->status_pengajuan !== 'menunggu' && $data->status_pengajuan !== 'ditolak')
+
                         <div class="max-w-xl mx-auto card p-8 mb-12"
                             style="box-shadow: 0 -2px 6px rgba(91, 76, 76, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
                             <div class="shrink-0 mb-4 md:mb-[20px]">
                                 <img src="https://i.ibb.co/hX6pfms/img32.jpg"
                                     class="rounded-lg object-cover h-[280px] w-[360px]" />
+
                             </div>
                             <p class="mb-[8px] font-bold text-lg text-neutral dark:text-white text-black line-clamp-2">
                                 {{ $data->nama_umkm }}

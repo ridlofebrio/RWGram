@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\KartuKeluargaModel;
+use App\Models\KepalaKeluargaModel;
 use App\Models\PendudukModel;
 use App\Models\RtModel;
 use Carbon\Carbon;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 
 class PendudukController extends Controller
@@ -17,11 +20,49 @@ class PendudukController extends Controller
     public function index()
     {
         //
-        $penduduk = PendudukModel::where('isDelete', '=', '0')->with('kartuKeluarga', 'kartuKeluarga.rt')->paginate(3);
+
+        $user = Auth::user();
+        try {
+            $penduduk = PendudukModel::with('kartuKeluarga', 'kartuKeluarga.rt')
+                ->join('kartu_keluarga', 'kartu_keluarga.kartu_keluarga_id', 'penduduk.kartu_keluarga_id')
+                ->join('rt', 'kartu_keluarga.rt_id', 'rt.rt_id')
+                ->where('isDelete', '=', '0')
+                ->where('rt.rt_id', $user->role_id)
+                ->paginate(3);
+            $kartuKeluarga = KepalaKeluargaModel::with('penduduk', 'kartuKeluarga')->paginate(3);
+
+            if ($user->user_id == 1) {
+                $penduduk = PendudukModel::with('kartuKeluarga', 'kartuKeluarga.rt')
+
+
+                    ->where('isDelete', '=', '0')
+
+                    ->paginate(3);
+                $kartuKeluarga = KepalaKeluargaModel::with('penduduk', 'kartuKeluarga')->paginate(3);
+            } else {
+                $penduduk = PendudukModel::with('kartuKeluarga', 'kartuKeluarga.rt')
+                    ->join('kartu_keluarga', 'kartu_keluarga.kartu_keluarga_id', 'penduduk.kartu_keluarga_id')
+                    ->join('rt', 'kartu_keluarga.rt_id', 'rt.rt_id')
+                    ->where('isDelete', '=', '0')
+                    ->where('rt.rt_id', $user->role_id)
+                    ->paginate(3);
+                $kartuKeluarga = KepalaKeluargaModel::with('penduduk', 'kartuKeluarga')
+                    ->join('kartu_keluarga', 'kartu_keluarga.kartu_keluarga_id', 'kepala_keluarga.kartu_keluarga_id')
+                    ->join('rt', 'kartu_keluarga.rt_id', 'rt.rt_id')
+                    ->where('rt.rt_id', $user->role_id)->paginate(3);
+            }
 
 
 
-        return view('dashboard.penduduk', ['data' => $penduduk, 'active' => 'penduduk']);
+
+
+        } catch (\Exception $error) {
+            dd($error);
+        }
+
+
+
+        return view('dashboard.penduduk', ['data' => $penduduk, 'active' => 'penduduk'], compact('kartuKeluarga'));
     }
 
     public function sort($sort)
@@ -31,12 +72,12 @@ class PendudukController extends Controller
         if ($sort == 'semua') {
             return $this->index();
         }
-        $penduduk = PendudukModel::where([['isDelete', '=', '0'], ['jenis_kelamin', '=', $sort]])->with('kartuKeluarga', 'kartuKeluarga.rt')->get();
+        $penduduk = PendudukModel::where([['isDelete', '=', '0'], ['jenis_kelamin', '=', $sort]])->with('kartuKeluarga', 'kartuKeluarga.rt')->paginate(3);
+
+        $kartuKeluarga = KepalaKeluargaModel::with('penduduk', 'kartuKeluarga')->paginate(1);
 
 
-
-
-        return view('dashboard.penduduk', ['data' => $penduduk, 'active' => 'penduduk']);
+        return view('dashboard.penduduk', ['data' => $penduduk, 'active' => 'penduduk'], compact('kartuKeluarga'));
     }
 
 
@@ -119,12 +160,6 @@ class PendudukController extends Controller
                 'status_tinggal' => $line['status_tinggal'],
 
             ]);
-
-
-
-
-
-
         }
         return redirect()->back()->with('flash', ['success', 'Data CSV Berhasil Di import']);
     }
@@ -136,20 +171,40 @@ class PendudukController extends Controller
      */
 
 
-    public function find($value)
+    public function find($type, $value)
     {
+
         if ($value == 'kosong') {
-            $data = PendudukModel::paginate(3);
+            $data = PendudukModel::where('isDelete', '=', '0')->with('kartuKeluarga', 'kartuKeluarga.rt')->paginate(3);
+            $kartuKeluarga = KepalaKeluargaModel::with('penduduk', 'kartuKeluarga')->paginate(3);
+
 
             return view('dashboard.penduduk', ['data' => $data, 'active' => 'penduduk']);
+        }
 
-        } else {
+        if ($type == 'umkm') {
 
-            $data = PendudukModel::whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->paginate(3);
+            $kartuKeluarga = KepalaKeluargaModel::with('penduduk', 'kartuKeluarga')->paginate(1);
+            $data = PendudukModel::where('isDelete', '=', '0')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->with('kartuKeluarga', 'kartuKeluarga.rt')->paginate(3);
+
+            return view('dashboard.penduduk', ['data' => $data, 'active' => 'penduduk'], compact('kartuKeluarga'));
+
+        } elseif ($type == 'umkm1') {
+            $data = PendudukModel::where('isDelete', '=', '0')->with('kartuKeluarga', 'kartuKeluarga.rt')->paginate(1);
+            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->first();
+
+            if ($id) {
+
+                $kartuKeluarga = KepalaKeluargaModel::whereAny(['penduduk_id'], $id->penduduk_id)->with('kartuKeluarga', 'kartuKeluarga.rt')->paginate(3);
+            } else {
+                $kartuKeluarga = KepalaKeluargaModel::whereAny(['penduduk_id'], 0)->with('kartuKeluarga', 'kartuKeluarga.rt')->paginate(3);
+            }
+            return view('dashboard.penduduk', ['data' => $data, 'active' => 'penduduk'], compact('kartuKeluarga'));
 
         }
 
-        return view('dashboard.penduduk', ['data' => $data, 'active' => 'penduduk']);
+
+
     }
     public function create()
     {
@@ -202,6 +257,31 @@ class PendudukController extends Controller
 
         return redirect('/dashboard/penduduk')->with('flash', ['success', 'Data berhasil ditambah']);
     }
+
+    public function storeKepala(Request $request)
+    {
+        //  
+
+        $validator = Validator::make($request->all(), [
+            'NKK' => 'required',
+            'NIK' => 'required'
+        ]);
+
+        $penduduk = PendudukModel::where('NIK', $request->NIK)->first()->penduduk_id;
+        $kartu_keluarga = KartuKeluargaModel::where('NKK', $request->NKK)->first()->kartu_keluarga_id;
+
+        KepalaKeluargaModel::create([
+            'kartu_keluarga_id' => $kartu_keluarga,
+            'penduduk_id' => $penduduk,
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('flash', ['error', $validator->messages()]);
+        }
+
+        return redirect('/dashboard/penduduk')->with('flash', ['success', 'Data berhasil ditambah']);
+    }
+
 
     /**
      * Display the specified resource.
@@ -317,6 +397,21 @@ class PendudukController extends Controller
             $penduduk = PendudukModel::findOrFail($id);
             $penduduk->isDelete = '1';
             $penduduk->save();
+
+
+            return redirect('dashboard/penduduk')->with('flash', ['success', 'Data berhasil dihapus']);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect('dashboard/penduduk')->with('flash', ['error', 'Data Gagal dihapus karena data terkait dengan tabel lain']);
+        }
+    }
+
+    public function destroyKepala(string $id)
+    {
+        //
+
+        try {
+            $penduduk = KepalaKeluargaModel::findOrFail($id)->deleteOrFail();
+
 
 
             return redirect('dashboard/penduduk')->with('flash', ['success', 'Data berhasil dihapus']);

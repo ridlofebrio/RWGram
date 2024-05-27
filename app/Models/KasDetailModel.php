@@ -16,7 +16,13 @@ class KasDetailModel extends Model
 
     public function kartuKeluarga()
     {
-        return $this->belongsTo(KartuKeluargaModel::class, 'kartu_keluarga_id');
+        return $this->belongsTo(KepalaKeluargaModel::class, 'kartu_keluarga_id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    
 }

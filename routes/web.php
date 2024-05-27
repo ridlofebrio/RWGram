@@ -12,6 +12,7 @@ use App\Http\Controllers\StatusNikahController;
 use App\Http\Controllers\StatusTinggalController;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\Auth\AuthSessionController;
+use App\Http\Controllers\PDFBansosController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -68,19 +69,23 @@ Route::group(['prefix' => 'nikah-penduduk'], function () {
     Route::get('/create', [StatusNikahController::class, 'create'])->name('nikah.penduduk.create');
     Route::get('/request', [StatusNikahController::class, 'request'])->name('nikah.penduduk.request');
     Route::post('/store', [StatusNikahController::class, 'store'])->name('nikah.penduduk.store');
+    Route::get('/find', [StatusNikahController::class, 'indexFind'])->name('nikah.penduduk.find');
 });
 Route::group(['prefix' => 'hidup-penduduk'], function () {
     Route::get('/', [StatusHidupController::class, 'index'])->name('hidup.penduduk.index');
     Route::get('/create', [StatusHidupController::class, 'create'])->name('hidup.penduduk.create');
     Route::get('/request', [StatusHidupController::class, 'request'])->name('hidup.penduduk.request');
     Route::post('/store', [StatusHidupController::class, 'store'])->name('hidup.penduduk.store');
+    Route::get('/find', [StatusHidupController::class, 'indexFind'])->name('hidup.penduduk.find');
 });
 Route::group(['prefix' => 'tinggal-penduduk'], function () {
     Route::get('/', [StatusTinggalController::class, 'index'])->name('tinggal.penduduk.index');
     Route::get('/create', [StatusTinggalController::class, 'create'])->name('tinggal.penduduk.create');
     Route::post('/store', [StatusTinggalController::class, 'store'])->name('tinggal.penduduk.store');
     Route::get('/request', [StatusTinggalController::class, 'request'])->name('tinggal.penduduk.request');
+    Route::get('/find', [StatusTinggalController::class, 'indexFind'])->name('tinggal.penduduk.find');
 });
+
 
 
 
@@ -100,29 +105,48 @@ Route::get('logout', [AuthSessionController::class, 'logout']);
 
 
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
-    Route::get('/pengajuan/{sort}', [UmkmController::class, 'sort'])->middleware('RW');
-    Route::get('/pengajuan', [UmkmController::class, 'index'])->middleware('RW');
-    Route::get('/pengaduan/{sort}', [LaporanController::class, 'keluhan'])->middleware('RW');
-    Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
-    Route::get('/penduduk', [PendudukController::class, 'index']);
-    Route::get('/bansos', [BansosController::class, 'index'])->middleware('RW');
-    Route::get('/akun', [UserController::class, 'index'])->middleware('RW');
-    Route::get('/persuratan', [PersuratanController::class, 'index'])->middleware('RW');
-    Route::get('/kas', [KasController::class, 'index'])->middleware('RW');
-    Route::get('/', [DashboardController::class, 'index']);
+    Route::group(['middleware' => 'antikt'], function () {
+        Route::get('/pengajuan', [UmkmController::class, 'index'])->middleware('RW');
+
+        Route::get('/pengaduan/{sort}', [LaporanController::class, 'keluhan'])->middleware('RW');
+        Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
+        Route::get('/penduduk', [PendudukController::class, 'index']);
+        Route::get('/bansos', [BansosController::class, 'index'])->middleware('RW');
+        Route::post('/bansos', [BansosController::class, 'normalize'])->middleware('RW')->name('normalize');
+        Route::get('/bansos/generate-pdf', [PDFBansosController::class, 'generatePDF'])->middleware('RW')->name('generatePDF');
+        Route::get('/akun', [UserController::class, 'index'])->middleware('RW');
+        Route::get('/persuratan', [PersuratanController::class, 'index'])->middleware('RW');
+        Route::get('/kas', [KasController::class, 'index']);
+        Route::get('/', [DashboardController::class, 'index']);
+
+    });
     Route::get('/detail-akun', [UserController::class, 'show']);
 });
+
+Route::group(['middleware' => 'auth', 'prefix' => 'karangTaruna'], function () {
+    Route::get('/', [InformasiController::class, 'dashboard']);
+});
+
+
+
 
 Route::post('/penduduk-import', [PendudukController::class, 'import'])->name('import');
 
 
 Route::group(['prefix' => 'data'], function () {
+    Route::get('/umkm/{sort}', [UmkmController::class, 'sort'])->middleware('RW');
     Route::get('/umkm', [UmkmController::class, 'pengajuan']);
+    Route::get('/nikah/{sort}', [StatusNikahController::class, 'sort'])->middleware('RW');
     Route::get('/nikah', [StatusNikahController::class, 'pengajuan']);
+    Route::get('/tinggal/{sort}', [StatusTinggalController::class, 'sort'])->middleware('RW');
     Route::get('/tinggal', [StatusTinggalController::class, 'pengajuan']);
+    Route::get('/meninggal/{sort}', [StatusHidupController::class, 'sort'])->middleware('RW');
     Route::get('/meninggal', [StatusHidupController::class, 'pengajuan']);
     Route::get('/notif', [DashboardController::class, 'notif']);
     Route::get('/notifcount', [DashboardController::class, 'notifcount']);
+    Route::get('/pengeluaran', [KasController::class, 'pengeluaran']);
+    Route::get('/chart/pengeluaran', [KasController::class, 'pengeluaranChart']);
+    Route::get('/pemasukan', [KasController::class, 'index']);
 });
 
 
@@ -134,8 +158,9 @@ Route::group(['prefix' => 'search', 'middleware' => 'auth'], function () {
     Route::get('/umkm/{value}', [UmkmController::class, 'find']);
     Route::get('/tinggal/{value}', [StatusTinggalController::class, 'find']);
     Route::get('/meninggal/{value}', [StatusHidupController::class, 'find']);
-    Route::get('/penduduk/{value}', [PendudukController::class, 'find']);
+    Route::get('/penduduk/type/{type}/{value}', [PendudukController::class, 'find']);
     Route::get('/pengaduan/{value}', [LaporanController::class, 'find']);
+    Route::get('/kas/{value}', [KasController::class, 'find']);
 });
 
 Route::group(['prefix' => 'akun'], function () {
@@ -144,17 +169,44 @@ Route::group(['prefix' => 'akun'], function () {
 
 Route::group(['prefix' => 'persuratan'], function () {
     Route::post('/', [PersuratanController::class, 'store']);
-
+    Route::delete('/{id}', [PersuratanController::class, 'destroy']);
 });
 
 Route::group(['prefix' => 'penduduk'], function () {
     Route::post('/', [PendudukController::class, 'store']);
+    Route::post('/kepalaKeluarga', [PendudukController::class, 'storeKepala']);
     Route::put('/{id}', [PendudukController::class, 'update']);
     Route::delete('{id}', [PendudukController::class, 'destroy']);
+    Route::delete('/kepalaKeluarga/{id}', [PendudukController::class, 'destroyKepala']);
     Route::get('{id}', [PendudukController::class, 'find']);
+    Route::get('sort/{sort}', [PendudukController::class, 'sort']);
 });
 
 Route::group(['prefix' => 'kas'], function () {
     Route::post('/', [KasController::class, 'store']);
 
+    Route::get('/{kk}', [KasController::class, 'detailKas']);
+    Route::delete('pengeluaran/{kk}', [KasController::class, 'destroyPengeluaran']);
+    Route::delete('/{kk}', [KasController::class, 'destroy']);
+
+
+});
+
+
+Route::group(['prefix' => 'konfirmasi'], function () {
+    Route::put('/umkm/{id}', [UmkmController::class, 'update']);
+    Route::put('/pengaduan/{id}', [LaporanController::class, 'update']);
+    Route::put('/nikah/{id}', [StatusNikahController::class, 'update']);
+    Route::put('/tinggal/{id}', [StatusTinggalController::class, 'update']);
+    Route::put('/hidup/{id}', [StatusHidupController::class, 'update']);
+});
+
+
+
+// percobaan
+Route::get('/auth/onedrive', [App\Http\Controllers\OneDriveController::class, 'redirectToProvider']);
+Route::get('callback', [App\Http\Controllers\OneDriveController::class, 'handleProviderCallback']);
+Route::post('upload', [App\Http\Controllers\OneDriveController::class, 'upload']);
+Route::get('upload', function () {
+    return view('coba');
 });

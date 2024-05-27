@@ -44,7 +44,7 @@
   @foreach ($umkm as $item)
      <ul>
         <li class="mb-3 hover:bg-blue-main hover:text-white p-2 rounded-lg">
-            <a href="" class="hover:bg-blue-main    w-full">
+            <a href="{{url('dashboard/pengajuan')}}" class="hover:bg-blue-main    w-full">
                 <div class="card  flex items-center space-x-3 ">
                     <div class="w-2 h-2 bg-blue-main rounded-full"></div>
                     <h1 class="font-bold">Permintaan UMKM : </h1>
@@ -64,7 +64,7 @@
   @foreach ($hidup as $item)
   <ul>
      <li class="mb-3 hover:bg-blue-main hover:text-white p-2 rounded-lg">
-         <a href="" class="hover:bg-blue-main    w-full">
+         <a href="{{url('dashboard/pengajuan')}}" class="hover:bg-blue-main    w-full">
              <div class="card  flex items-center space-x-3 ">
                 <div class="w-2 h-2 bg-blue-main rounded-full"></div>
                     <h1 class="font-bold">Pengajuan Status Hidup : </h1>
@@ -81,7 +81,7 @@
 @foreach ($nikah as $item)
 <ul>
    <li class="mb-3 hover:bg-blue-main hover:text-white p-2 rounded-lg">
-       <a href="" class="hover:bg-blue-main    w-full">
+       <a href="{{url('dashboard/pengajuan')}}" class="hover:bg-blue-main    w-full">
         <div class="card  flex items-center space-x-3 ">
             <div class="w-2 h-2 bg-blue-main rounded-full"></div>
                 <h1 class="font-bold">Pengajuan Status Nikah : </h1>
@@ -98,7 +98,7 @@
 @foreach ($tinggal as $item)
 <ul>
    <li class="mb-3 hover:bg-blue-main hover:text-white p-2 rounded-lg">
-       <a href="" class="hover:bg-blue-main    w-full">
+       <a href="{{url('dashboard/pengajuan')}}" class="hover:bg-blue-main    w-full">
         <div class="card  flex items-center space-x-3 ">
             <div class="w-2 h-2 bg-blue-main rounded-full"></div>
                 <h1 class="font-bold">Pengajuan Status Tinggal : </h1>
@@ -116,7 +116,7 @@
 @foreach ($laporan as $item)
 <ul>
    <li class="mb-3 hover:bg-blue-main hover:text-white p-2 rounded-lg">
-       <a href="" class="hover:bg-blue-main    w-full">
+       <a href="{{url('dashboard/pengaduan')}}" class="hover:bg-blue-main    w-full">
         <div class="card  flex items-center space-x-3 ">
             <div class="w-2 h-2 bg-blue-main rounded-full"></div>
                 <h1 class="font-bold">Pengaduan : </h1>
