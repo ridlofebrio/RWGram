@@ -64,6 +64,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'RW' => \App\Http\Middleware\IsRW::class,
-        'OneDrive' => \App\Http\Middleware\OneDriveMiddleware::class
+        'antikt' => \App\Http\Middleware\AdminMiddleware::class,
+
+
     ];
 }

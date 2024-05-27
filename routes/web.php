@@ -105,19 +105,26 @@ Route::get('logout', [AuthSessionController::class, 'logout']);
 
 
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
+    Route::group(['middleware' => 'antikt'], function () {
+        Route::get('/pengajuan', [UmkmController::class, 'index'])->middleware('RW');
 
-    Route::get('/pengajuan', [UmkmController::class, 'index'])->middleware('RW');
-    Route::get('/pengaduan/{sort}', [LaporanController::class, 'keluhan'])->middleware('RW');
-    Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
-    Route::get('/penduduk', [PendudukController::class, 'index']);
-    Route::get('/bansos', [BansosController::class, 'index'])->middleware('RW');
-    Route::post('/bansos', [BansosController::class, 'normalize'])->middleware('RW')->name('normalize');
-    Route::get('/bansos/generate-pdf', [PDFBansosController::class, 'generatePDF'])->middleware('RW')->name('generatePDF');
-    Route::get('/akun', [UserController::class, 'index'])->middleware('RW');
-    Route::get('/persuratan', [PersuratanController::class, 'index'])->middleware('RW');
-    Route::get('/kas', [KasController::class, 'index']);
-    Route::get('/', [DashboardController::class, 'index']);
+        Route::get('/pengaduan/{sort}', [LaporanController::class, 'keluhan'])->middleware('RW');
+        Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
+        Route::get('/penduduk', [PendudukController::class, 'index']);
+        Route::get('/bansos', [BansosController::class, 'index'])->middleware('RW');
+        Route::post('/bansos', [BansosController::class, 'normalize'])->middleware('RW')->name('normalize');
+        Route::get('/bansos/generate-pdf', [PDFBansosController::class, 'generatePDF'])->middleware('RW')->name('generatePDF');
+        Route::get('/akun', [UserController::class, 'index'])->middleware('RW');
+        Route::get('/persuratan', [PersuratanController::class, 'index'])->middleware('RW');
+        Route::get('/kas', [KasController::class, 'index']);
+        Route::get('/', [DashboardController::class, 'index']);
+
+    });
     Route::get('/detail-akun', [UserController::class, 'show']);
+});
+
+Route::group(['middleware' => 'auth', 'prefix' => 'karangTaruna'], function () {
+    Route::get('/', [InformasiController::class, 'dashboard']);
 });
 
 
