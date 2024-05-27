@@ -33,7 +33,15 @@ class AuthSessionController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect('/dashboard')->with('success', 'berhasil Login');
+            switch (Auth::user()->user_id) {
+                case 2:
+                    return redirect('karangTaruna')->with('success', 'berhasil Login');
+
+
+                default:
+                    return redirect('/dashboard')->with('success', 'berhasil Login');
+
+            }
         }
 
         throw ValidationException::withMessages([
