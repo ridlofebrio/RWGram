@@ -7,7 +7,7 @@
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white  text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
        
        
-    <ul x-data="{active: 'umkm'}" class="flex overflow-x-auto -mb-px">
+    <ul x-data="{active: 'umkm'}" class="{{Auth::user()->user_id == '1'?'flex overflow-x-auto -mb-px':'hidden'}}">
         <li class="">
             <button   @click="active = 'umkm'"  :class="active=='umkm' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"   data="umkm" >Semua RT</button>
         </li>

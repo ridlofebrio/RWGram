@@ -11,7 +11,7 @@
     <div class="grid grid-cols-1  lg:grid-cols-2 gap-5  ">
   
         <div class="left justify-self-start w-full  self-center ">
-            <h1 class=" font-semibold mb-3 text-black" >Ringkasan</h1>
+            <h1 class=" font-semibold mb-3 text-2xl text-black" >Ringkasan</h1>
             <div class="h-full flex  gap-2 flex-wrap w-full justify-around">
                     <div class="row-left flex gap-2 flex-col justify-around">
                         <div class="card bg-white rounded-xl px-2 py-3">
@@ -83,7 +83,7 @@
      
         
 <div class="justify-self-center col-span-1 carousel  w-[400px] xl:w-full">
-    <h1 class=" font-semibold mb-5 text-black" >Pengumuman</h1>
+    <h1 class=" font-semibold mb-5  text-2xl text-black" >Pengumuman</h1>
     <div id="default-carousel" class="relative w-full " data-carousel="slide">
         <!-- Carousel wrapper -->
         <div class="relative h-[326px]  overflow-hidden rounded-lg ">
@@ -180,52 +180,30 @@
 
 {{-- Jumlah Penduduk --}}
 <div class="mt-5">
-  <h1 class=" font-semibold mb-5 text-black" >Jumlah Penduduk</h1>
+  <h1 class=" font-semibold mb-5 text-black  text-2xl" >Jumlah Penduduk</h1>
   <div class=" w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-    <div class="w-full flex justify-end">
-      <div class="flex flex-col">
-       <div class="flex w-full justify-between ">
+    <div class="mb-3 w-full flex gap-5 justify-end">
+      <div class="flex gap-1 flex-col">
+       <div class="flex  items-center w-full justify-between ">
         <p>Laki-laki</p>
-        <div class="p-2 bg-blue-main"></div>
+        <div class="p-2 h-1 rounded-sm ml-2 bg-[#55B9FF]"></div>
        </div>
-       <div class="flex w-full justify-between">
+       <div class="flex items-center  w-full justify-between">
         <p>Perempuan</p>
-       <div class="p-2 bg-blue-main"></div>
+       <div class="p-2 h-1 rounded-sm ml-2 bg-[#AADCFF]"></div>
        </div>
       </div>
-      <select name="" id="">
-        <option value="">tes</option>
+      <select class="ml-5  rounded-full border text-sm font-bold border-neutral-06 text-black" name="" id="">
+        <option value="Februari">Februari</option>
+        <option value="Februari">Februari</option>
+        <option value="Februari">Februari</option>
+        <option value="Februari">Februari</option>
+        <option value="Februari">Februari</option>
       </select>
     </div>
     
     <div id="column-chart">
-      <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
-        <div class="flex justify-between items-center pt-5">
-          <!-- Button -->
-         
-          <!-- Dropdown menu -->
-          <div id="lastDaysdropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-              <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                <li>
-                  <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Yesterday</a>
-                </li>
-                <li>
-                  <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Today</a>
-                </li>
-                <li>
-                  <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 7 days</a>
-                </li>
-                <li>
-                  <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 30 days</a>
-                </li>
-                <li>
-                  <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 90 days</a>
-                </li>
-              </ul>
-          </div>
-          
-        </div>
-      </div>
+    
   </div>
   </div>
   
@@ -233,17 +211,21 @@
 <div class=" mt-5 ">
 
 
-  <h1 class=" font-semibold mb-5 text-black" >Kas</h1>
+  <h1 class=" text-2xl font-semibold mb-5 text-black" >Kas</h1>
   <div class="w-full bg-white rounded-lg shadow dark:bg-gray-800">
 
     <div class="flex justify-between p-4 md:p-6 pb-0 md:pb-0">
       <div class="flex w-full justify-around">
-        <div class="flex space-x-2">
-         <button class="flex items-center justify-center gap-2 border border-black py-2 px-3 rounded-full hover:bg-blue-main"> <div class="p-[2px] rounded-full border-2 border-black "><div class="p-1 rounded-full bg-blue-main"></div></div>Pemasukan</button>
-         <button class="flex items-center justify-center gap-2 border border-black py-2 px-3 rounded-full hover:bg-blue-main"> <div class="p-[2px] rounded-full border-2 border-black "><div class="p-1 rounded-full bg-blue-main"></div></div> Pengeluaran</button>
+        <div class="flex space-x-2" x-data="{active: 'pemasukan'}">
+         <button  @click="active = 'pemasukan'"  data="pemasukan"  class="tab flex items-center justify-center gap-2 border  border-neutral-06 text-neutral-06 py-2 px-3 rounded-full hover:bg-blue-main focus:bg-[#CCEAFF] focus:text-dodger-blue-800 focus:border-dodger-blue-800 focus:outline-none" autofocus> <div class="p-[2px] rounded-full border-2 border-neutral-06  "><div :class="active=='pemasukan' ? 'p-1 rounded-full bg-blue-main':'p-1 rounded-full bg-white'"></div></div>Pemasukan</button>
+         <button @click="active = 'pengeluaran'" data="pengeluaran" class="tab flex items-center justify-center gap-2 border border-neutral-06 text-neutral-06 py-2 px-3 rounded-full hover:bg-blue-main focus:bg-[#CCEAFF] focus:text-dodger-blue-800 focus:border-dodger-blue-800 focus:outline-none"> <div class="p-[2px] rounded-full border-2 border-neutral-06 "><div :class="active=='pengeluaran' ? 'p-1 rounded-full bg-blue-main':'p-1 rounded-full bg-white'"></div></div> Pengeluaran</button>
         </div>
-         <select name="" id="">
-           <option value="">tes</option>
+         <select class="rounded-full border text-sm font-bold border-neutral-06 text-black" name="" id="">
+           <option value="">6 bulan terakhir</option>
+           <option value="">6 bulan terakhir</option>
+           <option value="">6 bulan terakhir</option>
+           <option value="">6 bulan terakhir</option>
+           <option value="">6 bulan terakhir</option>
          </select>
        </div>
       
@@ -251,25 +233,7 @@
 
 
     <div id="labels-chart" class="px-2.5"></div>
-    <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between mt-5 p-4 md:p-6 pt-0 md:pt-0">
-      <div class="flex justify-between items-center pt-5">
-        <!-- Button -->
-        <button
-          id="dropdownDefaultButton"
-          data-dropdown-toggle="lastDaysdropdown"
-          data-dropdown-placement="bottom"
-          class="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 text-center inline-flex items-center dark:hover:text-white"
-          type="button">
-          Last 7 days
-          <svg class="w-2.5 m-2.5 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-          </svg>
-        </button>
-        <!-- Dropdown menu -->
-      
-        
-      </div>
-    </div>
+   
   </div>
 
   
@@ -302,7 +266,7 @@ var tgl = "{{ json_encode($tgl) }}"
 tgl=tgl.replace(/&quot;/g,'"');
 penduduk=penduduk.replace(/&quot;/g,'"');
 penduduk1=penduduk1.replace(/&quot;/g,'"');
-console.log(JSON.parse(penduduk));
+
 // tgl=tgl.replace(,'');
 
 // console.log( JSON.parse(tgl))
@@ -391,6 +355,58 @@ grid: {
   show: true,
 },
 }
+
+
+$('.tab').click(function(index){
+                      console.log('halo');
+                      
+                       if(index.currentTarget.getAttribute('data') == 'pengeluaran'){
+                        $.ajax({
+                          url:"{{url('data/chart')}}"+'/'+index.currentTarget.getAttribute('data'),
+                          datatype:'json',
+                          success:function(data){
+                            document.getElementById("labels-chart").innerHTML='pengeluaran'
+                             options.xaxis.categories = data.tgl
+                             data.data.push(0); 
+                             console.log(data);
+                            options.series[0].data= data.data;
+
+                            if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined' ) {
+                          console.log('langsung');
+                          const chart = new ApexCharts(document.getElementById("labels-chart"), options);
+                          chart.render();
+                          }
+     
+                          }
+                        })
+                       }else{
+                        options.xaxis.categories = JSON.parse(tgl)
+                             
+                            options.series[0].data= data1;
+                            document.getElementById("labels-chart").innerHTML='Pemasukan'
+                            if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined' ) {
+                          console.log('langsung');
+                          const chart = new ApexCharts(document.getElementById("labels-chart"), options);
+                          chart.render();
+                          }
+                       }
+                       
+                        
+
+
+ 
+ 
+              
+                })
+
+            
+                if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined' ) {
+                          console.log('langsung');
+                          document.getElementById("labels-chart").innerHTML='pemasukan'
+                          const chart = new ApexCharts(document.getElementById("labels-chart"), options);
+                          chart.render();
+                          }
+  
 
 // end graph cart
 // bar chart
@@ -493,10 +509,6 @@ if(document.getElementById("column-chart") && typeof ApexCharts !== 'undefined')
 
 
 
-if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined') {
-const chart = new ApexCharts(document.getElementById("labels-chart"), options);
-chart.render();
-}
 
 
 </script>

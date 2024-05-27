@@ -41,7 +41,7 @@ module.exports = {
                 main: [Manrope],
             },
             dropShadow: {
-                button: "0 4px 4px rgba(0, 0, 0, 0.40)",
+                button: "0 4px 4px rgba(0, 0, 0, 0.20)",
                 card: "0 4px 10px rgba(0, 0, 0, 0.25)",
             },
         },
