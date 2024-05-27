@@ -12,6 +12,7 @@ use App\Http\Controllers\StatusNikahController;
 use App\Http\Controllers\StatusTinggalController;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\Auth\AuthSessionController;
+use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\PDFBansosController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -181,10 +182,9 @@ Route::group(['prefix' => 'kas'], function () {
     Route::get('/{kk}', [KasController::class, 'detailKas']);
     Route::delete('pengeluaran/{kk}', [KasController::class, 'destroyPengeluaran']);
     Route::delete('/{kk}', [KasController::class, 'destroy']);
-
-
 });
 
+Route::put('/kriteria/{id}', [KriteriaController::class, 'update'])->middleware('RW');
 
 Route::group(['prefix' => 'konfirmasi'], function () {
     Route::put('/umkm/{id}', [UmkmController::class, 'update']);
