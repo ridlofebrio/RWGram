@@ -9,6 +9,7 @@ use App\Models\RtModel;
 use Carbon\Carbon;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 
 class PendudukController extends Controller
@@ -19,9 +20,41 @@ class PendudukController extends Controller
     public function index()
     {
         //
+
+        $user = Auth::user();
         try {
-            $penduduk = PendudukModel::where('isDelete', '=', '0')->with('kartuKeluarga', 'kartuKeluarga.rt')->paginate(3);
+            $penduduk = PendudukModel::with('kartuKeluarga', 'kartuKeluarga.rt')
+                ->join('kartu_keluarga', 'kartu_keluarga.kartu_keluarga_id', 'penduduk.kartu_keluarga_id')
+                ->join('rt', 'kartu_keluarga.rt_id', 'rt.rt_id')
+                ->where('isDelete', '=', '0')
+                ->where('rt.rt_id', $user->role_id)
+                ->paginate(3);
             $kartuKeluarga = KepalaKeluargaModel::with('penduduk', 'kartuKeluarga')->paginate(3);
+
+            if ($user->user_id == 1) {
+                $penduduk = PendudukModel::with('kartuKeluarga', 'kartuKeluarga.rt')
+
+
+                    ->where('isDelete', '=', '0')
+
+                    ->paginate(3);
+                $kartuKeluarga = KepalaKeluargaModel::with('penduduk', 'kartuKeluarga')->paginate(3);
+            } else {
+                $penduduk = PendudukModel::with('kartuKeluarga', 'kartuKeluarga.rt')
+                    ->join('kartu_keluarga', 'kartu_keluarga.kartu_keluarga_id', 'penduduk.kartu_keluarga_id')
+                    ->join('rt', 'kartu_keluarga.rt_id', 'rt.rt_id')
+                    ->where('isDelete', '=', '0')
+                    ->where('rt.rt_id', $user->role_id)
+                    ->paginate(3);
+                $kartuKeluarga = KepalaKeluargaModel::with('penduduk', 'kartuKeluarga')
+                    ->join('kartu_keluarga', 'kartu_keluarga.kartu_keluarga_id', 'kepala_keluarga.kartu_keluarga_id')
+                    ->join('rt', 'kartu_keluarga.rt_id', 'rt.rt_id')
+                    ->where('rt.rt_id', $user->role_id)->paginate(3);
+            }
+
+
+
+
 
         } catch (\Exception $error) {
             dd($error);
@@ -147,7 +180,7 @@ class PendudukController extends Controller
 
 
             return view('dashboard.penduduk', ['data' => $data, 'active' => 'penduduk']);
-        } 
+        }
 
         if ($type == 'umkm') {
 
