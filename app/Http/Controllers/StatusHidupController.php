@@ -8,20 +8,24 @@ use Illuminate\Http\Request;
 
 class StatusHidupController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $metadata = (object) [
             'title' => 'Status Hidup',
             'description' => 'Halaman Ubah Status Warga'
         ];
 
+        $status = $request->query('status');
+        $query = StatusHidupModel::query();
 
-        $hidup = StatusHidupModel::paginate(1);
+        if ($status) {
+            $query->where('status_pengajuan', $status);
+        }
 
+        $hidup = $query->paginate(5);
 
         return view('statusHidup.index', compact('hidup'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
     }
-
 
     public function create()
     {

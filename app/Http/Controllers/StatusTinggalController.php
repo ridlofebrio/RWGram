@@ -9,15 +9,21 @@ use Illuminate\Http\Request;
 
 class StatusTinggalController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $metadata = (object) [
             'title' => 'Status Tinggal',
             'description' => 'Halaman Ubah Status Warga'
         ];
 
-        // Menggunakan pagination, dengan 10 item per halaman
-        $tinggal = StatusTinggalModel::paginate(1);
+        $status = $request->query('status');
+        $query = StatusTinggalModel::query();
+
+        if ($status) {
+            $query->where('status_pengajuan', $status);
+        }
+
+        $tinggal = $query->paginate(5);
 
         return view('statusTinggal.index', compact('tinggal'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
     }

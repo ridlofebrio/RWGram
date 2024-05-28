@@ -29,12 +29,16 @@ class LaporanController extends Controller
 
     public function indexPenduduk(Request $requets)
     {
+        $status = $requets->query('status');
         $laporan = LaporanModel::query();
 
         if ($requets->has('search')) {
             $laporan->whereHas('penduduk', function ($query) use ($requets) {
                 $query->where('nama_penduduk', 'like', '%' . $requets->search . '%');
             });
+        }
+        if ($status) {
+            $laporan->where('status_laporan', $status);
         }
         $laporan = $laporan->get();
 
