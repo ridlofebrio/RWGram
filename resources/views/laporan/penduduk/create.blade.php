@@ -4,7 +4,7 @@
     <header class="bg-white">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 text-left">
             <div class="flex items-center mb-4">
-                <a href="{{ route('hidup.penduduk.request') }}" class="text-blue-main hover:text-blue-main mr-2">
+                <a href="{{ route('laporan.penduduk.index') }}" class="text-blue-main hover:text-blue-main mr-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5M12 5l-7 7 7 7" />
                     </svg>              
