@@ -1,6 +1,7 @@
 @extends('dashboard.template')
 
 @section('content')
+<h1>Data Penerimaan Bantuan Sosial</h1>
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
     <div class="flex mt-3 w-full justify-between items-center">
         <h2 class="text-xl ml-3">{{ $allData->where('status', 'menunggu')->count() }} Permohonan</h2>
@@ -89,7 +90,7 @@
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $loop->iteration }}</th>
                         <td class="px-6 py-4">{{$bansos->tanggal_bansos}}</td>
-                        <td class="px-6 py-4">{{$bansos->kartuKeluarga->NKK}}</td>
+                        <td class="px-6 py-4">{{$bansos->kartuKeluarga->kartuKeluarga->NKK}}</td>
                         <td class="px-6 py-4">{{$bansos->nama_pengaju}}</td>
                         <td class="px-6 py-4" style="text-transform: capitalize;">{{$bansos->status}}</td>
                         <td class="px-6 py-4 flex gap-2">
@@ -132,7 +133,7 @@
     
                                                   <div class="col-span-2">
                                                       <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NKK</label>
-                                                      <input readonly type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" value="{{$bansos->kartuKeluarga->NKK}}" required="">
+                                                      <input readonly type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" value="{{$bansos->kartuKeluarga->kartuKeluarga->NKK}}" required="">
                                                   </div>
                                                   <div class="col-span-2">
                                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pengaju</label>
@@ -206,6 +207,99 @@
           </li>
         </ul>
     </nav>
+</div>
+
+{{-- Data Kriteria --}}
+<h1 class="mt-3">Data Kriteria</h1>
+<div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+    <div class="filter flex space-x-2 items-center">  
+        <div class="search border w-[25%] focus-within:ring-2 focus-within:ring-blue-main flex items-center justify-between  bg-white rounded-full px-3">
+            <input id="search" data='umkm' type="text" class=" border-none bg-transparent" placeholder="cari apapun">  
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <div  x-data="{open:false}" class="relative" x-cloak >
+            <button @click="open= !open" class="flex px-3 items-center hover:bg-blue-main hover:border-blue-main hover:text-white space-x-5 py-2 border-2 w-min border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p id="sort" class="w-[100px]">Filter</p> <i class="fa fa-chevron-down"></i></button>
+            <div class="absolute  left-1/2 -translate-x-1/2 w-min z-30 bg-white drop-shadow-card" x-show="open"  @click.outside="open=false" >
+               <ul>
+                <li><button @click="open= !open"  data="semua" value="Semua" class="sort hover:bg-blue-main hover:text-white py-2 w-[200px]" >Semua</button></li>
+                <li><button @click="open= !open"  data="benefit" value="Benefit" class="sort hover:bg-blue-main hover:text-white py-2 w-[200px]" >Benefit</button></li>
+                <li><button @click="open= !open"  data='cost' value="Cost" class="sort hover:bg-blue-main hover:text-white py-2 w-[200px]">Cost</button></li>
+               </ul>
+            </div>
+        </div>
+    </div>
+    <div class="relative mt-5 overflow-x-auto shadow-md sm:rounded-lg">
+        <table id='umkm' class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-neutral-03 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">No</th>
+                    <th scope="col" class="px-6 py-3">Nama Kriteria</th>
+                    <th scope="col" class="px-6 py-3">Bobot</th>
+                    <th scope="col" class="px-6 py-3">Attribute</th>
+                    <th scope="col" class="px-6 py-3">Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="body">
+
+                @foreach ($kriteria as $data)
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $loop->iteration }}</th>
+                        <td class="px-6 py-4" style="text-transform: capitalize;">{{$data->nama_kriteria}}</td>
+                        <td class="px-6 py-4">{{ number_format($data->bobot, 2) }}</td>
+                        <td class="px-6 py-4" style="text-transform: capitalize;">{{$data->attribut}}</td>
+                        <td class="px-6 py-4 flex gap-2">
+                            <div x-cloak x-data="{ open: false }">
+                                <button @click="open = true" class="hover:border-none before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100 px-8 py-2 text-base font-medium rounded-full" type="button">
+                                    Edit
+                                </button>
+                                <!-- Main modal -->
+                                <div x-show="open" tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed z-40 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                    <div class="absolute w-[920px] h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4 z-50">
+                                        <!-- Modal content -->
+                                        <div @click.outside="open = false" class="relative bg-white w-full rounded-lg shadow dark:bg-gray-700">
+                                            <!-- Modal header -->
+                                            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Edit Kriteria</h3>
+                                                <button type="button" @click="open = false" class="absolute -top-5 -right-4 bg-blue-main text-white border-2 border-white hover:bg-gray-200 hover:text-gray-900 rounded-full text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
+                                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                    </svg>
+                                                    <span class="sr-only">Close modal</span>
+                                                </button>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <form action="{{ url('/kriteria/'.$data->kriteria_id) }}" method="POST" class="p-4 md:p-5 text-left">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="grid gap-4 mb-4 grid-cols-2">
+                                                    <div class="col-span-2">
+                                                        <label for="nama_kriteria" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Kriteria</label>
+                                                        <input type="text" name="nama_kriteria" id="nama_kriteria" value="{{ $data->nama_kriteria }}" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" style="text-transform: capitalize;" placeholder="Nama Kriteria" required>
+                                                    </div>
+                                                    <div class="col-span-2">
+                                                        <label for="bobot" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bobot</label>
+                                                        <input type="number" step="0.01" name="bobot" id="bobot" value="{{ number_format($data->bobot, 2) }}" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Bobot" required>
+                                                    </div>
+                                                    <div class="col-span-2">
+                                                        <label for="attribut" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Attribut</label>
+                                                        <input type="text" name="attribut" id="attribut" value="{{ $data->attribut }}" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" style="text-transform: capitalize;" placeholder="Attribut" required>
+                                                    </div>
+                                                </div>
+                                                <button class="hover:border-none before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100 px-8 py-2 text-base font-medium rounded-full" type="submit">
+                                                    Simpan
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40"></div>
+                                </div>                                
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
 @endsection
 
