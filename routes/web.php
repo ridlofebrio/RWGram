@@ -12,6 +12,8 @@ use App\Http\Controllers\StatusNikahController;
 use App\Http\Controllers\StatusTinggalController;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\Auth\AuthSessionController;
+use App\Http\Controllers\KriteriaController;
+use App\Http\Controllers\PDFBansosController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -104,17 +106,26 @@ Route::get('logout', [AuthSessionController::class, 'logout']);
 
 
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
+    Route::group(['middleware' => 'antikt'], function () {
+        Route::get('/pengajuan', [UmkmController::class, 'index'])->middleware('RW');
 
-    Route::get('/pengajuan', [UmkmController::class, 'index'])->middleware('RW');
-    Route::get('/pengaduan/{sort}', [LaporanController::class, 'keluhan'])->middleware('RW');
-    Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
-    Route::get('/penduduk', [PendudukController::class, 'index']);
-    Route::get('/bansos', [BansosController::class, 'index'])->middleware('RW');
-    Route::get('/akun', [UserController::class, 'index'])->middleware('RW');
-    Route::get('/persuratan', [PersuratanController::class, 'index'])->middleware('RW');
-    Route::get('/kas', [KasController::class, 'index'])->middleware('RW');
-    Route::get('/', [DashboardController::class, 'index']);
+        Route::get('/pengaduan/{sort}', [LaporanController::class, 'keluhan'])->middleware('RW');
+        Route::get('/pengaduan', [LaporanController::class, 'keluhan'])->middleware('RW');
+        Route::get('/penduduk', [PendudukController::class, 'index']);
+        Route::get('/bansos', [BansosController::class, 'index'])->middleware('RW');
+        Route::post('/bansos', [BansosController::class, 'normalize'])->middleware('RW')->name('normalize');
+        Route::get('/bansos/generate-pdf', [PDFBansosController::class, 'generatePDF'])->middleware('RW')->name('generatePDF');
+        Route::get('/akun', [UserController::class, 'index'])->middleware('RW');
+        Route::get('/persuratan', [PersuratanController::class, 'index'])->middleware('RW');
+        Route::get('/kas', [KasController::class, 'index']);
+        Route::get('/', [DashboardController::class, 'index']);
+
+    });
     Route::get('/detail-akun', [UserController::class, 'show']);
+});
+
+Route::group(['middleware' => 'auth', 'prefix' => 'karangTaruna'], function () {
+    Route::get('/', [InformasiController::class, 'dashboard']);
 });
 
 
@@ -135,6 +146,7 @@ Route::group(['prefix' => 'data'], function () {
     Route::get('/notif', [DashboardController::class, 'notif']);
     Route::get('/notifcount', [DashboardController::class, 'notifcount']);
     Route::get('/pengeluaran', [KasController::class, 'pengeluaran']);
+    Route::get('/chart/pengeluaran', [KasController::class, 'pengeluaranChart']);
     Route::get('/pemasukan', [KasController::class, 'index']);
 });
 
@@ -147,8 +159,9 @@ Route::group(['prefix' => 'search', 'middleware' => 'auth'], function () {
     Route::get('/umkm/{value}', [UmkmController::class, 'find']);
     Route::get('/tinggal/{value}', [StatusTinggalController::class, 'find']);
     Route::get('/meninggal/{value}', [StatusHidupController::class, 'find']);
-    Route::get('/penduduk/{value}', [PendudukController::class, 'find']);
+    Route::get('/penduduk/type/{type}/{value}', [PendudukController::class, 'find']);
     Route::get('/pengaduan/{value}', [LaporanController::class, 'find']);
+    Route::get('/kas/{value}', [KasController::class, 'find']);
 });
 
 Route::group(['prefix' => 'akun'], function () {
@@ -157,23 +170,28 @@ Route::group(['prefix' => 'akun'], function () {
 
 Route::group(['prefix' => 'persuratan'], function () {
     Route::post('/', [PersuratanController::class, 'store']);
-
+    Route::delete('/{id}', [PersuratanController::class, 'destroy']);
 });
 
 Route::group(['prefix' => 'penduduk'], function () {
     Route::post('/', [PendudukController::class, 'store']);
+    Route::post('/kepalaKeluarga', [PendudukController::class, 'storeKepala']);
     Route::put('/{id}', [PendudukController::class, 'update']);
     Route::delete('{id}', [PendudukController::class, 'destroy']);
+    Route::delete('/kepalaKeluarga/{id}', [PendudukController::class, 'destroyKepala']);
     Route::get('{id}', [PendudukController::class, 'find']);
     Route::get('sort/{sort}', [PendudukController::class, 'sort']);
-
 });
 
 Route::group(['prefix' => 'kas'], function () {
     Route::post('/', [KasController::class, 'store']);
 
+    Route::get('/{kk}', [KasController::class, 'detailKas']);
+    Route::delete('pengeluaran/{kk}', [KasController::class, 'destroyPengeluaran']);
+    Route::delete('/{kk}', [KasController::class, 'destroy']);
 });
 
+Route::put('/kriteria/{id}', [KriteriaController::class, 'update'])->middleware('RW');
 
 Route::group(['prefix' => 'konfirmasi'], function () {
     Route::put('/umkm/{id}', [UmkmController::class, 'update']);

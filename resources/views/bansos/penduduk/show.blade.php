@@ -23,6 +23,11 @@
                 <strong class="font-bold">Selamat!</strong>
                 <span class="block sm:inline">Anda berhak untuk menerima bantuan sosial.</span>
             </div>
+        @elseif ($bansos->status == 'menunggu')
+            <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative mx-auto" role="alert">
+                <strong class="font-bold">Perhatian!</strong>
+                <span class="block sm:inline">Status pengajuan Anda sedang dalam proses peninjauan.</span>
+            </div>
         @else
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mx-auto" role="alert">
                 <strong class="font-bold">Maaf!</strong>
@@ -46,60 +51,26 @@
                 <div class="mt-1 mb-4">
                     <div class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
                         text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                        focus:ring-blue-600 sm:text-sm sm:leading-6" contenteditable="false">{{ $bansos->kartuKeluarga->NKK }}</div>
+                        focus:ring-blue-600 sm:text-sm sm:leading-6" contenteditable="false">{{ $bansos->kartuKeluarga->kartuKeluarga->NKK }}</div>
                 </div>
             </div>
-            <div class="sm:col-span-4">
-                <label class="block text-sm font-medium leading-6 text-gray-900">Total Pendapatan</label>
-                <div class="mt-1 mb-4">
-                    <div class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                        focus:ring-blue-600 sm:text-sm sm:leading-6" contenteditable="false">
-                        {{-- Ubah format angka ke format mata uang Rupiah --}}
-                        Rp{{ number_format($bansos->total_pendapatan, 0, ',', '.') }}
+            @php
+                $count = 0;
+            @endphp
+
+            @foreach ($kriteria as $item)
+                @php
+                    $count++;
+                @endphp
+                <div class="sm:col-span-4">
+                    <label class="block text-sm font-medium leading-6 text-gray-900">{{ $item->nama_kriteria }}</label>
+                    <div class="mt-1 mb-4">
+                        <div class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
+                            text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
+                            focus:ring-blue-600 sm:text-sm sm:leading-6" contenteditable="false">{{ $bansos['c'.$count] }}</div>
                     </div>
                 </div>
-            </div>            
-            <div class="sm:col-span-4">
-                <label class="block text-sm font-medium leading-6 text-gray-900">Jumlah Tanggungan</label>
-                <div class="mt-1 mb-4">
-                    <div class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                        focus:ring-blue-600 sm:text-sm sm:leading-6" contenteditable="false">{{ $bansos->jumlah_tanggungan }}</div>
-                </div>
-            </div>
-            <div class="sm:col-span-4">
-                <label class="block text-sm font-medium leading-6 text-gray-900">Jumlah Kendaraan</label>
-                <div class="mt-1 mb-4">
-                    <div class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                        focus:ring-blue-600 sm:text-sm sm:leading-6" contenteditable="false">{{ $bansos->jumlah_kendaraan }}</div>
-                </div>
-            </div>
-            <div class="sm:col-span-4">
-                <label class="block text-sm font-medium leading-6 text-gray-900">Jumlah Watt Listrik</label>
-                <div class="mt-1 mb-4">
-                    <div class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                        focus:ring-blue-600 sm:text-sm sm:leading-6" contenteditable="false">{{ $bansos->jumlah_watt }}</div>
-                </div>
-            </div>
-            <div class="sm:col-span-4">
-                <label class="block text-sm font-medium leading-6 text-gray-900">Luas Tanah</label>
-                <div class="mt-1 mb-4">
-                    <div class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                        focus:ring-blue-600 sm:text-sm sm:leading-6" contenteditable="false">{{ $bansos->luas_tanah }}</div>
-                </div>
-            </div>
-            <div class="sm:col-span-4">
-                <label class="block text-sm font-medium leading-6 text-gray-900">Luas Rumah</label>
-                <div class="mt-1 mb-4">
-                    <div class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                        text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
-                        focus:ring-blue-600 sm:text-sm sm:leading-6" contenteditable="false">{{ $bansos->luas_rumah }}</div>
-                </div>
-            </div>
+            @endforeach
             <div class="sm:col-span-4">
                 <label class="block text-sm font-medium leading-6 text-gray-900">Tanggal Pengajuan</label>
                 <div class="mt-1 mb-4">

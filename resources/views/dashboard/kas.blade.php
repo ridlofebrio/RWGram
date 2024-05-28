@@ -7,10 +7,10 @@
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white  text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
        
   <ul x-data="{active: 'pemasukan'}" class="flex overflow-x-auto -mb-px">
-    <li class="me-2">
+    <li class="">
         <button   @click="active = 'pemasukan'"  :class="active=='pemasukan' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"   data="pemasukan" >Pemasukan</button>
     </li>
-    <li class="me-2">
+    <li class="">
       <button   @click="active = 'pengeluaran'"  :class="active=='pengeluaran' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"   data="pengeluaran" >Pengeluaran</button>
   </li>
    
@@ -27,6 +27,8 @@
 
 
     <div id="labels-chart" class="px-2.5"></div>
+    <div id="labels-chart1" class="px-2.5"></div>
+
     
   </div>
 
@@ -44,7 +46,7 @@
   <div class="filter flex space-x-2 mt-5 items-center">
      
       <div  x-data="{open:false}" class="relative" x-cloak >
-          <button @click="open= !open" class="flex px-3 items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p>-semua-</p> <i class="fa fa-chevron-down"></i></button>
+          <button @click="open= !open" class="flex px-3 w-[150px] hover:bg-blue-main hover:border-blue-main hover:text-white items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p>-semua-</p> <i class="fa fa-chevron-down"></i></button>
           <div class="absolute left-1/2 -translate-x-1/2  px-3 py-3 z-30 bg-white drop-shadow-card" x-show="open" @click.outside="open=false" >
              <ul>
               <li><button data="semua" class="sort" >Semua</button></li>
@@ -55,8 +57,7 @@
              </ul>
           </div>
       </div>
-    
-      <div class="search border-2 bg-neutral-04 rounded-full px-3">
+      <div class="{{Auth::user()->user_id== 1 ? 'hidden':' search border w-[70%] focus-within:ring-2 focus-within:ring-blue-main flex items-center justify-between  bg-white rounded-full px-3'}}">
           <i class="fa-solid fa-magnifying-glass"></i>
 
           <input id="search" type="text" class="border-none bg-transparent" placeholder="cari apapun">  
@@ -482,49 +483,52 @@
                         {{$loop->index +1 }}
                       </th>
                       <td class="px-6 py-4">
-                         {{$item->kartuKeluarga->NKK}}
+                     @if(Auth::user()->user_id == 1)
+                     {{$item->user->nama_user}}
+                     @else
+                         {{$item->kartuKeluarga->penduduk->nama_penduduk}}
+                     @endif
                       </td>
                      
                       <td scope="col" class="px-6 py-3">
-                        
-                        {{$item->Januari ? 'yes':'-'}}
+                        <i class=" fa-solid {{$item->Januari ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i>
+                       
                     </td>
                     <td scope="col" class="px-6 py-3">
-                      {{$item->Februari ? 'yes':'-'}}
+                      <i class=" fa-solid {{$item->Februari  ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i>
                     </td>
                     <td scope="col" class="px-6 py-3">
-                      {{$item->Maret ? 'yes':'-'}}
+                      <i class=" fa-solid {{$item->Maret  ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i> 
                     </td>
                     <td scope="col" class="px-6 py-3">
-                      {{$item->April ? 'yes':'-'}}
+                      <i class=" fa-solid {{$item->April  ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i>
                   </td>
                   <td scope="col" class="px-6 py-3">
-                    {{$item->Mei ? 'yes':'-'}}
+                    <i class=" fa-solid {{$item->Mei  ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i> 
                 </td>
                 <td scope="col" class="px-6 py-3">
-                  {{$item->Juni ? 'yes':'-'}}
+                  <i class=" fa-solid {{$item->Juni  ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i> 
                         </td>
                         <td scope="col" class="px-6 py-3">
-                          {{$item->Juli ? 'yes':'-'}}
+                          <i class=" fa-solid {{$item->Juli  ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i> 
                       </td>
                       <td scope="col" class="px-6 py-3">
-                        {{$item->Agustus ? 'yes':'-'}}
+                        <i class=" fa-solid {{$item->Agustus  ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i> 
+                    <td scope="col" class="px-6 py-3">
+                      <i class=" fa-solid {{$item->September  ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i>
                     </td>
                     <td scope="col" class="px-6 py-3">
-                      {{$item->September ? 'yes':'-'}}
+                      <i class=" fa-solid {{$item->Oktober  ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i>                  
+                         </td>
+                    <td scope="col" class="px-6 py-3">
+                      <i class=" fa-solid {{$item->November  ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i>
                     </td>
                     <td scope="col" class="px-6 py-3">
-                      {{$item->Oktober ? 'yes':'-'}}
+                      <i class=" fa-solid {{$item->Desember  ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i>
                     </td>
-                    <td scope="col" class="px-6 py-3">
-                      {{$item->November ? 'yes':'-'}}
-                    </td>
-                    <td scope="col" class="px-6 py-3">
-                      {{$item->Desember ? 'yes':'-'}}
-                    </td>
-          <td class="flex">
+          <td class="flex items-center h-full">
             <div x-cloak x-data="{ open: false }">
-              <button @click="open = true"  class="hover:border-none  before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  " type="button">
+              <button  onclick="fetchDetail(event,{{$item->id_kas}})"  @click="open = true"  class="my-2 hover:border-none  before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  " type="button">
                   Detail
                 </button>
                 
@@ -533,7 +537,7 @@
                 
                   <div  class="absolute w-[920px] h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  p-4  z-50 ">
                         <!-- Modal content -->
-                        <div @click.outside="open = false" class="relative bg-white w-full  rounded-lg shadow dark:bg-gray-700">
+                        <div @click.outside="open = false" id='modal-{{$item->id_kas}}' class="relative bg-white w-full  rounded-lg shadow dark:bg-gray-700">
                             <!-- Modal header -->
                             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
@@ -547,27 +551,39 @@
                                 </button>
                             </div>
                             <!-- Modal body -->
-                            <form class="p-4 md:p-5 text-left">
+                            <form action="{{url('/kas')}}" method="POST"  class="p-4 md:p-5 text-left">
+                              @csrf
+                              @method('POST')
                               <div class="grid gap-4 mb-4 grid-cols-2">
-                                  <div class="col-span-2">
-                                      <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NKK</label>
-                                      <input type="text" name="name" id="name" value="{{$item->kartuKeluarga->NKK}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="NKK" required="">
-                                  </div>
-                                 
+                                @if(Auth::user()->user_id == 1)
+                                <div class="col-span-2">
+                                  <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sumber</label>
+                                  <input type="text" name="nama_user" id="name" value="{{$item->user->nama_user}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="NKK" required="">
+                              </div>
+                             
+                     @else
+                     <div class="col-span-2">
+                      <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NKK</label>
+                      <input type="text" name="NKK" id="name" value="{{$item->kartuKeluarga->kartuKeluarga->NKK}}" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="NKK" required="">
+                  </div>
+                 
+                     @endif
+                                  
                               </div>
     
-                            
-              
+            
     
-                            
+                              <div id="list" >
                            
-                                  {{-- <button onclick="openModal(id = {{$penduduk->penduduk_id}})" x-bind='SomeButton' class="hover:border-none  before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  " type="button">
-                                      Edit
-                                    </button> --}}
-  
-                                  
+                              </div>
+                              <button type="button" class="block w-full text-center text-white py-3 hover:bg-blue-main" onclick="addDetail(event,'modal-{{$item->id_kas}}')">+</button>
+                              <button type="submit" class="text-white inline-flex items-center bg-blue-700 mt-5 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                                Simpan
+                            </button> 
                             
                           </form>
+                        
                         </div>
                     </div>
                     <div class="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40"></div> 
@@ -597,10 +613,16 @@
   </table>
     </div>
   
-
+    <div class="w-full mt-5 flex justify-end">
+      <div class="py-3 pl-3 drop-shadow-button rounded-xl text-left pr-10 border border-neutral-03 bg-white">
+        <h1 class="text-md  text-neutral-05">Total Kas</h1>
+        <h1 class=" text-2xl font-regular text-black">Rp. {{$jumlah}}</h1>
+      </div>
+    </div>
 
   </div>
     
+
 
  
 @endsection
@@ -608,132 +630,299 @@
 @push('js')
 
 <script>
+// ============= fungsi fetch data ================= //
+  const fetchDetail= (event,noKK)=>
+  {
+    
+    $.ajax({
+      url:"{{url('kas')}}"+"/"+noKK,
+      method:'GET',
+      datatype:'json',
+      beforeSend: function() {
+              $("#loading-image").show();
+           },
+      success:function(data){
+     
+        event.target.parentElement.querySelector('#list').innerHTML=data ;         
+        //  $('#list').html(data)
+        $("#loading-image").hide();
+      
+      },
+      error:function(error){
+        console.log(error);
+      }
+    })
+  }
+
+  // ============= end fetch data ================= //
+
+  // change name
+    const changeName= (event)=>{
+      let target = event.target
+      let form =target.parentElement.parentElement;
+   
+      let check= form.querySelector('#checkbox');
+      let tanggal= form.querySelector('#tanggal');
+      let jumlah= form.querySelector('#jumlah');
+      check.value=target.value;
+
+      tanggal.setAttribute('name',target.value+'[]')
+      jumlah.setAttribute('name',target.value+'[]')
+ 
+      target.setAttribute('name',target.value+'[]')
+      
+    }
+  // end change name
+
+// add detail //
+
+const addDetail= (event,idModal)=>{
+event.preventDefault()
+  let data = `
+<div class="flex w-full justify-between mt-5">
+    <div class=" flex flex-col">
+      <label for="">Pilih</label>
+     <div class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+      <input checked id ="checkbox" class=" border border-gray-900 rounded-lg   focus:ring-primary-600 focus:border-primary-600 block  p-2.5 " type="checkbox" name='cek[]' value="" id="">
+     </div>
+    </div>
+    <div class=" flex flex-col">
+      <label for="">Bulan</label>
+     
+      <select name="" onchange="changeName(event)" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[200px] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" id="">
+  <option value="Januari">Januari</option>
+  <option value="Februari">Februari</option>
+  <option value="Maret">Maret</option>
+  <option value="April">April</option>
+  <option value="Mei">Mei</option>
+  <option value="Juni">Juni</option>
+  <option value="Juli">Juli</option>
+  <option value="Agustus">Agustus</option>
+  <option value="September">September</option>
+  <option value="Oktober">Oktober</option>
+  <option value="November">November</option>
+  <option value="Desember">desember</option>
+</select>
+    </div>
+    <div class=" flex flex-col">
+      <label for="">Tanggal</label>
+      <input class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="date" name="" id="tanggal">
+    </div>
+    <div class=" flex flex-col">
+      <label for="">Jumlah</label>
+      <input value="15000" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="number" name="" id="jumlah">
+    </div>
+  </div>
+`
+const modal=document.getElementById(idModal);
+console.log('#'+idModal+' list')
+$('#' +idModal+' #list ').append(data);
+}
+
+// end //
+
+
+
+
 $(document).ready(function () {
 
+  // VARIABEL
+
+
+                          var data1 = JSON.parse("{{ json_encode($data) }}");
+                          data1.push(0);
+                          var tgl = "{{ json_encode($tgl) }}"
+                          tgl=tgl.replace(/&quot;/g,'"');
+
+
+                          // start graph cart
+                          const options = {
+                          // set the labels option to true to show the labels on the X and Y axis
+                          xaxis: {
+                            show: true,
+                            categories:JSON.parse(tgl),
+                            labels: {
+                              show: true,
+                              style: {
+                                fontFamily: "Inter, sans-serif",
+                                cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
+                              }
+                            },
+                            axisBorder: {
+                              show: false,
+                            },
+                            axisTicks: {
+                              show: false,
+                            },
+                          },
+                          yaxis: {
+                            show: true,
+                            labels: {
+                              show: true,
+                              style: {
+                                fontFamily: "Inter, sans-serif",
+                                cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
+                              },
+                              formatter: function (value) {
+                                
+                                return 'Rp.' + value;
+                              }
+                            }
+                          },
+                          series: [
+                            {
+                              name: "Pemasukan",
+                              data: data1,
+                              color: "#1A56DB",
+                            }
+                          
+                          ],
+                          chart: {
+                            sparkline: {
+                              enabled: false
+                            },
+                            height: "100%",
+                            width: "100%",
+                            type: "area",
+                            fontFamily: "Inter, sans-serif",
+                            dropShadow: {
+                              enabled: false,
+                            },
+                            toolbar: {
+                              show: false,
+                            },
+                          },
+                          tooltip: {
+                            enabled: true,
+                            x: {
+                              show: false,
+                            },
+                          },
+                          fill: {
+                            type: "gradient",
+                            gradient: {
+                              opacityFrom: 0.55,
+                              opacityTo: 0,
+                              shade: "#1C64F2",
+                              gradientToColors: ["#1C64F2"],
+                            },
+                          },
+                          dataLabels: {
+                            enabled: false,
+                          },
+                          stroke: {
+                            width: 6,
+                          },
+                          legend: {
+                            show: false
+                          },
+                          grid: {
+                            show: true,
+                          },
+                          }
+
+                         
+  // END 
+ 
 
 
 
-
-
-
-
-  
-      $('.tab').click(function(index){
+    $('.tab').click(function(index){
                       console.log('halo');
                     $.ajax({
                         url: "http://127.0.0.1:8000/data/"+index.currentTarget.getAttribute('data'),
                         beforeSend: function() {
-              $("#loading-image").show();
-           },
+                    $("#loading-image").show();
+      },
                         
                     }).done(function (data) {
+                   
                         const parser = new DOMParser();
-                        
                         const doc = parser.parseFromString(data, 'text/html');    
                         const table = doc.querySelector('#umkm');
+                      
                         $('#umkm').html(table);
                         $("#loading-image").hide();
-                    })
-                    
-                    
-                })
-    })
-  
+                      
+                       if(index.currentTarget.getAttribute('data') == 'pengeluaran'){
+                        $.ajax({
+                          url:"{{url('data/chart')}}"+'/'+index.currentTarget.getAttribute('data'),
+                          datatype:'json',
+                          success:function(data){
+                            document.getElementById("labels-chart").innerHTML='pengeluaran'
+                             options.xaxis.categories = data.tgl
+                             data.data.push(0);
+                            options.series[0].data= data.data;
 
-var data1 = JSON.parse("{{ json_encode($data) }}");
-data1.push(0);
-var tgl = "{{ json_encode($tgl) }}"
-tgl=tgl.replace(/&quot;/g,'"');
+                            if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined' ) {
+                          console.log('langsung');
+                          const chart = new ApexCharts(document.getElementById("labels-chart"), options);
+                          chart.render();
+                          }
+                          
+             
+
+                          // start graph cart
+                          
+                          
+                           
+                          
+                          }
+                        })
+                       }else{
+                        options.xaxis.categories = JSON.parse(tgl)
+                             
+                            options.series[0].data= data1;
+                            document.getElementById("labels-chart").innerHTML='Pemasukan'
+                            if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined' ) {
+                          console.log('langsung');
+                          const chart = new ApexCharts(document.getElementById("labels-chart"), options);
+                          chart.render();
+                          }
+                       }
+                       
+                        
 
 
-// start graph cart
-const options = {
-// set the labels option to true to show the labels on the X and Y axis
-xaxis: {
-  show: true,
-  categories:JSON.parse(tgl),
-  labels: {
-    show: true,
-    style: {
-      fontFamily: "Inter, sans-serif",
-      cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
-    }
-  },
-  axisBorder: {
-    show: false,
-  },
-  axisTicks: {
-    show: false,
-  },
-},
-yaxis: {
-  show: true,
-  labels: {
-    show: true,
-    style: {
-      fontFamily: "Inter, sans-serif",
-      cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
-    },
-    formatter: function (value) {
-      return 'Rp.' + value;
-    }
-  }
-},
-series: [
-  {
-    name: "Pemasukan",
-    data: data1,
-    color: "#1A56DB",
-  }
+ })
  
-],
-chart: {
-  sparkline: {
-    enabled: false
-  },
-  height: "100%",
-  width: "100%",
-  type: "area",
-  fontFamily: "Inter, sans-serif",
-  dropShadow: {
-    enabled: false,
-  },
-  toolbar: {
-    show: false,
-  },
-},
-tooltip: {
-  enabled: true,
-  x: {
-    show: false,
-  },
-},
-fill: {
-  type: "gradient",
-  gradient: {
-    opacityFrom: 0.55,
-    opacityTo: 0,
-    shade: "#1C64F2",
-    gradientToColors: ["#1C64F2"],
-  },
-},
-dataLabels: {
-  enabled: false,
-},
-stroke: {
-  width: 6,
-},
-legend: {
-  show: false
-},
-grid: {
-  show: true,
-},
-}
-if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined') {
-const chart = new ApexCharts(document.getElementById("labels-chart"), options);
-chart.render();
-}
+              
+                })
+                $('#search').change(function () {
+                    let data = ($(this).val())
+                    if(data == null || data == ""){
+                        data='kosong';
+                    }
+                    console.log(data);
+                    
+                  
+                    $.ajax({
+                        url: "http://127.0.0.1:8000/search/kas/"+data,
+                        type: "GET",
+                        datatype:'application/x-some-custom-type',
+                        async:true,
+                        
+                    }).done(function (data) {    
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(data, 'text/html');    
+                        const table = doc.getElementById('umkm');
+                            $('#umkm').html(table); 
+                    })
+
+                })
+
+                if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined' ) {
+                          console.log('langsung');
+                          document.getElementById("labels-chart").innerHTML='pemasukan'
+                          const chart = new ApexCharts(document.getElementById("labels-chart"), options);
+                          chart.render();
+                          }
+  
+    })
+
+   
+
+                         
 
 
 </script>

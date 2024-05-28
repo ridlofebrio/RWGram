@@ -15,9 +15,9 @@ class StatusHidupController extends Controller
             'description' => 'Halaman Ubah Status Warga'
         ];
 
-    
+
         $hidup = StatusHidupModel::paginate(1);
-    
+
 
         return view('statusHidup.index', compact('hidup'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
     }
@@ -29,7 +29,7 @@ class StatusHidupController extends Controller
             'title' => 'Status Hidup',
             'description' => 'Halaman Ubah Status Hidup Warga'
         ];
-        return view('statusHidup.create', ['activeMenu' => 'hidup', 'metadata' => $metadata]);
+        return view('statusHidup.create', ['activeMenu' => 'permohonan', 'metadata' => $metadata]);
     }
 
 
@@ -60,8 +60,12 @@ class StatusHidupController extends Controller
         } else {
 
             $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->first();
+            if ($id) {
 
-            $data = StatusHidupModel::whereAny(['penduduk_id', 'id_penduduk_meninggal'], $id->penduduk_id)->paginate(3);
+                $data = StatusHidupModel::whereAny(['penduduk_id', 'id_penduduk_meninggal'], $id->penduduk_id)->paginate(3);
+            } else {
+                $data = StatusHidupModel::whereAny(['penduduk_id', 'id_penduduk_meninggal'], 0)->paginate(3);
+            }
         }
 
         return view('component.statusHidup', ['data' => $data]);
@@ -124,9 +128,9 @@ class StatusHidupController extends Controller
         if (empty($search)) {
             $data = StatusHidupModel::paginate(5);
         } else {
-            $data = StatusHidupModel::whereHas('penduduk', function($query) use ($search) {
+            $data = StatusHidupModel::whereHas('penduduk', function ($query) use ($search) {
                 $query->where('nama_penduduk', 'like', '%' . $search . '%')
-                      ->orWhere('NIK', 'like', '%' . $search . '%');
+                    ->orWhere('NIK', 'like', '%' . $search . '%');
             })->paginate(3);
         }
 

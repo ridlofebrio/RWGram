@@ -23,10 +23,11 @@ class DatabaseSeeder extends Seeder
             RwSeeder::class,
             RtSeeder::class,
             kartuKeluargaSeeder::class,
-            Kas::class,
+
             PendudukSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
+            Kas::class,
             PersuratanSeeder::class,
             LaporanSeeder::class,
             BansosSeeder::class,
@@ -37,6 +38,7 @@ class DatabaseSeeder extends Seeder
             KepalaKeluargaSeeder::class,
             InformasiSeeder::class,
             UmkmSeeder::class,
+            KriteriaSeeder::class,
             KasLogSeeder::class
         ]);
     }

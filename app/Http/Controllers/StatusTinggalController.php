@@ -15,10 +15,10 @@ class StatusTinggalController extends Controller
             'title' => 'Status Tinggal',
             'description' => 'Halaman Ubah Status Warga'
         ];
-    
+
         // Menggunakan pagination, dengan 10 item per halaman
         $tinggal = StatusTinggalModel::paginate(1);
-    
+
         return view('statusTinggal.index', compact('tinggal'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
     }
 
@@ -30,7 +30,7 @@ class StatusTinggalController extends Controller
             'title' => 'Status Tinggal',
             'description' => 'Halaman Ubah tinggal Warga'
         ];
-        return view('statusTinggal.create', ['activeMenu' => 'tinggal', 'metadata' => $metadata]);
+        return view('statusTinggal.create', ['activeMenu' => 'permohonan', 'metadata' => $metadata]);
     }
 
     public function pengajuan()
@@ -58,8 +58,13 @@ class StatusTinggalController extends Controller
             return view('component.statusTinggal', ['data' => $data]);
         } else {
 
-            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->paginate(3);
-            $data = StatusTinggalModel::findMany($id);
+            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->first();
+            if ($id) {
+                $data = StatusTinggalModel::whereAny(['penduduk_id'], $id->penduduk_id)->paginate(3);
+
+            } else {
+                $data = StatusTinggalModel::whereAny(['penduduk_id'], 0)->paginate(3);
+            }
         }
 
         return view('component.statusTinggal', ['data' => $data]);
@@ -121,9 +126,9 @@ class StatusTinggalController extends Controller
         if (empty($search)) {
             $data = StatusTinggalModel::paginate(5);
         } else {
-            $data = StatusTinggalModel::whereHas('penduduk', function($query) use ($search) {
+            $data = StatusTinggalModel::whereHas('penduduk', function ($query) use ($search) {
                 $query->where('nama_penduduk', 'like', '%' . $search . '%')
-                      ->orWhere('NIK', 'like', '%' . $search . '%');
+                    ->orWhere('NIK', 'like', '%' . $search . '%');
             })->paginate(3);
         }
 

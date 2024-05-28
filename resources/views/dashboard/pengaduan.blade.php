@@ -22,7 +22,7 @@
         <h2 class="text-xl ml-3" > {{count($data)}} Laporan</h2>
         <div class="filter flex">
             <div x-cloak x-data="{open:false}" class="relative " >
-                <button  @click="open= !open" class="flex px-3 items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p id="sort">-semua-</p> <i class="fa fa-chevron-down"></i></button>
+                <button  @click="open= !open" class="flex px-3 items-center w-[150px] hover:bg-blue-main hover:border-blue-main hover:text-white space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p id="sort">-semua-</p> <i class="fa fa-chevron-down"></i></button>
                 <div class="absolute mt-1  left-1/2 -translate-x-1/2 p-0 z-30 bg-white drop-shadow-card w-full" x-show="open" @click.outside="open=false" >
                    <ul>
                     <li><button  @click="open= !open" class="hover:bg-blue-main px-5 py-2 w-full sort" data="selesai"  >selesai</button></li>
@@ -32,10 +32,10 @@
                    </ul>
                 </div>
             </div>
-            <div class="search border-2 border-neutral-400 rounded-full px-3">
+            <div class="search border w-[70%] focus-within:ring-2 focus-within:ring-blue-main flex items-center justify-between  bg-white rounded-full px-3">
+                
+                <input id="search" type="text" class="border-none bg-transparent" placeholder="cari apapun">  
                 <i class="fa-solid fa-magnifying-glass"></i>
-
-                <input id="search" type="text" class="border-none bg-transparent" placeholder="search">  
             </div>
         </div>
     </div>        
@@ -115,7 +115,7 @@
 
                                <div  @click.outside="open = false" class="absolute text-left w-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl  px-4 py-6 bg-white z-50">
                                 <h1 class="text-black text-xl mb-3">Pesan</h1>
-                                <form action="{{url('pengaduan/konfirmasi/'.$umkm->laporan_id)}}" method="POST">
+                                <form action="{{url('/konfirmasi/pengaduan/ '.$umkm->laporan_id)}}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <input type="hidden" name="status_laporan" value="ditolak">
@@ -125,7 +125,7 @@
                                         <textarea  id="description" rows="4" name="pesan" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  placeholder="Tulis Pesan Disini ..."></textarea>           
                                     </div>
                                    <div class="flex w-full justify-center space-x-5">
-                                    <button  class="text-blue-main border-2 border-dodger-blue-800  hover:bg-dodger-blue-800  hover:text-white mt-3 px-5 py-2 text-base font-medium rounded-full" >
+                                    <button @click= "open = false" type="button" class="text-blue-main border-2 border-dodger-blue-800  hover:bg-dodger-blue-800  hover:text-white mt-3 px-5 py-2 text-base font-medium rounded-full" >
                                         Batal
                                       </button>
                                     <button type="submit" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800  mt-3 px-5 py-2 text-base font-medium rounded-full">Konfirmasi</button>
@@ -367,7 +367,7 @@ document.addEventListener('alpine:init', () => {
                 return this.shouldDisable
             },
         }))
-    })
+})
 
             $(document).ready(function(){
 

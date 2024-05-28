@@ -16,7 +16,7 @@
             <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
             </svg>
          </button>
-         <div class="flex ml-0 md:ml-72 flex-col    font-main">
+         <div class=" ml-0 md:ml-72 flex-col hidden md:flex    font-main">
              <h1 class="text-neutral-07 text-lg">{{$i[$num]}}, {{date('d F Y',strtotime(now()))}}</h1>
             <h1 class="font-bold text-lg" >{{ucwords($active)}}</h1>
          </div>

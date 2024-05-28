@@ -17,6 +17,11 @@ class InformasiController extends Controller
         return view('informasi.index', ['informasi' => $informasi]);
     }
 
+    public function dashboard()
+    {
+        return view('dashboard.karangTaruna', ['active' => 'beranda']);
+    }
+
     public function indexPenduduk()
     {
         // Mendapatkan tanggal 7 hari ke belakang dari hari ini
@@ -31,7 +36,7 @@ class InformasiController extends Controller
         }
 
         $informasi = $informasi->get();
-        $metadata = (object)[
+        $metadata = (object) [
             'title' => 'Pengumuman',
             'description' => 'Pengumuman untuk penduduk'
         ];
