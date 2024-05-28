@@ -21,17 +21,27 @@ class LaporanController extends Controller
     public function keluhan($sort = 'Menunggu')
     {
         $laporan = LaporanModel::with('penduduk')->where('status_laporan', $sort)->paginate(3);
-
+        LaporanModel::where('terbaca', '=', '0')->update([
+            'terbaca' => 1
+        ]);
         return view('dashboard.pengaduan', ['data' => $laporan, 'active' => 'pengaduan']);
     }
 
-    public function indexPenduduk()
+    public function indexPenduduk(Request $requets)
     {
+        $laporan = LaporanModel::query();
+
+        if ($requets->has('search')) {
+            $laporan->whereHas('penduduk', function ($query) use ($requets) {
+                $query->where('nama_penduduk', 'like', '%' . $requets->search . '%');
+            });
+        }
+        $laporan = $laporan->get();
+
         $metadata = (object) [
             'title' => 'Pengaduan',
             'description' => 'Halaman Pengaduan Warga'
         ];
-        $laporan = LaporanModel::with('penduduk')->get();
 
         return view('laporan.penduduk.index', compact('laporan'))->with(['metadata' => $metadata, 'activeMenu' => 'pengaduan']);
     }
@@ -86,8 +96,14 @@ class LaporanController extends Controller
             return view('dashboard.pengaduan', ['data' => $data, 'active' => 'pengaduan']);
         } else {
 
-            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->paginate(3);
-            $data = LaporanModel::findMany($id);
+            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->first();
+            if ($id) {
+
+                $data = LaporanModel::where('penduduk_id', '=', $id->penduduk_id)->paginate(3);
+            } else {
+                $data = LaporanModel::where('penduduk_id', '=', 0)->paginate(3);
+            }
+
         }
 
         return view('dashboard.pengaduan', ['data' => $data, 'active' => 'pengaduan']);

@@ -12,9 +12,11 @@ return new class extends Migration {
     {
         Schema::create('detail_kas', function (Blueprint $table) {
             $table->id('id_detail_kas');
+
             $table->unsignedBigInteger('id_kas')->index();
             $table->foreign('id_kas')->references('id_kas')->on('kas');
             $table->integer('jumlah_kas');
+            $table->string('bulan');
             $table->date('tanggal_kas');
 
             $table->timestamps();

@@ -14,10 +14,9 @@ return new class extends Migration {
             $table->id('kas_log_id');
             $table->unsignedBigInteger('user_id')->index();
             $table->foreign('user_id')->references('user_id')->on('user');
+            $table->integer('jumlah');
             $table->boolean('status_kas_log');
             $table->string('keterangan_kas_log', 100);
-            $table->dateTime('tanggal_kas_log');
-
             $table->timestamps();
         });
     }

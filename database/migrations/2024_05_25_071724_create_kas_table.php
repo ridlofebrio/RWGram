@@ -12,8 +12,10 @@ return new class extends Migration {
     {
         Schema::create('kas', function (Blueprint $table) {
             $table->id('id_kas');
-            $table->unsignedBigInteger('kartu_keluarga_id')->index();
+            $table->unsignedBigInteger('kartu_keluarga_id')->index()->nullable();
             $table->foreign('kartu_keluarga_id')->references('kartu_keluarga_id')->on('kartu_keluarga');
+            $table->unsignedBigInteger('user_id')->index()->nullable();
+            $table->foreign('user_id')->references('user_id')->on('user');
             $table->integer('tahun');
             $table->boolean('Januari')->default(false);
             $table->boolean('Februari')->default(false);

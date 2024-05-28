@@ -27,21 +27,21 @@
         <div class="filter flex space-x-2">
                
             <div x-data="{open:false}" class="relative " >
-                <button @click="open= !open" class="flex px-3 items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p>-semua-</p> <i class="fa fa-chevron-down"></i></button>
+                <button @click="open= !open" class="flex px-3 w-[150px] hover:bg-blue-main hover:border-blue-main hover:text-white items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p id="sort">-semua-</p> <i class="fa fa-chevron-down"></i></button>
                 <div class="absolute mt-1  left-1/2 -translate-x-1/2 p-0 z-30 bg-white drop-shadow-card w-full" x-show="open" @click.outside="open=false" >
                    <ul>
-                    <li><button class="hover:bg-blue-main px-5 py-2 w-full sort" data="diterima"  >selesai</button></li>
-                    <li><button class="hover:bg-blue-main px-5 py-2 w-full sort " data="ditolak"  >ditolak</button></li>
-                    <li><button class="hover:bg-blue-main px-5 py-2 w-full sort"  data="menunggu" >menunggu</button></li>
+                    <li><button  @click="open= !open"  class="hover:bg-blue-main px-5 py-2 w-full sort" data="diterima"   >selesai</button></li>
+                    <li><button  @click="open= !open"  class="hover:bg-blue-main px-5 py-2 w-full sort " data="ditolak"  >ditolak</button></li>
+                    <li><button @click="open= !open"   class="hover:bg-blue-main px-5 py-2 w-full sort"  data="menunggu"  >menunggu</button></li>
                     
                    </ul>
                 </div>
             </div>
           
-            <div class="border-2 bg-neutral-04 rounded-full px-3">
-                <i class="fa-solid fa-magnifying-glass"></i>
-
+            <div class="search border w-[70%] focus-within:ring-2 focus-within:ring-blue-main flex items-center justify-between  bg-white rounded-full px-3">
+                
                 <input type="text" id="search" data='umkm' class="border-none bg-transparent" placeholder="cari apapun">  
+                <i class="fa-solid fa-magnifying-glass"></i>
             </div>
         </div>
     </div>        
@@ -82,7 +82,7 @@
                         const doc = parser.parseFromString(data, 'text/html');    
                         const table = doc.getElementById('umkm');
                         const page =doc.querySelector('.Page');
-                        console.log(doc);
+                        
                            $('#umkm').html(table);
                            $('.page').html(page);
                         $("#loading-image").hide();
@@ -103,6 +103,7 @@
                         const doc = parser.parseFromString(data, 'text/html');    
                         const table = doc.getElementById('umkm');
                         const page =doc.querySelector('.page');
+                        document.getElementById('search').setAttribute('data',index.currentTarget.getAttribute('data'))
                            $('#umkm').html(table);
                            $('.page').html(page);
                         $("#loading-image").hide();
@@ -123,9 +124,15 @@
                     $.ajax({
                         url: "http://127.0.0.1:8000/search/"+document.querySelector('#search').getAttribute('data')+'/'+data,
                         async:true,
-                        
+                            
                     }).done(function (data) {    
-                        $('#umkm').html(data)   
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(data, 'text/html');    
+                        const table = doc.getElementById('umkm');
+                        const page =doc.querySelector('.page');
+                           $('#umkm').html(table);
+                           $('.page').html(page);
+                        $("#loading-image").hide();
                     })
 
                 })
@@ -133,11 +140,17 @@
                 $('.sort').click(function (index) {
                    
                     $.ajax({
-                        url: "http://127.0.0.1:8000/dashboard/pengajuan/"+index.currentTarget.getAttribute('data'),
+                        url: "http://127.0.0.1:8000/data/"+ document.getElementById('search').getAttribute('data')+'/'+index.currentTarget.getAttribute('data'),
                         method:"GET",
                         success: function (data) {
                             
-                            $('#umkm').html(data);
+                            const parser = new DOMParser();
+                        const doc = parser.parseFromString(data, 'text/html');    
+                        const table = doc.getElementById('umkm');
+                        const page =doc.querySelector('.page');
+                           $('#umkm').html(table);
+                           $('.page').html(page);
+                           $('#sort').html(index.currentTarget.getAttribute('data'));
                         }
                         
                     })

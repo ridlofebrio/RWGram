@@ -7,7 +7,11 @@
             <img  class="w-52" src="{{asset('asset/images/'.$user->foto_profil)}}" alt="">
           
            <div>
-            <button  class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-8 py-2 text-base font-medium rounded-full">Change</button>
+            <form  action="{{ route('umkm.penduduk.store') }}" method="POST" enctype="multipart/form-data">
+            <input type="file" name="" id="">
+
+           </form>
+           <button  class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-8 py-2 text-base font-medium rounded-full">Change</button>
             <button  class="hover:border-none   px-8 py-2  before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  text-base font-medium rounded-full  " >Remove</button>
            </div>
         </div>

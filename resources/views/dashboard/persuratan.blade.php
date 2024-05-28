@@ -74,22 +74,23 @@
     </div> 
     
 
-    
+    <h2 class="text-xl text-left  ml-3 my-3"  > {{count($data)}} Laporan</h2>   
     <div class="flex w-full justify-between items-center">
 
-        <h2 class="text-xl ml-3" > {{count($data)}} Laporan</h2>
+       
         <div class="filter flex">
-            <button class="px-6 py-3 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> Filter</button>
-            <div class="search border-2 border-neutral-400 rounded-full px-3">
+            
+            <div class="search border  focus-within:ring-2 focus-within:ring-blue-main flex items-center justify-between  bg-white rounded-full px-3">
+                
+                <input id="search" type="text" class="border-none bg-transparent" placeholder="cari apapun">  
                 <i class="fa-solid fa-magnifying-glass"></i>
-
-                <input type="text" class="border-none bg-transparent" placeholder="search">  
             </div>
         </div>
         <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-8 py-2 text-base font-medium rounded-full  " type="button">
             Tambah
           </button> 
-    </div>        
+    </div>     
+
 <div class=" mt-5 overflow-x-auto shadow-md sm:rounded-lg ">
         <table id='umkm' class="w-full text-sm text-left rtl:text-right  text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-neutral-03 dark:bg-gray-700 dark:text-gray-400">
@@ -140,7 +141,7 @@
                   
                 
                     <td class="px-6 py-4 flex ">
-    
+                        
                      
                         <div x-cloak x-data="{ open: false }">
                             <button @click="open = true"  class="hover:border-none  before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  " type="button">
@@ -148,7 +149,7 @@
                               </button>
                               
                               <!-- Main modal -->
-                              <div  x-show="open"   tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed  z-40 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                              <div  x-show="open"   tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed  z-40 justify-center items-center w-bansfull md:inset-0 h-[calc(100%-1rem)] max-h-full">
                               
                                 <div  class="absolute w-[920px] h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  p-4  z-50 ">
                                       <!-- Modal content -->
@@ -196,7 +197,14 @@
                                   <div class="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40"></div> 
                               </div> 
                         </div>
-                          
+                        <form action="{{url('/persuratan/'.$persuratan->persuratan_id   )}}" onsubmit="return alert('are You sure ?')" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="hover:border-none  hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  "><svg   xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path  stroke="#EE0B0B" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 5.98c-3.33-.33-6.68-.5-10.02-.5-1.98 0-3.96.1-5.94.3L3 5.98m5.5-1.01.22-1.31C8.88 2.71 9 2 10.69 2h2.62c1.69 0 1.82.75 1.97 1.67l.22 1.3m3.35 4.17-.65 10.07C18.09 20.78 18 22 15.21 22H8.79C6 22 5.91 20.78 5.8 19.21L5.15 9.14m5.18 7.36h3.33m-4.16-4h5"/>
+                              </svg>
+                            </button>
+                        </form>
                           
                            
                     </td>

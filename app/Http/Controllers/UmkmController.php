@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\PendudukModel;
 use Illuminate\Http\Request;
 use App\Models\UmkmModel;
+use GuzzleHttp\Client;
+
 
 
 class UmkmController extends Controller
@@ -15,14 +17,18 @@ class UmkmController extends Controller
      */
     public function index($sort = 'menunggu')
     {
-        $umkm = UmkmModel::where('status_pengajuan', $sort)->with('penduduk')->get();
+        $umkm = UmkmModel::where('status_pengajuan', $sort)->with('penduduk')->paginate(3);
         $active = 'pengajuan';
+        UmkmModel::where('terbaca', '=', '0')->update([
+            'terbaca' => 1
+        ]);
         return view('dashboard.pengajuan', compact('umkm', 'active'));
     }
 
     public function sort($sort = 'menunggu')
     {
-        $umkm = UmkmModel::where('status_pengajuan', $sort)->with('penduduk')->get();
+        $umkm = UmkmModel::where('status_pengajuan', $sort)->with('penduduk')->paginate(3);
+
         $active = 'pengajuan';
         return view('component.umkm', compact('umkm'));
     }
@@ -56,15 +62,16 @@ class UmkmController extends Controller
     public function indexPenduduk(Request $request)
     {
         // Mendapatkan semua data UMKM
-        $umkm = UmkmModel::query();
+        $umkm = UmkmModel::with('penduduk')->get();
 
         // Filter berdasarkan pencarian nama UMKM jika ada
-        if ($request->has('search')) {
-            $umkm->where('nama_umkm', 'like', '%' . $request->input('search') . '%');
-        }
+        // if ($request->has('search')) {
+        //     $umkm->where('nama_umkm', 'like', '%' . $request->input('search') . '%');
+        // }
 
-        // Ambil data UMKM setelah diterapkan filter
-        $umkm = $umkm->get();
+        // // Ambil data UMKM setelah diterapkan filter
+        // $umkm = $umkm->get();
+
 
         $metadata = (object) [
             'title' => 'UMKM',
@@ -86,14 +93,19 @@ class UmkmController extends Controller
             'description' => 'Daftar UMKM'
         ];
 
-        return view('umkm.penduduk.create')->with(['activeMenu' => 'beranda', 'metadata' => $metadata]);
+        return view('umkm.penduduk.create')->with(['activeMenu' => 'permohonan', 'metadata' => $metadata]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
+
+
+
     public function store(Request $request)
     {
+
+        // dd($request);
         $request->validate([
             'NIK' => 'required',
             'nama_umkm' => 'required',
@@ -107,6 +119,18 @@ class UmkmController extends Controller
 
         $penduduk = PendudukModel::where('NIK', $request->NIK)->first();
 
+
+        try {
+            $response = cloudinary()->upload($request->file('file')->getRealPath())->getSecurePath();
+
+        } catch (\Exception $e) {
+            dd($e);
+            return redirect()->back()->with('flash', ['error', $e]);
+        }
+
+
+
+
         if ($penduduk) {
             UmkmModel::create([
                 'penduduk_id' => $penduduk->penduduk_id,
@@ -117,10 +141,14 @@ class UmkmController extends Controller
                 'deskripsi_umkm' => $request->deskripsi_umkm,
                 'lokasi_umkm' => $request->lokasi_umkm,
                 'tanggal_umkm' => now(),
+                'foto_umkm' => $response
             ]);
 
-            return redirect()->route('umkm.penduduk.index')
-                ->with('success', 'UMKM Berhasil Ditambahkan');
+
+
+
+            
+        return $response;
         } else {
             return redirect()->route('umkm.penduduk.create')
                 ->with('error', 'NIK Anda belum terdaftar sebagai warga.');
