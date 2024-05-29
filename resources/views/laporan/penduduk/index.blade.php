@@ -33,47 +33,49 @@
             </div>
         @endif
     </div>
-    <div class="bg-white mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <div class="flex justify-between mb-12">
-            <div class="flex gap-3">
-                <div class=" drop-shadow-md">
-                    <form action="{{ route('laporan.penduduk.index') }}" method="GET" class=" max-w-sm mx-auto">
-                        @include('component.search')
-                    </form>
-                </div>
 
-                <div class="rounded-full border border-neutral-04 shadow drop-shadow-md ">
-                    <button id="doubleDropdownButton" data-dropdown-toggle="doubleDropdown"
-                        class="py-2 text-black font-medium text-sm px-5 text-center inline-flex items-center"
-                        type="button">-
-                        Status -
-                        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 4 4 4-4" />
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="flex justify-between my-4">
+            <div class="flex gap-3 drop-shadow-lg">
+                <form action="{{ route('laporan.penduduk.index') }}" method="GET" class="max-w-sm mx-auto">   
+                    <div class="relative">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                            </svg>
+                        </div>
+                        <input type="text" name="search" class="pl-8 block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari pengaduan" required />
+                    </div>
+                </form>
+                
+                <div class="">
+                    <button id="statusDropdownButton" data-dropdown-toggle="statusDropdown" class="p-2 font-medium text-sm text-gray-600 px-4 text-center inline-flex items-center rounded-full bg-white " type="button">
+                        {{ request('status') ? request('status') : '-Semua-' }}
+                        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                         </svg>
                     </button>
                 </div>
 
                 <!-- Dropdown menu -->
-                <div id="doubleDropdown"
-                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-md w-44 dark:bg-gray-700">
-                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton">
+
+                <div id="statusDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="statusDropdownButton">
                         <li>
-                            <a href="#"
-                                class="block px-4 py-2  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Selesai</a>
+                            <a href="{{ route('laporan.penduduk.index', ['status' => '']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">-Semua-</a>
                         </li>
                         <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Proses</a>
+                            <a href="{{ route('laporan.penduduk.index', ['status' => 'Selesai']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Selesai</a>
                         </li>
                         <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Menunggu</a>
+                            <a href="{{ route('laporan.penduduk.index', ['status' => 'Proses']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Proses</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('laporan.penduduk.index', ['status' => 'Menunggu']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Menunggu</a>
                         </li>
                     </ul>
                 </div>
-
+                
             </div>
             <a href="{{ route('laporan.penduduk.create') }}"
                 class="text-white bg-blue-main px-8 py-2 font-semibold text-base rounded-full drop-shadow-button hover:bg-dodger-blue-800">Ajukan</a>
@@ -104,6 +106,13 @@
                     </tr>
                 </thead>
                 <tbody>
+
+                @if ($laporan->isEmpty())
+                    <tr>
+                        <td colspan="5" class="text-center py-4">Tidak ada data yang tersedia</td>
+                    </tr>
+                @endif
+                
                     @foreach ($laporan as $lap)
                         <tr class="font-medium text-sm">
                             <td scope="row" class="px-6 py-4 whitespace-nowrap dark:text-white">

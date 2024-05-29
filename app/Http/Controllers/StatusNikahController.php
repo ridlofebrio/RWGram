@@ -38,17 +38,24 @@ class StatusNikahController extends Controller
         return view('component.statusNikah', ['data' => $data]);
     }
 
-        public function index()
-        {
+    public function index(Request $request)
+    {
         $metadata = (object) [
             'title' => 'Status Nikah',
             'description' => 'Halaman Ubah Status Warga'
         ];
 
-        $nikah = StatusNikahModel::paginate(1);
+        $status = $request->query('status');
+        $query = StatusNikahModel::query();
+
+        if ($status) {
+            $query->where('status_pengajuan', $status);
+        }
+
+        $nikah = $query->paginate(5);
 
         return view('statusNikah.index', compact('nikah'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
-        }
+    }
 
 
 
