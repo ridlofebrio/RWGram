@@ -2,22 +2,15 @@
 
 @section('content')
     <header class="bg-white">
-        <div class="mx-auto max-w-7xl px-8 py-12 sm:px-6 lg:px-8 text-center">
+        <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 text-center">
             <h1 class="text-3xl font-extrabold text-neutral-10">UMKM</h1>
-            <p class="mt-6 font-normal leading-6 text-neutral-10 max-w-4xl mx-auto">Informasi ini berisikan UMKM yang berada
-                di
-                lingkungan RW.
-                Di sekitar lingkungan RW, terdapat beragam Usaha Mikro, Kecil, dan Menengah (UMKM) yang menjadi bagian
-                penting dari ekosistem perekonomian lokal. Melalui UMKM, para warga tidak hanya menyediakan berbagai produk
-                dan layanan yang dibutuhkan oleh masyarakat sekitar, tetapi juga menjadi motor penggerak ekonomi yang
-                mempererat hubungan antarwarga.</p>
+            <p class="mt-6 font-normal leading-6 text-neutral-10 max-w-4xl mx-auto">Informasi ini berisikan UMKM yang berada di lingkungan RW. Di sekitar lingkungan RW, terdapat beragam Usaha Mikro, Kecil, dan Menengah (UMKM) yang menjadi bagian penting dari ekosistem perekonomian lokal. Melalui UMKM, para warga tidak hanya menyediakan berbagai produk dan layanan yang dibutuhkan oleh masyarakat sekitar, tetapi juga menjadi motor penggerak ekonomi yang mempererat hubungan antarwarga.</p>
         </div>
     </header>
 
     <div class="container mx-auto mt-2">
         @if ($message = Session::get('error'))
-            <div id="alert" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mx-auto w-1/2"
-                role="alert">
+            <div id="alert" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mx-auto sm:w-1/2 w-11/12" role="alert">
                 <strong class="font-bold">Ops!</strong>
                 <span class="block sm:inline">{{ $message }}</span>
                 <!-- Tombol Close -->
@@ -25,9 +18,7 @@
             </div>
         @endif
         @if ($message = Session::get('success'))
-            <div id="alert"
-                class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mx-auto w-1/2"
-                role="alert">
+            <div id="alert" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mx-auto sm:w-1/2 w-11/12" role="alert">
                 <strong class="font-bold">Berhasil!</strong>
                 <span class="block sm:inline">{{ $message }}</span>
                 <!-- Tombol Close -->
@@ -35,40 +26,32 @@
             </div>
         @endif
     </div>
+
     <div class="bg-white mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <div class="flex justify-between mb-12">
+        <div class="flex justify-between mb-12 gap-3">
             <div class="drop-shadow-md">
-                <form action="{{ route('umkm.penduduk.index') }}" method="GET" class=" max-w-sm mx-auto">
+                <form action="{{ route('umkm.penduduk.index') }}" method="GET" class=" max-w-sm min-w-xs mx-auto">
                     @include('component.search')
                 </form>
             </div>
             <button onclick="window.location.href='{{ route('umkm.penduduk.create') }}'"
                 class="text-white bg-blue-main px-8 py-2 font-semibold text-base rounded-full drop-shadow-button hover:bg-dodger-blue-800">Ajukan</button>
         </div>
-        <div class="grid grid-cols-1 gap-y-1 md:grid-cols-3 md:gap-x-6">
+
+        <div class="grid grid-cols-1 gap-y-6 md:grid-cols-2 lg:grid-cols-3 md:gap-x-6">
             @if ($umkm->isEmpty())
-                <div>
-                </div>
-                <div class="text-center">
+                <div class="col-span-full text-center">
                     <p class="text-lg text-neutral-06">Tidak ada UMKM yang tersedia</p>
                 </div>
             @else
                 @foreach ($umkm as $data)
                     @if ($data->status_pengajuan !== 'menunggu' && $data->status_pengajuan !== 'ditolak')
-
-                        <div class="max-w-xl mx-auto card p-8 mb-12"
-                            style="box-shadow: 0 -2px 6px rgba(91, 76, 76, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
-                            <div class="shrink-0 mb-4 md:mb-[20px]">
-                                <img src="https://i.ibb.co/hX6pfms/img32.jpg"
-                                    class="rounded-lg object-cover h-[280px] w-[360px]" />
-
+                        <div class="max-w-xl mx-auto card p-8 mb-12" style="box-shadow: 0 -2px 6px rgba(91, 76, 76, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+                            <div class="shrink-0 mb-4 md:mb-6">
+                                <img src="https://i.ibb.co/hX6pfms/img32.jpg" class="rounded-lg object-cover w-full h-[280px] md:h-[280px] lg:h-[280px]" alt="{{ $data->nama_umkm }}">
                             </div>
-                            <p class="mb-[8px] font-bold text-lg text-neutral dark:text-white text-black line-clamp-2">
-                                {{ $data->nama_umkm }}
-                            </p>
-                            <p class="mb-[20px] text-sm text-neutral dark:text-white text-black line-clamp-3">
-                                {{ $data->deskripsi_umkm }}
-                            </p>
+                            <p class="mb-2 font-bold text-lg text-neutral dark:text-white text-black line-clamp-2">{{ $data->nama_umkm }}</p>
+                            <p class="mb-5 text-sm text-neutral dark:text-white text-black line-clamp-3">{{ $data->deskripsi_umkm }}</p>
                             <div
                                 class="mb-[12px] font-medium text-sm flex items-center text-neutral dark:text-white text-black">
                                 <svg class="mr-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -121,8 +104,13 @@
                                         <p class="line-clamp-1">{{ $data->nama_medsos }}</p>
                                     </a>
                                 @else
-                                    <img src="{{ asset('asset/icon/Icons-ig.png') }}" class="w-[24px] h-[24px] mr-2"
-                                        alt="Icon Media Sosial">
+                                    <svg class="mr-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        fill="none" viewBox="0 0 24 24">
+                                        <path fill="#1B1B1B"
+                                            d="M12.5 4.71c2.538 0 2.839.012 3.837.056.928.041 1.429.197 1.763.327.441.17.76.378 1.09.709.335.334.539.65.71 1.09.13.335.285.84.326 1.763.045 1.002.056 1.303.056 3.838 0 2.538-.011 2.838-.056 3.837-.04.927-.197 1.428-.326 1.762a2.93 2.93 0 0 1-.71 1.091 2.934 2.934 0 0 1-1.09.71c-.334.13-.839.285-1.763.326-1.002.044-1.302.055-3.837.055-2.538 0-2.839-.01-3.837-.055-.928-.041-1.429-.197-1.763-.327a2.938 2.938 0 0 1-1.09-.709 2.922 2.922 0 0 1-.71-1.09c-.13-.335-.285-.84-.326-1.763-.045-1.002-.056-1.303-.056-3.837 0-2.539.011-2.84.056-3.838.04-.927.197-1.428.326-1.762a2.93 2.93 0 0 1 .71-1.091 2.92 2.92 0 0 1 1.09-.709c.334-.13.839-.286 1.763-.327.998-.044 1.299-.055 3.837-.055Zm0-1.71c-2.58 0-2.902.011-3.915.056-1.01.044-1.703.207-2.305.441a4.637 4.637 0 0 0-1.684 1.099 4.655 4.655 0 0 0-1.099 1.68c-.234.606-.397 1.296-.441 2.305C3.01 9.598 3 9.921 3 12.5c0 2.58.011 2.902.056 3.915.044 1.01.207 1.703.441 2.305a4.637 4.637 0 0 0 1.099 1.684 4.643 4.643 0 0 0 1.68 1.095c.606.234 1.296.397 2.305.442 1.013.044 1.336.055 3.915.055 2.58 0 2.902-.01 3.915-.055 1.01-.045 1.704-.208 2.305-.442a4.643 4.643 0 0 0 1.68-1.095 4.644 4.644 0 0 0 1.096-1.68c.233-.606.397-1.296.441-2.305.045-1.013.056-1.336.056-3.915 0-2.58-.011-2.902-.056-3.915-.044-1.01-.208-1.704-.441-2.305a4.45 4.45 0 0 0-1.088-1.688 4.644 4.644 0 0 0-1.68-1.095c-.606-.234-1.296-.397-2.305-.442C15.402 3.011 15.079 3 12.5 3Z" />
+                                        <path fill="#1B1B1B"
+                                            d="M12.5 7.62a4.881 4.881 0 0 0 0 9.76 4.881 4.881 0 0 0 0-9.76Zm0 8.045a3.166 3.166 0 1 1 0-6.331 3.166 3.166 0 0 1 0 6.331Zm6.212-8.238a1.14 1.14 0 1 1-2.279 0 1.14 1.14 0 0 1 2.28 0Z" />
+                                    </svg>
                                     <p class="line-clamp-1">-</p>
                                 @endif
                             </div>
@@ -134,25 +122,21 @@
     </div>
 
     <script>
-        // Fungsi untuk menyembunyikan alert setelah 5 detik
-        function hideAlert() {
-            let alert = document.getElementById('alert');
-            if (alert) {
-                alert.style.display = 'none';
-            }
-        }
-
-        // Tambahkan event listener untuk tombol close alert
         document.addEventListener('DOMContentLoaded', function() {
-            let closeBtn = document.getElementById('close-btn');
-            if (closeBtn) {
-                closeBtn.addEventListener('click', function() {
-                    hideAlert();
-                });
-            }
+            const alertBox = document.getElementById('alert');
+            const closeBtn = document.getElementById('close-btn');
 
-            // Sembunyikan alert setelah 5 detik
-            setTimeout(hideAlert, 5000);
+            if (alertBox && closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    alertBox.style.display = 'none';
+                });
+
+                setTimeout(function() {
+                    if (alertBox) {
+                        alertBox.style.display = 'none';
+                    }
+                }, 5000); // Waktu dalam milidetik (5000ms = 5 detik)
+            }
         });
     </script>
 @endsection
