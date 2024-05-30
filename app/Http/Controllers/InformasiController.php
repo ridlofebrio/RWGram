@@ -6,6 +6,7 @@ use App\Models\InformasiModel;
 use App\Models\informasi;
 use Carbon\Carbon;
 use App\Models\User;
+use Cloudinary\Api\Admin\AdminApi;
 use Illuminate\Http\Request;
 
 class InformasiController extends Controller
@@ -19,7 +20,14 @@ class InformasiController extends Controller
 
     public function dashboard()
     {
-        return view('dashboard.karangTaruna', ['active' => 'beranda']);
+        $informasi = InformasiModel::where('upload', 1)->get();
+        $pengumuman = InformasiModel::all();
+        return view('dashboard.KarangTaruna.index', ['active' => 'beranda'], compact('informasi', 'pengumuman'));
+    }
+
+    public function informasiDetail()
+    {
+
     }
 
     public function indexPenduduk()

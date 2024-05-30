@@ -25,9 +25,10 @@
                 <button  @click="open= !open" class="flex px-3 items-center w-[150px] hover:bg-blue-main hover:border-blue-main hover:text-white space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p id="sort">-semua-</p> <i class="fa fa-chevron-down"></i></button>
                 <div class="absolute mt-1  left-1/2 -translate-x-1/2 p-0 z-30 bg-white drop-shadow-card w-full" x-show="open" @click.outside="open=false" >
                    <ul>
-                    <li><button  @click="open= !open" class="hover:bg-blue-main px-5 py-2 w-full sort" data="selesai"  >selesai</button></li>
-                    <li><button  @click="open= !open" class="hover:bg-blue-main px-5 py-2 w-full sort " data="ditolak"  >ditolak</button></li>
+                    <li><button  @click="open= !open" class="hover:bg-blue-main px-5 py-2 w-full sort" data="Selesai"  >selesai</button></li>
+                    <li><button  @click="open= !open" class="hover:bg-blue-main px-5 py-2 w-full sort " data="Ditolak"  >ditolak</button></li>
                     <li><button  @click="open= !open" class="hover:bg-blue-main px-5 py-2 w-full sort"  data="Menunggu" >menunggu</button></li>
+                    <li><button  @click="open= !open" class="hover:bg-blue-main px-5 py-2 w-full sort"  data="Proses" >proses</button></li>
                     
                    </ul>
                 </div>
@@ -84,72 +85,49 @@
                         {{$umkm->tanggal_laporan}}
                     </td>
                     <td class="px-6 py-4">
-                       @if($umkm->status_laporan == 'ditolak')
-                       <div class="px-2 py-2 w-[113px] bg-red-200  rounded-full flex items-center gap-2  justify-center">
-                        <div class="w-2 h-2 bg-red-500 rounded-full"></div>
-                        <p class="font-body font-semibold text-red-500">
-
-                                {{$umkm->status_laporan}}
-
-                        </p>
-                </div>
-                       @else
-                       <div class="px-2 py-2 w-[113px] {{$umkm->status_laporan=='selesai'? 'bg-[#CCF1E5]':'bg-[#FBF4CF]'}}  rounded-full flex items-center gap-2  justify-center">
-                        <div class="w-2 h-2 {{$umkm->status_laporan=='selesai'? 'bg-green-400':'bg-yellow-300'}} rounded-full"></div>
-                        <p class="font-body font-semibold {{$umkm->status_laporan=='selesai'? 'text-green-400':'text-yellow-300'}}">
-
-                                {{$umkm->status_laporan}}
-
-                        </p>
-                </div>
-                @endif
-                    </td>
-                    
-                    <td class="px-6 py-4 flex ">
-
-                        <div x-data='{open:false}'>
-
-                            <button @click="open=true"  class="text-red-500 border-2 border-red-500  hover:bg-red-500 hover:text-white   px-8 py-2 text-base font-medium rounded-full ">Tolak</button>
-
-                            <div x-show='open' class="overflow-y-auto overflow-x-hidden fixed  z-40  justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-
-                               <div  @click.outside="open = false" class="absolute text-left w-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl  px-4 py-6 bg-white z-50">
-                                <h1 class="text-black text-xl mb-3">Pesan</h1>
-                                <form action="{{url('/konfirmasi/pengaduan/ '.$umkm->laporan_id)}}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <input type="hidden" name="status_laporan" value="ditolak">
-
-                                    <div class="col-span-2">
-                                  
-                                        <textarea  id="description" rows="4" name="pesan" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  placeholder="Tulis Pesan Disini ..."></textarea>           
-                                    </div>
-                                   <div class="flex w-full justify-center space-x-5">
-                                    <button @click= "open = false" type="button" class="text-blue-main border-2 border-dodger-blue-800  hover:bg-dodger-blue-800  hover:text-white mt-3 px-5 py-2 text-base font-medium rounded-full" >
-                                        Batal
-                                      </button>
-                                    <button type="submit" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800  mt-3 px-5 py-2 text-base font-medium rounded-full">Konfirmasi</button>
-                                   </div>
-                                </form>
-                               </div>
-                               <div class="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40"></div> 
+                        <div x-cloak x-data="{ open: false }">
+                            @php($class = array('Menunggu'=>'bg-[#FBF4CF]  w-[150px]  text-[#E9C90E] border border-yellow-100 px-3 py-2 rounded-full font-bold hover:border hover:border-yellow-400',
+                                                 'Selesai'=>'bg-green-100 text-green-400 w-[150px]  border border-green-100 px-3 py-2 rounded-full font-bold hover:border hover:border-green-400',
+                                                 'Proses'=>'bg-blue-100 text-blue-main  w-[150px] border border-blue-100 px-3 py-2 rounded-full font-bold hover:border hover:border-blue-400',
+                                                 'Ditolak'=>'bg-red-100 text-red-400 w-[150px]  border border-red-100 px-3 py-2 rounded-full font-bold hover:border hover:border-red-400'))
+                            <button @click="open = ! open" class="{{$class[$umkm->status_laporan]}}" >{{$umkm->status_laporan}} <i class="fa-solid fa-chevron-down"></i></button>
+                          
+                            <div x-show="open" @click.outside="open = false" class="absolute flex flex-col items-center gap-3 mt-1 py-2 w-[200px] drop-shadow-card rounded-xl bg-white" \>
+                                               
+                      <form action="{{url('konfirmasi/pengaduan/'.$umkm->laporan_id)}}" method="POST">
+                        @csrf
+                        @method('PUT')
+                             
+                            <input type="hidden" name="status_laporan" value="Menunggu">
+                            <button type="submit" class=" bg-[#FBF4CF] text-[#E9C90E] w-[150px]  border border-yellow-100 px-3 py-2 rounded-full font-bold hover:border hover:border-yellow-400" >Menunggu </i></button>
+                                
+                      </form>
+                               
+                                <button  onclick="showModal({{$umkm->laporan_id}})" class=" bg-green-100 text-green-400 w-[150px]  border border-green-100 px-3 py-2 rounded-full font-bold hover:border hover:border-green-400" >Selesai</button>
+                                    
+                      <form action="{{url('konfirmasi/pengaduan/'.$umkm->laporan_id)}}" method="POST">
+                        @csrf
+                        @method('PUT')
+                             
+                            <input type="hidden" name="status_laporan" value="proses">
+                        <button type="submit"  class=" bg-blue-100 text-blue-main  w-[150px] border border-blue-100 px-3 py-2 rounded-full font-bold hover:border hover:border-blue-400" >Proses</button>
+                      </form>
+                                    
+                                <button  onclick="showModal({{$umkm->laporan_id}},'Ditolak')" class=" bg-red-100 text-red-400 w-[150px]  border border-red-100 px-3 py-2 rounded-full font-bold hover:border hover:border-red-400" >Ditolak</button>
+                               
                             </div>
                         </div>
-                        
-                        
-                        <div x-data= "{open:false}">
 
-                            <button @click="open= true"  class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-5 py-2 text-base font-medium rounded-full disabled:bg-neutral-06 " {{$umkm->status_pengajuan=='diterima'?"disabled ":""}}>Konfirmasi</button>
-                            <div x-show="open"  class="overflow-y-auto overflow-x-hidden fixed  z-40 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                <div @click.outside="open = false" class="absolute text-center w-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl  px-4 py-6 bg-white z-50">
+                            <div id="modal-{{$umkm->laporan_id}}"  class="hidden modal transition duration-150 ease-in-out overflow-y-auto overflow-x-hidden fixed  z-40 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                <div  class="absolute text-center w-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl  px-4 py-6 bg-white z-50">
                                     <h1 class="text-lg mb-5 text-black">Apakah Anda ingin mengkonfirmasi pengaduan ini ?</h1>
-                                   <div class="flex w-full space-x-7 justify-center">
+                                <div class="flex w-full space-x-7 justify-center">
                                     
-                                                <button onclick="openModal(id = {{$umkm->laporan_id}})" x-bind='SomeButton' class="text-blue-main border-2 border-dodger-blue-800  hover:bg-dodger-blue-800  hover:text-white  px-5 py-2 text-base font-medium rounded-full" type="button">
-                                                    Lihat Detail
-                                                  </button>
+                                                <button onclick="closeModal()" x-bind='SomeButton' class="text-blue-main border-2 border-dodger-blue-800  hover:bg-dodger-blue-800  hover:text-white  px-5 py-2 text-base font-medium rounded-full" type="button">
+                                                Kembali
+                                                </button>
 
-                                                  <form action="{{url('konfirmasi/pengaduan'.$umkm->laporan_id)}}" method="POST">
+                                                <form action="{{url('konfirmasi/pengaduan/'.$umkm->laporan_id)}}" method="POST">
                                                     @csrf
                                                     @method('PUT')
                                                     <input type="hidden" name="status_laporan" value="selesai">
@@ -157,13 +135,45 @@
                                     <button class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-5 py-2 text-base font-medium rounded-full">Konfirmasi</button>
                                                 </form>
 
-                                   </div>
-    
+                                </div>
+
                                 </div>
                                 <div class="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40"></div> 
                             </div>
-    
-                        </div>
+
+                            <div id="modal-ditolak-{{$umkm->laporan_id}}"  class="modal hidden overflow-y-auto overflow-x-hidden fixed  z-40  justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+
+                                <div   class="absolute text-left w-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl  px-4 py-6 bg-white z-50">
+                                 <h1 class="text-black text-xl mb-3">Pesan</h1>
+                                 <form action="{{url('/konfirmasi/pengaduan/ '.$umkm->laporan_id)}}" method="POST">
+                                     @csrf
+                                     @method('PUT')
+                                     <input type="hidden" name="status_laporan" value="ditolak">
+ 
+                                     <div class="col-span-2">
+                                   
+                                         <textarea  id="description" rows="4" name="pesan" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  placeholder="Tulis Pesan Disini ..."></textarea>           
+                                     </div>
+                                    <div class="flex w-full justify-center space-x-5">
+                                     <button onclick="closeModal()" type="button" class="text-blue-main border-2 border-dodger-blue-800  hover:bg-dodger-blue-800  hover:text-white mt-3 px-5 py-2 text-base font-medium rounded-full" >
+                                         Batal
+                                       </button>
+                                     <button type="submit" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800  mt-3 px-5 py-2 text-base font-medium rounded-full">Konfirmasi</button>
+                                    </div>
+                                 </form>
+                                </div>
+                                <div class="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40"></div> 
+                             </div>
+                         </div>
+
+                    </td>
+                    
+                    <td class="px-6 py-4 flex ">
+
+                       
+                        
+                        
+                       
                         <div x-cloak x-data="{ open: false }">
                             <button @click="open = true"  class="hover:border-none  before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  " type="button">
                                 Detail
@@ -320,6 +330,18 @@
         // let button = document.querySelectorAll('.tab');
         // console.log(button)
 
+        const showModal=(id,status = 'diterima')=>{
+           if(status === 'diterima'){
+            let modal =document.getElementById('modal-'+id)
+            modal.classList.remove('hidden');
+           }else{
+            let modal =document.getElementById('modal-ditolak-'+id)
+            modal.classList.remove('hidden');
+           }
+        }
+
+       
+
         function page(event,link) {
                
                event.preventDefault()
@@ -347,8 +369,8 @@
     document.getElementById('modal-'+id).classList.remove('hidden');
 }
 
-const closeModal = (id) => {
-    document.getElementById('modal-'+id).classList.add('hidden');
+const closeModal = () => {
+    document.querySelector('.modal').classList.add('hidden');
 }
 
 
@@ -370,6 +392,7 @@ document.addEventListener('alpine:init', () => {
 })
 
             $(document).ready(function(){
+
 
                 $('#search').change(function () {
                     let data = ($(this).val())

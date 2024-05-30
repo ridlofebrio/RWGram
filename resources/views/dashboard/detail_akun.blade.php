@@ -4,7 +4,7 @@
     <div class="text-sm relative min-h-screen  px-5 py-8 font-medium  rounded-xl w-full bg-white  text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
        <h1 class="text-2xl font-bold mb-5 text-black">Setting Akun</h1>
         <div class=" space-x-5 flex items-center  mb-5">
-            <img  class="w-52" src="{{asset('asset/images/'.$user->foto_profil)}}" alt="">
+            <img  class="w-52" src="{{Auth::user()->foto_profil}}" alt="">
           
            <div>
             <form  action="{{ route('umkm.penduduk.store') }}" method="POST" enctype="multipart/form-data">

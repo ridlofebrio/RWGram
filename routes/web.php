@@ -195,6 +195,7 @@ Route::put('/kriteria/{id}', [KriteriaController::class, 'update'])->middleware(
 
 Route::group(['prefix' => 'konfirmasi'], function () {
     Route::put('/umkm/{id}', [UmkmController::class, 'update']);
+    Route::put('/pengaduan/{status}/{id}', [LaporanController::class, 'update']);
     Route::put('/pengaduan/{id}', [LaporanController::class, 'update']);
     Route::put('/nikah/{id}', [StatusNikahController::class, 'update']);
     Route::put('/tinggal/{id}', [StatusTinggalController::class, 'update']);

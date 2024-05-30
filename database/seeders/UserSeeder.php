@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
                 'role_id' => 5,
                 'username' => 'RWLawang',
                 'nama_user' => 'Hasibuan',
+                'foto_profil' => 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716898016/mcdjouvceefyfpoujo87.png',
                 'password' => Hash::make('rw'),
                 'created_at' => now(),
             ],
@@ -31,6 +32,7 @@ class UserSeeder extends Seeder
                 'username' => 'KTLawang',
                 'nama_user' => 'Karang Taruna',
                 'password' => Hash::make('kt'),
+                'foto_profil' => 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716898016/mcdjouvceefyfpoujo87.png',
                 'created_at' => now(),
             ],
             [
@@ -39,6 +41,7 @@ class UserSeeder extends Seeder
                 'username' => 'RT1',
                 'nama_user' => 'RT 01',
                 'password' => Hash::make('rt1'),
+                'foto_profil' => 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716898016/mcdjouvceefyfpoujo87.png',
                 'created_at' => now(),
             ],
             [
@@ -47,6 +50,7 @@ class UserSeeder extends Seeder
                 'username' => 'RT4',
                 'nama_user' => 'RT 04',
                 'password' => Hash::make('rt4'),
+                'foto_profil' => 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716898016/mcdjouvceefyfpoujo87.png',
                 'created_at' => now(),
             ],
             [
@@ -55,6 +59,7 @@ class UserSeeder extends Seeder
                 'username' => 'RT2',
                 'nama_user' => 'RT 02',
                 'password' => Hash::make('rt2'),
+                'foto_profil' => 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716898016/mcdjouvceefyfpoujo87.png',
                 'created_at' => now(),
             ],
             [
@@ -63,15 +68,16 @@ class UserSeeder extends Seeder
                 'username' => 'RT3',
                 'nama_user' => 'RT 03',
                 'password' => Hash::make('rt3'),
+                'foto_profil' => 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716898016/mcdjouvceefyfpoujo87.png',
                 'created_at' => now(),
             ]
         ];
-        
-        
-        
-            DB::table('user')->insert(
-                $data
-            );
-        
+
+
+
+        DB::table('user')->insert(
+            $data
+        );
+
     }
 }
