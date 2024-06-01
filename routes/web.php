@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\BansosController;
+use App\Http\Controllers\CloudinaryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\KasController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\PersuratanController;
@@ -28,13 +30,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $metadata = (object) [
-        'title' => 'Home',
-        'description' => 'Landing Page RWGram'
-    ];
-    return view('welcome', ['activeMenu' => 'beranda', 'metadata' => $metadata]);
-});
+Route::get('/', [LandingController::class, 'index']);
 
 
 Route::group(['prefix' => 'bansos-penduduk'], function () {
@@ -88,6 +84,12 @@ Route::group(['prefix' => 'tinggal-penduduk'], function () {
     Route::get('/find', [StatusTinggalController::class, 'indexFind'])->name('tinggal.penduduk.find');
 });
 
+Route::group(['prefix' => 'cloudinary'], function () {
+    Route::post('/upload', [CloudinaryController::class, 'upload']);
+    Route::get('/delete/{asset_id}', [CloudinaryController::class, 'removeImage']);
+
+});
+
 
 
 
@@ -100,7 +102,7 @@ Route::group(['prefix' => 'pengaduan'], function () {
 
 Route::get('coba', [PendudukController::class, 'list']);
 
-Route::get('login', [AuthSessionController::class, 'create'])->name('login');
+Route::get('login', [AuthSessionController::class, 'create'])->middleware('guest')->name('login');
 Route::post('login', [AuthSessionController::class, 'store']);
 Route::get('logout', [AuthSessionController::class, 'logout']);
 
@@ -152,6 +154,11 @@ Route::group(['prefix' => 'data'], function () {
     Route::get('/pengeluaran', [KasController::class, 'pengeluaran']);
     Route::get('/chart/pengeluaran', [KasController::class, 'pengeluaranChart']);
     Route::get('/pemasukan', [KasController::class, 'index']);
+});
+
+Route::group(['prefix' => 'image'], function () {
+    Route::get('/umkm/{id}', [UmkmController::class, 'loadImage']);
+
 });
 
 

@@ -108,11 +108,30 @@ class StatusTinggalController extends Controller
     }
     public function update(Request $request, string $id)
     {
+
+
         $request->validate([
-            'status_pengajuan' => 'required'
+            'status_pengajuan' => 'required',
+            'status_tinggal' => 'required',
+            'id_penduduk' => 'required'
         ]);
 
-        StatusTinggalModel::find($id)->update($request->all());
+        try {
+            $model = StatusTinggalModel::findOrFail($id);
+            $model->status_pengajuan = $request->status_pengajuan;
+            $model->save();
+
+        } catch (\Exception $e) {
+            dd($e);
+        }
+
+        try {
+            $penduduk = PendudukModel::findOrFail($request->id_penduduk);
+            $penduduk->status_tinggal = $request->status_tinggal;
+            $penduduk->save();
+        } catch (\Exception $e) {
+            dd($e);
+        }
         return redirect('dashboard/pengajuan')->with('flash', ['success', 'Data berhasil dikonfirmasi']);
     }
     public function destroy(string $id)

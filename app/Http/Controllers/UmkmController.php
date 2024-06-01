@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PendudukModel;
+use Cloudinary\Api\Admin\AdminApi;
 use Illuminate\Http\Request;
 use App\Models\UmkmModel;
 use GuzzleHttp\Client;
@@ -36,9 +37,16 @@ class UmkmController extends Controller
 
     public function pengajuan()
     {
-        $umkm = UmkmModel::with('penduduk')->paginate(3);
 
-        return view('component.umkm', compact('umkm'));
+        $umkm = UmkmModel::with('penduduk')->paginate(3);
+        $result = (array) (new AdminApi())->assetByAssetId("3c16fa34033ee2110ddceab721812f07");
+
+
+        $adminApi = new AdminApi();
+
+
+
+        return view('component.umkm', compact('umkm', 'adminApi'));
     }
 
     public function find($value)
@@ -62,7 +70,7 @@ class UmkmController extends Controller
     public function indexPenduduk(Request $request)
     {
         // Mendapatkan semua data UMKM
-        $umkm = UmkmModel::with('penduduk')->get();
+        $umkm = UmkmModel::with('penduduk')->where('status_pengajuan', 'diterima')->get();
 
         // Filter berdasarkan pencarian nama UMKM jika ada
         // if ($request->has('search')) {
@@ -114,19 +122,19 @@ class UmkmController extends Controller
             'no_whatsapp' => 'required',
             'link_medsos' => 'required',
             'nama_medsos' => 'required',
-            // 'foto_umkm' => 'required',
+            'foto_umkm' => 'required',
         ]);
 
         $penduduk = PendudukModel::where('NIK', $request->NIK)->first();
 
 
-        try {
-            $response = cloudinary()->upload($request->file('file')->getRealPath())->getSecurePath();
+        // try {
+        //     $response = cloudinary()->upload($request->file('file')->getRealPath())->getSecurePath();
 
-        } catch (\Exception $e) {
-            dd($e);
-            return redirect()->back()->with('flash', ['error', $e]);
-        }
+        // } catch (\Exception $e) {
+        //     dd($e);
+        //     return redirect()->back()->with('flash', ['error', $e]);
+        // }
 
 
 
@@ -141,14 +149,15 @@ class UmkmController extends Controller
                 'deskripsi_umkm' => $request->deskripsi_umkm,
                 'lokasi_umkm' => $request->lokasi_umkm,
                 'tanggal_umkm' => now(),
-                'foto_umkm' => $response
+                'foto_umkm' => $request->foto_umkm
             ]);
 
 
 
 
-            
-        return $response;
+
+            return redirect()->route('umkm.penduduk.index')
+                ->with('success', 'UMKM Berhasil Ditambah');
         } else {
             return redirect()->route('umkm.penduduk.create')
                 ->with('error', 'NIK Anda belum terdaftar sebagai warga.');
@@ -171,6 +180,14 @@ class UmkmController extends Controller
     {
         $umkm = UmkmModel::find($id);
         return view('umkm.edit', compact('umkm'));
+    }
+
+    public function loadImage($id)
+    {
+        $umkm = UmkmModel::select('foto_umkm')->findOrFail($id);
+
+        $result = (array) (new AdminApi())->assetByAssetId($umkm->foto_umkm);
+        return $result['secure_url'];
     }
 
     /**
