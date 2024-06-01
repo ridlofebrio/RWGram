@@ -62,6 +62,8 @@
                             @csrf
                             @method('PUT')
                                 <input type="hidden" name="status_pengajuan" value="diterima">
+                                <input type="hidden" name="status_tinggal" value="{{$status->status}}">
+                                <input type="hidden" name="id_penduduk" value="{{$status->penduduk_id}}">
                             <button type="submit" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-5 py-2 text-base font-medium rounded-full">Konfirmasi</button>
                            </form>
                            </div>
