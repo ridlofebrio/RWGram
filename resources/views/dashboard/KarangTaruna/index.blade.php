@@ -39,8 +39,8 @@
     <h1 class=" font-semibold mb-5  text-2xl text-black" >Pengumuman</h1>
     <div id="default-carousel" class="relative w-full " data-carousel="slide">
         <!-- Carousel wrapper -->
+        <div class="relative h-[400px]  overflow-hidden rounded-lg ">
       @foreach ($informasi as $item)
-      <div class="relative h-[400px]  overflow-hidden rounded-lg ">
         <!-- Item 1 -->
         
        <div class="hidden duration-700 ease-in-out" data-carousel-item>
@@ -54,6 +54,7 @@
      <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
            <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
        </div>
+       
        
       @endforeach
             <!-- Item 2 -->
