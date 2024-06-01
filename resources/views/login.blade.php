@@ -72,7 +72,7 @@
                                 class="w-full focus:outline-none border-neutral-04 rounded-lg py-3 px-4 pr-12 items-center focus:shadow-outline @error('password') is-invalid @enderror"
                                 id="password" type="password" name="password" placeholder="Masukkan Password">
 
-                            <button id="icon_reveal"> <img src="{{ asset('asset/icon/Eye.svg') }} "id="eye"
+                            <button type="button" id="icon_reveal"> <img src="{{ asset('asset/icon/Eye.svg') }} "id="eye"
                                     class="absolute inset-y-3 right-0 flex items-center pr-3"></button>
 
                         </div>

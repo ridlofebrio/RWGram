@@ -37,7 +37,7 @@
 
                 
                 <div class="user flex gap-3 items-center">
-                    <img src="{{asset('asset/images/profil.jpeg')}}"  class="w-9 rounded-full" alt="">
+                    <img src="{{Auth::user()->foto_profil}}"  class="w-9 rounded-full" alt="">
                     <div class="info flex justify-center items-center gap-3">
                         <div class="detail">
                             <h1 class=" font-medium text-lg">{{Auth::user()->nama_user}}</h1>
