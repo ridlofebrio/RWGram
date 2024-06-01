@@ -52,6 +52,7 @@ Route::group(['prefix' => 'informasi-penduduk'], function () {
 });
 
 
+
 Route::group(['prefix' => 'data-penduduk'], function () {
     Route::post('/show', [PendudukController::class, 'showPenduduk'])->name('data.penduduk.show');
     Route::get('/request', [PendudukController::class, 'request'])->name('data.penduduk.request');
@@ -126,6 +127,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
 
 Route::group(['middleware' => 'auth', 'prefix' => 'karangTaruna'], function () {
     Route::get('/', [InformasiController::class, 'dashboard']);
+    Route::get('/informasi', [InformasiController::class, 'informasi']);
+    Route::get('/pengumuman', [InformasiController::class, 'pengumuman']);
+    Route::get('/list', [InformasiController::class, 'getUpload']);
 });
 
 
@@ -182,6 +186,13 @@ Route::group(['prefix' => 'penduduk'], function () {
     Route::get('{id}', [PendudukController::class, 'find']);
     Route::get('sort/{sort}', [PendudukController::class, 'sort']);
 });
+
+Route::group(['prefix' => 'informasi'], function () {
+    Route::post('/tambahInformasi', [InformasiController::class, 'tambahInformasi'])->name('informasi.tambah.informasi');
+    Route::post('/arsip/{id}', [InformasiController::class, 'arsip'])->name('informasi.arsip.informasi');
+
+});
+
 
 Route::group(['prefix' => 'kas'], function () {
     Route::post('/', [KasController::class, 'store']);

@@ -899,7 +899,7 @@ $(document).ready(function () {
                     $.ajax({
                         url: "http://127.0.0.1:8000/search/kas/"+data,
                         type: "GET",
-                        datatype:'application/x-some-custom-type',
+                   
                         async:true,
                         
                     }).done(function (data) {    
@@ -916,7 +916,7 @@ $(document).ready(function () {
                           document.getElementById("labels-chart").innerHTML='pemasukan'
                           const chart = new ApexCharts(document.getElementById("labels-chart"), options);
                           chart.render();
-                          }
+                        }
   
     })
 
