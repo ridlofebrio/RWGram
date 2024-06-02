@@ -91,7 +91,7 @@ class PendudukController extends Controller
             $a = array_combine($csv[0], $a);
         });
         array_shift($csv);
-
+        // dd($csv);
 
 
 
@@ -133,7 +133,7 @@ class PendudukController extends Controller
             $kk = KartuKeluargaModel::where('NKK', '=', $line['NKK'])->first();
 
             if ($kk == null) {
-                KartuKeluargaModel::create([
+                $kk = KartuKeluargaModel::create([
                     'NKK' => $line['NKK'],
                     'rt_id' => RtModel::where('nomor_rt', '=', $line['rt'])->first()->rt_id,
                     'tanggal_kk' => now(),
@@ -141,17 +141,17 @@ class PendudukController extends Controller
                 ]);
             }
 
-            $kk = KartuKeluargaModel::where('NKK', '=', $line['NKK'])->first();
 
-            $jenis_kelamin = $line['Jenis_Kelamin'] == 'Laki-laki' ? 'L' : 'P';
 
-            PendudukModel::create([
+
+
+            $data = PendudukModel::create([
                 'kartu_keluarga_id' => $kk->kartu_keluarga_id,
                 'NIK' => $line['NIK'],
                 'nama_penduduk' => $line['nama'],
                 'tempat_lahir' => $line['Tempat_Lahir'],
                 'tanggal_lahir' => date('Y-m-d', strtotime($line['Tanggal_Lahir'])),
-                'jenis_kelamin' => $jenis_kelamin,
+                'jenis_kelamin' => $line['Jenis_Kelamin'],
                 'golongan_darah' => $line['golongan_darah'],
                 'agama' => $line['Agama'],
                 'alamat' => $line['Alamat'],
@@ -160,6 +160,14 @@ class PendudukController extends Controller
                 'status_tinggal' => $line['status_tinggal'],
 
             ]);
+
+            $kepalaKeluarga = KepalaKeluargaModel::where('kartu_keluarga_id', $kk->kartu_keluarga_id)->first();
+            if ($kepalaKeluarga == null) {
+                KepalaKeluargaModel::create([
+                    'kartu_keluarga_id' => $kk->kartu_keluarga_id,
+                    'penduduk_id' => $data->penduduk_id
+                ]);
+            }
         }
         return redirect()->back()->with('flash', ['success', 'Data CSV Berhasil Di import']);
     }
@@ -229,16 +237,17 @@ class PendudukController extends Controller
         $kk = KartuKeluargaModel::where('NKK', '=', $request->NKK)->first();
 
         if ($kk == null) {
-            KartuKeluargaModel::create([
-                'nkk' => $request->NKK,
+            $kk = KartuKeluargaModel::create([
+                'NKK' => $request->NKK,
                 'rt_id' => RtModel::where('nomor_rt', '=', $request->rt)->first()->rt_id,
-                'tanggal_kk' => now()
+                'tanggal_kk' => now(),
+                'no_telepon' => '+62'
             ]);
         }
 
         $kk = KartuKeluargaModel::where('NKK', '=', $request->NKK)->first();
 
-        PendudukModel::create([
+        $data = PendudukModel::create([
             'kartu_keluarga_id' => $kk->kartu_keluarga_id,
             'NIK' => $request->NIK,
             'nama_penduduk' => $request->nama,
@@ -254,6 +263,13 @@ class PendudukController extends Controller
             'status_kematian' => $request->status_meninggal
 
         ]);
+        $kepalaKeluarga = KepalaKeluargaModel::where('kartu_keluarga_id', $kk->kartu_keluarga_id)->first();
+        if ($kepalaKeluarga == null) {
+            KepalaKeluargaModel::create([
+                'kartu_keluarga_id' => $kk->kartu_keluarga_id,
+                'penduduk_id' => $data->penduduk_id
+            ]);
+        }
 
         return redirect('/dashboard/penduduk')->with('flash', ['success', 'Data berhasil ditambah']);
     }

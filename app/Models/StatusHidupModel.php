@@ -18,6 +18,7 @@ class StatusHidupModel extends Model
         'penduduk_id',
         'id_penduduk_meninggal',
         'foto_bukti',
+        'asset_id'
     ];
 
     public function Penduduk(): BelongsTo

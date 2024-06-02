@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    \{{-- <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    {{-- <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" /> --}}
 
 </head>
@@ -54,7 +54,7 @@ input:focus{
     <div class="p-4 md:ml-64 min-h-screen bg-neutral-03">
         <div class="w-full">
            <div class="grid gap-4 mb-4">
-            <div id="loading-image" class="fixed top-1/2 left-1/2 flex justify-center items-center -translate-x-1/2 -translate-y-1/2 z-40 w-screen h-screen bg-white opacity-70"  ><div class="  loader " ></div></div>
+            <div style="z-index: 99999" id="loading-image" class="fixed top-1/2 left-1/2 flex justify-center items-center -translate-x-1/2 -translate-y-1/2  w-screen h-screen bg-white opacity-70" style="display: none;" ><div class="  loader " ></div></div>
     @yield('content')
            </div>
         </div>
@@ -65,14 +65,16 @@ input:focus{
 @stack('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script>
-    $(document).ready(function(){
-        setTimeout(() => {
-                    console.log('tes')
-                     
-                     $('#loading-image').css('display','none')
+  if('{{$active}}' != 'pengajuan'){
+    $(document).ready(function () {
+    setTimeout(() => {
+        console.log("tes");
 
-                }, 1000);
-    })
+        $("#loading-image").css("display", "none");
+    }, 1000);
+});
+
+  }
 </script>
 </body>
 </html>

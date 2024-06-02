@@ -22,7 +22,8 @@ class StatusTinggalModel extends Model
         'alamat_pindah',
         'foto_bukti',
         'status',
-        'status_pengajuan'
+        'status_pengajuan',
+        'asset_id'
     ];
 
     public function Penduduk(): BelongsTo

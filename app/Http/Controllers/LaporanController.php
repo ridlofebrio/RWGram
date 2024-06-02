@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\LaporanModel;
 use App\Models\PendudukModel;
+use Exception;
 use Illuminate\Http\Request;
 
 class LaporanController extends Controller
@@ -29,12 +30,16 @@ class LaporanController extends Controller
 
     public function indexPenduduk(Request $requets)
     {
+        $status = $requets->query('status');
         $laporan = LaporanModel::query();
 
         if ($requets->has('search')) {
             $laporan->whereHas('penduduk', function ($query) use ($requets) {
                 $query->where('nama_penduduk', 'like', '%' . $requets->search . '%');
             });
+        }
+        if ($status) {
+            $laporan->where('status_laporan', $status);
         }
         $laporan = $laporan->get();
 
@@ -64,9 +69,12 @@ class LaporanController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'NIK_pengaju' => 'required',
             'deskripsi_laporan' => 'required',
+            'foto_umkm' => 'required',
+            'asset_id' => 'required',
         ]);
 
         $penduduk = PendudukModel::where('NIK', $request->NIK_pengaju)->first();
@@ -76,7 +84,9 @@ class LaporanController extends Controller
                 'penduduk_id' => $penduduk->penduduk_id,
                 'deskripsi_laporan' => $request->deskripsi_laporan,
                 'status_laporan' => 'menunggu',
-                'tanggal_laporan' => now()
+                'tanggal_laporan' => now(),
+                'foto_laporan' => $request->foto_umkm,
+                'asset_id' => $request->asset_id
             ];
 
             LaporanModel::create($data);
@@ -90,21 +100,26 @@ class LaporanController extends Controller
 
     public function find($value)
     {
-        if ($value == 'kosong') {
-            $data = LaporanModel::paginate(3);
+        try {
+            if ($value == 'kosong') {
+                $data = LaporanModel::paginate(3);
 
-            return view('dashboard.pengaduan', ['data' => $data, 'active' => 'pengaduan']);
-        } else {
-
-            $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->first();
-            if ($id) {
-
-                $data = LaporanModel::where('penduduk_id', '=', $id->penduduk_id)->paginate(3);
+                return view('dashboard.pengaduan', ['data' => $data, 'active' => 'pengaduan']);
             } else {
-                $data = LaporanModel::where('penduduk_id', '=', 0)->paginate(3);
-            }
 
+                $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->firstOrFail();
+                if ($id) {
+
+                    $data = LaporanModel::where('penduduk_id', '=', $id->penduduk_id)->paginate(3);
+                } else {
+                    $data = LaporanModel::where('penduduk_id', '=', 0)->paginate(3);
+                }
+
+            }
+        } catch (\Exception $e) {
+            dd($e);
         }
+
 
         return view('dashboard.pengaduan', ['data' => $data, 'active' => 'pengaduan']);
     }
@@ -134,13 +149,17 @@ class LaporanController extends Controller
     public function update(Request $request, string $id)
     {
 
-
-        $laporan = LaporanModel::find($id);
-        $laporan->status_laporan = $request->status_laporan;
-        if (isset($request->pesan)) {
-            $laporan->pesan = $request->pesan;
+        try {
+            $laporan = LaporanModel::find($id);
+            $laporan->status_laporan = $request->status_laporan;
+            if (isset($request->pesan)) {
+                $laporan->pesan = $request->pesan;
+            }
+            $laporan->save();
+        } catch (\Exception $e) {
+            dd($e);
         }
-        $laporan->save();
+
         return redirect('/dashboard/pengaduan')->with('flash', ['success', 'Data berhasil Dikonfirmasi']);
     }
 
