@@ -13,7 +13,7 @@ use App\Http\Controllers\StatusHidupController;
 use App\Http\Controllers\StatusNikahController;
 use App\Http\Controllers\StatusTinggalController;
 use App\Http\Controllers\UmkmController;
-use App\Http\Controllers\Auth\AuthSessionController;
+use App\Http\Controllers\AuthSessionController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\PDFBansosController;
 use App\Http\Controllers\UserController;
