@@ -17,7 +17,8 @@ return new class extends Migration {
             $table->string('username', 40)->unique();
             $table->string('nama_user', 50);
             $table->string('password');
-            $table->string('foto_profil')->default('user.png');
+            $table->string('foto_profil')->nullable();
+            $table->string('asset_id')->nullable();
             $table->timestamps();
         });
     }

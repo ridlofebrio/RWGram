@@ -1,5 +1,50 @@
 @extends('layouts.template')
+@push('css')
+<style>
+    #myId{
+        background: ;
+        border-radius: 13px;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        border: 2px dashed #1833FF;
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+    .loader {
 
+width: 90px;
+height: 14px;
+--c:#0096FF 92%,white;
+background: 
+  radial-gradient(circle 7px at bottom,var(--c)) 0 0,
+  radial-gradient(circle 7px at top   ,var(--c)) 0 100%;
+background-size: calc(100%/4) 50%;
+background-repeat: repeat-x;
+animation: l11 1s infinite;
+}
+@keyframes l11 {
+  80%,100% {background-position: calc(100%/3) 0,calc(100%/-3) 100%}
+}
+.dz-success-mark{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+
+
+}
+
+
+
+
+
+</style>
+@endpush
 @section('content')
     <header class="bg-white">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 text-left">
@@ -59,6 +104,26 @@
                     <div class="dropzone" id="myDragAndDropUploader"></div>
                     <h5 id="message"></h5>
                 </div> --}}
+
+                <div>
+                    <label for="deskripsi_umkm" class="block text-sm font-medium leading-6 text-gray-900">Foto UMKM</label>
+                    <div id="myId" class="h-52">
+                        <input type="hidden" name="foto_umkm" id="public_id" >
+                        <input type="hidden" name="asset_id" id="asset_id" >
+                        
+                       <div id="text-main" class="flex flex-col  items-center w-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="24" fill="none" viewBox="0 0 36 24">
+                            <path fill="#0096FF" d="M29.025 9.06C28.005 3.885 23.46 0 18 0c-4.335 0-8.1 2.46-9.975 6.06A8.991 8.991 0 0 0 0 15c0 4.965 4.035 9 9 9h19.5c4.14 0 7.5-3.36 7.5-7.5 0-3.96-3.075-7.17-6.975-7.44ZM28.5 21H9c-3.315 0-6-2.685-6-6 0-3.075 2.295-5.64 5.34-5.955l1.605-.165.75-1.425C12.12 4.71 14.91 3 18 3c3.93 0 7.32 2.79 8.085 6.645l.45 2.25 2.295.165A4.47 4.47 0 0 1 33 16.5c0 2.475-2.025 4.5-4.5 4.5ZM12 13.5h3.825V18h4.35v-4.5H24l-6-6-6 6Z"/>
+                          </svg>
+                          <p>Seret file Anda atau Klik file dari perangkat Anda </p>
+                          <p class="text-neutral-06">Ukuran file maksimal adalah 10 MB</p>
+                 
+                       </div>
+                       <div style="z-index: 99999" id="loading-image"  class="hidden fixed top-1/2 left-1/2 justify-center items-center -translate-x-1/2 -translate-y-1/2  w-screen h-screen bg-white opacity-70" style="display: none;" ><div class="  loader " ></div></div>
+                    </div>
+                    <p id="Error-Messages" class="text-red-600" ></p>
+                    
+                </div>
                 <div class="flex items-center mt-6">
                     <input id="agree" type="checkbox" class="form-checkbox h-4 w-4 text-blue-600" />
                     <label for="agree" class="ml-2 block text-sm text-gray-900">
@@ -75,6 +140,98 @@
         </div>
     </main>
     <script>
+        // ============== dropzone ====================
+
+const errorMessage = $('#dzErrorMessage');
+const placeHolder = $('#dzPlaceholder');
+
+
+let myDropzone = new Dropzone("div#myId", { 
+  thumbnailHeight: 120,
+  thumbnailWidth: 120,
+  uploadMultiple:false,
+  maxFiles:1,
+  addRemoveLinks:true,
+  maxFilesize: 10,
+    url: '{{url("cloudinary/upload")}}', 
+
+    headers:{
+        'x-csrf-token': '{{csrf_token()}}',
+    },
+    uploadprogress: function(file, progress, bytesSent) {
+        $('#text-main').hide();
+        console.log(file);
+    if (file.previewElement) {
+        var progressElement = document.querySelector("#loading-image");
+
+        progressElement.classList.remove("hidden");
+        progressElement.classList.add("flex");
+
+    }
+},
+  
+  success:function(file,response) {
+    var progressElement = document.querySelector("#loading-image");
+    progressElement.classList.remove("flex");
+        progressElement.classList.add("hidden");
+
+    document.getElementById('asset_id').value= response.asset_id;
+    document.getElementById('public_id').value= response.secure_url;
+
+    },
+    removedfile(file) {
+        const asset_id = document.getElementById('asset_id').value
+        console.log('dancok');
+        $.ajax({
+            url:"{{url('cloudinary/delete')}}"+'/'+asset_id,
+            method:'GET',
+            beforeSend: function() {
+              $("#loading-image").removeClass('hidden');
+              $("#loading-image").addClass('flex');
+           },
+            success:function(data){
+                $("#loading-image").removeClass('flex');
+                $("#loading-image").addClass('hidden');
+
+                if (file.previewElement != null && file.previewElement.parentNode != null) {
+      file.previewElement.parentNode.removeChild(file.previewElement);
+      $('#text-main').show();
+
+    }
+     return this._updateMaxFilesReachedClass();
+            }
+        })
+  },
+});
+
+myDropzone.on('addedfile', function(file) {
+    $('.dz-success-mark').hide()
+        $('.dz-error-mark').hide()
+        $('.dz-error-message').hide()
+
+
+});
+
+const removefile=  (file)=>{
+    if (file.previewElement != null && file.previewElement.parentNode != null) {
+      file.previewElement.parentNode.removeChild(file.previewElement);
+      $('#text-main').show();
+
+    }
+}
+
+myDropzone.on('error', function(file, response) {
+    $('#Error-Messages').html(response);
+
+    removefile(file);
+
+
+});
+
+// // ============== End Dropzone ====================
+
+
+
     let closeBtn = document.getElementById('close-btn');
     let agreeCheckbox = document.getElementById('agree');
     let submitBtn = document.getElementById('submitBtn');

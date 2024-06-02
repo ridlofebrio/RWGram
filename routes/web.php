@@ -13,7 +13,7 @@ use App\Http\Controllers\StatusHidupController;
 use App\Http\Controllers\StatusNikahController;
 use App\Http\Controllers\StatusTinggalController;
 use App\Http\Controllers\UmkmController;
-use App\Http\Controllers\Auth\AuthSessionController;
+use App\Http\Controllers\AuthSessionController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\PDFBansosController;
 use App\Http\Controllers\UserController;
@@ -177,6 +177,8 @@ Route::group(['prefix' => 'search', 'middleware' => 'auth'], function () {
 
 Route::group(['prefix' => 'akun'], function () {
     Route::delete('{id}', [UserController::class, 'destroy']);
+    Route::put('/gambar/{id}', [UserController::class, 'gantiGambar']);
+    Route::put('{id}', [UserController::class, 'update']);
 });
 
 Route::group(['prefix' => 'persuratan'], function () {
@@ -197,7 +199,8 @@ Route::group(['prefix' => 'penduduk'], function () {
 Route::group(['prefix' => 'informasi'], function () {
     Route::post('/tambahInformasi', [InformasiController::class, 'tambahInformasi'])->name('informasi.tambah.informasi');
     Route::post('/arsip/{id}', [InformasiController::class, 'arsip'])->name('informasi.arsip.informasi');
-
+    Route::delete('{id}', [InformasiController::class, 'destroy'])->middleware('auth');
+    Route::post('/', [InformasiController::class, 'store'])->middleware('auth');
 });
 
 
@@ -222,10 +225,3 @@ Route::group(['prefix' => 'konfirmasi'], function () {
 
 
 
-// percobaan
-Route::get('/auth/onedrive', [App\Http\Controllers\OneDriveController::class, 'redirectToProvider']);
-Route::get('callback', [App\Http\Controllers\OneDriveController::class, 'handleProviderCallback']);
-Route::post('upload', [App\Http\Controllers\OneDriveController::class, 'upload']);
-Route::get('upload', function () {
-    return view('coba');
-});

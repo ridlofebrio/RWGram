@@ -68,9 +68,12 @@ class LaporanController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'NIK_pengaju' => 'required',
             'deskripsi_laporan' => 'required',
+            'foto_umkm' => 'required',
+            'asset_id' => 'required',
         ]);
 
         $penduduk = PendudukModel::where('NIK', $request->NIK_pengaju)->first();
@@ -80,7 +83,9 @@ class LaporanController extends Controller
                 'penduduk_id' => $penduduk->penduduk_id,
                 'deskripsi_laporan' => $request->deskripsi_laporan,
                 'status_laporan' => 'menunggu',
-                'tanggal_laporan' => now()
+                'tanggal_laporan' => now(),
+                'foto_laporan' => $request->foto_umkm,
+                'asset_id' => $request->asset_id
             ];
 
             LaporanModel::create($data);

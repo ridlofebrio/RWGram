@@ -80,6 +80,8 @@ class StatusHidupController extends Controller
         $request->validate([
             'NIK_pengaju' => 'required',
             'NIK_meninggal' => 'required',
+            'foto_umkm' => 'required',
+            'asset_id' => 'required',
         ]);
 
         $penduduk_pengaju = PendudukModel::where('NIK', $request->NIK_pengaju)->first();
@@ -89,6 +91,8 @@ class StatusHidupController extends Controller
             StatusHidupModel::create([
                 'penduduk_id' => $penduduk_pengaju->penduduk_id,
                 'id_penduduk_meninggal' => $penduduk_meninggal->penduduk_id,
+                'foto_bukti' => $request->foto_umkm,
+                'asset_id' => $request->asset_id
             ]);
 
             return redirect()->route('hidup.penduduk.index')

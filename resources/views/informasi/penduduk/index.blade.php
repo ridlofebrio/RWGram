@@ -44,8 +44,7 @@
                         <a href="{{ route('informasi.penduduk.show', $info->informasi_id) }}" class="w-full h-full">
                             <div class="flex flex-col md:flex-row items-left hover:bg-neutral-02 p-6 rounded-lg">
                                 <div class="shrink-0 mb-4 md:mb-0 md:mr-2">
-                                    <img src="https://i.ibb.co/hX6pfms/img32.jpg"
-                                        class="rounded-lg object-cover h-[200px] w-[320px]" />
+                                    <img src="{{$item->foto_informasi == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716897949/e7dulpy8h3y86sspr8o5.jpg' : $item->foto_informasi}}" class="rounded-lg object-cover h-[200px] w-[320px]"/>
                                 </div>
                                 <div class="ml-3 grow">
                                     <p class="mb-1.5 font-bold text-xl text-neutral-10 dark:text-white line-clamp-2">

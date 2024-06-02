@@ -26,9 +26,35 @@ class KepalaKeluargaSeeder extends Seeder
                 'kartu_keluarga_id' => 3,
                 'penduduk_id' => 5,
             ],
-
+            [
+                'kartu_keluarga_id' => 4,
+                'penduduk_id' => 2,
+            ],
+            [
+                'kartu_keluarga_id' => 5,
+                'penduduk_id' => 4,
+            ],
+            [
+                'kartu_keluarga_id' => 6,
+                'penduduk_id' => 6,
+            ],
+            [
+                'kartu_keluarga_id' => 7,
+                'penduduk_id' => 7,
+            ],
+            [
+                'kartu_keluarga_id' => 8,
+                'penduduk_id' => 8,
+            ],
+            [
+                'kartu_keluarga_id' => 9,
+                'penduduk_id' => 9,
+            ],
+            [
+                'kartu_keluarga_id' => 10,
+                'penduduk_id' => 10,
+            ],
         ];
-
 
         DB::table('kepala_keluarga')->insert(
             $data

@@ -24,6 +24,7 @@ class UmkmModel extends Model
         'tanggal_umkm',
         'no_wa',
         'nama_medsos',
+        'asset_id'
     ];
 
     public function penduduk(): BelongsTo

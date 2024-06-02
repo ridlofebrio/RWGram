@@ -10,6 +10,7 @@ use GuzzleHttp\Client;
 
 
 
+
 class UmkmController extends Controller
 {
 
@@ -37,6 +38,7 @@ class UmkmController extends Controller
 
     public function pengajuan()
     {
+
 
         $umkm = UmkmModel::with('penduduk')->paginate(3);
         $result = (array) (new AdminApi())->assetByAssetId("3c16fa34033ee2110ddceab721812f07");
@@ -123,6 +125,7 @@ class UmkmController extends Controller
             'link_medsos' => 'required',
             'nama_medsos' => 'required',
             'foto_umkm' => 'required',
+            'asset_id' => 'required',
         ]);
 
         $penduduk = PendudukModel::where('NIK', $request->NIK)->first();
@@ -149,7 +152,8 @@ class UmkmController extends Controller
                 'deskripsi_umkm' => $request->deskripsi_umkm,
                 'lokasi_umkm' => $request->lokasi_umkm,
                 'tanggal_umkm' => now(),
-                'foto_umkm' => $request->foto_umkm
+                'foto_umkm' => $request->foto_umkm,
+                'asset_id' => $request->asset_id
             ]);
 
 

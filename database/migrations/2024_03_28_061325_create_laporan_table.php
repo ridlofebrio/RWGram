@@ -16,6 +16,8 @@ return new class extends Migration {
             $table->foreign('penduduk_id')->references('penduduk_id')->on('penduduk');
             $table->text('deskripsi_laporan');
             $table->string('foto_laporan', 250)->nullable();
+            $table->string('asset_id', 250)->nullable();
+
             $table->enum('status_laporan', ['Menunggu', 'Selesai', 'Proses', 'Ditolak']);
             $table->dateTime('tanggal_laporan');
             $table->text('pesan')->nullable();

@@ -88,7 +88,7 @@
 
                 @foreach ($data as $bansos)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $loop->iteration }}</th>
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $bansos->bansos_id }}</th>
                         <td class="px-6 py-4">{{$bansos->tanggal_bansos}}</td>
                         <td class="px-6 py-4">{{$bansos->kartuKeluarga->kartuKeluarga->NKK}}</td>
                         <td class="px-6 py-4">{{$bansos->nama_pengaju}}</td>
@@ -152,7 +152,11 @@
                                                         <input readonly type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" value="{{ $bansos['c'.$count] }}" required="">
                                                     </div>
                                                 @endforeach
-                                                                                                                <div class="col-span-2">
+                                                <div class="col-span-2">
+                                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Score</label>
+                                                    <input readonly type="text" name="score" id="score" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" value="{{$bansos->score}}" required="">
+                                                </div>
+                                                <div class="col-span-2">
                                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Dapur </label>
                                                     <img src="{{asset('images/'.$bansos->foto_dapur)}}" alt="Foto Bukti">
                                                 </div>
