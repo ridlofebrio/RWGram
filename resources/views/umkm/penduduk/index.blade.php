@@ -49,8 +49,10 @@
                     @if ($data->status_pengajuan !== 'menunggu' && $data->status_pengajuan !== 'ditolak')
                         <div class="max-w-xl mx-auto card p-8 mb-12" style="box-shadow: 0 -2px 6px rgba(91, 76, 76, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
                             <div class="shrink-0 mb-4 md:mb-6">
+
                                 
                                 <img src="{{$data->foto_umkm}}" class="rounded-lg object-cover w-full h-[280px] md:h-[280px] lg:h-[280px]" alt="{{ $data->nama_umkm }}">
+
                             </div>
                             <p class="mb-2 font-bold text-lg text-neutral dark:text-white text-black line-clamp-2">{{ $data->nama_umkm }}</p>
                             <p class="mb-5 text-sm text-neutral dark:text-white text-black line-clamp-3">{{ $data->deskripsi_umkm }}</p>

@@ -16,7 +16,7 @@ class BansosController extends Controller
         $allBansos = BansosModel::all();
         $kriteria = Kriteria::all();
 
-        $bansos = BansosModel::with('kartuKeluarga', 'kartuKeluarga.kartuKeluarga', 'kartuKeluarga.penduduk')->paginate(3);
+        $bansos = BansosModel::with('kartuKeluarga', 'kartuKeluarga.kartuKeluarga', 'kartuKeluarga.penduduk')->paginate(5);
 
 
         return view('dashboard.bansos', ['data' => $bansos, 'allData' => $allBansos, 'kriteria' => $kriteria, 'active' => 'bansos']);
@@ -113,6 +113,44 @@ class BansosController extends Controller
 
     public function normalize(Request $request)
     {
+        // Menjalankan metode SAW dan TOPSIS
+        $this->sawMethod();
+        $this->topsisMethod();
+
+        // Ambil semua data bansos setelah di-update oleh metode SAW dan TOPSIS
+        $bansos = BansosModel::all();
+        $kriteria = Kriteria::all();
+
+        // Hitung nilai akhir (score) dengan rata-rata dari SAW dan TOPSIS
+        foreach ($bansos as $item) {
+            $item->score = ($item->saw + $item->preference) / 2;
+            $item->save();
+        }
+
+        // Urutkan data berdasarkan nilai score secara descending
+        $bansos = $bansos->sortByDesc('score');
+
+        // Ubah status menjadi "menerima"
+        $count = 0;
+        foreach ($bansos as $item) {
+            $count++;
+            if ($count <= $request->jumlah_penerima) {
+                $item->status = 'menerima';
+            } else {
+                $item->status = 'tidak menerima';
+            }
+            $item->save();
+        }
+
+        $allBansos = BansosModel::all();
+        $bansos = BansosModel::with('kartuKeluarga')->paginate(5);
+
+        // Kembalikan hasil normalisasi
+        return view('dashboard.bansos', ['data' => $bansos, 'allData' => $allBansos, 'kriteria' => $kriteria, 'active' => 'bansos']);
+    }
+
+    public function sawMethod()
+    {
         // Ambil semua data bansos dan kriteria
         $bansos = BansosModel::all();
         $kriteria = Kriteria::all();
@@ -128,9 +166,9 @@ class BansosController extends Controller
             $minValues[$key] = $bansos->min($key);
         }
 
-        // Normalisasi setiap item dan hitung WSM
+        // Normalisasi setiap item dan hitung SAW
         foreach ($bansos as $item) {
-            $wsm = 0; // Inisialisasi nilai WSM
+            $saw = 0; // Inisialisasi nilai SAW
 
             foreach ($kriteria as $k) {
                 $key = 'c' . $k->kriteria_id;
@@ -146,36 +184,90 @@ class BansosController extends Controller
                 // Kalikan dengan bobot
                 $weightedValue = $normalizedValue * $k->bobot;
 
-                // Tambahkan ke nilai WSM
-                $wsm += $weightedValue;
+                // Tambahkan ke nilai SAW
+                $saw += $weightedValue;
             }
 
-            // Simpan nilai WSM
-            $item->wsm = $wsm;
+            // Simpan nilai SAW
+            $item->saw = $saw;
             $item->save();
         }
+    }
 
-        // Urutkan data berdasarkan nilai WSM secara descending
-        $bansos = $bansos->sortByDesc('wsm');
+    public function topsisMethod()
+    {
+        // Ambil semua data bansos dan kriteria
+        $bansos = BansosModel::all();
+        $kriteria = Kriteria::all();
 
-        // Ubah status menjadi "menerima" untuk tiga item pertama
-        $count = 0;
+        // Inisialisasi array untuk menyimpan nilai maksimum dan minimum dari setiap kriteria
+        $sumSquares = [];
+
+        // Menghitung jumlah kuadrat dari setiap kolom c1 hingga c6
+        foreach ($kriteria as $k) {
+            $key = 'c' . $k->kriteria_id; // Asumsi id kriteria sesuai dengan urutan kolom c1, c2, ..., c6
+            $sumSquares[$key] = sqrt($bansos->sum(function ($item) use ($key) {
+                return pow($item->$key, 2);
+            }));
+        }
+
+        // Normalisasi setiap item dan hitung normalisasi terbobot
+        $normalizedMatrix = [];
         foreach ($bansos as $item) {
-            $count++;
-            if ($count <= $request->jumlah_penerima) {
-                $item->status = 'menerima';
-                $item->save();
+            $normalizedItem = [];
+            foreach ($kriteria as $k) {
+                $key = 'c' . $k->kriteria_id;
+                // Normalisasi
+                $normalizedValue = $sumSquares[$key] != 0 ? $item->$key / $sumSquares[$key] : 0;
+                // Kalikan dengan bobot
+                $weightedValue = $normalizedValue * $k->bobot;
+                $normalizedItem[$key] = $weightedValue;
+            }
+            $normalizedMatrix[] = $normalizedItem;
+        }
+
+        // Hitung Solusi Ideal Positif dan Negatif
+        $idealPositive = [];
+        $idealNegative = [];
+
+        foreach ($kriteria as $k) {
+            $key = 'c' . $k->kriteria_id;
+            if ($k->attribut == 'cost') {
+                $idealPositive[$key] = min(array_column($normalizedMatrix, $key));
+                $idealNegative[$key] = max(array_column($normalizedMatrix, $key));
             } else {
-                $item->status = 'tidak menerima';
-                $item->save();
+                $idealPositive[$key] = max(array_column($normalizedMatrix, $key));
+                $idealNegative[$key] = min(array_column($normalizedMatrix, $key));
             }
         }
 
-        $allBansos = BansosModel::all();
-        $bansos = BansosModel::with('kartuKeluarga')->paginate(3);
+        // Menghitung jarak terhadap solusi ideal positif dan negatif
+        $distances = [];
+        foreach ($normalizedMatrix as $index => $normalizedItem) {
+            $distancePositive = 0;
+            $distanceNegative = 0;
+            foreach ($kriteria as $k) {
+                $key = 'c' . $k->kriteria_id;
+                $distancePositive += pow($normalizedItem[$key] - $idealPositive[$key], 2);
+                $distanceNegative += pow($normalizedItem[$key] - $idealNegative[$key], 2);
+            }
+            $distances[$index] = [
+                'positive' => sqrt($distancePositive),
+                'negative' => sqrt($distanceNegative),
+            ];
+        }
 
-        // Kembalikan hasil normalisasi
-        return view('dashboard.bansos', ['data' => $bansos, 'allData' => $allBansos, 'kriteria' => $kriteria, 'active' => 'bansos']);
+        // Menghitung nilai preferensi untuk setiap alternatif
+        $preferences = [];
+        foreach ($distances as $index => $distance) {
+            $preferences[$index] = $distance['negative'] / ($distance['positive'] + $distance['negative']);
+        }
+
+        // Menambahkan nilai preferensi ke dalam data bansos
+        foreach ($bansos as $index => $item) {
+            $item->preference = $preferences[$index];
+            $item->save();
+        }
     }
 
     public function show(string $id)

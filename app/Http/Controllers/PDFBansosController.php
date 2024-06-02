@@ -13,7 +13,7 @@ class PDFBansosController extends Controller
     public function generatePDF()
     {
         $bansos = BansosModel::all();
-        $bansos = BansosModel::orderBy('wsm', 'desc')->get();
+        $bansos = BansosModel::orderBy('score', 'desc')->get();
         $kriteria = Kriteria::all();
 
         $date = Carbon::now()->isoFormat('D MMMM YYYY', 'id');
