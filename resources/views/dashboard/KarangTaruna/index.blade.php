@@ -54,7 +54,7 @@
        </div>
      </div>
      <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
-           <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+           <img src="{{$item->foto_informasi == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716897949/e7dulpy8h3y86sspr8o5.jpg' : $item->foto_informasi}}" class="absolute block  w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
        </div>
        
        
@@ -94,8 +94,8 @@
     <div class="max-w-[1400px] pb-5 mx-auto mt-5 overflow-x-auto scrollbar-sangar">
         <div class="w-full flex  space-x-8  ">
                 @foreach ($pengumuman as $item)
-                <section class="relative flex-shrink-0 ">
-                    <div class=" duration-700 ease-in-out" data-carousel-item>
+                <section class="relative w-[500px]  flex-shrink-0 ">
+                    <div class=" duration-700 h-full ease-in-out" data-carousel-item>
                         <div class="absolute font-main  w-full z-50 h-full">
                           <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
                               <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
@@ -104,7 +104,7 @@
                       </div>
                     </div>
                     <div class="bg-gradient-to-t from-[#0096FF] opacity-50 rounded-xl  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
-                          <img src="{{$item->foto_informasi}}" class=" block rounded-xl w-[500px] top-0 left-0" alt="...">
+                          <img src="{{$item->foto_informasi == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716897949/e7dulpy8h3y86sspr8o5.jpg' : $item->foto_informasi}}" class=" block rounded-xl  h-full object-cover top-0 left-0" alt="...">
                       </div>
                       
                   </section>

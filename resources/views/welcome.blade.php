@@ -20,7 +20,7 @@
        </div>
      </div>
      <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
-           <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+           <img src="{{$item->foto_informasi == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716897949/e7dulpy8h3y86sspr8o5.jpg' : $item->foto_informasi}}" class="absolute block  w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
        </div>
        
        
@@ -61,11 +61,11 @@
         <div class="flex gap-12 flex-col md:flex-row w-full justify-center items-center h-full">
             <div class="img flex md:w-[300px] w-[200px] lg:w-[550px]  relative h-[350px]">
 
-                <img class="w-32 sm:w-64 absolute left-[1rem] top-0 rounded-xl"
+                <img class="w-64 sm:w-64 absolute left-[1rem] top-5 md:top-0 rounded-xl"
                     src="{{ asset('asset/images/homepage.jpg') }}" alt="">
-                <img class="w-32 sm:w-64 absolute left-[3rem] bottom-[1rem] rounded-xl "
+                <img class="w-64 md:w-64 absolute md:left-[3rem] left-[2rem] bottom-[4rem] md:bottom-[1rem] rounded-xl "
                     src="{{ asset('asset/images/homepage.jpg') }}" alt="">
-                <img class="w-32 sm:w-64 absolute right-[5rem] top-[5rem] rounded-xl "
+                <img class="w-64 md:w-64 absolute md:right-[5rem] top-[5rem] right-[6rem] md:top-[5rem] rounded-xl "
                     src="{{ asset('asset/images/homepage.jpg') }}" alt="">
 
             </div>
@@ -88,28 +88,28 @@
             <div class="flex flex-col md:flex-row  text-white items-center h-full justify-between">
                 <div class="info font-main font-bold">
                     <h2 class="text-dodger-blue-200 text-2xl mb-2">RT 01</h2>
-                    <h1 class="text-white font-semibold text-4xl">231<span class="text-base font-normal"> penduduk</span>
+                    <h1 class="text-white font-semibold text-4xl">{{$penduduk[0]}}<span class="text-base font-normal"> penduduk</span>
                     </h1>
                 </div>
-                <div class="bg-white w-[1px] h-[52px] opacity-60">
+                <div class="hidden md:block bg-white w-[1px] h-[52px] opacity-60">
                 </div>
                 <div class="info font-main font-bold">
                     <h2 class="text-dodger-blue-200 text-2xl mb-2">RT 02</h2>
-                    <h1 class="text-white font-semibold text-4xl">134<span class="text-base font-normal"> penduduk</span>
+                    <h1 class="text-white font-semibold text-4xl">{{$penduduk[1]}}<span class="text-base font-normal"> penduduk</span>
                     </h1>
                 </div>
-                <div class="bg-white w-[1px] h-[52px] opacity-60">
+                   <div class="hidden md:block bg-white w-[1px] h-[52px] opacity-60">
                 </div>
                 <div class="info font-main font-bold">
                     <h2 class="text-dodger-blue-200 text-2xl mb-2">RT 03</h2>
-                    <h1 class="text-white font-semibold text-4xl">59<span class="text-base font-normal"> penduduk</span>
+                    <h1 class="text-white font-semibold text-4xl">{{$penduduk[2]}}<span class="text-base font-normal"> penduduk</span>
                     </h1>
                 </div>
-                <div class="bg-white w-[1px] h-[52px] opacity-60">
+                   <div class="hidden md:block bg-white w-[1px] h-[52px] opacity-60">
                 </div>
                 <div class="info font-main font-bold">
                     <h2 class="text-dodger-blue-200 text-2xl mb-2">RT 04</h2>
-                    <h1 class="text-white font-semibold text-4xl">192<span class="text-base font-normal"> penduduk</span>
+                    <h1 class="text-white font-semibold text-4xl">{{$penduduk[3]}}<span class="text-base font-normal"> penduduk</span>
                     </h1>
                 </div>
             </div>

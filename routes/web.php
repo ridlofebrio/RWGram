@@ -199,7 +199,8 @@ Route::group(['prefix' => 'penduduk'], function () {
 Route::group(['prefix' => 'informasi'], function () {
     Route::post('/tambahInformasi', [InformasiController::class, 'tambahInformasi'])->name('informasi.tambah.informasi');
     Route::post('/arsip/{id}', [InformasiController::class, 'arsip'])->name('informasi.arsip.informasi');
-
+    Route::delete('{id}', [InformasiController::class, 'destroy'])->middleware('auth');
+    Route::post('/', [InformasiController::class, 'store'])->middleware('auth');
 });
 
 

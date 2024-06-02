@@ -25,17 +25,39 @@
                       </button>
                     </div>
                     <!-- Modal body -->
-                    <form action="{{url('/penduduk')}}" method="POST" class="p-4 md:p-5 text-left">
+                    <form action="{{url('/informasi')}}" method="POST" enctype="multipart/form-data" class="p-4 md:p-5 text-left">
                       @csrf
                       @method('POST')
                         <div class="grid gap-4 mb-4 grid-cols-2">
+                            <input type="hidden" name="user_id" value="{{Auth::user()->user_id}}">
                             <div class="col-span-2">
-                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deskripsi</label>
-                                <input type="text" name="NKK" id="name" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Deskripsi" required="">
+                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Judul Acara</label>
+                                <input type="text" name="judul" id="name" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Judul" required="">
                             </div>
-                           
-                            
-                       
+                            <div class="col-span-2">
+                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">deskripsi Informasi</label>
+                                <textarea name="deskripsi_informasi" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Deskripsi informasi"></textarea>
+
+                            </div>
+
+                            <div class="col-span-2 sm:col-span-1">
+                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tempat Acara</label>
+                                <input type="text" name="lokasi_informasi" id="name" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tempat acara" required="">
+                            </div>
+                            <div class="col-span-2 sm:col-span-1">
+                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Acara</label>
+                                <input type="date" name="tanggal_informasi" id="name" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tanggal acara" required="">
+                            </div>
+
+                            <div class="col-span-2 ">
+                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gambar</label>
+                                <label class="flex w-1/5 py-2 px-2 gap-1 items-center  bg-white text-blue rounded-lg justify-center  border border-neutral-04 cursor-pointer hover:bg-blue-main hover:text-white hover:border-blue-main text-blue-main">
+                                    <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                                    <span id="text" class="">Select a file</span>
+                                    <input onchange="changeButton(event)" type='file'name='foto_informasi' class="hidden" />
+                                   
+                                </label>
+                            </div>
                             
                         </div>
                         <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -54,10 +76,10 @@
     <div class=" w-full gap-4 mt-5" >
         @foreach ($informasi as $item)
         <div x-data="{ open: false }">
-            <button @click="open = true" class="hover:scale-95 mx-auto transition ease-in-out delay-100">
-                <div class="flex mt-4 w-full gap-5">
+            <button @click="open = true" class="hover:scale-95 text-left w-full transition ease-in-out delay-100">
+                <div class="flex flex-wrap mt-4 w-full gap-5">
         
-                    <img src="{{$item->foto_informasi}}" class="rounded-xl max-w-md" alt="">
+                    <img src="{{$item->foto_informasi == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716897949/e7dulpy8h3y86sspr8o5.jpg' : $item->foto_informasi}}" class="rounded-xl max-w-md object-cover" alt="">
                     <div class="content text-left">
                         <h1 class="font-bold text-2xl text-black">{{$item->judul}}</h1>
                         <p class="mt-4"> {{$item->deskripsi_informasi}}</p>
@@ -104,11 +126,12 @@
                                       <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deskripsi</label>
                                       <textarea readonly type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 h-[200px] focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">{{$item->deskripsi_informasi}} </textarea>
                                   </div>
+                                  
                                   <div class="col-span-2">
                                       <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Informasi</label>
                                       <input readonly type="date" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" value="{{date('Y-m-d',strtotime($item->deskripsi_informasi))}}" required="">
                                   </div>
-                                  <div class="col-span-2">
+                                  <div class="">
                                       <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Informasi</label>
                                      <a href="{{$item->foto_informasi}}"><img src="{{$item->foto_informasi}}" class="rounded-xl max-w-[500px]" alt=""></a>
                                   </div>
@@ -119,11 +142,12 @@
                                
                             </form>
             
-                            <form action="{{url('/informasi/arsip/'.$item->informasi_id)}}" onsubmit="return alert('are You sure ?')" class="text-left px-5 py-3" method="post">
+                            <form action="{{url('/informasi/'.$item->informasi_id)}}" onsubmit="return alert('are You sure ?')" class="text-left px-5 py-3" method="post">
                                 @csrf
+                                @method('DELETE')
                                 
                                 <button type="submit" class=" hover:bg-dodger-blue-100 hover:border-2 hover:text-white hover:border-dodger-blue-100 border-2 border-blue-main  px-8 py-2 text-base font-medium rounded-full  ">
-                                   <p class="font-bold text-blue-main"> Arsipkan</p>
+                                   <p class="font-bold text-blue-main"> Hapus</p>
                                 </button>
                             </form>
                           </div>
@@ -139,3 +163,12 @@
 </div>
 
 @endsection
+
+@push('js')
+<script>
+    const changeButton= (event)=>{
+        const button = event.target
+        document.getElementById('text').textContent = button.files[0].name
+    }
+</script>
+@endpush
