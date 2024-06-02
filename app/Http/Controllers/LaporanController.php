@@ -30,18 +30,17 @@ class LaporanController extends Controller
 
     public function indexPenduduk(Request $requets)
     {
-        $status = $requets->query('status');
-        $laporan = LaporanModel::query();
+        $laporan = LaporanModel::with('penduduk', 'penduduk.kartuKeluarga.rt')->get();
 
         if ($requets->has('search')) {
             $laporan->whereHas('penduduk', function ($query) use ($requets) {
                 $query->where('nama_penduduk', 'like', '%' . $requets->search . '%');
             });
         }
-        if ($status) {
-            $laporan->where('status_laporan', $status);
-        }
-        $laporan = $laporan->get();
+        // if ($status) {
+        //     $laporan->where('status_laporan', $status);
+        // }
+        // $laporan = $laporan->get();
 
         $metadata = (object) [
             'title' => 'Pengaduan',
