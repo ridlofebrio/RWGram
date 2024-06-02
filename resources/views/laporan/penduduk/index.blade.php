@@ -105,11 +105,11 @@
                 </thead>
                 <tbody>
 
-                @if ($laporan->isEmpty())
-                    <tr>
-                        <td colspan="5" class="text-center py-4">Tidak ada data yang tersedia</td>
-                    </tr>
-                @endif
+                    @if ($laporan->isEmpty())
+                        <tr>
+                            <td colspan="5" class="text-center py-4">Tidak ada data yang tersedia</td>
+                        </tr>
+                    @endif
 
                     @foreach ($laporan as $lap)
                         <tr class="font-medium text-sm">
@@ -160,7 +160,7 @@
                                     {{-- Main modal --}}
                                     <div x-show="open" tabindex="-1" aria-hidden="true"
                                         class="overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex justify-center items-center w-full h-full bg-black bg-opacity-80">
-                                        <div class="relative w-[920px] h-[80vh] bg-white rounded-lg px-6 py-5">
+                                        <div class="relative w-[920px] max-h-full bg-white rounded-lg px-6 py-5">
                                             <button type="button" @click="open = false"
                                                 class="absolute -top-5 -right-4 bg-blue-main text-white border-2 border-white hover:bg-gray-200 hover:text-gray-900 rounded-full text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
                                                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -197,17 +197,17 @@
                                                             value="{{ $lap->penduduk->kartuKeluarga->rt_id }}">
                                                     </div>
                                                     <div class="col-span-2">
-                                                        <label for="name"
-                                                            class="block mb-2 text-sm font-medium text-neutral-06 dark:text-white">Tanggal
+                                                        <label for="deskripsi"
+                                                            class="block mb-2 text-sm font-medium text-neutral-06 dark:text-white">Deskripsi
                                                             Pengaduan</label>
-                                                        <input readonly type="text" name="name" id="name"
+                                                        <textarea readonly type="text" name="deskripsi" id="deskripsi"
                                                             class=" border border-neutral-04 text-neutral-10 text-sm rounded-lg focus:outline-none block w-full p-2.5"
-                                                            value="{{ $lap->tanggal_laporan }}">
+                                                            rows="6">
+                                                            {{ $lap->deskripsi_laporan }}></textarea>
                                                     </div>
                                                     <div class="col-span-2">
                                                         <label for="name"
-                                                            class="block mb-2 text-sm font-medium text-neutral-06 dark:text-white">Tanggal
-                                                            Pengaduan</label>
+                                                            class="block mb-2 text-sm font-medium text-neutral-06 dark:text-white">Foto Bukti Kejadian</label>
                                                         <input readonly type="text" name="name" id="name"
                                                             class=" border border-neutral-04 text-neutral-10 text-sm rounded-lg focus:outline-none block w-full p-2.5"
                                                             value="{{ $lap->tanggal_laporan }}">
