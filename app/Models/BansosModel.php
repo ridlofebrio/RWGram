@@ -30,7 +30,9 @@ class BansosModel extends Model
         'foto_ruang_tamu',
         'status',
         'keterangan',
-        'wsm'
+        'saw',
+        'preference',
+        'score',
     ];
 
     public function kartuKeluarga(): BelongsTo

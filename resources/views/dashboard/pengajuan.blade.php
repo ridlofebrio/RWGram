@@ -45,7 +45,7 @@
             </div>
         </div>
     </div>        
-    <div id="loading-image" class="fixed top-1/2 left-1/2 flex justify-center items-center -translate-x-1/2 -translate-y-1/2 z-40 w-screen h-screen bg-white opacity-70" style="display: none;" ><div class="  loader " ></div></div>
+   
 <div  class="relative  mt-5 overflow-x-auto shadow-md sm:rounded-lg ">
     <table id="umkm" class="w-full text-sm text-left rtl:text-right  text-gray-500 dark:text-gray-400">
    
@@ -71,13 +71,13 @@
             $(document).ready(function(){
                 
                 $.ajax({
-                        url: "http://127.0.0.1:8000/data/umkm",
+                        url: "{{url('data/umkm')}}",
                         beforeSend: function() {
               $("#loading-image").show();
            },
                         
                     }).done(function (data) {
-                    
+                                      
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(data, 'text/html');    
                         const table = doc.getElementById('umkm');
@@ -85,7 +85,7 @@
                         
                            $('#umkm').html(table);
                            $('.page').html(page);
-                        $("#loading-image").hide();
+                          $("#loading-image").hide();
                         
                     })
                  
@@ -141,7 +141,9 @@
                    
                     $.ajax({
                         url: "http://127.0.0.1:8000/data/"+ document.getElementById('search').getAttribute('data')+'/'+index.currentTarget.getAttribute('data'),
-                        method:"GET",
+                        method:"GET",     beforeSend: function() {
+              $("#loading-image").show();
+           },
                         success: function (data) {
                             
                             const parser = new DOMParser();
@@ -151,6 +153,7 @@
                            $('#umkm').html(table);
                            $('.page').html(page);
                            $('#sort').html(index.currentTarget.getAttribute('data'));
+                           $("#loading-image").hide();
                         }
                         
                     })

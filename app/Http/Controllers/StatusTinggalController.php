@@ -83,6 +83,8 @@ class StatusTinggalController extends Controller
             'alamat_pindah' => 'required',
             'status' => 'required',
             // 'foto_bukti' => 'required',
+            'foto_umkm' => 'required',
+            'asset_id' => 'required',
         ]);
 
         $penduduk = PendudukModel::where('NIK', $request->NIK)->first();
@@ -92,6 +94,8 @@ class StatusTinggalController extends Controller
                 'penduduk_id' => $penduduk->penduduk_id,
                 'alamat_pindah' => $request->alamat_pindah,
                 'status' => $request->status,
+                'foto_bukti' => $request->foto_umkm,
+                'asset_id' => $request->asset_id
             ]);
             return redirect()->route('tinggal.penduduk.index')
                 ->with('success', 'Data Berhasil Ditambahkan');
@@ -108,11 +112,30 @@ class StatusTinggalController extends Controller
     }
     public function update(Request $request, string $id)
     {
+
+
         $request->validate([
-            'status_pengajuan' => 'required'
+            'status_pengajuan' => 'required',
+            'status_tinggal' => 'required',
+            'id_penduduk' => 'required'
         ]);
 
-        StatusTinggalModel::find($id)->update($request->all());
+        try {
+            $model = StatusTinggalModel::findOrFail($id);
+            $model->status_pengajuan = $request->status_pengajuan;
+            $model->save();
+
+        } catch (\Exception $e) {
+            dd($e);
+        }
+
+        try {
+            $penduduk = PendudukModel::findOrFail($request->id_penduduk);
+            $penduduk->status_tinggal = $request->status_tinggal;
+            $penduduk->save();
+        } catch (\Exception $e) {
+            dd($e);
+        }
         return redirect('dashboard/pengajuan')->with('flash', ['success', 'Data berhasil dikonfirmasi']);
     }
     public function destroy(string $id)

@@ -35,25 +35,28 @@
 @endpush
 @section('content')
 
-<div class="justify-self-center col-span-1 carousel  xl:w-full">
+<div class="justify-self-center h-[500px] col-span-1 carousel w-full  xl:w-full">
     <h1 class=" font-semibold mb-5  text-2xl text-black" >Pengumuman</h1>
-    <div id="default-carousel" class="relative w-full " data-carousel="slide">
+    <div id="default-carousel" class="relative h-full w-full " data-carousel="slide">
         <!-- Carousel wrapper -->
+        <div class="relative h-full  overflow-hidden rounded-lg ">
       @foreach ($informasi as $item)
-      <div class="relative h-[400px]  overflow-hidden rounded-lg ">
         <!-- Item 1 -->
         
-       <div class="hidden duration-700 ease-in-out" data-carousel-item>
+       <div class="hidden h-full duration-700 ease-in-out" data-carousel-item>
          <div class="absolute font-main  w-full z-50 h-full">
            <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
                <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
-               <h1 class=" text-md  font-bold text-white w-3/4" >{{$item->deskripsi_informasi}} </h1>
+               <h1 class=" text-md hidden md:flex font-bold text-white w-3/4" >{{$item->deskripsi_informasi}} </h1>
+               <h1 class=" text-md block md:hidden font-bold text-white w-3/4" >{{$item->judul}} </h1>
+               
               
        </div>
      </div>
      <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
-           <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+           <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
        </div>
+       
        
       @endforeach
             <!-- Item 2 -->
@@ -86,7 +89,7 @@
 </div>
 </div>
 
-<h1 class=" font-semibold mb-5 mt-5 text-2xl text-black" >Informasi</h1>
+<h1 class=" font-semibold mb-5 mt-5 pt-10 text-2xl text-black" >Informasi</h1>
 
     <div class="max-w-[1400px] pb-5 mx-auto mt-5 overflow-x-auto scrollbar-sangar">
         <div class="w-full flex  space-x-8  ">

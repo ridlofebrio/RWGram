@@ -25,6 +25,27 @@ class InformasiController extends Controller
         return view('dashboard.KarangTaruna.index', ['active' => 'beranda'], compact('informasi', 'pengumuman'));
     }
 
+    public function getUpload()
+    {
+        $pengumuman = InformasiModel::where('upload', 0)->get();
+
+        return view('component.informasi', compact('pengumuman'));
+    }
+
+    public function informasi()
+    {
+        $pengumuman = InformasiModel::where('upload', 1)->get();
+
+        return view('dashboard.KarangTaruna.informasi', ['active' => 'informasi'], compact('pengumuman'));
+    }
+
+    public function pengumuman()
+    {
+        $informasi = InformasiModel::all();
+
+        return view('dashboard.KarangTaruna.pengumuman', ['active' => 'pengumuman'], compact('informasi'));
+    }
+
     public function informasiDetail()
     {
 
@@ -134,9 +155,49 @@ class InformasiController extends Controller
             ->with('success', 'Data Berhasil Diupdate');
     }
 
+    public function tambahInformasi(Request $request)
+    {
+        // dd($request);
+
+        foreach ($request->cek as $key => $value) {
+
+            try {
+                $informasi = InformasiModel::find($value);
+                $informasi->upload = 1;
+                $informasi->save();
+
+            } catch (\Exception $e) {
+                dd($e);
+            }
+
+        }
+
+
+        return redirect('/karangTaruna/informasi')->with('flash', ['success', 'Informasi Berhasil Di Upload']);
+
+    }
+
+    public function arsip(string $id)
+    {
+        try {
+            $informasi = InformasiModel::findOrFail($id);
+            $informasi->upload = 0;
+            $informasi->save();
+        } catch (\Exception $e) {
+            dd($e);
+        }
+        return redirect('/karangTaruna/informasi')->with('flash', ['success', 'Informasi Berhasil Di Arsipkan']);
+
+    }
+
     public function destroy(string $id)
     {
-        $informasi = InformasiModel::findOrFail($id)->delete();
+        try {
+            $informasi = InformasiModel::findOrFail($id)->delete();
+
+        } catch (\Exception $e) {
+            dd($e);
+        }
 
         return redirect()->route('informasi.index')
             ->with('success', 'Data Berhasil Dihapus');

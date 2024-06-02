@@ -18,6 +18,24 @@ class UserController extends Controller
         return view('dashboard.akun', compact('data', 'active'));
     }
 
+    public function gantiGambar(Request $request, $id)
+    {
+        try {
+            $user = User::findOrFail($id);
+
+            $file = (array) cloudinary()->uploadApi()->upload($request->file('foto_profil')->getRealPath(), $options = []);
+
+            $user->foto_profil = $file['secure_url'];
+            $user->asset_id = $file['asset_id'];
+            $user->save();
+
+        } catch (\Exception $e) {
+            dd($e);
+        }
+
+        return redirect('dashboard/detail-akun')->with('flash', ['success', 'Foto Profil Berhasil Di Perbarui']);
+    }
+
     public function destroy($id)
     {
 

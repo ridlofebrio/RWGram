@@ -16,7 +16,9 @@ class LaporanModel extends Model
         'penduduk_id',
         'deskripsi_laporan',
         'tanggal_laporan',
-        'status_laporan'
+        'status_laporan',
+        'foto_laporan',
+        'asset_id'
     ];
 
     public function penduduk()

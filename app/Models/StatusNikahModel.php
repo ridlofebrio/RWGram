@@ -22,7 +22,8 @@ class StatusNikahModel extends Model
         'NIK_pasangan',
         'foto_bukti',
         'status',
-        'status_pengajuan'
+        'status_pengajuan',
+        'asset_id'
     ];
 
     public function Penduduk(): BelongsTo

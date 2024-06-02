@@ -80,6 +80,8 @@ class StatusHidupController extends Controller
         $request->validate([
             'NIK_pengaju' => 'required',
             'NIK_meninggal' => 'required',
+            'foto_umkm' => 'required',
+            'asset_id' => 'required',
         ]);
 
         $penduduk_pengaju = PendudukModel::where('NIK', $request->NIK_pengaju)->first();
@@ -89,6 +91,8 @@ class StatusHidupController extends Controller
             StatusHidupModel::create([
                 'penduduk_id' => $penduduk_pengaju->penduduk_id,
                 'id_penduduk_meninggal' => $penduduk_meninggal->penduduk_id,
+                'foto_bukti' => $request->foto_umkm,
+                'asset_id' => $request->asset_id
             ]);
 
             return redirect()->route('hidup.penduduk.index')
@@ -107,13 +111,29 @@ class StatusHidupController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'status_pengajuan' => 'required'
+            'status_pengajuan' => 'required',
+            'id_penduduk' => 'required'
         ]);
 
+        try {
+            $status = StatusHidupModel::findOrFail($id);
+            $status->status_pengajuan = $request->status_pengajuan;
+            $status->save();
 
-        $status = StatusHidupModel::find($id);
-        $status->status_pengajuan = $request->status_pengajuan;
-        $status->save();
+        } catch (\Exception $e) {
+            dd($e);
+        }
+
+        try {
+            $penduduk = PendudukModel::findOrFail($request->id_penduduk);
+            $penduduk->status_kematian = 1;
+            $penduduk->save();
+
+        } catch (\Exception $e) {
+            dd($e);
+        }
+
+
         return redirect('dashboard/pengajuan')->with('flash', ['success', 'Data berhasil dikonfirmasi']);
     }
 

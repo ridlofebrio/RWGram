@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InformasiModel;
 use App\Models\KasDetailModel;
 use App\Models\KasModel;
 use App\Models\LaporanModel;
@@ -25,6 +26,7 @@ class DashboardController extends Controller
             $tinggal = StatusTinggalModel::selectRaw('count(id_status_tinggal  )as jumlah')->first()->jumlah;
             $laporan = LaporanModel::selectRaw('count(laporan_id) as jumlah')->first()->jumlah;
             $penduduk = PendudukModel::selectRaw('count(penduduk_id)as jumlah')->first()->jumlah;
+            $informasi = InformasiModel::where('upload', 1)->get();
             $pengajuan = $hidup + $tinggal + $nikah;
             $semua = array('umkm' => $umkm, 'penduduk' => $penduduk, 'pengajuan' => $pengajuan, 'laporan' => $laporan);
 
@@ -47,7 +49,7 @@ class DashboardController extends Controller
         }
         $active = 'beranda';
 
-        return view('dashboard', compact('data', 'tgl', 'active', 'jumlah', 'penduduk_laki', 'penduduk_perempuan', 'semua'));
+        return view('dashboard', compact('data', 'tgl', 'active', 'jumlah', 'penduduk_laki', 'penduduk_perempuan', 'semua', 'informasi'));
     }
 
     public function notif()

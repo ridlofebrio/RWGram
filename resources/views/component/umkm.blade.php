@@ -1,5 +1,5 @@
 
-
+@inject('adminApi', \Cloudinary\Api\Admin\AdminApi::class)
     <table id='umkm' class="w-full text-sm text-left rtl:text-right  text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-neutral-03 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -74,12 +74,12 @@
 
                     </div>
                     <div x-data="{ open: false }">
-                        <button @click="open = true"  class="hover:border-none  before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  " type="button">
+                        <button @click="open = true" onclick="loadGambar('{{$item->umkm_id}}')"  class="hover:border-none  before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  " type="button">
                             Detail
                           </button>
                           
                           <!-- Main modal -->
-                          <div  x-show="open"   tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed  z-40 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                          <div id="modal-{{$item->umkm_id}}"  x-show="open"   tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed  z-40 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                           
                             <div  class="absolute w-[920px] h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  p-4  z-50 ">
                                   <!-- Modal content -->
@@ -120,8 +120,10 @@
                                               <textarea readonly id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  placeholder="Write product description here">{{$item->deskripsi_umkm}}</textarea>           
                                           </div>
                                           <div class="col-span-2">
+                                            {{-- @php($result = (array) (new $adminApi)->assetByAssetId("3c16fa34033ee2110ddceab721812f07")) --}}
+                                            
                                               <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gambar</label>
-                                              <img src="{{$item->foto_umkm}}" alt="Foto Bukti">
+                                              <img src="{{$item->foto_umkm}}" loading="lazy" alt="Foto Bukti">
                                           </div>
                                           <div class="col-span-2">
                                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Link Media Sosial</label>
@@ -167,3 +169,4 @@
         </ul>
       </nav>
     </div>
+

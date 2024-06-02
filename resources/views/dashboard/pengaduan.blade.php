@@ -123,7 +123,7 @@
                                     <h1 class="text-lg mb-5 text-black">Apakah Anda ingin mengkonfirmasi pengaduan ini ?</h1>
                                 <div class="flex w-full space-x-7 justify-center">
                                     
-                                                <button onclick="closeModal()" x-bind='SomeButton' class="text-blue-main border-2 border-dodger-blue-800  hover:bg-dodger-blue-800  hover:text-white  px-5 py-2 text-base font-medium rounded-full" type="button">
+                                                <button onclick="closeModal({{$umkm->laporan_id}})" x-bind='SomeButton' class="text-blue-main border-2 border-dodger-blue-800  hover:bg-dodger-blue-800  hover:text-white  px-5 py-2 text-base font-medium rounded-full" type="button">
                                                 Kembali
                                                 </button>
 
@@ -155,7 +155,7 @@
                                          <textarea  id="description" rows="4" name="pesan" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  placeholder="Tulis Pesan Disini ..."></textarea>           
                                      </div>
                                     <div class="flex w-full justify-center space-x-5">
-                                     <button onclick="closeModal()" type="button" class="text-blue-main border-2 border-dodger-blue-800  hover:bg-dodger-blue-800  hover:text-white mt-3 px-5 py-2 text-base font-medium rounded-full" >
+                                     <button onclick="closeModal('ditolak-'+{{$umkm->laporan_id}})" type="button" class="text-blue-main border-2 border-dodger-blue-800  hover:bg-dodger-blue-800  hover:text-white mt-3 px-5 py-2 text-base font-medium rounded-full" >
                                          Batal
                                        </button>
                                      <button type="submit" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800  mt-3 px-5 py-2 text-base font-medium rounded-full">Konfirmasi</button>
@@ -218,7 +218,7 @@
                                               </div>
                                               <div class="col-span-2">
                                                   <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gambar</label>
-                                                  <img src="{{asset('images/'.$umkm->foto_laporan)}}" alt="Foto Bukti">
+                                                  <img src="{{$umkm->foto_laporan}}" alt="Foto Bukti">
                                               </div>
                                               
                                                
@@ -369,8 +369,10 @@
     document.getElementById('modal-'+id).classList.remove('hidden');
 }
 
-const closeModal = () => {
-    document.querySelector('.modal').classList.add('hidden');
+
+const closeModal = (id) => {
+   console.log(id);
+   document.querySelector('#modal-'+id).classList.add('hidden');
 }
 
 

@@ -1,140 +1,59 @@
 @extends('layouts.template')
 
 @section('content')
-    <div id="indicators-carousel" class="relative z-20 w-full" data-carousel="static">
+<div class="justify-self-center h-[90vh]  col-span-1 carousel w-full  xl:w-full">
+
+    <div id="default-carousel" class="relative h-full w-full " data-carousel="slide">
         <!-- Carousel wrapper -->
-        <div class="relative  overflow-hidden h-[200px] sm:h-[250px]  md:h-[400px]  lg:h-[91vh]">
-            <!-- Item 1 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-
-                <div
-                    class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-10  absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                </div>
-
-                <div class="absolute z-20 font-main  w-full h-full">
-                    <div class=" mx-auto flex flex-col justify-end  max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
-                        <h2 class="text-white text-xs md:text-2xl">Sistem Informasi RW 06 - Kalirejo </h2>
-                        <h1 class=" text-xs md:text-5xl font-bold text-white w-3/4">Ayo ramaikan buka bersama puasa Ramadhan
-                            1445H di Rumah Pak Sohib, pukul 15.00 </h1>
-
-                    </div>
-                </div>
-                <img src="{{ asset('asset/images/homepage.jpg') }}"
-                    class="absolute block w-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-
-
-            </div>
+        <div class="relative h-full  overflow-hidden  ">
+      @foreach ($informasi as $item)
+        <!-- Item 1 -->
+        
+       <div class="hidden h-full duration-700 ease-in-out" data-carousel-item>
+         <div class="absolute font-main  w-full z-50 h-full">
+           <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
+               <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
+               <h1 class=" text-md hidden md:flex font-bold text-white w-3/4" >{{$item->deskripsi_informasi}} </h1>
+               <h1 class=" text-md block md:hidden font-bold text-white w-3/4" >{{$item->judul}} </h1>
+               
+              
+       </div>
+     </div>
+     <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
+           <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+       </div>
+       
+       
+      @endforeach
             <!-- Item 2 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <div
-                    class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-10  absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                </div>
-
-                <div class="absolute z-20 font-main  w-full h-full">
-                    <div class=" mx-auto flex flex-col justify-end  max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
-                        <h2 class="text-white text-2xl">Sistem Informasi RW 06 - Kalirejo </h2>
-                        <h1 class="text-xl md:text-3xl font-bold text-white w-3/4">Ayo ramaikan buka bersama puasa Ramadhan
-                            1445H di Rumah Pak Sohib, pukul 15.00 </h1>
-
-                    </div>
-                </div>
-                <img src="{{ asset('asset/images/homepage.jpg') }}"
-                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-            </div>
-            <!-- Item 3 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <div
-                    class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-10  absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                </div>
-
-                <div class="absolute z-20 font-main  w-full h-full">
-                    <div class=" mx-auto flex flex-col justify-end  max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
-                        <h2 class="text-white text-2xl">Sistem Informasi RW 06 - Kalirejo </h2>
-                        <h1 class=" text-xl md:text-3xl font-bold text-white w-3/4">Ayo ramaikan buka bersama puasa Ramadhan
-                            1445H di Rumah Pak Sohib, pukul 15.00 </h1>
-
-                    </div>
-                </div>
-                <img src="{{ asset('asset/images/logo/Logo.png') }}"
-                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-            </div>
-            <!-- Item 4 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <div
-                    class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-10  absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                </div>
-
-                <div class="absolute z-20 font-main  w-full h-full">
-                    <div class=" mx-auto flex flex-col justify-end  max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
-                        <h2 class="text-white text-2xl">Sistem Informasi RW 06 - Kalirejo </h2>
-                        <h1 class=" text-xl md:text-5xl font-bold text-white w-3/4">Ayo ramaikan buka bersama puasa Ramadhan
-                            1445H di Rumah Pak Sohib, pukul 15.00 </h1>
-
-                    </div>
-                </div>
-                <img src="{{ asset('asset/images/logo/Logo.png') }}"
-                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-            </div>
-            <!-- Item 5 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <div
-                    class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-10  absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                </div>
-
-                <div class="absolute z-20 font-main  w-full h-full">
-                    <div class=" mx-auto flex flex-col justify-end  max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
-                        <h2 class="text-white text-2xl">Sistem Informasi RW 06 - Kalirejo </h2>
-                        <h1 class="text-xl md:text-3xl font-bold text-white w-3/4">Ayo ramaikan buka bersama puasa Ramadhan
-                            1445H di Rumah Pak Sohib, pukul 15.00 </h1>
-
-                    </div>
-                </div>
-                <img src="{{ asset('asset/images/logo/Logo.png') }}"
-                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-            </div>
-        </div>
+            
         <!-- Slider indicators -->
-        <div
-            class="absolute bg-neutral-400 opacity-50 px-3 py-2 rounded-xl z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse bottom-5 left-1/2">
-            <button type="button" class="w-2 h-2 rounded-full" aria-current="true" aria-label="Slide 1"
-                data-carousel-slide-to="0"></button>
-            <button type="button" class="w-2 h-2 rounded-full" aria-current="false" aria-label="Slide 2"
-                data-carousel-slide-to="1"></button>
-            <button type="button" class="w-2 h-2 rounded-full" aria-current="false" aria-label="Slide 2"
-                data-carousel-slide-to="2"></button>
-            <button type="button" class="w-2 h-2 rounded-full" aria-current="false" aria-label="Slide 4"
-                data-carousel-slide-to="3"></button>
-            <button type="button" class="w-2 h-2 rounded-full" aria-current="false" aria-label="Slide 5"
-                data-carousel-slide-to="4"></button>
+        <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+            @foreach ($informasi as $item)
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+            @endforeach
+           
         </div>
         <!-- Slider controls -->
-        <button type="button"
-            class="md:flex  absolute top-0 start-0 z-30 hidden items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-            data-carousel-prev>
-            <span
-                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-black dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70  group-focus:outline-none">
-                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M5 1 1 5l4 4" />
+        <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
                 </svg>
-                <span class="sr-only ">Previous</span>
+                <span class="sr-only">Previous</span>
             </span>
         </button>
-        <button type="button"
-            class="absolute top-0 end-0 z-30 md:flex hidden items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-            data-carousel-next>
-            <span
-                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-black dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="m1 9 4-4-4-4" />
+        <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                 </svg>
                 <span class="sr-only">Next</span>
             </span>
         </button>
     </div>
+</div>
+</div>
 
 
 
