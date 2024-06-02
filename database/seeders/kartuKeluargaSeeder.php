@@ -40,8 +40,55 @@ class kartuKeluargaSeeder extends Seeder
                 'tanggal_kk' => now(),
                 'created_at' => date("Y-m-d H:i:s"),
             ],
-
-
+            [
+                'rt_id' => 4,
+                'NKK' => 3326160107400453,
+                'no_telepon' => '085399275357',
+                'tanggal_kk' => now(),
+                'created_at' => date("Y-m-d H:i:s"),
+            ],
+            [
+                'rt_id' => 1,
+                'NKK' => 3326166004030864,
+                'no_telepon' => '081284123879',
+                'tanggal_kk' => now(),
+                'created_at' => date("Y-m-d H:i:s"),
+            ],
+            [
+                'rt_id' => 2,
+                'NKK' => 3326161606790832,
+                'no_telepon' => '082192013821',
+                'tanggal_kk' => now(),
+                'created_at' => date("Y-m-d H:i:s"),
+            ],
+            [
+                'rt_id' => 3,
+                'NKK' => 3326160107400974,
+                'no_telepon' => '085399275341',
+                'tanggal_kk' => now(),
+                'created_at' => date("Y-m-d H:i:s"),
+            ],
+            [
+                'rt_id' => 4,
+                'NKK' => 3326166004030884,
+                'no_telepon' => '081284123989',
+                'tanggal_kk' => now(),
+                'created_at' => date("Y-m-d H:i:s"),
+            ],
+            [
+                'rt_id' => 1,
+                'NKK' => 3326161606790225,
+                'no_telepon' => '082192013779',
+                'tanggal_kk' => now(),
+                'created_at' => date("Y-m-d H:i:s"),
+            ],
+            [
+                'rt_id' => 2,
+                'NKK' => 3326161606790768,
+                'no_telepon' => '082192013657',
+                'tanggal_kk' => now(),
+                'created_at' => date("Y-m-d H:i:s"),
+            ],
         ];
 
 
