@@ -29,14 +29,13 @@ class LaporanController extends Controller
 
     public function indexPenduduk(Request $requets)
     {
-        $laporan = LaporanModel::query();
+        $laporan = LaporanModel::with('penduduk', 'penduduk.kartuKeluarga.rt')->get();
 
         if ($requets->has('search')) {
             $laporan->whereHas('penduduk', function ($query) use ($requets) {
                 $query->where('nama_penduduk', 'like', '%' . $requets->search . '%');
             });
         }
-        $laporan = $laporan->get();
 
         $metadata = (object) [
             'title' => 'Pengaduan',
@@ -103,7 +102,6 @@ class LaporanController extends Controller
             } else {
                 $data = LaporanModel::where('penduduk_id', '=', 0)->paginate(3);
             }
-
         }
 
         return view('dashboard.pengaduan', ['data' => $data, 'active' => 'pengaduan']);
