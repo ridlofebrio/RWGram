@@ -128,7 +128,7 @@
                             @if ($lap->status_laporan === 'Sukses')
                                 <td class="px-6 py-4">
                                     <div
-                                        class="bg-green-100 text-green-600 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-1">
+                                        class="bg-green-100 text-green-600 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-2 w-fit">
                                         <div class="bg-green-600 rounded-full w-2 h-2"></div>
                                         <p>Selesai</p>
                                     </div>
@@ -136,7 +136,7 @@
                             @elseif ($lap->status_laporan === 'Proses')
                                 <td class="px-6 py-4">
                                     <div
-                                        class="bg-blue-info-100 text-blue-main font-bold py-2 px-4 text-xs rounded-full flex items-center gap-1">
+                                        class="bg-blue-info-100 text-blue-main font-bold py-2 px-4 text-xs rounded-full flex items-center gap-2 w-fit">
                                         <div class="bg-blue-main rounded-full w-2 h-2"></div>
                                         <p>Proses</p>
                                     </div>
@@ -144,7 +144,7 @@
                             @else
                                 <td class="px-6 py-4">
                                     <div
-                                        class="bg-yellow-100 text-yellow-400 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-1">
+                                        class="bg-yellow-100 text-yellow-400 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-2 w-fit">
                                         <div class="bg-yellow-400 rounded-full w-2 h-2"></div>
                                         <p>Menunggu</p>
                                     </div>
@@ -207,7 +207,8 @@
                                                     </div>
                                                     <div class="col-span-2">
                                                         <label for="name"
-                                                            class="block mb-2 text-sm font-medium text-neutral-06 dark:text-white">Foto Bukti Kejadian</label>
+                                                            class="block mb-2 text-sm font-medium text-neutral-06 dark:text-white">Foto
+                                                            Bukti Kejadian</label>
                                                         <input readonly type="text" name="name" id="name"
                                                             class=" border border-neutral-04 text-neutral-10 text-sm rounded-lg focus:outline-none block w-full p-2.5"
                                                             value="{{ $lap->tanggal_laporan }}">
