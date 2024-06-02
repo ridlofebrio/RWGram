@@ -25,8 +25,8 @@
                         <p>Normalize</p>
                     </button>
 
-           
-            
+
+
                     <!-- Main modal -->
                     <div x-show="open" x-cloak tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed z-40 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="absolute w-[400px] h-[30vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4 z-50">
@@ -122,15 +122,15 @@
                                                     </div>
                                                     <div class="col-span-2">
                                                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
-                                                        <input readonly type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 
-                                                        @if($bansos->status == 'tidak menerima') text-red-500 
-                                                        @elseif($bansos->status == 'menunggu') text-yellow-500 
-                                                        @else text-green-500 
-                                                        @endif 
-                                                        text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" 
+                                                        <input readonly type="text" name="name" id="name" class="bg-gray-50 border border-gray-300
+                                                        @if($bansos->status == 'tidak menerima') text-red-500
+                                                        @elseif($bansos->status == 'menunggu') text-yellow-500
+                                                        @else text-green-500
+                                                        @endif
+                                                        text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                         style="text-transform: capitalize;" placeholder="Type product name" value="{{$bansos->status}}" required="">
                                                     </div>
-    
+
                                                   <div class="col-span-2">
                                                       <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NKK</label>
                                                       <input readonly type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" value="{{$bansos->kartuKeluarga->kartuKeluarga->NKK}}" required="">
@@ -142,7 +142,7 @@
                                                 @php
                                                     $count = 0;
                                                 @endphp
-    
+
                                                 @foreach ($kriteria as $item)
                                                     @php
                                                         $count++;
@@ -201,7 +201,7 @@
           <li>
             <a href="#" class=" flex items-center justify-center px-3 h-8 bg-blue-main leading-tight  text-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{$data->currentPage()}}</a>
           </li>
-         
+
           <li>
             <button  {{$data->nextPageUrl()?'':'disabled'}}  onclick="page(event,'{{$data->nextPageUrl()}}')" class="pagination disabled:bg-neutral-04  flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><i class="fa-solid fa-chevron-right"></i></button>
           </li>
@@ -212,9 +212,9 @@
 {{-- Data Kriteria --}}
 <h1 class="mt-3">Data Kriteria</h1>
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
-    <div class="filter flex space-x-2 items-center">  
-        <div class="search border w-[25%] focus-within:ring-2 focus-within:ring-blue-main flex items-center justify-between  bg-white rounded-full px-3">
-            <input id="search" data='umkm' type="text" class=" border-none bg-transparent" placeholder="cari apapun">  
+    <div class="filter flex space-x-2 items-center">
+        <div class="search border w-[30%] focus-within:ring-2 focus-within:ring-blue-main flex items-center justify-between  bg-white rounded-full px-3">
+            <input id="search" data='umkm' type="text" class=" border-none bg-transparent" placeholder="cari apapun">
             <i class="fa-solid fa-magnifying-glass"></i>
         </div>
         <div  x-data="{open:false}" class="relative" x-cloak >
@@ -292,7 +292,7 @@
                                         </div>
                                     </div>
                                     <div class="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40"></div>
-                                </div>                                
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -306,7 +306,7 @@
 @push('js')
 <script>
     function page(event,link) {
-               
+
                event.preventDefault()
                $.ajax({
                                url: link,
@@ -315,7 +315,7 @@
                   },
                   success:function(data){
                    const parser = new DOMParser();
-                               const doc = parser.parseFromString(data, 'text/html');    
+                               const doc = parser.parseFromString(data, 'text/html');
                                const table = doc.getElementById('umkm');
                                const page =doc.querySelector('.page');
                                console.log(page);
@@ -323,14 +323,14 @@
                                   $('.page').html(page);
                                $("#loading-image").hide();
                   }
-                               
+
                            })
-              } 
+              }
 
     function submitForm() {
         let jumlahPenerima = document.getElementById('jumlah_penerima').value;
         document.getElementById('jumlah_penerima_hidden').value = jumlahPenerima;
-        
+
         document.getElementById('normalizeButton').classList.remove('hidden');
         document.getElementById('inputJumlahPenerimaForm').submit();
     }
