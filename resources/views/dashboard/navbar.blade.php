@@ -37,31 +37,16 @@
 
                 
                 <div class="user flex gap-3 items-center">
-                    <img src="{{Auth::user()->foto_profil}}"  class="w-9 rounded-full" alt="">
+                    <div class="w-12 h-12 rounded-full">
+                        <img src="{{Auth::user()->foto_profil == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716898016/mcdjouvceefyfpoujo87.png' :Auth::user()->foto_profil}}"  class="w-full h-full object-cover rounded-full" alt="">
+                    </div>
+                  
                     <div class="info flex justify-center items-center gap-3">
                         <div class="detail">
                             <h1 class=" font-medium text-lg">{{Auth::user()->nama_user}}</h1>
                             <h2 class=" font-medium text-xs text-neutral-400">{{Auth::user()->role_id == 5 ? 'RW Admin' : 'RT Admin'}}</h2>
                         </div>
-                        
-                        <div x-data="{ open:false}"  x-cloak>
-                            <button  @click="open = ! open" class="hover:bg-blue-main">
-                                <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                            </button>
-                            <div class="bg-blue-main z-30 absolute top-16 px-3 py-5 right-5 rounded-lg" x-show="open" @click.outside="open = false">
-                               
-                                <ul>
-                                    <li><a href="{{url('dashboard/detail-akun')}}">Setting</a></li>
-                                    <hr>
-                                    <li><a href="/logout">Log out</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                      
-                
-                    </div>
-
-
+                        <a href="{{url('dashboard/detail-akun')}}" class="text-blue-main flex items-center hover:bg-blue-main hover:text-white text-2xl px-2 py-2 rounded-full" ><i class="fa-solid fa-gear"></i></a>
 
                 </div>
             </div>

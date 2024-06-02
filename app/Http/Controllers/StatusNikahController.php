@@ -76,6 +76,8 @@ class StatusNikahController extends Controller
             'nama_pasangan' => 'required',
             'status' => 'required',
             // 'foto_bukti' => 'required',
+            'foto_umkm' => 'required',
+            'asset_id' => 'required',
         ]);
 
         $penduduk = PendudukModel::where('NIK', $request->NIK_pengaju)->first();
@@ -86,6 +88,8 @@ class StatusNikahController extends Controller
                 'NIK_pasangan' => $request->NIK_pasangan,
                 'nama_pasangan' => $request->nama_pasangan,
                 'status' => $request->status,
+                'foto_bukti' => $request->foto_umkm,
+                'asset_id' => $request->asset_id
             ]);
             return redirect()->route('nikah.penduduk.index')
                 ->with('success', 'Data Berhasil Ditambahkan');
@@ -126,9 +130,9 @@ class StatusNikahController extends Controller
         if (empty($search)) {
             $data = StatusNikahModel::paginate(5);
         } else {
-            $data = StatusNikahModel::whereHas('penduduk', function($query) use ($search) {
+            $data = StatusNikahModel::whereHas('penduduk', function ($query) use ($search) {
                 $query->where('nama_penduduk', 'like', '%' . $search . '%')
-                      ->orWhere('NIK', 'like', '%' . $search . '%');
+                    ->orWhere('NIK', 'like', '%' . $search . '%');
             })->paginate(3);
         }
 

@@ -66,26 +66,7 @@
         // console.log(button)
 
     
-        const loadGambar=(id)=>{
-            console.log(id);
-            const modal =document.getElementById('modal-'+id);
-            $.ajax({
-                url:"{{url('image/umkm')}}"+'/'+id,
-                method:'GET',
-                beforeSend: function() {
-              $("#loading-image").show();
-           },
-                success:function(data){
-                    modal.querySelector('img').setAttribute('src',data)
-                    $("#loading-image").hide();
-                },error(data,response){
-                    console.log(response);
-                }
-                
-            })
 
-           
-        }
 
             $(document).ready(function(){
                 
