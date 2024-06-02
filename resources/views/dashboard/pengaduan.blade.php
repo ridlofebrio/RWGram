@@ -218,7 +218,7 @@
                                               </div>
                                               <div class="col-span-2">
                                                   <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gambar</label>
-                                                  <img src="{{asset('images/'.$umkm->foto_laporan)}}" alt="Foto Bukti">
+                                                  <img src="{{$umkm->foto_laporan}}" alt="Foto Bukti">
                                               </div>
                                               
                                                

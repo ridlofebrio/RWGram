@@ -177,6 +177,8 @@ Route::group(['prefix' => 'search', 'middleware' => 'auth'], function () {
 
 Route::group(['prefix' => 'akun'], function () {
     Route::delete('{id}', [UserController::class, 'destroy']);
+    Route::put('/gambar/{id}', [UserController::class, 'gantiGambar']);
+    Route::put('{id}', [UserController::class, 'update']);
 });
 
 Route::group(['prefix' => 'persuratan'], function () {
@@ -222,10 +224,3 @@ Route::group(['prefix' => 'konfirmasi'], function () {
 
 
 
-// percobaan
-Route::get('/auth/onedrive', [App\Http\Controllers\OneDriveController::class, 'redirectToProvider']);
-Route::get('callback', [App\Http\Controllers\OneDriveController::class, 'handleProviderCallback']);
-Route::post('upload', [App\Http\Controllers\OneDriveController::class, 'upload']);
-Route::get('upload', function () {
-    return view('coba');
-});

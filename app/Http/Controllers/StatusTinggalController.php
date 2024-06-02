@@ -83,6 +83,8 @@ class StatusTinggalController extends Controller
             'alamat_pindah' => 'required',
             'status' => 'required',
             // 'foto_bukti' => 'required',
+            'foto_umkm' => 'required',
+            'asset_id' => 'required',
         ]);
 
         $penduduk = PendudukModel::where('NIK', $request->NIK)->first();
@@ -92,6 +94,8 @@ class StatusTinggalController extends Controller
                 'penduduk_id' => $penduduk->penduduk_id,
                 'alamat_pindah' => $request->alamat_pindah,
                 'status' => $request->status,
+                'foto_bukti' => $request->foto_umkm,
+                'asset_id' => $request->asset_id
             ]);
             return redirect()->route('tinggal.penduduk.index')
                 ->with('success', 'Data Berhasil Ditambahkan');

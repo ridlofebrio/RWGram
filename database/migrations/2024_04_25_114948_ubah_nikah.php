@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -19,7 +18,8 @@ return new class extends Migration
             $table->string('NIK_pasangan', 16);
             $table->enum('status', ['kawin', 'cerai']);
             $table->longText('foto_bukti')->nullable();
-            $table->enum('status_pengajuan', ['diterima', 'menunggu','ditolak'])->default('menunggu');
+            $table->string('asset_id', 250)->nullable();
+            $table->enum('status_pengajuan', ['diterima', 'menunggu', 'ditolak'])->default('menunggu');
             $table->boolean('terbaca')->default(false);
             $table->timestamps();
         });
