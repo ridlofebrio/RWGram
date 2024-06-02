@@ -8,20 +8,24 @@ use Illuminate\Http\Request;
 
 class StatusHidupController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $metadata = (object) [
             'title' => 'Status Hidup',
             'description' => 'Halaman Ubah Status Warga'
         ];
 
+        $status = $request->query('status');
+        $query = StatusHidupModel::query();
 
-        $hidup = StatusHidupModel::paginate(1);
+        if ($status) {
+            $query->where('status_pengajuan', $status);
+        }
 
+        $hidup = $query->paginate(5);
 
         return view('statusHidup.index', compact('hidup'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
     }
-
 
     public function create()
     {
@@ -103,13 +107,29 @@ class StatusHidupController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'status_pengajuan' => 'required'
+            'status_pengajuan' => 'required',
+            'id_penduduk' => 'required'
         ]);
 
+        try {
+            $status = StatusHidupModel::findOrFail($id);
+            $status->status_pengajuan = $request->status_pengajuan;
+            $status->save();
 
-        $status = StatusHidupModel::find($id);
-        $status->status_pengajuan = $request->status_pengajuan;
-        $status->save();
+        } catch (\Exception $e) {
+            dd($e);
+        }
+
+        try {
+            $penduduk = PendudukModel::findOrFail($request->id_penduduk);
+            $penduduk->status_kematian = 1;
+            $penduduk->save();
+
+        } catch (\Exception $e) {
+            dd($e);
+        }
+
+
         return redirect('dashboard/pengajuan')->with('flash', ['success', 'Data berhasil dikonfirmasi']);
     }
 

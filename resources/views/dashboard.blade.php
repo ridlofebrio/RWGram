@@ -1,5 +1,12 @@
 @extends('dashboard.template')
 
+@push('css')
+<style>
+
+</style>
+
+@endpush
+
 @section('content')
 @if ( Session::has('errors'))
 <div class="absolute bg-white drop-shadow-card top-0 left-1/2 -translate-x-1/2">
@@ -8,15 +15,15 @@
 @endif
 
 
-    <div class="grid grid-cols-1  lg:grid-cols-2 gap-5  ">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-20  ">
   
-        <div class="left justify-self-start w-full  self-center ">
+        <div class=" h-full w-full   ">
             <h1 class=" font-semibold mb-3 text-2xl text-black" >Ringkasan</h1>
-            <div class="h-full flex  gap-2 flex-wrap w-full justify-around">
-                    <div class="row-left flex gap-2 flex-col justify-around">
-                        <div class="card bg-white rounded-xl px-2 py-3">
+            <div class="h-full overflow-y-auto flex  gap-2 flex-wrap w-full items-stretch justify-between">
+                    <div class="row-left flex-grow flex gap-2 flex-col justify-around">
+                        <div class="card bg-white rounded-xl px-3 py-3">
                                 <div class="flex space-x-3 items-center">
-                                    <div class="icon bg-dodger-blue-100 px-3 py-2 rounded-xl">
+                                    <div class="icon bg-dodger-blue-100 px-3 py-5 rounded-xl">
                                         <img class="w-6" src="{{asset('asset/icon/bulk/people.svg')}}" alt="">
                                     </div>
                                     <h1 class="text-neutral-06" >Jumlah Penduduk</h1>
@@ -29,9 +36,9 @@
                                 
     
                         </div>
-                        <div class="card bg-white rounded-xl px-3 py-5">
+                        <div class="card bg-white  rounded-xl px-3 py-3">
                             <div class="flex space-x-3 items-center">
-                                <div class="icon bg-dodger-blue-100 px-3 py-2 rounded-xl">
+                                <div class="icon bg-dodger-blue-100 px-3 py-5 rounded-xl">
                                     <img class="w-6" src="{{asset('asset/icon/bulk/shop.svg')}}" alt="">
     
                                 </div>
@@ -46,140 +53,100 @@
     
                     </div>
                     </div>
-                    <div class="row-right flex flex-col  gap-2 justify-around">
-                        <div class="card bg-white rounded-xl px-3 py-5">
-                            <div class="flex space-x-3 items-center">
-                                <div class="icon bg-dodger-blue-100 px-3 py-2 rounded-xl">
-                                    <img  class="w-6" src="{{asset('asset/icon/bulk/messages-3.svg')}}" alt="">
-                                </div>
-                                <h1 class="text-neutral-06" >Jumlah Pengaduan</h1>
-                            </div>
-    
-                            <div class="flex w-full mt-10 space-x-44 items-center ">
-                                <h1 class="text-3xl font-semibold" >{{$semua['laporan']}}</h1>
-                                <a href="">show</a>
-                            </div>
-                            
-    
-                    </div>
-                    <div class="card bg-white rounded-xl px-3 py-5">
+                    <div class="row-left flex-grow flex gap-2 flex-col justify-around">
+                      <div class="card bg-white rounded-xl px-3 py-3">
                         <div class="flex space-x-3 items-center">
-                            <div class="icon bg-dodger-blue-100 px-3 py-2 rounded-xl">
-                                <img class="w-6" src="{{asset('asset/icon/bulk/directbox.svg')}}" alt="">
+                            <div class="icon bg-dodger-blue-100 px-3 py-5 rounded-xl">
+                                <img class="w-6" src="{{asset('asset/icon/bulk/people.svg')}}" alt="">
                             </div>
-                            <h1 class="text-neutral-06" >Jumlah Permohonan</h1>
+                            <h1 class="text-neutral-06" >Jumlah Pengaduan</h1>
                         </div>
-    
+
                         <div class="flex w-full mt-10 space-x-44 items-center ">
-                            <h1 class="text-3xl font-semibold" >{{$semua['pengajuan']}}</h1>
+                            <h1 class="text-3xl font-semibold" >{{$semua['laporan']}}</h1>
                             <a href="">show</a>
                         </div>
                         
-    
+
                 </div>
+                <div class="card bg-white  rounded-xl px-3 py-3">
+                    <div class="flex space-x-3 items-center">
+                        <div class="icon bg-dodger-blue-100 px-3 py-5 rounded-xl">
+                            <img class="w-6" src="{{asset('asset/icon/bulk/shop.svg')}}" alt="">
+
+                        </div>
+                        <h1 class="text-neutral-06" >Jumlah Permohonan</h1>
+                    </div>
+
+                    <div class="flex w-full mt-10 space-x-44 items-center ">
+                        <h1 class="text-3xl font-semibold" >{{$semua['pengajuan']}}</h1>
+                        <a href="">show</a>
+                    </div>
+                    
+
+            </div>
                     </div>
             </div>
         </div>
      
         
-<div class="justify-self-center col-span-1 carousel  w-[400px] xl:w-full">
-    <h1 class=" font-semibold mb-5  text-2xl text-black" >Pengumuman</h1>
-    <div id="default-carousel" class="relative w-full " data-carousel="slide">
-        <!-- Carousel wrapper -->
-        <div class="relative h-[326px]  overflow-hidden rounded-lg ">
-             <!-- Item 1 -->
+        <div class="justify-self-center  h-[400px] md:min-h-full col-span-1 carousel w-full  xl:w-full">
+          <h1 class=" font-semibold mb-5  text-2xl text-black" >Pengumuman</h1>
+          <div id="default-carousel" class="relative h-full w-full " data-carousel="slide">
+              <!-- Carousel wrapper -->
+              <div class="relative h-full  overflow-hidden rounded-lg ">
+            @foreach ($informasi as $item)
+              <!-- Item 1 -->
+              
+             <div class="hidden h-full duration-700 ease-in-out" data-carousel-item>
+               <div class="absolute font-main  w-full z-50 h-full">
+                 <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
+                     <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
+                     <h1 class=" text-md hidden md:flex font-bold text-white w-3/4" >{{$item->deskripsi_informasi}} </h1>
+                     <h1 class=" text-md block md:hidden font-bold text-white w-3/4" >{{$item->judul}} </h1>
+                     
+                    
+             </div>
+           </div>
+           <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
+                 <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+             </div>
              
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-              <div class="absolute font-main  w-full z-50 h-full">
-                <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
-                    <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
-                    <h1 class=" text-md  font-bold text-white w-3/4" >Ayo ramaikan buka bersama puasa Ramadhan 1445H di Rumah Pak Sohib, pukul 15.00  </h1>
-                   
-            </div>
+             
+            @endforeach
+                  <!-- Item 2 -->
+                  
+              <!-- Slider indicators -->
+              <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                  @foreach ($informasi as $item)
+                  <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                  @endforeach
+                 
+              </div>
+              <!-- Slider controls -->
+              <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                  <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                      <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                      </svg>
+                      <span class="sr-only">Previous</span>
+                  </span>
+              </button>
+              <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                  <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                      <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                      </svg>
+                      <span class="sr-only">Next</span>
+                  </span>
+              </button>
           </div>
-          <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
-                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-            </div>
-            <!-- Item 2 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-              <div class="absolute font-main  w-full z-50 h-full">
-                <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
-                    <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
-                    <h1 class=" text-md  font-bold text-white w-3/4" >Ayo ramaikan buka bersama puasa Ramadhan 1445H di Rumah Pak Sohib, pukul 15.00  </h1>
-                   
-            </div>
-          </div>
-          <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
-                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-            </div>
-            <!-- Item 3 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-              <div class="absolute font-main  w-full z-50 h-full">
-                <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
-                    <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
-                    <h1 class=" text-md  font-bold text-white w-3/4" >Ayo ramaikan buka bersama puasa Ramadhan 1445H di Rumah Pak Sohib, pukul 15.00  </h1>
-                   
-            </div>
-          </div>
-          <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
-                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-            </div>
-            <!-- Item 4 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-              <div class="absolute font-main  w-full z-50 h-full">
-                <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
-                    <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
-                    <h1 class=" text-md  font-bold text-white w-3/4" >Ayo ramaikan buka bersama puasa Ramadhan 1445H di Rumah Pak Sohib, pukul 15.00  </h1>
-                   
-            </div>
-          </div>
-          <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
-                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-            </div>
-            <!-- Item 5 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-              <div class="absolute font-main  w-full z-50 h-full">
-                <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
-                    <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
-                    <h1 class=" text-md  font-bold text-white w-3/4" >Ayo ramaikan buka bersama puasa Ramadhan 1445H di Rumah Pak Sohib, pukul 15.00  </h1>
-                   
-            </div>
-          </div>
-          <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
-                <img src="{{asset('asset/images/homepage.jpg')}}" class="absolute block  w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-            </div>
-        </div>
-        <!-- Slider indicators -->
-        <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
-        </div>
-        <!-- Slider controls -->
-        <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-                </svg>
-                <span class="sr-only">Previous</span>
-            </span>
-        </button>
-        <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                </svg>
-                <span class="sr-only">Next</span>
-            </span>
-        </button>
-    </div>
-</div>
+      </div>
+      </div>
 
 
 {{-- Jumlah Penduduk --}}
-<div class="mt-5">
+<div class="h-full ">
   <h1 class=" font-semibold mb-5 text-black  text-2xl" >Jumlah Penduduk</h1>
   <div class=" w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
     <div class="mb-3 w-full flex gap-5 justify-end">
@@ -208,15 +175,16 @@
   </div>
   
 </div>
-<div class=" mt-5 ">
+{{-- kas --}}
+<div class="">
 
 
   <h1 class=" text-2xl font-semibold mb-5 text-black" >Kas</h1>
-  <div class="w-full bg-white rounded-lg shadow dark:bg-gray-800">
+  <div class="w-full  bg-white rounded-lg shadow dark:bg-gray-800">
 
-    <div class="flex justify-between p-4 md:p-6 pb-0 md:pb-0">
-      <div class="flex w-full justify-around">
-        <div class="flex space-x-2" x-data="{active: 'pemasukan'}">
+    <div class="flex justify-between flex-wrap p-4 md:p-6 pb-0 md:pb-0">
+      <div class="flex w-full flex-wrap justify-between gap-2">
+        <div class="flex flex-wrap space-x-2" x-data="{active: 'pemasukan'}">
          <button  @click="active = 'pemasukan'"  data="pemasukan"  class="tab flex items-center justify-center gap-2 border  border-neutral-06 text-neutral-06 py-2 px-3 rounded-full hover:bg-blue-main focus:bg-[#CCEAFF] focus:text-dodger-blue-800 focus:border-dodger-blue-800 focus:outline-none" autofocus> <div class="p-[2px] rounded-full border-2 border-neutral-06  "><div :class="active=='pemasukan' ? 'p-1 rounded-full bg-blue-main':'p-1 rounded-full bg-white'"></div></div>Pemasukan</button>
          <button @click="active = 'pengeluaran'" data="pengeluaran" class="tab flex items-center justify-center gap-2 border border-neutral-06 text-neutral-06 py-2 px-3 rounded-full hover:bg-blue-main focus:bg-[#CCEAFF] focus:text-dodger-blue-800 focus:border-dodger-blue-800 focus:outline-none"> <div class="p-[2px] rounded-full border-2 border-neutral-06 "><div :class="active=='pengeluaran' ? 'p-1 rounded-full bg-blue-main':'p-1 rounded-full bg-white'"></div></div> Pengeluaran</button>
         </div>
@@ -257,6 +225,7 @@
 @endsection
 
 @push('js')
+
 <script>
 var data1 = JSON.parse("{{ json_encode($data) }}");
 data1.push(0);
@@ -266,7 +235,7 @@ var tgl = "{{ json_encode($tgl) }}"
 tgl=tgl.replace(/&quot;/g,'"');
 penduduk=penduduk.replace(/&quot;/g,'"');
 penduduk1=penduduk1.replace(/&quot;/g,'"');
-
+console.log(penduduk)
 // tgl=tgl.replace(,'');
 
 // console.log( JSON.parse(tgl))
@@ -316,7 +285,7 @@ chart: {
   sparkline: {
     enabled: false
   },
-  height: "100%",
+  height: "400px",
   width: "100%",
   type: "area",
   fontFamily: "Inter, sans-serif",
@@ -429,7 +398,7 @@ const options1 = {
   chart: {
     
     type: "bar",
-    height: "320px",
+    height: "365px",
     fontFamily: "Inter, sans-serif",
     toolbar: {
       show: false,

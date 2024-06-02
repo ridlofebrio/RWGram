@@ -9,15 +9,21 @@ use Illuminate\Http\Request;
 
 class StatusTinggalController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $metadata = (object) [
             'title' => 'Status Tinggal',
             'description' => 'Halaman Ubah Status Warga'
         ];
 
-        // Menggunakan pagination, dengan 10 item per halaman
-        $tinggal = StatusTinggalModel::paginate(1);
+        $status = $request->query('status');
+        $query = StatusTinggalModel::query();
+
+        if ($status) {
+            $query->where('status_pengajuan', $status);
+        }
+
+        $tinggal = $query->paginate(5);
 
         return view('statusTinggal.index', compact('tinggal'))->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
     }
@@ -102,11 +108,30 @@ class StatusTinggalController extends Controller
     }
     public function update(Request $request, string $id)
     {
+
+
         $request->validate([
-            'status_pengajuan' => 'required'
+            'status_pengajuan' => 'required',
+            'status_tinggal' => 'required',
+            'id_penduduk' => 'required'
         ]);
 
-        StatusTinggalModel::find($id)->update($request->all());
+        try {
+            $model = StatusTinggalModel::findOrFail($id);
+            $model->status_pengajuan = $request->status_pengajuan;
+            $model->save();
+
+        } catch (\Exception $e) {
+            dd($e);
+        }
+
+        try {
+            $penduduk = PendudukModel::findOrFail($request->id_penduduk);
+            $penduduk->status_tinggal = $request->status_tinggal;
+            $penduduk->save();
+        } catch (\Exception $e) {
+            dd($e);
+        }
         return redirect('dashboard/pengajuan')->with('flash', ['success', 'Data berhasil dikonfirmasi']);
     }
     public function destroy(string $id)

@@ -56,20 +56,20 @@
                 </div>
 
                 <!-- Dropdown menu -->
-                <div id="doubleDropdown"
-                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-md w-44 dark:bg-gray-700">
-                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton">
+
+                <div id="statusDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="statusDropdownButton">
                         <li>
-                            <a href="#"
-                                class="block px-4 py-2  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Selesai</a>
+                            <a href="{{ route('laporan.penduduk.index', ['status' => '']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">-Semua-</a>
                         </li>
                         <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Proses</a>
+                            <a href="{{ route('laporan.penduduk.index', ['status' => 'Selesai']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Selesai</a>
                         </li>
                         <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Menunggu</a>
+                            <a href="{{ route('laporan.penduduk.index', ['status' => 'Proses']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Proses</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('laporan.penduduk.index', ['status' => 'Menunggu']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Menunggu</a>
                         </li>
                     </ul>
                 </div> --}}
@@ -104,6 +104,13 @@
                     </tr>
                 </thead>
                 <tbody>
+
+                @if ($laporan->isEmpty())
+                    <tr>
+                        <td colspan="5" class="text-center py-4">Tidak ada data yang tersedia</td>
+                    </tr>
+                @endif
+
                     @foreach ($laporan as $lap)
                         <tr class="font-medium text-sm">
                             <td scope="row" class="px-6 py-4 whitespace-nowrap dark:text-white">

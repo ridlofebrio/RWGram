@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('foto_informasi', 250);
             $table->string('lokasi_informasi', 100);
             $table->dateTime('tanggal_informasi');
-
+            $table->boolean('upload')->default(false);
             $table->timestamps();
         });
     }

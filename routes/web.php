@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\BansosController;
+use App\Http\Controllers\CloudinaryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\KasController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\PersuratanController;
@@ -28,13 +30,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $metadata = (object) [
-        'title' => 'Home',
-        'description' => 'Landing Page RWGram'
-    ];
-    return view('welcome', ['activeMenu' => 'beranda', 'metadata' => $metadata]);
-});
+Route::get('/', [LandingController::class, 'index']);
 
 
 Route::group(['prefix' => 'bansos-penduduk'], function () {
@@ -50,6 +46,7 @@ Route::group(['prefix' => 'informasi-penduduk'], function () {
     Route::get('/index', [InformasiController::class, 'indexPenduduk'])->name('informasi.penduduk.index');
     Route::get('/search', [InformasiController::class, 'search'])->name('informasi.penduduk.search');
 });
+
 
 
 Route::group(['prefix' => 'data-penduduk'], function () {
@@ -87,6 +84,12 @@ Route::group(['prefix' => 'tinggal-penduduk'], function () {
     Route::get('/find', [StatusTinggalController::class, 'indexFind'])->name('tinggal.penduduk.find');
 });
 
+Route::group(['prefix' => 'cloudinary'], function () {
+    Route::post('/upload', [CloudinaryController::class, 'upload']);
+    Route::get('/delete/{asset_id}', [CloudinaryController::class, 'removeImage']);
+
+});
+
 
 
 
@@ -99,7 +102,7 @@ Route::group(['prefix' => 'pengaduan'], function () {
 
 Route::get('coba', [PendudukController::class, 'list']);
 
-Route::get('login', [AuthSessionController::class, 'create'])->name('login');
+Route::get('login', [AuthSessionController::class, 'create'])->middleware('guest')->name('login');
 Route::post('login', [AuthSessionController::class, 'store']);
 Route::get('logout', [AuthSessionController::class, 'logout']);
 
@@ -126,6 +129,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
 
 Route::group(['middleware' => 'auth', 'prefix' => 'karangTaruna'], function () {
     Route::get('/', [InformasiController::class, 'dashboard']);
+    Route::get('/informasi', [InformasiController::class, 'informasi']);
+    Route::get('/pengumuman', [InformasiController::class, 'pengumuman']);
+    Route::get('/list', [InformasiController::class, 'getUpload']);
 });
 
 
@@ -148,6 +154,11 @@ Route::group(['prefix' => 'data'], function () {
     Route::get('/pengeluaran', [KasController::class, 'pengeluaran']);
     Route::get('/chart/pengeluaran', [KasController::class, 'pengeluaranChart']);
     Route::get('/pemasukan', [KasController::class, 'index']);
+});
+
+Route::group(['prefix' => 'image'], function () {
+    Route::get('/umkm/{id}', [UmkmController::class, 'loadImage']);
+
 });
 
 
@@ -183,6 +194,13 @@ Route::group(['prefix' => 'penduduk'], function () {
     Route::get('sort/{sort}', [PendudukController::class, 'sort']);
 });
 
+Route::group(['prefix' => 'informasi'], function () {
+    Route::post('/tambahInformasi', [InformasiController::class, 'tambahInformasi'])->name('informasi.tambah.informasi');
+    Route::post('/arsip/{id}', [InformasiController::class, 'arsip'])->name('informasi.arsip.informasi');
+
+});
+
+
 Route::group(['prefix' => 'kas'], function () {
     Route::post('/', [KasController::class, 'store']);
 
@@ -195,6 +213,7 @@ Route::put('/kriteria/{id}', [KriteriaController::class, 'update'])->middleware(
 
 Route::group(['prefix' => 'konfirmasi'], function () {
     Route::put('/umkm/{id}', [UmkmController::class, 'update']);
+    Route::put('/pengaduan/{status}/{id}', [LaporanController::class, 'update']);
     Route::put('/pengaduan/{id}', [LaporanController::class, 'update']);
     Route::put('/nikah/{id}', [StatusNikahController::class, 'update']);
     Route::put('/tinggal/{id}', [StatusTinggalController::class, 'update']);
