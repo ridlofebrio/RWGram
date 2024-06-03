@@ -38,22 +38,24 @@
             style="box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
             <div class="grid grid-cols-1 gap-y-6 md:grid-cols-1 md:gap-x-6">
                 @if ($informasi->isEmpty())
-                    <p class="text-center text-xl text-neutral-07">Tidak ada pengumuman yang tersedia</p>
+                    <p class="text-center text-xl text-neutral-06">Tidak ada pengumuman yang tersedia</p>
                 @else
                     @foreach ($informasi as $info)
                         <a href="{{ route('informasi.penduduk.show', $info->informasi_id) }}" class="w-full h-full">
-                            <div class="flex flex-col md:flex-row items-left hover:bg-neutral-02 p-6 rounded-lg">
+                            <div class="flex flex-col md:flex-row items-left hover:bg-neutral-03 p-6 rounded-lg">
                                 <div class="shrink-0 mb-4 md:mb-0 md:mr-6">
-                                    <img src="{{$info->foto_informasi == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716897949/e7dulpy8h3y86sspr8o5.jpg' : $info->foto_informasi}}" class="rounded-lg object-cover h-[200px] w-[320px]"/>
+                                    <img src="{{ $info->foto_informasi == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716897949/e7dulpy8h3y86sspr8o5.jpg' : $info->foto_informasi }}"
+                                        class="rounded-lg object-cover h-[200px] w-[320px]" />
                                 </div>
                                 <div class="grow">
-                                    <p class="mb-1 font-medium text-lg text-neutral dark:text-white text-black line-clamp-2">
+                                    <p
+                                        class="mb-1 font-semibold text-lg text-neutral dark:text-white text-black line-clamp-2">
                                         {{ $info->judul }}
                                     </p>
                                     <p class="mb-3 text-base text-neutral-10 dark:text-white line-clamp-3">
                                         {{ $info->deskripsi_informasi }}
                                     </p>
-                                    <div class="flex items-center dark:text-white mb-3">
+                                    <div class="flex items-center dark:text-white mb-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                             viewBox="0 0 24 24">
                                             <path stroke="#1B1B1B" stroke-linecap="round" stroke-linejoin="round"

@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use Cloudinary\Api\Admin\AdminApi;
 use Illuminate\Http\Request;
-use Validator;
+use \Validator;
 
 class InformasiController extends Controller
 {
@@ -134,6 +134,11 @@ class InformasiController extends Controller
     public function show(string $id)
     {
         $informasi = InformasiModel::findOrFail($id);
+        // Mengonversi format tanggal informasi
+        foreach ($informasi as $info) {
+            $info = date('d F Y', strtotime($info->tanggal_informasi));
+        }
+
         return view('informasi.show', compact('informasi'));
     }
 
