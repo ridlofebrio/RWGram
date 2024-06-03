@@ -17,7 +17,7 @@
     </header>
 
     <div class="bg-white-100 mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">        
-        <img src="https://i.ibb.co/hX6pfms/img32.jpg" class="rounded-lg object-cover h-[420px] w-full mb-[24px]"/>
+        <img src="{{$informasi->foto_informasi == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716897949/e7dulpy8h3y86sspr8o5.jpg' : $informasi->foto_informasi}}" class="rounded-lg object-cover h-full w-full mb-[24px]"/>
         <p class="mb-4 font-medium text-xl text-neutral dark:text-white text-black">
             {{ $informasi->judul }}
         </p>       
