@@ -52,7 +52,7 @@
                         </button>
                       </div>
                       <!-- Modal body -->
-                      <form action="{{url('/penduduk')}}" method="POST" class="p-4 md:p-5 text-left">
+                      <form action="{{secure_url('/penduduk')}}" method="POST" class="p-4 md:p-5 text-left">
                         @csrf
                         @method('POST')
                           <div class="grid gap-4 mb-4 grid-cols-2">
@@ -442,7 +442,7 @@
                               </div> 
                              
                         </div>
-                        <form action="{{url('/penduduk/'.$penduduk->penduduk_id)}}" onsubmit="return alert('are You sure ?')" method="post">
+                        <form action="{{secure_url('/penduduk/'.$penduduk->penduduk_id)}}" onsubmit="return alert('are You sure ?')" method="post">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="hover:border-none  hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  "><svg   xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -968,7 +968,7 @@ document.addEventListener('alpine:init', () => {
       
 
                    $.ajax({
-                       url: "http://127.0.0.1:8000/penduduk/sort/"+data,
+                       url: "{{secure_url('penduduk/sort/')}}"+'/'+data,
                        method:"GET",
                        beforeSend: function() {
               $("#loading-image").show();
@@ -997,7 +997,7 @@ document.addEventListener('alpine:init', () => {
                     
                   
                     $.ajax({
-                        url: "http://127.0.0.1:8000/search/penduduk/type/"+index.currentTarget.getAttribute('data')+'/'+data,
+                        url: "{{secure_url(search/penduduk/type/)}}"+'/'+index.currentTarget.getAttribute('data')+'/'+data,
                         method:'GET',
                         
                     }).done(function (data) {

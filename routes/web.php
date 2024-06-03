@@ -13,7 +13,7 @@ use App\Http\Controllers\StatusHidupController;
 use App\Http\Controllers\StatusNikahController;
 use App\Http\Controllers\StatusTinggalController;
 use App\Http\Controllers\UmkmController;
-use App\Http\Controllers\Auth\AuthSessionController;
+use App\Http\Controllers\AuthSessionController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\PDFBansosController;
 use App\Http\Controllers\UserController;
@@ -93,7 +93,7 @@ Route::group(['prefix' => 'pengaduan'], function () {
 });
 
 Route::get('login', [AuthSessionController::class, 'create'])->middleware('guest')->name('login');
-Route::post('login', [AuthSessionController::class, 'store']);
+Route::post('login', [AuthSessionController::class, 'store'])->name('proses_login');
 Route::get('logout', [AuthSessionController::class, 'logout']);
 
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
@@ -177,6 +177,8 @@ Route::group(['prefix' => 'penduduk'], function () {
 Route::group(['prefix' => 'informasi'], function () {
     Route::post('/tambahInformasi', [InformasiController::class, 'tambahInformasi'])->name('informasi.tambah.informasi');
     Route::post('/arsip/{id}', [InformasiController::class, 'arsip'])->name('informasi.arsip.informasi');
+    Route::delete('{id}', [InformasiController::class, 'destroy'])->middleware('auth');
+    Route::post('/', [InformasiController::class, 'store'])->middleware('auth');
 });
 
 Route::group(['prefix' => 'kas'], function () {

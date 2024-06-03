@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use Cloudinary\Api\Admin\AdminApi;
 use Illuminate\Http\Request;
+use Validator;
 
 class InformasiController extends Controller
 {
@@ -94,19 +95,40 @@ class InformasiController extends Controller
     public function store(Request $request)
     {
         // melakukan validasi data
-        $request->validate([
-            'user_id' => 'required',
+        // dd($request);
+        $validator = Validator::make($request->all(), [
+
             'judul' => 'required|string',
             'deskripsi_informasi' => 'required|string',
-            'foto_informasi' => 'required|string',
+            'foto_informasi' => 'required',
             'lokasi_informasi' => 'required|string',
-            'tanggal_informasi' => 'required'
-        ]);
+            'tanggal_informasi' => 'required',
 
-        // fungsi eloquent untuk menambah data
-        InformasiModel::create($request->all());
-        return redirect()->route('informasi.index')
-            ->with('success', 'Informasi Berhasil Ditambahkan');
+        ]);
+        if ($validator->fails()) {
+            dd($validator);
+            return redirect()->back()->with('flash', ['error', $validator]);
+        }
+        try {
+            $file = (array) cloudinary()->uploadApi()->upload($request->file('foto_informasi')->getRealPath(), $options = []);
+
+
+            // fungsi eloquent untuk menambah data
+            InformasiModel::create([
+                'user_id' => $request->user_id,
+                'judul' => $request->judul,
+                'deskripsi_informasi' => $request->deskripsi_informasi,
+                'foto_informasi' => $file['secure_url'],
+                'lokasi_informasi' => $request->lokasi_informasi,
+                'tanggal_informasi' => $request->tanggal_informasi,
+                'asset_id' => $file['asset_id'],
+            ]);
+        } catch (\Exception $e) {
+            dd($e);
+        }
+
+        return redirect('karangTaruna/pengumuman')
+            ->with('flash', ['success', 'Informasi Berhasil Ditambahkan']);
     }
 
     public function show(string $id)
@@ -193,13 +215,25 @@ class InformasiController extends Controller
     public function destroy(string $id)
     {
         try {
-            $informasi = InformasiModel::findOrFail($id)->delete();
+            $informasi = InformasiModel::findOrFail($id);
 
+            if ($informasi->asset_id != null) {
+                $result = (array) (new AdminApi())->assetByAssetId($informasi->asset_id);
+
+                $public_ids = $result['public_id'];
+                $result = (new AdminApi())->deleteAssets(
+                    $public_ids,
+                    ["resource_type" => "image", "type" => "upload"]
+                );
+
+            }
+
+            $informasi->delete();
         } catch (\Exception $e) {
             dd($e);
         }
 
-        return redirect()->route('informasi.index')
-            ->with('success', 'Data Berhasil Dihapus');
+        return redirect('karangTaruna')
+            ->with('flash', ['success', 'Data Berhasil Dihapus']);
     }
 }

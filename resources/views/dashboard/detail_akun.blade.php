@@ -13,9 +13,9 @@
          
            
            <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-8 py-2 text-base font-medium rounded-full  " type="button">
-            Tambah
+            Ganti Profil
           </button>
-            <button  class="hover:border-none   px-8 py-2  before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  text-base font-medium rounded-full  " >Remove</button>
+         
            </div>
         </div>
 

@@ -51,8 +51,8 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full gap-4 mt-5" >
         @foreach ($pengumuman as $item)
       <button class="hover:scale-75 mx-auto transition ease-in-out delay-150 " onclick="openModal({{$item->informasi_id}})">
-        <section class="relative max-w-full  ">
-            <div class=" duration-700 ease-in-out" data-carousel-item>
+        <section class="relative max-w-full h-full ">
+            <div class=" duration-700 ease-in-out h-full" data-carousel-item>
                 <div class="absolute font-main  w-full z-40 h-full">
                   <div class=" text-left flex flex-col justify-end px-3 py-7  w-full h-full">
                       <h2 class="text-white text-md lg:text-lg " >Sistem Informasi RW 06 - Kalirejo </h2>
@@ -61,7 +61,7 @@
               </div>
             </div>
             <div class="bg-gradient-to-t from-[#0096FF] opacity-50 rounded-xl  to-transparent to-70%   z-30 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
-                  <img src="{{$item->foto_informasi}}" class=" block rounded-xl w-full object-cover top-0 left-0" alt="...">
+                  <img src="{{$item->foto_informasi == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716897949/e7dulpy8h3y86sspr8o5.jpg' : $item->foto_informasi}}" class=" block rounded-xl w-full h-full object-cover top-0 left-0" alt="...">
               </div>
               
           </section>

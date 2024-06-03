@@ -33,7 +33,7 @@
 
 
 <body class="bg-dodger-blue-50">
-    <div class="min-h-screen flex items-center justify-center">
+<div class="min-h-screen flex items-center justify-center">
         <div class="w-full flex items-center flex-col max-w-md ">
 
 
@@ -41,7 +41,7 @@
 
             <form
                 class="bg-white md:h-[550px] md:w-[450px] w=[200px]  min-[350px]:w-[350px] flex flex-col justify-between  drop-shadow-card rounded-3xl px-8 pt-6 pb-8 md:pt-12 md:pb-12 mb-4"
-                action="{{ url('/login') }}" method="POST">
+                action="{{ route('proses_login') }}" method="POST">
                 @csrf
                 @method('POST')
 
