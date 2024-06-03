@@ -22,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         if (env('APP_ENV') === 'production') {
+            $this->app['request']->server->set('HTTPS', 'on');
             \Illuminate\Support\Facades\URL::forceScheme('https');
         }
         Paginator::useBootstrap();
