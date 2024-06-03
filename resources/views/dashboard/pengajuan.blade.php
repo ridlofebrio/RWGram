@@ -71,7 +71,7 @@
             $(document).ready(function(){
                 
                 $.ajax({
-                        url: "{{url('data/umkm')}}",
+                        url: "{{secure_url('data/umkm')}}",
                         beforeSend: function() {
               $("#loading-image").show();
            },
@@ -93,7 +93,7 @@
                 $('.tab').click(function(index){
                     
                     $.ajax({
-                        url: "http://127.0.0.1:8000/data/"+index.currentTarget.getAttribute('data'),
+                        url: "{{secure_url('data')}}"+'/'+index.currentTarget.getAttribute('data'),
                         beforeSend: function() {
               $("#loading-image").show();
            },
@@ -122,7 +122,7 @@
                     
                   
                     $.ajax({
-                        url: "http://127.0.0.1:8000/search/"+document.querySelector('#search').getAttribute('data')+'/'+data,
+                        url: "{{secure_url('search')}}"+'/'+document.querySelector('#search').getAttribute('data')+'/'+data,
                         async:true,
                             
                     }).done(function (data) {    
@@ -140,7 +140,7 @@
                 $('.sort').click(function (index) {
                    
                     $.ajax({
-                        url: "http://127.0.0.1:8000/data/"+ document.getElementById('search').getAttribute('data')+'/'+index.currentTarget.getAttribute('data'),
+                        url: "{{secure_url('data')}}"+'/'+ document.getElementById('search').getAttribute('data')+'/'+index.currentTarget.getAttribute('data'),
                         method:"GET",     beforeSend: function() {
               $("#loading-image").show();
            },
