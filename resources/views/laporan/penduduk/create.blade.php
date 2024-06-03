@@ -106,7 +106,7 @@ animation: l11 1s infinite;
                 </div> --}}
 
                 <div>
-                    <label for="deskripsi_umkm" class="block text-sm font-medium leading-6 text-gray-900">Foto UMKM</label>
+                    <label for="deskripsi_umkm" class="block text-sm font-medium leading-6 text-gray-900">Bukti</label>
                     <div id="myId" class="h-52">
                         <input type="hidden" name="foto_umkm" id="public_id" >
                         <input type="hidden" name="asset_id" id="asset_id" >
