@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use Cloudinary\Api\Admin\AdminApi;
 use Illuminate\Http\Request;
-use Validator;
+use \Validator;
 
 class InformasiController extends Controller
 {
@@ -49,7 +49,6 @@ class InformasiController extends Controller
 
     public function informasiDetail()
     {
-
     }
 
     public function indexPenduduk()
@@ -75,6 +74,7 @@ class InformasiController extends Controller
         foreach ($informasi as $info) {
             $info = date('d F Y', strtotime($info->tanggal_informasi));
         }
+
 
         return view('informasi.penduduk.index')->with(['informasi' => $informasi, 'activeMenu' => 'pengumuman', 'metadata' => $metadata]);
     }
@@ -134,6 +134,11 @@ class InformasiController extends Controller
     public function show(string $id)
     {
         $informasi = InformasiModel::findOrFail($id);
+        // Mengonversi format tanggal informasi
+        foreach ($informasi as $info) {
+            $info = date('d F Y', strtotime($info->tanggal_informasi));
+        }
+
         return view('informasi.show', compact('informasi'));
     }
 
@@ -187,16 +192,13 @@ class InformasiController extends Controller
                 $informasi = InformasiModel::find($value);
                 $informasi->upload = 1;
                 $informasi->save();
-
             } catch (\Exception $e) {
                 dd($e);
             }
-
         }
 
 
         return redirect('/karangTaruna/informasi')->with('flash', ['success', 'Informasi Berhasil Di Upload']);
-
     }
 
     public function arsip(string $id)
@@ -209,7 +211,6 @@ class InformasiController extends Controller
             dd($e);
         }
         return redirect('/karangTaruna/informasi')->with('flash', ['success', 'Informasi Berhasil Di Arsipkan']);
-
     }
 
     public function destroy(string $id)

@@ -405,7 +405,7 @@ document.addEventListener('alpine:init', () => {
                     
                   
                     $.ajax({
-                        url: "{{secure_url('search/pengaduan')}"+'/'+data,
+                        url: "{{url('search/pengaduan')}}"+'/'+data,
                         type: "GET",
                       
                         
@@ -422,7 +422,7 @@ document.addEventListener('alpine:init', () => {
                 $('.sort').click(function (index) {
                 
                     $.ajax({
-                        url: "{{secure_url('dashboard/pengaduan')}}"+'/'+index.currentTarget.getAttribute('data'),
+                        url: "{{url('dashboard/pengaduan')}}"+'/'+index.currentTarget.getAttribute('data'),
                         method:"GET",
                         success: function (data) {
                         const parser = new DOMParser();
