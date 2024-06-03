@@ -26,7 +26,7 @@
             </div>
         @endif
     </div>
-    <main class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+    <main class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <!-- Your content -->
         <div class="max-w-6xl mx-auto card p-8 mb-12" style="box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
             <form action="show" method="POST">
@@ -45,11 +45,14 @@
                         Apakah data Anda sudah benar?
                     </label>
                 </div>
-                <div class="flex justify-center mt-12">
-                    <button type="button" class="text-blue-main bg-grey hover:bg-blue-main hover:text-white hover:border-blue-main 
-                    border border-blue-main px-20 py-1 text-base font-small rounded-full mr-8" onclick="resetForm()">Batal</button>
+                <div
+                    class="flex flex-col-reverse gap-4 sm:flex-row justify-center mt-12 space-y-4 sm:space-x-8 sm:space-y-0">
+                    <button type="button"
+                        class="text-blue-main hover:bg-[#CCEAFF] hover:text-blue-main hover:border-blue-main
+                    border border-blue-main px-10 py-2 text-base font-medium rounded-full sm:px-20"
+                        onclick="resetForm()">Batal</button>
                     <button type="submit" id="submitBtn" disabled
-                        class="text-white bg-gray-400 px-20 py-1 text-base font-small rounded-full">Cari</button>
+                        class="text-white bg-neutral-06 px-10 py-2 text-base font-medium rounded-full sm:px-20">Cari</button>
                 </div>
             </form>
         </div>

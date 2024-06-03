@@ -43,11 +43,11 @@
                     @foreach ($informasi as $info)
                         <a href="{{ route('informasi.penduduk.show', $info->informasi_id) }}" class="w-full h-full">
                             <div class="flex flex-col md:flex-row items-left hover:bg-neutral-02 p-6 rounded-lg">
-                                <div class="shrink-0 mb-4 md:mb-0 md:mr-2">
-                                    <img src="{{$item->foto_informasi == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716897949/e7dulpy8h3y86sspr8o5.jpg' : $item->foto_informasi}}" class="rounded-lg object-cover h-[200px] w-[320px]"/>
+                                <div class="shrink-0 mb-4 md:mb-0 md:mr-6">
+                                    <img src="{{$info->foto_informasi == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716897949/e7dulpy8h3y86sspr8o5.jpg' : $info->foto_informasi}}" class="rounded-lg object-cover h-[200px] w-[320px]"/>
                                 </div>
-                                <div class="ml-3 grow">
-                                    <p class="mb-1.5 font-bold text-xl text-neutral-10 dark:text-white line-clamp-2">
+                                <div class="grow">
+                                    <p class="mb-1 font-medium text-lg text-neutral dark:text-white text-black line-clamp-2">
                                         {{ $info->judul }}
                                     </p>
                                     <p class="mb-3 text-base text-neutral-10 dark:text-white line-clamp-3">
