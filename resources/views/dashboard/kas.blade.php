@@ -635,7 +635,7 @@
   {
     
     $.ajax({
-      url:"{{url('kas')}}"+"/"+noKK,
+      url:"{{secure_url('kas')}}"+"/"+noKK,
       method:'GET',
       datatype:'json',
       beforeSend: function() {
@@ -830,7 +830,7 @@ $(document).ready(function () {
     $('.tab').click(function(index){
                       console.log('halo');
                     $.ajax({
-                        url: "http://127.0.0.1:8000/data/"+index.currentTarget.getAttribute('data'),
+                        url: "{{secure_url('data/')}}"+'/'+index.currentTarget.getAttribute('data'),
                         beforeSend: function() {
                     $("#loading-image").show();
       },
@@ -897,7 +897,7 @@ $(document).ready(function () {
                     
                   
                     $.ajax({
-                        url: "http://127.0.0.1:8000/search/kas/"+data,
+                        url: "{{secure_url(search/kas/)}}"+'/'+data,
                         type: "GET",
                    
                         async:true,

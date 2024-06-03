@@ -103,7 +103,7 @@ Route::group(['prefix' => 'pengaduan'], function () {
 Route::get('coba', [PendudukController::class, 'list']);
 
 Route::get('login', [AuthSessionController::class, 'create'])->middleware('guest')->name('login');
-Route::post('login', [AuthSessionController::class, 'store']);
+Route::post('login', [AuthSessionController::class, 'store'])->name('proses_login');
 Route::get('logout', [AuthSessionController::class, 'logout']);
 
 
