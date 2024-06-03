@@ -46,7 +46,7 @@
                                 <div class="shrink-0 mb-4 md:mb-0 md:mr-6">
                                     <img src="{{$info->foto_informasi == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716897949/e7dulpy8h3y86sspr8o5.jpg' : $info->foto_informasi}}" class="rounded-lg object-cover h-[200px] w-[320px]"/>
                                 </div>
-                                <div class="ml-3 grow">
+                                <div class="grow">
                                     <p class="mb-1 font-medium text-lg text-neutral dark:text-white text-black line-clamp-2">
                                         {{ $info->judul }}
                                     </p>
