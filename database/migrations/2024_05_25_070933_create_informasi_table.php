@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->foreign('user_id')->references('user_id')->on('user');
             $table->string('judul', 30);
             $table->text('deskripsi_informasi');
-            $table->string('foto_informasi', 250);
+            $table->string('foto_informasi', 250)->nullable();
             $table->string('asset_id', 250)->nullable();
             $table->string('lokasi_informasi', 100);
             $table->dateTime('tanggal_informasi');

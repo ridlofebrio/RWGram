@@ -919,7 +919,7 @@ const closeModal = (id) => {
 }
 
 function page(event,link,target,pagination) {
-               
+               console.log(link);
                event.preventDefault()
                $.ajax({
                                url: link,
@@ -968,7 +968,7 @@ document.addEventListener('alpine:init', () => {
       
 
                    $.ajax({
-                       url: "http://127.0.0.1:8000/penduduk/sort/"+data,
+                       url: "{{url('penduduk/sort/')}}"+'/'+data,
                        method:"GET",
                        beforeSend: function() {
               $("#loading-image").show();
@@ -997,7 +997,7 @@ document.addEventListener('alpine:init', () => {
                     
                   
                     $.ajax({
-                        url: "http://127.0.0.1:8000/search/penduduk/type/"+index.currentTarget.getAttribute('data')+'/'+data,
+                        url: "{{url('search/penduduk/type/')}}"+'/'+index.currentTarget.getAttribute('data')+'/'+data,
                         method:'GET',
                         
                     }).done(function (data) {

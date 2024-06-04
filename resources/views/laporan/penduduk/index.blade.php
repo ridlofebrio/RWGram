@@ -33,26 +33,24 @@
             </div>
         @endif
     </div>
+    <div class="bg-white mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <div class="flex justify-between mb-12 gap-3">
+            <div class="flex gap-3">
+                <div class=" drop-shadow-md">
+                    <form action="{{ route('laporan.penduduk.index') }}" method="GET" class=" max-w-sm mx-auto">
+                        @include('component.search')
+                    </form>
+                </div>
 
-    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div class="flex justify-between my-4">
-            <div class="flex gap-3 drop-shadow-lg">
-                <form action="{{ route('laporan.penduduk.index') }}" method="GET" class="max-w-sm mx-auto">   
-                    <div class="relative">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                            </svg>
-                        </div>
-                        <input type="text" name="search" class="pl-8 block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari pengaduan" required />
-                    </div>
-                </form>
-                
-                <div class="">
-                    <button id="statusDropdownButton" data-dropdown-toggle="statusDropdown" class="p-2 font-medium text-sm text-gray-600 px-4 text-center inline-flex items-center rounded-full bg-white " type="button">
-                        {{ request('status') ? request('status') : '-Semua-' }}
-                        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                {{-- <div class="rounded-full border border-neutral-04 shadow drop-shadow-md ">
+                    <button id="doubleDropdownButton" data-dropdown-toggle="doubleDropdown"
+                        class="py-2 text-black font-medium text-sm px-5 text-center inline-flex items-center"
+                        type="button">-
+                        Status -
+                        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 4 4 4-4" />
                         </svg>
                     </button>
                 </div>
@@ -74,14 +72,14 @@
                             <a href="{{ route('laporan.penduduk.index', ['status' => 'Menunggu']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Menunggu</a>
                         </li>
                     </ul>
-                </div>
-                
+                </div> --}}
+
             </div>
             <a href="{{ route('laporan.penduduk.create') }}"
                 class="text-white bg-blue-main px-8 py-2 font-semibold text-base rounded-full drop-shadow-button hover:bg-dodger-blue-800">Ajukan</a>
         </div>
 
-        <div class="mt-5 overflow-x-auto shadow-md sm:rounded-lg mb-56">
+        <div class="mt-5 overflow-x-auto shadow-md rounded-lg mb-56">
             <table class="text-sm text-left shadow-xl w-full">
                 <thead class="text-xs text-white bg-dodger-blue-950">
                     <tr>
@@ -107,12 +105,12 @@
                 </thead>
                 <tbody>
 
-                @if ($laporan->isEmpty())
-                    <tr>
-                        <td colspan="5" class="text-center py-4">Tidak ada data yang tersedia</td>
-                    </tr>
-                @endif
-                
+                    @if ($laporan->isEmpty())
+                        <tr>
+                            <td colspan="5" class="text-center py-4">Tidak ada data yang tersedia</td>
+                        </tr>
+                    @endif
+
                     @foreach ($laporan as $lap)
                         <tr class="font-medium text-sm">
                             <td scope="row" class="px-6 py-4 whitespace-nowrap dark:text-white">
@@ -130,7 +128,7 @@
                             @if ($lap->status_laporan === 'Sukses')
                                 <td class="px-6 py-4">
                                     <div
-                                        class="bg-green-100 text-green-600 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-1">
+                                        class="bg-green-100 text-green-600 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-2 w-fit">
                                         <div class="bg-green-600 rounded-full w-2 h-2"></div>
                                         <p>Selesai</p>
                                     </div>
@@ -138,7 +136,7 @@
                             @elseif ($lap->status_laporan === 'Proses')
                                 <td class="px-6 py-4">
                                     <div
-                                        class="bg-blue-info-100 text-blue-main font-bold py-2 px-4 text-xs rounded-full flex items-center gap-1">
+                                        class="bg-blue-info-100 text-blue-main font-bold py-2 px-4 text-xs rounded-full flex items-center gap-2 w-fit">
                                         <div class="bg-blue-main rounded-full w-2 h-2"></div>
                                         <p>Proses</p>
                                     </div>
@@ -146,17 +144,74 @@
                             @else
                                 <td class="px-6 py-4">
                                     <div
-                                        class="bg-yellow-100 text-yellow-400 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-1">
+                                        class="bg-yellow-100 text-yellow-400 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-2 w-fit">
                                         <div class="bg-yellow-400 rounded-full w-2 h-2"></div>
                                         <p>Menunggu</p>
                                     </div>
                                 </td>
                             @endif
                             <td class="px-6 py-4">
-                                <button
-                                    class="px-6 py-3 bg-dodger-blue-100 rounded-full font-bold text-dodger-blue-950 hover:bg-blue-main hover:text-white">
-                                    Detail
-                                </button>
+                                <div x-cloak x-data="{ open: false }">  
+
+                                    {{-- Main modal --}}
+                                    <div x-cloak x-data="{ open: false }">
+                                        <button @click="open = true"
+                                            class="px-6 py-3 bg-dodger-blue-100 rounded-full font-bold text-dodger-blue-950 hover:bg-blue-main hover:text-white">
+                                            Detail
+                                        </button>
+                                          
+                                          <!-- Main modal -->
+                                          <div  x-show="open"   tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed  z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                          
+                                            <div  class="absolute w-[920px] h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  p-4  z-50 ">
+                                                  <!-- Modal content -->
+                                                  <div @click.outside="open = false" class="relative bg-white w-full  rounded-lg shadow dark:bg-gray-700">
+                                                      <!-- Modal header -->
+                                                      <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                                          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                            Detail Pengaduan
+                                                          </h3>
+                                                          <button type="button" @click="open = false" class="absolute -top-5 -right-4 bg-blue-main   text-white border-2 border-white hover:bg-gray-200 hover:text-gray-900 rounded-full text-sm w-8 h-8 ms-auto inline-flex justify-center items-center " >
+                                                              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                              </svg>
+                                                              <span class="sr-only">Close modal</span>
+                                                          </button>
+                                                      </div>
+                                                      <!-- Modal body -->
+                                                      <form class="p-4 md:p-5">
+                                                        <div class="grid gap-4 mb-4 grid-cols-2">
+                                                            
+                                                            <div class="col-span-2">
+                                                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Pengaduan</label>
+                                                                <input readonly type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" value="{{$lap->tanggal_laporan}}" required="">
+                                                            </div>
+                                                            <div class="col-span-2">
+                                                              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK</label>
+                                                              <input readonly type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" value="{{$lap->penduduk->NIK}}" required="">
+                                                          </div>
+                                                          <div class="col-span-2">
+                                                              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Anda</label>
+                                                              <input readonly type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" value="{{$lap->penduduk->nama_penduduk}}" required="">
+                                                          </div>
+                                                          <div class="col-span-2">
+                                                              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deskripsi Laporan</label>
+                                                              <textarea readonly id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  placeholder="Write product description here">{{$lap->deskripsi_laporan}}</textarea>           
+                                                          </div>
+                                                          <div class="col-span-2">
+                                                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Bukti Laporan</label>
+                                                            <img src="{{$lap->foto_laporan}}" alt="Foto Bukti" class="w-full h-80 rounded-xl object-cover">
+                                                          </div>
+                                                        </div>
+                                                       
+                                                    </form>
+                                                  </div>
+                                              </div>
+                                              <div class="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40"></div> 
+                                          </div> 
+                                    </div>
+
+                                </div>
                             </td>
                         </tr>
                     @endforeach

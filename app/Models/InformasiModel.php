@@ -16,10 +16,11 @@ class InformasiModel extends Model
     protected $fillable = [
         'user_id',
         'judul',
-        'deskrisi_informasi',
+        'deskripsi_informasi',
         'foto_informasi',
         'lokasi_informasi',
-        'tanggal_informasi'
+        'tanggal_informasi',
+        'asset_id'
     ];
 
     public function user(): BelongsTo

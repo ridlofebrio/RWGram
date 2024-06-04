@@ -8,7 +8,7 @@
         margin-left: auto;
         margin-right: auto;
         border: 2px dashed #1833FF;
-        margin-top: 50px;
+        margin-top: 16px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -72,7 +72,7 @@ animation: l11 1s infinite;
                 </div>
             @endif
         </div>
-        <main class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <main class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             <!-- Your content -->        
             <div class="max-w-7xl mx-auto card p-8 mb-12" style="box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
                 <form  action="{{ route('umkm.penduduk.store') }}" method="POST" enctype="multipart/form-data">
@@ -169,25 +169,25 @@ animation: l11 1s infinite;
                     </div>    
                  --}}
 
-<div>
-    <label for="deskripsi_umkm" class="block text-sm font-medium leading-6 text-gray-900">Foto UMKM</label>
-    <div id="myId" class="h-52">
-        <input type="hidden" name="foto_umkm" id="public_id" >
-        <input type="hidden" name="asset_id" id="asset_id" >
+        <div>
+            <label for="deskripsi_umkm" class="block text-sm font-medium leading-6 text-gray-900">Foto UMKM</label>
+            <div id="myId" class="h-52">
+                <input type="hidden" name="foto_umkm" id="public_id" >
+                <input type="hidden" name="asset_id" id="asset_id" >
+                
+            <div id="text-main" class="flex flex-col  items-center w-full">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="24" fill="none" viewBox="0 0 36 24">
+                    <path fill="#0096FF" d="M29.025 9.06C28.005 3.885 23.46 0 18 0c-4.335 0-8.1 2.46-9.975 6.06A8.991 8.991 0 0 0 0 15c0 4.965 4.035 9 9 9h19.5c4.14 0 7.5-3.36 7.5-7.5 0-3.96-3.075-7.17-6.975-7.44ZM28.5 21H9c-3.315 0-6-2.685-6-6 0-3.075 2.295-5.64 5.34-5.955l1.605-.165.75-1.425C12.12 4.71 14.91 3 18 3c3.93 0 7.32 2.79 8.085 6.645l.45 2.25 2.295.165A4.47 4.47 0 0 1 33 16.5c0 2.475-2.025 4.5-4.5 4.5ZM12 13.5h3.825V18h4.35v-4.5H24l-6-6-6 6Z"/>
+                </svg>
+                <p>Seret file Anda atau Klik file dari perangkat Anda </p>
+                <p class="text-neutral-06">Ukuran file maksimal adalah 10 MB</p>
         
-       <div id="text-main" class="flex flex-col  items-center w-full">
-        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="24" fill="none" viewBox="0 0 36 24">
-            <path fill="#0096FF" d="M29.025 9.06C28.005 3.885 23.46 0 18 0c-4.335 0-8.1 2.46-9.975 6.06A8.991 8.991 0 0 0 0 15c0 4.965 4.035 9 9 9h19.5c4.14 0 7.5-3.36 7.5-7.5 0-3.96-3.075-7.17-6.975-7.44ZM28.5 21H9c-3.315 0-6-2.685-6-6 0-3.075 2.295-5.64 5.34-5.955l1.605-.165.75-1.425C12.12 4.71 14.91 3 18 3c3.93 0 7.32 2.79 8.085 6.645l.45 2.25 2.295.165A4.47 4.47 0 0 1 33 16.5c0 2.475-2.025 4.5-4.5 4.5ZM12 13.5h3.825V18h4.35v-4.5H24l-6-6-6 6Z"/>
-          </svg>
-          <p>Seret file Anda atau Klik file dari perangkat Anda </p>
-          <p class="text-neutral-06">Ukuran file maksimal adalah 10 MB</p>
- 
-       </div>
-       <div style="z-index: 99999" id="loading-image"  class="hidden fixed top-1/2 left-1/2 justify-center items-center -translate-x-1/2 -translate-y-1/2  w-screen h-screen bg-white opacity-70" style="display: none;" ><div class="  loader " ></div></div>
-    </div>
-    <p id="Error-Messages" class="text-red-600" ></p>
-    
-</div>
+            </div>
+            <div style="z-index: 99999" id="loading-image"  class="hidden fixed top-1/2 left-1/2 justify-center items-center -translate-x-1/2 -translate-y-1/2  w-screen h-screen bg-white opacity-70" style="display: none;" ><div class="  loader " ></div></div>
+            </div>
+            <p id="Error-Messages" class="text-red-600" ></p>
+            
+        </div>
                     
 
                     <div class="flex items-center mt-6">
@@ -196,11 +196,14 @@ animation: l11 1s infinite;
                             Apakah data Anda sudah benar?
                         </label>    
                     </div>
-                    <div class="flex justify-center mt-12">
-                        <button type="button" class="text-blue-main bg-grey hover:bg-blue-main hover:text-white hover:border-blue-main 
-                        border border-blue-main px-20 py-1 text-base font-small rounded-full mr-8" onclick="resetForm()">Batal</button>
+                    <div
+                        class="flex flex-col-reverse gap-4 sm:flex-row justify-center mt-12 space-y-4 sm:space-x-8 sm:space-y-0">
+                        <button type="button"
+                            class="text-blue-main hover:bg-[#CCEAFF] hover:text-blue-main hover:border-blue-main
+                        border border-blue-main px-10 py-2 text-base font-medium rounded-full sm:px-20"
+                            onclick="resetForm()">Batal</button>
                         <button type="submit" id="submitBtn" disabled
-                            class="text-white bg-gray-400 px-20 py-1 text-base font-small rounded-full">Kirim</button>
+                            class="text-white bg-gray-400 px-10 py-2 text-base font-medium rounded-full sm:px-20">Kirim</button>
                     </div>
                 </form>
             </div>

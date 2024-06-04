@@ -33,7 +33,7 @@
 
 
 <body class="bg-dodger-blue-50">
-    <div class="min-h-screen flex items-center justify-center">
+<div class="min-h-screen flex items-center justify-center">
         <div class="w-full flex items-center flex-col max-w-md ">
 
 

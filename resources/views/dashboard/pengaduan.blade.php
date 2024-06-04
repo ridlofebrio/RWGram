@@ -405,10 +405,9 @@ document.addEventListener('alpine:init', () => {
                     
                   
                     $.ajax({
-                        url: "http://127.0.0.1:8000/search/pengaduan/"+data,
+                        url: "{{url('search/pengaduan')}}"+'/'+data,
                         type: "GET",
-                        datatype:'application/x-some-custom-type',
-                        async:true,
+                      
                         
                     }).done(function (data) {    
                         const parser = new DOMParser();
@@ -423,7 +422,7 @@ document.addEventListener('alpine:init', () => {
                 $('.sort').click(function (index) {
                 
                     $.ajax({
-                        url: "http://127.0.0.1:8000/dashboard/pengaduan/"+index.currentTarget.getAttribute('data'),
+                        url: "{{url('dashboard/pengaduan')}}"+'/'+index.currentTarget.getAttribute('data'),
                         method:"GET",
                         success: function (data) {
                         const parser = new DOMParser();

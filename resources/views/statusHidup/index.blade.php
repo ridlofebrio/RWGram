@@ -1,9 +1,9 @@
 @extends('layouts.template')
 @section('content')
     <header class="bg-white">
-        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-3xl font-bold tracking-tight text-gray-900">Status Meninggal</h1>
-            <p class="mt-1 text-base leading-6 text-gray-600 max-w-4xl mx-auto">Formulir ini dirancang untuk warga RW 04 Kalirejo yang ingin mengajukan perubahan status hidup. Melalui formulir ini, warga dapat memberikan informasi terkait perubahan status hidup yang diinginkan, seperti melaporkan kematian, atau mengonfirmasi status hidup seseorang.</p>
+        <div class="mx-auto max-w-7xl px-8 py-12 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-3xl font-extrabold text-neutral-10">Status Meninggal</h1>
+            <p class="mt-6 font-normal leading-6 text-neutral-10 max-w-4xl mx-auto">Formulir ini dirancang untuk warga RW 04 Kalirejo yang ingin mengajukan perubahan status hidup. Melalui formulir ini, warga dapat memberikan informasi terkait perubahan status hidup yang diinginkan, seperti melaporkan kematian, atau mengonfirmasi status hidup seseorang.</p>
         </div>
     </header>
 
@@ -25,8 +25,8 @@
             </div>
         @endif
     </div>
-    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div class="flex justify-between my-4">
+    <div class="bg-white mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <div class="flex justify-between mb-12 gap-3">
             <div class="flex gap-3 drop-shadow-lg">
                 <form class="max-w-sm mx-auto" action="{{ route('hidup.penduduk.find') }}" method="GET">
                     <div class="relative">
@@ -66,18 +66,18 @@
                     </ul>
                 </div>
             </div>
-            <a href="{{ route('hidup.penduduk.create') }}" class="inline-block text-white bg-blue-main px-4 md:px-8 py-2 md:py-3 font-medium text-sm md:text-base rounded-full shadow-lg md:shadow-xl">Ajukan</a>
+            <a href="{{ route('hidup.penduduk.create') }}" class="text-white bg-blue-main px-8 py-2 font-semibold text-base rounded-full drop-shadow-button hover:bg-dodger-blue-800">Ajukan</a>
         </div>
 
-        <div class="mt-5 overflow-x-auto shadow-md sm:rounded-lg mb-56">
+        <div class="mt-5 overflow-x-auto shadow-md rounded-lg mb-56">
             <table class="text-sm text-left shadow-xl w-full">
-                <thead class="text-xs text-white bg-dodger-blue-900">
+                <thead class="text-xs text-white bg-dodger-blue-950">
                     <tr>
-                        <th class="px-6 py-3">No</th>
-                        <th class="px-6 py-3">Nama Pengaju</th>
-                        <th class="px-6 py-3">Tanggal Pengajuan</th>
-                        <th class="px-6 py-3">Status</th>
-                        <th class="px-6 py-3"></th>
+                        <th class="px-6 py-4">No</th>
+                        <th class="px-6 py-4">Nama Pengaju</th>
+                        <th class="px-6 py-4">Tanggal Pengajuan</th>
+                        <th class="px-6 py-4">Status</th>
+                        <th class="px-6 py-4"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -87,10 +87,10 @@
                     </tr>
                 @endif
                 @foreach ($hidup as $item)
-                    <tr>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <tr class="font-medium text-sm">
+                        <td scope="row" class="px-6 py-4 whitespace-nowrap dark:text-white">
                             {{ $item->id_status_hidup }}
-                        </th>
+                        </td>
                         <td class="px-6 py-4">
                             {{ $item->penduduk->nama_penduduk }}
                         </td>
@@ -99,21 +99,21 @@
                         </td>
                         @if ($item->status_pengajuan === 'Sukses')
                             <td class="px-6 py-4">
-                                <div class="bg-green-100 text-green-600 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-1">
+                                <div class="bg-green-100 text-green-600 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-2 w-fit">
                                     <div class="bg-green-600 rounded-full w-2 h-2"></div>
                                     <p>Selesai</p>
                                 </div>
                             </td>
                         @elseif ($item->status_pengajuan === 'Proses')
                             <td class="px-6 py-4">
-                                <div class="bg-blue-info-100 text-blue-main font-bold py-2 px-4 text-xs rounded-full flex items-center gap-1">
+                                <div class="bg-blue-info-100 text-blue-main font-bold py-2 px-4 text-xs rounded-full flex items-center gap-2 w-fit">
                                     <div class="bg-blue-main rounded-full w-2 h-2"></div>
                                     <p>Proses</p>
                                 </div>
                             </td>
                         @else
                             <td class="px-6 py-4">
-                                <div class="bg-yellow-100 text-yellow-400 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-1">
+                                <div class="bg-yellow-100 text-yellow-400 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-2 w-fit">
                                     <div class="bg-yellow-400 rounded-full w-2 h-2"></div>
                                     <p>Menunggu</p>
                                 </div>
