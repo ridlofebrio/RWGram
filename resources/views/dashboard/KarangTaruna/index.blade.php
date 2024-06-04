@@ -91,7 +91,7 @@
 
 <h1 class=" font-semibold mb-5 mt-5 pt-10 text-2xl text-black" >Informasi</h1>
 
-    <div class="max-w-[1400px] pb-5 mx-auto mt-5 overflow-x-auto scrollbar-sangar">
+    <div class="max-w-[1400px] w-full pb-5 mx-auto mt-5 overflow-x-auto scrollbar-sangar">
         <div class="w-full flex  space-x-8  ">
                 @foreach ($pengumuman as $item)
                 <section class="relative w-[500px]  flex-shrink-0 ">

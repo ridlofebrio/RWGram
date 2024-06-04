@@ -34,20 +34,21 @@
         @endif
     </div>
     <div class="bg-white mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <div class="flex justify-between mb-12 gap-3">
-            <div class="flex gap-3">
-                <div class=" drop-shadow-md">
-                    <form action="{{ route('laporan.penduduk.index') }}" method="GET" class=" max-w-sm mx-auto">
+        <div class="flex flex-wrap justify-end md:justify-between mb-12 gap-3">
+            <div class="flex gap-3 z-40 relative  justify-between md:justify-normal w-full md:w-[80%] drop-shadow-lg">
+               
+                    <form class="w-full md:max-w-md" action="{{ route('laporan.penduduk.index') }}" method="GET" class=" max-w-sm mx-auto">
                         @include('component.search')
                     </form>
-                </div>
+      
 
-                {{-- <div class="rounded-full border border-neutral-04 shadow drop-shadow-md ">
-                    <button id="doubleDropdownButton" data-dropdown-toggle="doubleDropdown"
-                        class="py-2 text-black font-medium text-sm px-5 text-center inline-flex items-center"
-                        type="button">-
-                        Status -
-                        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                <div class="h-full ">
+                    <button id="doubleDropdownButton" data-dropdown-toggle="statusDropdown"
+                        class="p-2 font-medium text-sm min-h-full text-gray-600 px-4 text-center inline-flex items-center rounded-full bg-white"
+                        type="button">
+                        <i class="md:hidden fa-solid fa-filter"></i>
+                        <p class="hidden md:block">{{ request('status') ? request('status') : '-Semua-' }}</p>
+                        <svg class="hidden md:block  w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m1 1 4 4 4-4" />
@@ -72,7 +73,7 @@
                             <a href="{{ route('laporan.penduduk.index', ['status' => 'Menunggu']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Menunggu</a>
                         </li>
                     </ul>
-                </div> --}}
+                </div>
 
             </div>
             <a href="{{ route('laporan.penduduk.create') }}"
@@ -161,9 +162,9 @@
                                         </button>
                                           
                                           <!-- Main modal -->
-                                          <div  x-show="open"   tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed  z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                          <div  x-show="open"   tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed  z-50 justify-center items-center w-full inset-0 h-[calc(100%-1rem)] max-h-full">
                                           
-                                            <div  class="absolute w-[920px] h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  p-4  z-50 ">
+                                            <div  class="absolute w-full max-w-[920px] h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  p-4  z-50 ">
                                                   <!-- Modal content -->
                                                   <div @click.outside="open = false" class="relative bg-white w-full  rounded-lg shadow dark:bg-gray-700">
                                                       <!-- Modal header -->
