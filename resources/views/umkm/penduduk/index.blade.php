@@ -29,14 +29,14 @@
     </div>
 
     <div class="bg-white mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <div class="flex justify-between mb-12 gap-3">
-            <div class="drop-shadow-md">
-                <form action="{{ route('umkm.penduduk.index') }}" method="GET" class=" max-w-sm min-w-xs mx-auto">
+        <div class="flex flex-wrap justify-end md:justify-between mb-12 gap-3">
+            <div class="drop-shadow-md w-full md:w-1/2">
+                <form action="{{ route('umkm.penduduk.index') }}" method="GET" class="max-w-md ">
                     @include('component.search')
                 </form>
             </div>
             <button onclick="window.location.href='{{ route('umkm.penduduk.create') }}'"
-                class="text-white bg-blue-main px-8 py-2 font-semibold text-base rounded-full drop-shadow-button hover:bg-dodger-blue-800">Ajukan</button>
+                class="text-white bg-blue-main px-8 py-2 font-semibold text-base rounded-full  drop-shadow-button hover:bg-dodger-blue-800">Ajukan</button>
         </div>
 
         <div class="grid grid-cols-1 gap-y-6 md:grid-cols-2 lg:grid-cols-3 md:gap-x-6">
