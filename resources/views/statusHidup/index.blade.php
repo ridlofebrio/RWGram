@@ -26,9 +26,9 @@
         @endif
     </div>
     <div class="bg-white mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <div class="flex justify-between mb-12 gap-3">
-            <div class="flex gap-3 drop-shadow-lg">
-                <form class="max-w-sm mx-auto" action="{{ route('hidup.penduduk.find') }}" method="GET">
+        <div class="flex flex-wrap justify-end md:justify-between mb-12 gap-3">
+            <div class="flex gap-3 z-40 relative  justify-between md:justify-normal w-full md:w-[80%] drop-shadow-lg">
+                <form class="w-full md:max-w-md" action="{{ route('hidup.penduduk.find') }}" method="GET">
                     <div class="relative">
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -39,11 +39,14 @@
                     </div>
                 </form>
 
-                <div class="">
-                    <button id="statusDropdownButton" data-dropdown-toggle="statusDropdown" class="p-2 font-medium text-sm text-gray-600 px-4 text-center inline-flex items-center rounded-full bg-white " type="button">
-                        {{ request('status') ? request('status') : '-Semua-' }}
-                        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                <div class="h-full">
+                    <button id="statusDropdownButton" data-dropdown-toggle="statusDropdown" class="p-2 font-medium text-sm min-h-full text-gray-600 px-4 text-center inline-flex items-center rounded-full bg-white " type="button">
+                        <i class="md:hidden fa-solid fa-filter"></i>
+                        <p class="hidden md:block">{{ request('status') ? request('status') : '-Semua-' }}</p>
+                        <svg class="hidden md:block  w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 4 4 4-4" />
                         </svg>
                     </button>
                 </div>
