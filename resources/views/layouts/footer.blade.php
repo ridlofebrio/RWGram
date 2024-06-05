@@ -1,7 +1,9 @@
 <footer class="footer p-10 bg-dodger-blue-950 text-white ">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="flex flex-shrink-0 space-x-3 items-center">
+
             <img class="h-10 w-auto" src="https://res.cloudinary.com/dtzlizlrs/image/upload/v1717481970/ioxdtp815fvw1w3smkcc.png" alt="Your Company">
+
             <a href="#" class="text-white font-body font-bold text-xl "> <span
                     class="text-dodger-blue-700">RW</span>GRAM</a>
         </div>
@@ -25,4 +27,6 @@
             <p>Copyright&copy2024 RWGRAM</p>
         </div>
     </div>
+
 </footer>
+

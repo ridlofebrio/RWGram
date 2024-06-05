@@ -30,7 +30,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [LandingController::class, 'index']);
+Route::get('/', [LandingController::class, 'index'])->name('/');
+Route::get('tim', [LandingController::class, 'indexTim'])->name('tim');
 
 Route::group(['prefix' => 'bansos-penduduk'], function () {
     Route::post('/show', [BansosController::class, 'showPenduduk'])->name('bansos.penduduk.show');
@@ -87,7 +88,8 @@ Route::group(['prefix' => 'cloudinary'], function () {
 });
 
 Route::group(['prefix' => 'pengaduan'], function () {
-    Route::get('/', [LaporanController::class, 'indexPenduduk'])->name('laporan.penduduk.index');
+    Route::get('/', [LaporanController::class, 'indexPenduduk'])->name('laporan.penduduk.index'); 
+    Route::get('/filter', [LaporanController::class, 'request'])->name('laporan.penduduk.filter');
     Route::get('/create', [LaporanController::class, 'create'])->name('laporan.penduduk.create');
     Route::post('/create', [LaporanController::class, 'store'])->name('laporan.store');
 });
@@ -106,6 +108,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::get('/bansos', [BansosController::class, 'index'])->middleware('RW');
         Route::post('/bansos', [BansosController::class, 'normalize'])->middleware('RW')->name('normalize');
         Route::get('/bansos/generate-pdf', [PDFBansosController::class, 'generatePDF'])->middleware('RW')->name('generatePDF');
+        Route::get('/generate-detail-pdf', [PDFBansosController::class, 'generateDetailPDF'])->name('generateDetailPDF');
         Route::get('/akun', [UserController::class, 'index'])->middleware('RW');
         Route::get('/persuratan', [PersuratanController::class, 'index'])->middleware('RW');
         Route::get('/kas', [KasController::class, 'index']);

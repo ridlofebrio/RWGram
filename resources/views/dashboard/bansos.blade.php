@@ -77,6 +77,9 @@
                 <a href="{{ route('generatePDF') }}" class="flex w-full hover:bg-blue-main hover:border-blue-main hover:text-white px-3 items-center  py-2 border border-gray-300 rounded-full">
                     <i class="fa-solid fa-file-pdf"></i> <p class="block  sm:block md:hidden lg:block w-[100px]">Export PDF</p>
                 </a>
+                <a href="{{ route('generateDetailPDF') }}" class="flex w-[210px] hover:bg-blue-main hover:border-blue-main hover:text-white px-3 items-center space-x-4 py-2 border-2 border-neutral-400 rounded-full">
+                    <i class="fa-solid fa-file-pdf"></i> <p>Detail SPK</p>
+                </a>
 
                
             </div>
@@ -283,9 +286,12 @@
                                                         <label for="bobot" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bobot</label>
                                                         <input type="number" step="0.01" name="bobot" id="bobot" value="{{ number_format($data->bobot, 2) }}" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Bobot" required>
                                                     </div>
-                                                    <div class="col-span-2">
-                                                        <label for="attribut" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Attribut</label>
-                                                        <input type="text" name="attribut" id="attribut" value="{{ $data->attribut }}" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" style="text-transform: capitalize;" placeholder="Attribut" required>
+                                                    <div class="col-span-2 ">
+                                                        <label for="attribut" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Golongan Darah</label>
+                                                        <select id="attribut" name="attribut" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" style="text-transform: capitalize;">
+                                                            <option {{$data->attribut=="benefit"?'selected':''}} value="benefit">Benefit</option>
+                                                            <option {{$data->attribut=="cost"?'selected':''}}  value="cost">Cost</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <button class="hover:border-none before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100 px-8 py-2 text-base font-medium rounded-full" type="submit">
