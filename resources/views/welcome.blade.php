@@ -8,31 +8,31 @@
         <div class="relative h-full  overflow-hidden  ">
       @foreach ($informasi as $item)
         <!-- Item 1 -->
-        
+
        <div class="hidden h-full duration-700 ease-in-out" data-carousel-item>
          <div class="absolute font-main  w-full z-50 h-full">
            <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
                <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
                <h1 class=" text-md hidden md:flex font-bold text-white w-3/4" >{{$item->deskripsi_informasi}} </h1>
                <h1 class=" text-md block md:hidden font-bold text-white w-3/4" >{{$item->judul}} </h1>
-               
-              
+
+
        </div>
      </div>
      <div class="bg-gradient-to-t from-[#0096FF] opacity-50  to-transparent to-70%   z-40 absolute w-full h-full  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
            <img src="{{$item->foto_informasi == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716897949/e7dulpy8h3y86sspr8o5.jpg' : $item->foto_informasi}}" class="absolute block  w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
        </div>
-       
-       
+
+
       @endforeach
             <!-- Item 2 -->
-            
+
         <!-- Slider indicators -->
         <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
             @foreach ($informasi as $item)
             <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
             @endforeach
-           
+
         </div>
         <!-- Slider controls -->
         <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
@@ -89,41 +89,41 @@
                 <div class="info w-full flex items-center justify-around font-main font-bold">
                     <div>
                         <h2 class="text-dodger-blue-200 text-2xl mb-2">RT 01</h2>
-                        <h1 class="text-white font-semibold text-4xl">{{$penduduk[0]}}<span class="text-base font-normal"> Penduduk</span>
-                           
+                        <h1 class="text-white font-semibold text-4xl">{{$penduduk[0]}}<span class="ml-2 text-base font-normal">penduduk</span>
+
                         </h1>
                     </div>
-                    
+
                     <div class="hidden md:block bg-white w-[1px] h-[52px] opacity-60">
                     </div>
                 </div>
-               
+
                 <div class="info w-full flex items-center justify-around font-main font-bold">
 
                     <div>
                         <h2 class="text-dodger-blue-200 text-2xl mb-2">RT 02</h2>
-                        <h1 class="text-white font-semibold text-4xl">{{$penduduk[1]}}<span class="text-base font-normal"> Penduduk</span>
+                        <h1 class="text-white font-semibold text-4xl">{{$penduduk[1]}}<span class="ml-2 text-base font-normal">penduduk</span>
                         </h1>
                     </div>
-                  
+
                     <div class="hidden md:block bg-white w-[1px] h-[52px] opacity-60">
                     </div>
                 </div>
-                 
+
                 <div class="info w-full flex items-center justify-around font-main font-bold">
 
                    <div>
                     <h2 class="text-dodger-blue-200 text-2xl mb-2">RT 03</h2>
-                    <h1 class="text-white font-semibold text-4xl">{{$penduduk[2]}}<span class="text-base font-normal"> Penduduk</span>
+                    <h1 class="text-white font-semibold text-4xl">{{$penduduk[2]}}<span class="ml-2 text-base font-normal">penduduk</span>
                     </h1>
                    </div>
                     <div class="hidden md:block bg-white w-[1px] h-[52px] opacity-60">
                     </div>
                 </div>
-                   
+
                 <div class="info font-main font-bold">
                     <h2 class="text-dodger-blue-200 text-2xl mb-2">RT 04</h2>
-                    <h1 class="text-white font-semibold text-4xl">{{$penduduk[3]}}<span class="text-base font-normal"> Penduduk</span>
+                    <h1 class="text-white font-semibold text-4xl">{{$penduduk[3]}}<span class="ml-2 text-base font-normal">penduduk</span>
                     </h1>
                 </div>
             </div>
@@ -144,11 +144,11 @@
 
                     <h5 class="mb-2 mt-4 text-xl font-bold tracking-tight text-neutral-10 dark:text-white">UMKM</h5>
 
-                    <p class="mb-3 font-normal text-neutral-10 dark:text-gray-400">Anda bisa pengajuan UMKM, untuk memudahkan
+                    <p class="mb-3 font-normal text-neutral-10 dark:text-gray-400">Anda bisa melakukan pengajuan UMKM untuk memudahkan
                         Anda dalam melakukan promosi dan mengembangkan usaha Anda.</p>
                     <a href="{{ route('umkm.penduduk.index') }}"
-                        class="inline-flex gap-2 font-medium items-center text-blue-main hover:text-dodger-blue-800">
-                        Ajukan <i class="fa fa-arrow-right hover:translate-x-2 transition ease-out"></i>
+                        class="inline-flex gap-2 font-medium items-center text-blue-main group hover:text-dodger-blue-800">
+                        Ajukan <i class="fa fa-arrow-right group-hover:translate-x-2 transition ease-out"></i>
                     </a>
                 </div>
             </div>
@@ -159,11 +159,10 @@
 
                     <h5 class="mb-2 mt-4 text-xl font-bold tracking-tight text-neutral-10 dark:text-white">Status Nikah</h5>
 
-                    <p class="mb-3 font-normal text-neutral-10 dark:text-gray-400">Anda bisa pengajuan UMKM, untuk memudahkan
-                        Anda dalam melakukan promosi dan mengembangkan usaha Anda.</p>
+                    <p class="mb-3 font-normal text-neutral-10 dark:text-gray-400">Anda bisa melakukan pengajuan status pernikahan untuk mengubah status pernikahan Anda.</p>
                     <a href="{{ route('nikah.penduduk.index') }}"
-                        class="inline-flex gap-2 font-medium items-center text-blue-main hover:text-dodger-blue-800">
-                        Ajukan <i class="fa fa-arrow-right hover:translate-x-2 transition ease-out"></i>
+                        class="inline-flex gap-2 font-medium items-center text-blue-main group hover:text-dodger-blue-800">
+                        Ajukan <i class="fa fa-arrow-right group-hover:translate-x-2 transition ease-out"></i>
                     </a>
                 </div>
             </div>
@@ -176,11 +175,10 @@
                     <h5 class="mb-2 mt-4 text-xl font-bold tracking-tight text-neutral-10 dark:text-white">Status Tempat Tinggal
                     </h5>
 
-                    <p class="mb-3 font-normal text-neutral-10 dark:text-gray-400">Anda bisa pengajuan UMKM, untuk memudahkan
-                        Anda dalam melakukan promosi dan mengembangkan usaha Anda.</p>
+                    <p class="mb-3 font-normal text-neutral-10 dark:text-gray-400">Anda bisa melakukan pengajuan status tempat tinggal untuk mengubah status tinggal Anda.</p>
                     <a href="{{ route('tinggal.penduduk.index') }}"
-                        class="inline-flex gap-2 font-medium items-center text-blue-main hover:text-dodger-blue-800">
-                        Ajukan <i class="fa fa-arrow-right hover:translate-x-2 transition ease-out"></i>
+                        class="inline-flex gap-2 font-medium items-center text-blue-main group hover:text-dodger-blue-800">
+                        Ajukan <i class="fa fa-arrow-right group-hover:translate-x-2 transition ease-out"></i>
                     </a>
                 </div>
             </div>
@@ -192,11 +190,10 @@
 
                     <h5 class="mb-2 mt-4 text-xl font-bold tracking-tight text-neutral-10 dark:text-white">Status Meninggal</h5>
 
-                    <p class="mb-3 font-normal text-neutral-10 dark:text-gray-400">Anda bisa pengajuan UMKM, untuk memudahkan
-                        Anda dalam melakukan promosi dan mengembangkan usaha Anda.</p>
+                    <p class="mb-3 font-normal text-neutral-10 dark:text-gray-400">Anda bisa melakukan pengajuan status meninggal untuk mengubah status kematian seseorang.</p>
                     <a href="{{ route('hidup.penduduk.index') }}"
-                        class="inline-flex gap-2 font-medium items-center text-blue-main hover:text-dodger-blue-800">
-                        Ajukan <i class="fa fa-arrow-right hover:translate-x-2 transition ease-out"></i>
+                        class="inline-flex gap-2 font-medium items-center text-blue-main group hover:text-dodger-blue-800">
+                        Ajukan <i class="fa fa-arrow-right group-hover:translate-x-2 transition ease-out"></i>
                     </a>
                 </div>
             </div>
@@ -208,11 +205,10 @@
 
                     <h5 class="mb-2 mt-4 text-xl font-bold tracking-tight text-neutral-10 dark:text-white">Pengaduan</h5>
 
-                    <p class="mb-3 font-normal text-neutral-10 dark:text-gray-400">Anda bisa pengajuan UMKM, untuk memudahkan
-                        Anda dalam melakukan promosi dan mengembangkan usaha Anda.</p>
+                    <p class="mb-3 font-normal text-neutral-10 dark:text-gray-400">Anda bisa melakukan pengaduan untuk membuat laporan kepada RT/RW dan ditindaklanjuti dengan cepat.</p>
                     <a href="{{ route('laporan.penduduk.index') }}"
-                        class="inline-flex gap-2 font-medium items-center text-blue-main hover:text-dodger-blue-800">
-                        Ajukan <i class="fa fa-arrow-right hover:translate-x-2 transition ease-out"></i>
+                        class="inline-flex gap-2 font-medium items-center text-blue-main group hover:text-dodger-blue-800">
+                        Ajukan <i class="fa fa-arrow-right group-hover:translate-x-2 transition ease-out"></i>
                     </a>
                 </div>
             </div>
@@ -224,11 +220,10 @@
 
                     <h5 class="mb-2 mt-4 text-xl font-bold tracking-tight text-neutral-10 dark:text-white">Bantuan Sosial</h5>
 
-                    <p class="mb-3 font-normal text-neutral-10 dark:text-gray-400">Anda bisa pengajuan UMKM, untuk memudahkan
-                        Anda dalam melakukan promosi dan mengembangkan usaha Anda.</p>
+                    <p class="mb-3 font-normal text-neutral-10 dark:text-gray-400">Anda bisa melakukan pengajuan bansos untuk mempermudahkan RW dalam memilih warga yang layak mendapatkan bansos.</p>
                     <a href="{{ route('bansos.penduduk.request')}}"
-                        class="inline-flex gap-2 font-medium items-center text-blue-main hover:text-dodger-blue-800">
-                        Ajukan <i class="fa fa-arrow-right hover:translate-x-2 transition ease-out"></i>
+                        class="inline-flex gap-2 font-medium items-center text-blue-main group hover:text-dodger-blue-800">
+                        Ajukan <i class="fa fa-arrow-right group-hover:translate-x-2 transition ease-out"></i>
                     </a>
                 </div>
             </div>
@@ -240,11 +235,10 @@
 
                     <h5 class="mb-2 mt-4 text-xl font-bold tracking-tight text-neutral-10 dark:text-white">Pengumuman</h5>
 
-                    <p class="mb-3 font-normal text-neutral-10 dark:text-gray-400">Anda bisa pengajuan UMKM, untuk memudahkan
-                        Anda dalam melakukan promosi dan mengembangkan usaha Anda.</p>
+                    <p class="mb-3 font-normal text-neutral-10 dark:text-gray-400">Anda bisa melihat pengumuman yang tersedia untuk membantu Anda tetap terhubung dengan informasi terbaru.</p>
                     <a href="{{ route('informasi.penduduk.index') }}"
-                        class="inline-flex gap-2 font-medium items-center text-blue-main hover:text-dodger-blue-800">
-                        Ajukan <i class="fa fa-arrow-right hover:translate-x-2 transition ease-out"></i>
+                        class="inline-flex gap-2 font-medium items-center text-blue-main group hover:text-dodger-blue-800">
+                        Ajukan <i class="fa fa-arrow-right group-hover:translate-x-2 transition ease-out"></i>
                     </a>
                 </div>
             </div>
@@ -256,11 +250,10 @@
 
                     <h5 class="mb-2 mt-4 text-xl font-bold tracking-tight text-neutral-10 dark:text-white">Melihat Data Diri</h5>
 
-                    <p class="mb-3 font-normal text-neutral-10 dark:text-gray-400">Anda bisa pengajuan UMKM, untuk memudahkan
-                        Anda dalam melakukan promosi dan mengembangkan usaha Anda.</p>
+                    <p class="mb-3 font-normal text-neutral-10 dark:text-gray-400">Anda bisa melihat data diri anda untuk mengetahui informasi pribadi Anda, seperti nama, alamat , dll.</p>
                     <a href="{{ route('data.penduduk.request') }}"
-                        class="inline-flex gap-2 font-medium items-center text-blue-main hover:text-dodger-blue-800">
-                        Ajukan <i class="fa fa-arrow-right hover:translate-x-2 transition ease-out"></i>
+                        class="inline-flex gap-2 font-medium items-center text-blue-main group hover:text-dodger-blue-800">
+                        Ajukan <i class="fa fa-arrow-right group-hover:translate-x-2 transition ease-out"></i>
                     </a>
                 </div>
             </div>
