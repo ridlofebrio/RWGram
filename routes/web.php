@@ -30,7 +30,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [LandingController::class, 'index']);
+Route::get('/', [LandingController::class, 'index'])->name('/');
+Route::get('tim', [LandingController::class, 'indexTim'])->name('tim');
 
 Route::group(['prefix' => 'bansos-penduduk'], function () {
     Route::post('/show', [BansosController::class, 'showPenduduk'])->name('bansos.penduduk.show');
