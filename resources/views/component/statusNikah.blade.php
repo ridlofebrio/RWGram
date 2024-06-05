@@ -5,16 +5,16 @@
                 No
             </th>
             <th scope="col" class="px-6 py-3">
-                Tanggal
+                Nama Pengaju
             </th>
             <th scope="col" class="px-6 py-3">
-                Nama
+                Nama Pasangan
             </th>
             <th scope="col" class="px-6 py-3">
-                Nama UMKM
+                Status Perkawinan
             </th>
             <th scope="col" class="px-6 py-3">
-                Status
+                Status Pengjajuan
             </th>
             <th scope="col" class="px-6 py-3">
                Aksi
@@ -56,11 +56,13 @@
                         <div @click.outside="open = false" class="absolute text-center w-full max-w-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl  p-4 bg-white z-50">
                             <h1 class="text-xl mb-5">Apakah anda yakin ingin mengkonfirmasi permohonan ini ?</h1>
                            <div class="flex w-full space-x-7 justify-center">
-                            <button class="text-blue-main border-2 border-dodger-blue-800  hover:bg-dodger-blue-800  hover:text-white  px-5 py-2 text-base font-medium rounded-full">Lihat Detail</button>
+                            <button @click="open= false" class="text-blue-main border-2 border-dodger-blue-800  hover:bg-dodger-blue-800  hover:text-white  px-5 py-2 text-base font-medium rounded-full">Batal</button>
                            <form action="{{url('konfirmasi/nikah/'.$status->id_status_nikah)}}" method="POST">
                             @csrf
                             @method('PUT')
                                 <input type="hidden" name="status_pengajuan" value="diterima">
+                                <input type="hidden" name="status" value="{{$status->status}}">
+                                <input type="hidden" name="penduduk_id" value="{{$status->penduduk_id}}">
                             <button type="submit" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-5 py-2 text-base font-medium rounded-full">Konfirmasi</button>
                            </form>
                            </div>
@@ -111,7 +113,7 @@
                                      
                                       <div class="col-span-2">
                                           <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gambar</label>
-                                          <img src="{{asset('images/'.$status->foto_bukti)}}" alt="Foto Bukti">
+                                          <img src="{{$status->foto_bukti == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1717600035/qcwtusubd3trexvgfcre.jpg' : $status->foto_bukti }}" alt="Foto Bukti">
                                       </div>
                                      
                                         {{-- <div class="col-span-2 sm:col-span-1">

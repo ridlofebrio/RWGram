@@ -62,11 +62,11 @@
             <div class="img flex md:w-[300px] w-[200px] lg:w-[550px]  relative h-[350px]">
 
                 <img class="w-56 md:w-64 absolute left-[1rem] top-5 md:top-0 rounded-xl"
-                    src="{{ asset('asset/images/homepage.jpg') }}" alt="">
+                    src="{{ asset('asset/images/kegiatan1.jpeg') }}" alt="">
                 <img class="w-56 md:w-64 absolute md:left-[3rem] left-[2rem] bottom-[4rem] md:bottom-[1rem] rounded-xl "
-                    src="{{ asset('asset/images/homepage.jpg') }}" alt="">
+                    src="{{ asset('asset/images/kegiatan2.jpeg') }}" alt="">
                 <img class="w-56 md:w-64 absolute md:right-[5rem] top-[5rem] right-[3rem] md:top-[5rem] rounded-xl "
-                    src="{{ asset('asset/images/homepage.jpg') }}" alt="">
+                    src="{{ asset('asset/images/kegiatan4.jpeg') }}" alt="">
 
             </div>
 

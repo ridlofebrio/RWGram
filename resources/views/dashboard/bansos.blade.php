@@ -4,7 +4,7 @@
 <h1>Data Penerimaan Bantuan Sosial</h1>
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
     <div class="flex flex-wrap md:flex-nowrap gap-1 mt-3 w-full justify-between items-center">
-        <h2 class="text-xl text-left ml-3 w-full max-w-[150px]">{{ $allData->where('status', 'menunggu')->count() }} Permohonan</h2>
+        <h2 class="text-xl text-left ml-3 w-full max-w-[150px]">{{ $allData->jumlah}} Permohonan</h2>
         <div class="filter w-full gap-3 flex-wrap flex md:flex-nowrap  items-center">
         <div class="flex gap-1 justify-end w-full h-full items-center">
             <div class="relative w-full lg:w-1/2  h-full">
@@ -175,23 +175,23 @@
                                                 </div>
                                                 <div class="col-span-2">
                                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Dapur </label>
-                                                    <img src="{{asset('images/'.$bansos->foto_dapur)}}" alt="Foto Bukti">
+                                                    <img src="{{$bansos->foto_dapur == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1717593373/xyic4r2k4packpic2gzd.jpg' : $bansos->foto_dapur}}"  alt="Foto Bukti">
                                                 </div>
                                                 <div class="col-span-2">
                                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Depan Rumah</label>
-                                                    <img src="{{asset('images/'.$bansos->foto_depan_rumah)}}" alt="Foto Bukti">
+                                                    <img src="{{$bansos->foto_depan_rumah == null? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1717593373/xyic4r2k4packpic2gzd.jpg' : $bansos->foto_depan_rumah}}" alt="Foto Bukti">
                                                 </div>
                                                 <div class="col-span-2">
                                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Kamar Mandi</label>
-                                                    <img src="{{asset('images/'.$bansos->foto_kamar_mandi)}}" alt="Foto Bukti">
+                                                    <img src="{{$bansos->foto_kamar_mandi == null? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1717593373/xyic4r2k4packpic2gzd.jpg' : $bansos->foto_kamar_mandi}}" alt="Foto Bukti">
                                                 </div>
                                                 <div class="col-span-2">
                                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Kamar Tidur</label>
-                                                    <img src="{{asset('images/'.$bansos->foto_kamar_tidur)}}" alt="Foto Bukti">
+                                                    <img src="{{$bansos->foto_kamar_tidur == null? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1717593373/xyic4r2k4packpic2gzd.jpg' : $bansos->foto_kamar_tidur}}" alt="Foto Bukti">
                                                 </div>
                                                 <div class="col-span-2">
                                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Kamar Tamu</label>
-                                                    <img src="{{asset('images/'.$bansos->foto_kamar_tamu)}}" alt="Foto Bukti">
+                                                    <img src="{{$bansos->foto_kamar_tamu == null? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1717593373/xyic4r2k4packpic2gzd.jpg' : $bansos->foto_kamar_tamu}}" alt="Foto Bukti">
                                                 </div>
                                                 </div>
                                             </form>

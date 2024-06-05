@@ -57,7 +57,7 @@
                         <div @click.outside="open = false" class="absolute text-center w-full max-w-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl  p-4 bg-white z-50">
                             <h1 class="text-xl mb-5">Apakah anda yakin ingin mengkonfirmasi permohonan ini ?</h1>
                            <div class="flex w-full space-x-7 justify-center">
-                            <button class="text-blue-main border-2 border-dodger-blue-800  hover:bg-dodger-blue-800  hover:text-white  px-5 py-2 text-base font-medium rounded-full">Lihat Detail</button>
+                            <button @click="open= false" class="text-blue-main border-2 border-dodger-blue-800  hover:bg-dodger-blue-800  hover:text-white  px-5 py-2 text-base font-medium rounded-full">Batal</button>
                            <form action="{{url('konfirmasi/hidup/'.$status->id_status_hidup)}}" method="POST">
                             @csrf
                             @method('PUT')
@@ -108,14 +108,14 @@
                                         </div>
                                         <div class="col-span-2">
                                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK Meninggal</label>
-                                            <input readonly type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" value="{{$status->pendudukM->NIK}}" required="">
+                                        <input readonly type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" value="{{$status->pendudukM->NIK}}" required="">
                                         </div>
                                        
                                    
                                      
                                       <div class="col-span-2">
                                           <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gambar</label>
-                                          <img src="{{$status->foto_bukti}}" alt="Foto Bukti">
+                                          <img src="{{$status->foto_bukti == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1717600837/vutkd8upi1jqty2c8tmf.jpg' : $status->foto_bukti}}" alt="Foto Bukti">
                                       </div>
                                      
                                         {{-- <div class="col-span-2 sm:col-span-1">

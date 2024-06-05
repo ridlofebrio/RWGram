@@ -25,7 +25,7 @@ class PDFBansosController extends Controller
             'kriteria' => $kriteria,
         ];
 
-        $pdf = PDF::loadView('dashboard.bansos_generate_pdf', $data)->setPaper('A4', 'landscape');
+        $pdf = PDF::loadView('dashboard.pdf.bansos_generate_pdf', $data)->setPaper('A4', 'landscape');
         return $pdf->download('data-penerimaan-bansos.pdf');
     }
 
