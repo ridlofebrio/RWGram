@@ -12,58 +12,95 @@ class LaporanSeeder extends Seeder
      */
     public function run(): void
     {
-
-        $data = [
-            [
-                'laporan_id' => 1,
-                'penduduk_id' => 1,
-                'deskripsi_laporan' => 'Saya ingin melaporkan tentang masalah sanitasi di lingkungan kami. Beberapa hari terakhir, kami telah mengalami masalah dengan saluran air yang tersumbat di sekitar rumah kami. Hal ini menyebabkan air kotor dan limbah tersumbat di depan rumah kami, menciptakan bau yang tidak sedap dan lingkungan yang tidak sehat. Kami sangat berharap masalah ini bisa segera ditangani oleh pihak yang berwenang. Kami juga membutuhkan perbaikan lampu jalan di sekitar wilayah kami, karena beberapa lampu sudah mati dan membuat malam hari menjadi gelap dan tidak aman bagi kami yang harus pulang larut malam. Terima kasih atas perhatiannya.',
-                'status_laporan' => 'menunggu',
-                'foto_laporan' => null,
-                'tanggal_laporan' => now(),
-                'created_at' => now()
-            ],
-            [
-                'laporan_id' => 2,
-                'penduduk_id' => 2,
-                'deskripsi_laporan' => 'Saya ingin melaporkan adanya masalah dengan fasilitas kesehatan di lingkungan kami. Rumah sakit terdekat sudah tidak mampu menampung jumlah pasien yang semakin meningkat, menyebabkan antrian panjang dan pelayanan yang kurang optimal. Selain itu, kami juga mengalami kesulitan dalam mendapatkan obat-obatan dan perawatan medis yang diperlukan. Kami membutuhkan perhatian dan solusi dari pemerintah terkait masalah ini agar masyarakat bisa mendapatkan pelayanan kesehatan yang memadai dan terjangkau. Terima kasih.',
-                'status_laporan' => 'menunggu',
-                'foto_laporan' => null,
-                'tanggal_laporan' => now(),
-                'created_at' => now()
-            ],
-            [
-                'laporan_id' => 3,
-                'penduduk_id' => 3,
-                'deskripsi_laporan' => 'Saya ingin melaporkan tentang keamanan di lingkungan kami yang semakin memprihatinkan. Beberapa minggu terakhir, kami sering mendengar tentang kasus pencurian dan tindak kriminal lainnya yang terjadi di sekitar kami. Kami merasa khawatir akan keselamatan kami dan keluarga kami. Kami membutuhkan peningkatan patroli keamanan dan peningkatan sinar lampu jalan di sekitar wilayah kami untuk mencegah tindak kriminal tersebut. Kami harap pihak berwenang segera mengambil tindakan untuk meningkatkan keamanan lingkungan kami. Terima kasih.',
-                'status_laporan' => 'menunggu',
-                'foto_laporan' => null,
-                'tanggal_laporan' => now(),
-                'created_at' => now()
-            ],
-            [
-                'laporan_id' => 4,
-                'penduduk_id' => 4,
-                'deskripsi_laporan' => 'Saya ingin melaporkan tentang masalah transportasi publik di wilayah kami yang semakin buruk. Kami sering mengalami keterlambatan dan ketidakpastian dalam jadwal transportasi publik yang ada. Hal ini menyulitkan kami untuk bekerja dan beraktivitas sehari-hari. Selain itu, kondisi armada transportasi yang sudah tua dan kurang terawat juga menyebabkan ketidaknyamanan dan risiko keselamatan bagi penumpang. Kami berharap pihak terkait bisa segera melakukan perbaikan dan peningkatan dalam sistem transportasi publik di wilayah kami. Terima kasih.',
-                'status_laporan' => 'menunggu',
-                'foto_laporan' => null,
-                'tanggal_laporan' => now(),
-                'created_at' => now()
-            ],
-            [
-                'laporan_id' => 5,
-                'penduduk_id' => 5,
-                'deskripsi_laporan' => 'Saya ingin melaporkan tentang masalah kebersihan di lingkungan kami. Beberapa kali kami melihat sampah berserakan di sekitar tempat pembuangan sampah yang sudah penuh. Hal ini menyebabkan bau tidak sedap dan menarik penyebaran hama serta penyakit. Kami juga menemukan banyak jalan yang tidak bersih dan terdapat genangan air yang menjadi sarang nyamuk. Kami berharap pihak terkait segera melakukan tindakan untuk membersihkan lingkungan kami dan mengatasi masalah ini. Terima kasih atas perhatiannya.',
-                'status_laporan' => 'menunggu',
-                'foto_laporan' => null,
-                'tanggal_laporan' => now(),
-                'created_at' => now()
-            ],
+        // Define data source
+        $keluhan = [
+            "Masalah sanitasi di lingkungan",
+            "Kerusakan infrastruktur jalan",
+            "Kekurangan fasilitas pendidikan",
+            "Ketidaknyamanan lingkungan akibat sampah",
+            "Kualitas air minum yang buruk",
+            "Tingkat kejahatan yang meningkat",
+            "Kerusakan saluran air",
+            "Ketidakamanan transportasi umum",
+            "Ketidakmampuan layanan kesehatan",
+            "Kerusakan fasilitas umum",
+            "Kerusakan listrik di wilayah",
+            "Kebisingan dari industri di sekitar",
+            "Ketidakstabilan harga kebutuhan pokok",
+            "Ketidakmampuan akses internet yang baik",
+            "Ketidakmampuan pengelolaan sampah",
+            "Masalah polusi udara",
+            "Kurangnya penerangan jalan di malam hari",
+            "Kemacetan lalu lintas",
+            "Kurangnya ruang hijau dan taman",
+            "Kualitas udara yang buruk",
+            "Kurangnya fasilitas olahraga",
+            "Kurangnya aksesibilitas untuk penyandang disabilitas",
+            "Banjir saat musim hujan",
+            "Kurangnya tempat parkir umum",
+            "Masalah pengelolaan limbah industri",
+            "Kurangnya pusat kegiatan masyarakat",
+            "Kualitas jalan yang buruk",
+            "Kurangnya pos keamanan lingkungan",
+            "Masalah keberlanjutan lingkungan",
+            "Masalah dengan kebisingan kendaraan",
+            "Kurangnya fasilitas untuk anak-anak",
+            "Kurangnya perawatan taman kota",
+            "Masalah kebersihan di pasar tradisional",
+            "Kerusakan jembatan",
+            "Kekurangan pasokan air bersih",
+            "Masalah dengan binatang liar",
+            "Kurangnya tempat penampungan hewan",
+            "Pengelolaan bencana yang tidak memadai",
+            "Masalah dengan lalu lintas berat",
+            "Kurangnya program kesehatan masyarakat",
+            "Kurangnya fasilitas untuk lansia",
+            "Masalah dengan kualitas udara dalam ruangan",
+            "Kurangnya fasilitas daur ulang",
+            "Masalah dengan vandalisme",
+            "Kurangnya pengawasan lingkungan",
+            "Masalah dengan drainase air hujan",
+            "Kurangnya penerangan di fasilitas umum",
+            "Masalah dengan akses ke perawatan kesehatan mental",
+            "Kurangnya pengelolaan hutan kota",
+            "Masalah dengan serangga dan hama",
+            "Kurangnya program pendidikan lingkungan",
+            "Masalah dengan layanan darurat",
+            "Kurangnya tempat rekreasi",
+            "Masalah dengan infrastruktur air limbah",
+            "Kurangnya fasilitas seni dan budaya",
+            "Masalah dengan keamanan cyber",
+            "Kurangnya pengelolaan lalu lintas sepeda",
+            "Masalah dengan penyediaan air minum",
+            "Kurangnya fasilitas kebugaran",
+            "Masalah dengan jaringan listrik",
+            "Kurangnya perlindungan terhadap polusi suara",
+            "Masalah dengan pemeliharaan bangunan bersejarah",
+            "Kurangnya fasilitas transportasi publik",
+            "Masalah dengan kualitas makanan di pasar",
+            "Kurangnya pusat bantuan hukum",
+            "Masalah dengan layanan telekomunikasi",
+            "Kurangnya program beasiswa pendidikan",
+            "Masalah dengan penyediaan energi terbarukan",
+            "Kurangnya fasilitas sanitasi di sekolah"
         ];
 
+        $status = ["menunggu", "proses", "selesai", "ditolak"];
 
-        DB::table('laporan')->insert(
-            $data
-        );
+        // Generate 100 reports
+        for ($i = 0; $i < 100; $i++) {
+            $pendudukId = rand(1, 10); // Assuming you have 10 penduduk records
+            $deskripsiLaporan = $keluhan[array_rand($keluhan)];
+            $statusLaporan = $status[array_rand($status)];
+            $tanggalLaporan = date('Y-m-d H:i:s', mt_rand(strtotime('2024-01-01'), strtotime('2024-12-31')));
+
+            // Insert report data into database
+            DB::table('laporan')->insert([
+                'penduduk_id' => $pendudukId,
+                'deskripsi_laporan' => $deskripsiLaporan,
+                'status_laporan' => $statusLaporan,
+                'tanggal_laporan' => $tanggalLaporan,
+            ]);
+        }
     }
 }

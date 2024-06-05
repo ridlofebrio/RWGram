@@ -35,7 +35,7 @@
 
     @yield('content')
 
-    @if ($activeMenu == 'beranda')
+    @if ($activeMenu == 'beranda' || $activeMenu == 'tim')
         @include('layouts.footer')
     @endif
 

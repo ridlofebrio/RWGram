@@ -60,17 +60,20 @@
 
                 <div id="statusDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="statusDropdownButton">
-                        <li>
-                            <a href="{{ route('laporan.penduduk.index', ['status' => '']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">-Semua-</a>
+                        <li>  
+                            <a href="{{ route('laporan.penduduk.index')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">-Semua-</a>
                         </li>
                         <li>
-                            <a href="{{ route('laporan.penduduk.index', ['status' => 'Selesai']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Selesai</a>
+                            <a href="{{ route('laporan.penduduk.index', ['status_laporan' => 'Selesai']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Selesai</a>
                         </li>
                         <li>
-                            <a href="{{ route('laporan.penduduk.index', ['status' => 'Proses']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Proses</a>
+                            <a href="{{ route('laporan.penduduk.index', ['status_laporan' => 'Proses']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Proses</a>
                         </li>
                         <li>
-                            <a href="{{ route('laporan.penduduk.index', ['status' => 'Menunggu']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Menunggu</a>
+                            <a href="{{ route('laporan.penduduk.index', ['status_laporan' => 'Menunggu']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Menunggu</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('laporan.penduduk.index', ['status_laporan' => 'Ditolak']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ditolak</a>
                         </li>
                     </ul>
                 </div>
@@ -126,7 +129,7 @@
                             <td class="px-6 py-4 max-w-xl overflow-hidden">
                                 <div class="line-clamp-4">{{ $lap->deskripsi_laporan }}</div>
                             </td>
-                            @if ($lap->status_laporan === 'Sukses')
+                            @if ($lap->status_laporan === 'Selesai')
                                 <td class="px-6 py-4">
                                     <div
                                         class="bg-green-100 text-green-600 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-2 w-fit">
@@ -137,11 +140,18 @@
                             @elseif ($lap->status_laporan === 'Proses')
                                 <td class="px-6 py-4">
                                     <div
-                                        class="bg-blue-info-100 text-blue-main font-bold py-2 px-4 text-xs rounded-full flex items-center gap-2 w-fit">
+                                        class="bg-cyan-100 text-blue-main font-bold py-2 px-4 text-xs rounded-full flex items-center gap-2 w-fit">
                                         <div class="bg-blue-main rounded-full w-2 h-2"></div>
                                         <p>Proses</p>
                                     </div>
                                 </td>
+                            @elseif ($lap->status_laporan === 'Ditolak')
+                            <td class="px-6 py-4">
+                            <div class="bg-red-400 text-red-main font-bold py-2 px-4 text-xs rounded-full flex items-center gap-2 w-fit">
+                                <div class="bg-red-600 rounded-full w-2 h-2"></div>
+                                <p>Ditolak</p>
+                            </div>
+                        </td>                            
                             @else
                                 <td class="px-6 py-4">
                                     <div
@@ -225,6 +235,11 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="card-footer">
+                <ul class="pagination">
+                    {{ $laporan->links('vendor.pagination.tailwind') }}
+                </ul>
+            </div>
         </div>
     </div>
 
