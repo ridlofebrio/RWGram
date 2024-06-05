@@ -39,20 +39,20 @@
                     <div class="flex items-center gap-8 font-main ">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                         <a href="/"
-                            class="{{ $activeMenu == 'beranda' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main  rounded-md  text-base font-medium">Beranda</a>
+                            class="{{ $activeMenu == 'beranda' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main text-base font-medium">Beranda</a>
                         <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
-                            class=" {{ $activeMenu == 'permohonan' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main rounded-md  text-base font-medium"
+                            class=" {{ $activeMenu == 'permohonan' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main text-base font-medium"
                             aria-current="page">Permohonan <i class="fa fa-angle-down"></i></button>
                         <a href="/pengaduan"
-                            class="{{ $activeMenu == 'pengaduan' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main  rounded-md  text-base font-medium">Pengaduan</a>
+                            class="{{ $activeMenu == 'pengaduan' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main text-base font-medium">Pengaduan</a>
                         <a href="/informasi-penduduk/index"
-                            class="{{ $activeMenu == 'pengumuman' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main  rounded-md  text-base font-medium">Pengumuman
+                            class="{{ $activeMenu == 'pengumuman' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main text-base font-medium">Pengumuman
                         </a>
                         <a href="/data-penduduk/request"
-                            class="{{ $activeMenu == 'dataDiri' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main  rounded-md  text-base font-medium">Data
+                            class="{{ $activeMenu == 'dataDiri' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main text-base font-medium">Data
                             Diri</a>
                         <a href="{{ $activeMenu == 'beranda' ? '#tentang' : '/#tentang' }}"
-                            class="{{ $activeMenu == 'tentang' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main  rounded-md  text-base font-medium">Tentang</a>
+                            class="{{ $activeMenu == 'tentang' ? 'text-blue-main' : 'text-neutral-10' }} hover:text-blue-main text-base font-medium">Tentang</a>
                         <a href="/login"
                             class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-8 py-3 text-base font-semibold rounded-full drop-shadow-button ">Masuk</a>
                     </div>
@@ -61,35 +61,36 @@
 
                 <div id="dropdown"
                     class="z-50 hidden bg-white divide-y divide-gray-100 rounded-lg w-44 dark:bg-gray-700 drop-shadow-card ">
-                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                    <ul class="py-2 font-medium text-sm text-neutal-10 dark:text-gray-200"
+                        aria-labelledby="dropdownDefaultButton">
                         <li>
                             <a href="/umkm-penduduk/index"
-                                class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">UMKM</a>
+                                class="{{ Route::currentRouteName() == 'umkm.penduduk.index' ? 'text-blue-main' : 'text-neutral-10' }} block px-4 py-2 hover:text-blue-main">UMKM</a>
                         </li>
                         <li>
                             <a href="{{ route('nikah.penduduk.index') }}"
-                                class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Status
+                                class="{{ Route::currentRouteName() == 'nikah.penduduk.index' ? 'text-blue-main' : 'text-neutral-10' }} block px-4 py-2 hover:text-blue-main">Status
                                 Nikah</a>
                         </li>
                         <li>
                             <a href="{{ route('tinggal.penduduk.index') }}"
-                                class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Status
+                                class="{{ Route::currentRouteName() == 'tinggal.penduduk.index' ? 'text-blue-main' : 'text-neutral-10' }} block px-4 py-2 hover:text-blue-main">Status
                                 Tempat Tinggal</a>
                         </li>
                         <li>
                             <a href="{{ route('hidup.penduduk.index') }}"
-                                class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Status
-                                Meniggal</a>
+                                class="{{ Route::currentRouteName() == 'hidup.penduduk.index' ? 'text-blue-main' : 'text-neutral-10' }} block px-4 py-2 hover:text-blue-main">Status
+                                Meninggal</a>
                         </li>
                         <li>
                             <a href="{{ route('bansos.penduduk.request') }}"
-                                class="block px-4 py-2 hover:text-blue-main dark:hover:bg-gray-600 dark:hover:text-white">Bantuan
+                                class="{{ Route::currentRouteName() == 'bansos.penduduk.request' ? 'text-blue-main' : 'text-neutral-10' }} block px-4 py-2 hover:text-blue-main">Bantuan
                                 Sosial</a>
                         </li>
                     </ul>
                 </div>
 
-       
+
 
             </div>
             <!-- <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -134,21 +135,71 @@
 
     <!-- Mobile menu, show/hide based on menu state. -->
     <div class="hidden" data-open="false" id="mobile-menu">
-        <div class="space-y-1 px-2 pb-3 pt-2">
+        <div class="flex flex-col py-6 px-4 gap-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href="#" class=" text-blue-main block rounded-md px-3 py-2 text-base font-medium"
-                aria-current="page">Dashboard</a>
-            <a href="#"
-                class="text-neutral-10  hover:text-blue-main block rounded-md px-3 py-2 text-base font-medium">Team</a>
-            <a href="#"
-                class="text-neutral-10  hover:text-blue-main block rounded-md px-3 py-2 text-base font-medium">Projects</a>
-            <a href="#"
-                class="text-neutral-10  hover:text-blue-main block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
+            <a href="/"
+                class="{{ $activeMenu == 'beranda' ? 'text-blue-main' : 'text-neutral-10' }} text-base font-medium"
+                aria-current="page">Beranda</a>
+
+            <div
+                class="{{ $activeMenu == 'permohonan' ? 'text-blue-main' : 'text-neutral-10' }} text-base font-medium" onclick="dropdown()">
+                Permohonan
+                <span class="">
+                    <i class="fa fa-angle-down" id="arrow"></i>
+                </span>
+            </div>
+
+            <div id="submenu" class="hidden text-sm font-medium text-neutral-10">
+                <ul class="">
+                    <li>
+                        <a href="/umkm-penduduk/index"
+                            class="{{ Route::currentRouteName() == 'umkm.penduduk.index' ? 'text-blue-main' : 'text-neutral-10' }} block px-4 pb-2 ">UMKM</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('nikah.penduduk.index') }}"
+                            class="{{ Route::currentRouteName() == 'nikah.penduduk.index' ? 'text-blue-main' : 'text-neutral-10' }} block px-4 py-2 ">Status
+                            Nikah</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('tinggal.penduduk.index') }}"
+                            class="{{ Route::currentRouteName() == 'tinggal.penduduk.index' ? 'text-blue-main' : 'text-neutral-10' }} block px-4 py-2 ">Status
+                            Tempat Tinggal</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('hidup.penduduk.index') }}"
+                            class="{{ Route::currentRouteName() == 'hidup.penduduk.index' ? 'text-blue-main' : 'text-neutral-10' }} block px-4 py-2 ">Status
+                            Meninggal</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('bansos.penduduk.request') }}"
+                            class="{{ Route::currentRouteName() == 'bansos.penduduk.request' ? 'text-blue-main' : 'text-neutral-10' }} block px-4 py-2 ">Bantuan
+                            Sosial</a>
+                    </li>
+                </ul>
+            </div>
+
+
+            <a href="/pengaduan"
+                class="{{ $activeMenu == 'pengaduan' ? 'text-blue-main' : 'text-neutral-10' }} text-base font-medium">Pengaduan</a>
+            <a href="/informasi-penduduk/index"
+                class="{{ $activeMenu == 'pengumuman' ? 'text-blue-main' : 'text-neutral-10' }} text-base font-medium">Pengumuman
+            </a>
+            <a href="/data-penduduk/request"
+                class="{{ $activeMenu == 'dataDiri' ? 'text-blue-main' : 'text-neutral-10' }} text-base font-medium">Data
+                Diri</a>
+            <a href="{{ $activeMenu == 'beranda' ? '#tentang' : '/#tentang' }}"
+                class="{{ $activeMenu == 'tentang' ? 'text-blue-main' : 'text-neutral-10' }} text-base font-medium">Tentang</a>
+            <a href="/login" class="text-neutral-10 text-base font-medium">Masuk</a>
         </div>
     </div>
 </nav>
 
-
+<script type="text/javascript">
+    function dropdown(){
+        document.querySelector('#submenu').classList.toggle('hidden');
+        document.querySelector('#arrow').classList.toggle('rotate-180');
+    }
+</script>
 
 
 
