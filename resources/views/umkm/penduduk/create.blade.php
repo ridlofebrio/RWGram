@@ -192,7 +192,7 @@ animation: l11 1s infinite;
                     
 
                     <div class="flex items-center mt-6">
-                        <input id="agree" type="checkbox" class="form-checkbox h-4 w-4 text-blue-600" />
+                        <input id="agree" type="checkbox" class="form-checkbox rounded-md h-4 w-4 text-blue-600" />
                         <label for="agree" class="ml-2 block text-sm text-gray-900">
                             Apakah data Anda sudah benar?
                         </label>    

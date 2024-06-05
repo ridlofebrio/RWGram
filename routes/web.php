@@ -159,6 +159,9 @@ Route::group(['prefix' => 'search', 'middleware' => 'auth'], function () {
     Route::get('/surat/{value}', [PersuratanController::class, 'find']);
 });
 
+Route::get('/', [LandingController::class, 'index'])->name('/');
+Route::get('tim', [LandingController::class, 'indexTim'])->name('tim');
+
 Route::group(['prefix' => 'akun'], function () {
     Route::delete('{id}', [UserController::class, 'destroy']);
     Route::put('/gambar/{id}', [UserController::class, 'gantiGambar']);
