@@ -15,12 +15,12 @@
 @endif
 
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-20  ">
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-10  ">
   
         <div class=" h-full w-full   ">
             <h1 class=" font-semibold mb-3 text-2xl text-black" >Ringkasan</h1>
-            <div class="h-full overflow-y-auto flex  gap-2 flex-wrap w-full items-stretch justify-between">
-                    <div class="row-left flex-grow flex gap-2 flex-col justify-around">
+            <div class="h-full overflow-y-auto flex  gap-2 flex-wrap lg:flex-nowrap w-full items-stretch justify-between">
+                    <div class="row-left flex-grow w-full md:w-1/2 flex gap-2 flex-col justify-around">
                         <div class="card bg-white rounded-xl px-3 py-3">
                                 <div class="flex space-x-3 items-center">
                                     <div class="icon bg-dodger-blue-100 px-3 py-5 rounded-xl">
@@ -29,7 +29,7 @@
                                     <h1 class="text-neutral-06" >Jumlah Penduduk</h1>
                                 </div>
     
-                                <div class="flex w-full mt-10 space-x-44 items-center ">
+                                <div class="flex w-full mt-10 justify-between  items-center ">
                                     <h1 class="text-3xl font-semibold" >{{$semua['penduduk']}}</h1>
                                     <a href="">show</a>
                                 </div>
@@ -45,7 +45,7 @@
                                 <h1 class="text-neutral-06" >Jumlah UMKM</h1>
                             </div>
     
-                            <div class="flex w-full mt-10 space-x-44 items-center ">
+                            <div class="flex w-full mt-10 justify-between  items-center">
                                 <h1 class="text-3xl font-semibold" >{{$semua['umkm']}}</h1>
                                 <a href="">show</a>
                             </div>
@@ -53,7 +53,7 @@
     
                     </div>
                     </div>
-                    <div class="row-left flex-grow flex gap-2 flex-col justify-around">
+                    <div class="row-left flex-grow w-full md:w-1/2 flex gap-2 flex-col justify-around">
                       <div class="card bg-white rounded-xl px-3 py-3">
                         <div class="flex space-x-3 items-center">
                             <div class="icon bg-dodger-blue-100 px-3 py-5 rounded-xl">
@@ -62,7 +62,7 @@
                             <h1 class="text-neutral-06" >Jumlah Pengaduan</h1>
                         </div>
 
-                        <div class="flex w-full mt-10 space-x-44 items-center ">
+                        <div class="flex w-full mt-10 justify-between  items-center">
                             <h1 class="text-3xl font-semibold" >{{$semua['laporan']}}</h1>
                             <a href="">show</a>
                         </div>
@@ -78,7 +78,7 @@
                         <h1 class="text-neutral-06" >Jumlah Permohonan</h1>
                     </div>
 
-                    <div class="flex w-full mt-10 space-x-44 items-center ">
+                    <div class="flex w-full mt-10 justify-between  items-center">
                         <h1 class="text-3xl font-semibold" >{{$semua['pengajuan']}}</h1>
                         <a href="">show</a>
                     </div>
@@ -90,7 +90,7 @@
         </div>
      
         
-        <div class="justify-self-center  h-[400px] md:min-h-full col-span-1 carousel w-full  xl:w-full">
+        <div class="justify-self-center py-5 h-[400px] md:min-h-full col-span-1 carousel w-full  xl:w-full">
           <h1 class=" font-semibold mb-5  text-2xl text-black" >Pengumuman</h1>
           <div id="default-carousel" class="relative h-full w-full " data-carousel="slide">
               <!-- Carousel wrapper -->
@@ -102,8 +102,8 @@
                <div class="absolute font-main  w-full z-50 h-full">
                  <div class=" mx-auto flex flex-col justify-end   max-w-7xl px-2 sm:px-6 lg:px-8 py-14 w-full h-full">
                      <h2 class="text-white text-md " >Sistem Informasi RW 06 - Kalirejo </h2>
-                     <h1 class=" text-md hidden md:flex font-bold text-white w-3/4" >{{$item->deskripsi_informasi}} </h1>
-                     <h1 class=" text-md block md:hidden font-bold text-white w-3/4" >{{$item->judul}} </h1>
+               
+                     <h1 class=" text-md block font-bold text-white w-3/4" >{{$item->judul}} </h1>
                      
                     
              </div>
@@ -146,7 +146,7 @@
 
 
 {{-- Jumlah Penduduk --}}
-<div class="h-full ">
+<div class=" ">
   <h1 class=" font-semibold mb-5 text-black  text-2xl" >Jumlah Penduduk</h1>
   <div class=" w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
     <div class="mb-3 w-full flex gap-5 justify-end">
@@ -232,6 +232,7 @@ data1.push(0);
 var penduduk = "{{ $penduduk_laki }}"
 var penduduk1 = "{{ $penduduk_perempuan }}"
 var tgl = "{{ json_encode($tgl) }}"
+// console.log(penduduk)
 tgl=tgl.replace(/&quot;/g,'"');
 penduduk=penduduk.replace(/&quot;/g,'"');
 penduduk1=penduduk1.replace(/&quot;/g,'"');
@@ -333,7 +334,11 @@ $('.tab').click(function(index){
                         $.ajax({
                           url:"{{url('data/chart')}}"+'/'+index.currentTarget.getAttribute('data'),
                           datatype:'json',
+                          beforeSend: function() {
+              $("#loading-image").show();
+           },
                           success:function(data){
+                            $("#loading-image").hide();
                             document.getElementById("labels-chart").innerHTML='pengeluaran'
                              options.xaxis.categories = data.tgl
                              data.data.push(0); 
