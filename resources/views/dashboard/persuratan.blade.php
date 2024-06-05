@@ -37,7 +37,7 @@
                 <!-- Modal header -->
                 <div class="flex items-center  justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        Create New Product
+                        Tambah Persuratan
                     </h3>
                     <button type="button" class="absolute -top-5 -right-4 bg-blue-main   text-white border-2 border-white hover:bg-gray-200 hover:text-gray-900 rounded-full text-sm w-8 h-8 ms-auto inline-flex justify-center items-center " data-modal-toggle="crud-modal">
                       <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -74,7 +74,7 @@
     </div> 
     
 
-    <h2 class="text-xl text-left  ml-3 my-3"  > {{count($data)}} Laporan</h2>   
+    <h2 class="text-xl text-left  ml-3 my-3"  > {{ $dataAll['jumlah'] }} Persuratan</h2>   
     <div class="flex w-full justify-between gap-3 flex-wrap md:flex-nowrap items-center">
         <div class="relative w-full lg:w-1/2  h-full">
             <div class="absolute  inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -172,7 +172,7 @@
                                                     <input readonly type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" value="{{$persuratan->nomor_surat}}" required="">
                                                 </div>
                                                 <div class="col-span-2">
-                                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Pengaduan</label>
+                                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Pembuatan</label>
                                                     <input readonly type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" value="{{$persuratan->tanggal_persuratan}}" required="">
                                                 </div>
                                                 <div class="col-span-2">

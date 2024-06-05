@@ -74,12 +74,8 @@
                                 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">-Semua-</a>
                         </li>
                         <li>
-                            <a href="{{ route('nikah.penduduk.index', ['status' => 'Selesai']) }}"
+                            <a href="{{ route('nikah.penduduk.index', ['status' => 'diterima']) }}"
                                 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Selesai</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('nikah.penduduk.index', ['status' => 'Proses']) }}"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Proses</a>
                         </li>
                         <li>
                             <a href="{{ route('nikah.penduduk.index', ['status' => 'Menunggu']) }}"
@@ -131,7 +127,7 @@
                             <td class="px-6 py-4">
                                 {{ $item->created_at }}
                             </td>
-                            @if ($item->status_pengajuan === 'Sukses')
+                            @if ($item->status_pengajuan === 'diterima')
                                 <td class="px-6 py-4">
                                     <div
                                         class="bg-green-100 text-green-600 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-2 w-fit">
@@ -139,11 +135,11 @@
                                         <p>Selesai</p>
                                     </div>
                                 </td>
-                            @elseif ($item->status_pengajuan === 'Proses')
+                            @elseif ($item->status_pengajuan === 'ditolak')
                                 <td class="px-6 py-4">
                                     <div
-                                        class="bg-blue-info-100 text-blue-main font-bold py-2 px-4 text-xs rounded-full flex items-center gap-2 w-fit">
-                                        <div class="bg-blue-main rounded-full w-2 h-2"></div>
+                                        class="bg-blue-info-100 text-red-500 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-2 w-fit">
+                                        <div class="bg-red-500 rounded-full w-2 h-2"></div>
                                         <p>Proses</p>
                                     </div>
                                 </td>

@@ -48,6 +48,12 @@ class StatusNikahController extends Controller
         $status = $request->query('status');
         $query = StatusNikahModel::query();
 
+        if ($request->has('search')) {
+            $nikah = $query->whereHas('penduduk', function ($query) use ($request) {
+                $query->where('nama_penduduk', 'like', '%' . $request->search . '%');
+            });
+        }
+
         if ($status) {
             $query->where('status_pengajuan', $status);
         }
@@ -119,7 +125,7 @@ class StatusNikahController extends Controller
     {
         $laporan = StatusNikahModel::findOrFail($id)->delete();
     }
-    public function indexFind(Request $request) 
+    public function indexFind(Request $request)
     {
         $metadata = (object) [
             'title' => 'Status Nikah',

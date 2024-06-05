@@ -9,7 +9,7 @@
 
     <div class="container mx-auto mt-2">
         @if ($message = Session::get('error'))
-            <div id="alert" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mx-auto w-1/2" role="alert">
+            <div id="alert" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mx-auto w-2/3" role="alert">
                 <strong class="font-bold">Ops!</strong>
                 <span class="block sm:inline">{{ $message }}</span>
                 <!-- Tombol Close -->
@@ -17,7 +17,7 @@
             </div>
         @endif
         @if ($message = Session::get('success'))
-            <div id="alert" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mx-auto w-1/2" role="alert">
+            <div id="alert" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mx-auto w-2/3" role="alert">
                 <strong class="font-bold">Berhasil!</strong>
                 <span class="block sm:inline">{{ $message }}</span>
                 <!-- Tombol Close -->
@@ -58,10 +58,7 @@
                             <a href="{{ route('hidup.penduduk.index', ['status' => '']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">-Semua-</a>
                         </li>
                         <li>
-                            <a href="{{ route('hidup.penduduk.index', ['status' => 'Selesai']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Selesai</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('hidup.penduduk.index', ['status' => 'Proses']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Proses</a>
+                            <a href="{{ route('hidup.penduduk.index', ['status' => 'diterima']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Selesai</a>
                         </li>
                         <li>
                             <a href="{{ route('hidup.penduduk.index', ['status' => 'Menunggu']) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Menunggu</a>
@@ -100,17 +97,17 @@
                         <td class="px-6 py-4">
                             {{ $item->created_at }}
                         </td>
-                        @if ($item->status_pengajuan === 'Sukses')
+                        @if ($item->status_pengajuan === 'diterima')
                             <td class="px-6 py-4">
                                 <div class="bg-green-100 text-green-600 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-2 w-fit">
                                     <div class="bg-green-600 rounded-full w-2 h-2"></div>
                                     <p>Selesai</p>
                                 </div>
                             </td>
-                        @elseif ($item->status_pengajuan === 'Proses')
+                        @elseif ($item->status_pengajuan === 'ditolak')
                             <td class="px-6 py-4">
-                                <div class="bg-blue-info-100 text-blue-main font-bold py-2 px-4 text-xs rounded-full flex items-center gap-2 w-fit">
-                                    <div class="bg-blue-main rounded-full w-2 h-2"></div>
+                                <div class="bg-blue-info-100 text-red-500 font-bold py-2 px-4 text-xs rounded-full flex items-center gap-2 w-fit">
+                                    <div class="bg-red-500 rounded-full w-2 h-2"></div>
                                     <p>Proses</p>
                                 </div>
                             </td>

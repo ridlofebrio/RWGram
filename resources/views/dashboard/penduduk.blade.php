@@ -3,7 +3,7 @@
 @section('content')
 
 
-<h1>Data Penduduk</h1>
+<h1 class="text-xl font-bold text-black my-2">Data Penduduk</h1>
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white  text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
        
        
@@ -668,7 +668,7 @@
 
 
 {{-- kartu Keluarga --}}
-<h1 class="my-3">Data Kartu Keluarga</h1>
+<h1 class="text-xl font-bold text-black my-2">Data Kartu Keluarga</h1>
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white  text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
        
        
