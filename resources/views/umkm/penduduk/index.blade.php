@@ -31,7 +31,7 @@
     <div class="bg-white mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <div class="flex flex-wrap justify-end md:justify-between mb-12 gap-3">
             <div class="drop-shadow-md w-full md:w-1/2">
-                <form action="{{ route('umkm.penduduk.index') }}" method="GET" class="max-w-md ">
+                <form action="{{ route('umkm.penduduk.index') }}" method="GET" class="w-full">
                     @include('component.search')
                 </form>
             </div>
