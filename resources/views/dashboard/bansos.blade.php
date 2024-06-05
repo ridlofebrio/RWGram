@@ -1,7 +1,7 @@
 @extends('dashboard.template')
 
 @section('content')
-<h1>Data Penerimaan Bantuan Sosial</h1>
+<h1 class="text-xl font-bold text-black my-2">Data Penerimaan Bantuan Sosial</h1>
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
     <div class="flex flex-wrap md:flex-nowrap gap-1 mt-3 w-full justify-between items-center">
         <h2 class="text-xl text-left ml-3 w-full max-w-[150px]">{{ $allData->jumlah}} Permohonan</h2>
@@ -231,7 +231,7 @@
 </div>
 
 {{-- Data Kriteria --}}
-<h1 class="mt-3">Data Kriteria</h1>
+<h1 class="text-xl font-bold text-black my-2">Data Kriteria</h1>
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
    
     <div class="relative mt-5 overflow-x-auto shadow-md sm:rounded-lg">

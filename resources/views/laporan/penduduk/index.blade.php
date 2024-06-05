@@ -14,7 +14,7 @@
 
     <div class="container mx-auto mt-2">
         @if ($message = Session::get('error'))
-            <div id="alert" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mx-auto w-1/2"
+            <div id="alert" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mx-auto w-2/3"
                 role="alert">
                 <strong class="font-bold">Ops!</strong>
                 <span class="block sm:inline">{{ $message }}</span>
@@ -24,7 +24,7 @@
         @endif
         @if ($message = Session::get('success'))
             <div id="alert"
-                class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mx-auto w-1/2"
+                class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mx-auto w-2/3"
                 role="alert">
                 <strong class="font-bold">Berhasil!</strong>
                 <span class="block sm:inline">{{ $message }}</span>

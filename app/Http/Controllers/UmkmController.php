@@ -67,17 +67,14 @@ class UmkmController extends Controller
 
     public function indexPenduduk(Request $request)
     {
-        // Mendapatkan semua data UMKM
-        $umkm = UmkmModel::with('penduduk')->where('status_pengajuan', 'diterima')->get();
+        $query = UmkmModel::with('penduduk')->where('status_pengajuan', 'diterima');
 
-        // Filter berdasarkan pencarian nama UMKM jika ada
-        // if ($request->has('search')) {
-        //     $umkm->where('nama_umkm', 'like', '%' . $request->input('search') . '%');
-        // }
 
-        // // Ambil data UMKM setelah diterapkan filter
-        // $umkm = $umkm->get();
+        if ($request->has('search')) {
+            $query->where('nama_umkm', 'like', '%' . $request->input('search') . '%');
+        }
 
+        $umkm = $query->get();
 
         $metadata = (object) [
             'title' => 'UMKM',

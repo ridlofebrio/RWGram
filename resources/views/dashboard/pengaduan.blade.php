@@ -19,7 +19,7 @@
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white  text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
         
     <div class="flex flex-wrap gap-3 w-full justify-between items-center">
-        <h2 class="text-xl " > {{count($data)}} Laporan</h2>
+        <h2 class="text-xl " > {{ $dataAll }} Laporan</h2>
         <div class="filter flex space-x-2">
             <div x-cloak x-data="{open:false}" class="relative " >
                 <button @click="open= !open" class=" px-3 hover:bg-blue-main hover:border-blue-main hover:text-white items-center py-2 w-fit  md:min-w-fit md:w-full h-full  border border-gray-300 rounded-full" ><div class="flex min-w-fit md:min-w-[100px] justify-around items-center"><i class=" fa-solid fa-sliders"></i> <p class="hidden md:block" id="sort">-semua-</p> <i class="hidden md:block fa fa-chevron-down"></i></div></button>

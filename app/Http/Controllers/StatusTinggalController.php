@@ -20,6 +20,12 @@ class StatusTinggalController extends Controller
         $status = $request->query('status');
         $query = StatusTinggalModel::query();
 
+        if ($request->has('search')) {
+            $tinggal = $query->whereHas('penduduk', function ($query) use ($request) {
+                $query->where('nama_penduduk', 'like', '%' . $request->search . '%');
+            });
+        }
+
         if ($status) {
             $query->where('status_pengajuan', $status);
         }
@@ -68,7 +74,6 @@ class StatusTinggalController extends Controller
             $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->first();
             if ($id) {
                 $data = StatusTinggalModel::whereAny(['penduduk_id'], $id->penduduk_id)->paginate(3);
-
             } else {
                 $data = StatusTinggalModel::whereAny(['penduduk_id'], 0)->paginate(3);
             }
@@ -134,7 +139,6 @@ class StatusTinggalController extends Controller
             $model = StatusTinggalModel::findOrFail($id);
             $model->status_pengajuan = $request->status_pengajuan;
             $model->save();
-
         } catch (\Exception $e) {
             dd($e);
         }
@@ -174,5 +178,4 @@ class StatusTinggalController extends Controller
 
         return view('statusTinggal.index', ['tinggal' => $data])->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
     }
-
 }
