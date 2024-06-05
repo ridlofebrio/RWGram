@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\LaporanModel;
 use App\Models\PendudukModel;
-use Exception;
 use Illuminate\Http\Request;
+use Exception;
 
 class LaporanController extends Controller
 {

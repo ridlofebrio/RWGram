@@ -62,7 +62,6 @@ Route::group(['prefix' => 'nikah-penduduk'], function () {
     Route::get('/create', [StatusNikahController::class, 'create'])->name('nikah.penduduk.create');
     Route::get('/request', [StatusNikahController::class, 'request'])->name('nikah.penduduk.request');
     Route::post('/store', [StatusNikahController::class, 'store'])->name('nikah.penduduk.store');
-    Route::get('/find', [StatusNikahController::class, 'indexFind'])->name('nikah.penduduk.find');
 });
 
 Route::group(['prefix' => 'hidup-penduduk'], function () {
@@ -70,7 +69,6 @@ Route::group(['prefix' => 'hidup-penduduk'], function () {
     Route::get('/create', [StatusHidupController::class, 'create'])->name('hidup.penduduk.create');
     Route::get('/request', [StatusHidupController::class, 'request'])->name('hidup.penduduk.request');
     Route::post('/store', [StatusHidupController::class, 'store'])->name('hidup.penduduk.store');
-    Route::get('/find', [StatusHidupController::class, 'indexFind'])->name('hidup.penduduk.find');
 });
 
 Route::group(['prefix' => 'tinggal-penduduk'], function () {
@@ -78,7 +76,6 @@ Route::group(['prefix' => 'tinggal-penduduk'], function () {
     Route::get('/create', [StatusTinggalController::class, 'create'])->name('tinggal.penduduk.create');
     Route::post('/store', [StatusTinggalController::class, 'store'])->name('tinggal.penduduk.store');
     Route::get('/request', [StatusTinggalController::class, 'request'])->name('tinggal.penduduk.request');
-    Route::get('/find', [StatusTinggalController::class, 'indexFind'])->name('tinggal.penduduk.find');
 });
 
 Route::group(['prefix' => 'cloudinary'], function () {
