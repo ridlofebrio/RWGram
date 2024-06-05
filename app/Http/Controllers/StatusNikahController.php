@@ -119,7 +119,7 @@ class StatusNikahController extends Controller
     {
         $laporan = StatusNikahModel::findOrFail($id)->delete();
     }
-    public function indexFind(Request $request)
+    public function indexFind(Request $request) 
     {
         $metadata = (object) [
             'title' => 'Status Nikah',

@@ -87,7 +87,8 @@ Route::group(['prefix' => 'cloudinary'], function () {
 });
 
 Route::group(['prefix' => 'pengaduan'], function () {
-    Route::get('/', [LaporanController::class, 'indexPenduduk'])->name('laporan.penduduk.index');
+    Route::get('/', [LaporanController::class, 'indexPenduduk'])->name('laporan.penduduk.index'); 
+    Route::get('/filter', [LaporanController::class, 'request'])->name('laporan.penduduk.filter');
     Route::get('/create', [LaporanController::class, 'create'])->name('laporan.penduduk.create');
     Route::post('/create', [LaporanController::class, 'store'])->name('laporan.store');
 });
