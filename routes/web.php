@@ -172,6 +172,7 @@ Route::group(['prefix' => 'persuratan'], function () {
 
 Route::group(['prefix' => 'penduduk'], function () {
     Route::post('/', [PendudukController::class, 'store']);
+    Route::get('/pdf', [PendudukController::class, 'viewPDF']);
     Route::post('/kepalaKeluarga', [PendudukController::class, 'storeKepala']);
     Route::put('/{id}', [PendudukController::class, 'update']);
     Route::delete('{id}', [PendudukController::class, 'destroy']);
@@ -190,7 +191,7 @@ Route::group(['prefix' => 'informasi'], function () {
 
 Route::group(['prefix' => 'kas'], function () {
     Route::post('/', [KasController::class, 'store']);
-
+    Route::get('/pdf', [KasController::class, 'viewPDF']);
     Route::get('/{kk}', [KasController::class, 'detailKas']);
     Route::delete('pengeluaran/{kk}', [KasController::class, 'destroyPengeluaran']);
     Route::post('pengeluaran', [KasController::class, 'storePengeluaran']);

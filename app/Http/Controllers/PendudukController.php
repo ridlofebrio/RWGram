@@ -8,7 +8,7 @@ use App\Models\KepalaKeluargaModel;
 use App\Models\PendudukModel;
 use App\Models\RtModel;
 use Carbon\Carbon;
-
+use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -64,6 +64,15 @@ class PendudukController extends Controller
 
 
         return view('dashboard.penduduk', ['data' => $penduduk, 'active' => 'penduduk'], compact('kartuKeluarga'));
+    }
+
+    public function viewPDF()
+    {
+
+        $pdf = PDF::loadView('dashboard.pdf.penduduk', array('data' => PendudukModel::all()))
+            ->setPaper('a4', 'portrait');
+
+        return $pdf->stream();
     }
 
     public function rt($id)

@@ -41,14 +41,10 @@ class UmkmController extends Controller
 
 
         $umkm = UmkmModel::with('penduduk')->paginate(3);
-        $result = (array) (new AdminApi())->assetByAssetId("3c16fa34033ee2110ddceab721812f07");
-
-
-        $adminApi = new AdminApi();
 
 
 
-        return view('component.umkm', compact('umkm', 'adminApi'));
+        return view('component.umkm', compact('umkm'));
     }
 
     public function find($value)

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PendudukModel;
 use App\Models\StatusTinggalModel;
 use Illuminate\Http\Request;
+use Validator;
 
 
 class StatusTinggalController extends Controller
@@ -112,13 +113,22 @@ class StatusTinggalController extends Controller
     }
     public function update(Request $request, string $id)
     {
+        // dd($request);
 
 
-        $request->validate([
+        $validasi = Validator::make($request->all(), [
+
             'status_pengajuan' => 'required',
             'status_tinggal' => 'required',
-            'id_penduduk' => 'required'
+            'status_pindah' => 'required',
+            'id_penduduk' => 'required',
+
         ]);
+
+        if ($validasi->fails()) {
+            dd($validasi);
+        }
+
 
         try {
             $model = StatusTinggalModel::findOrFail($id);
@@ -132,6 +142,7 @@ class StatusTinggalController extends Controller
         try {
             $penduduk = PendudukModel::findOrFail($request->id_penduduk);
             $penduduk->status_tinggal = $request->status_tinggal;
+            $penduduk->alamat = $request->status_pindah;
             $penduduk->save();
         } catch (\Exception $e) {
             dd($e);

@@ -21,9 +21,9 @@
             <h1 class=" font-semibold mb-3 text-2xl text-black" >Ringkasan</h1>
             <div class="h-full overflow-y-auto flex  gap-2 flex-wrap lg:flex-nowrap w-full items-stretch justify-between">
                     <div class="row-left flex-grow w-full md:w-1/2 flex gap-2 flex-col justify-around">
-                        <div class="card bg-white rounded-xl px-3 py-3">
+                        <div class="card bg-white rounded-xl px-3 py-10">
                                 <div class="flex space-x-3 items-center">
-                                    <div class="icon bg-dodger-blue-100 px-3 py-5 rounded-xl">
+                                    <div class="icon bg-dodger-blue-100 px-3 py-3 rounded-xl">
                                         <img class="w-6" src="{{asset('asset/icon/bulk/people.svg')}}" alt="">
                                     </div>
                                     <h1 class="text-neutral-06" >Jumlah Penduduk</h1>
@@ -31,14 +31,14 @@
     
                                 <div class="flex w-full mt-10 justify-between  items-center ">
                                     <h1 class="text-3xl font-semibold" >{{$semua['penduduk']}}</h1>
-                                    <a href="">show</a>
+                                    <a href="{{url('dashboard/penduduk')}}">show</a>
                                 </div>
                                 
     
                         </div>
-                        <div class="card bg-white  rounded-xl px-3 py-3">
+                        <div class="card bg-white  rounded-xl px-3 py-10">
                             <div class="flex space-x-3 items-center">
-                                <div class="icon bg-dodger-blue-100 px-3 py-5 rounded-xl">
+                                <div class="icon bg-dodger-blue-100 px-3 py-3 rounded-xl">
                                     <img class="w-6" src="{{asset('asset/icon/bulk/shop.svg')}}" alt="">
     
                                 </div>
@@ -47,32 +47,39 @@
     
                             <div class="flex w-full mt-10 justify-between  items-center">
                                 <h1 class="text-3xl font-semibold" >{{$semua['umkm']}}</h1>
-                                <a href="">show</a>
+                                <a href="{{url('umkm-penduduk/index')}}">show</a>
                             </div>
                             
     
                     </div>
                     </div>
                     <div class="row-left flex-grow w-full md:w-1/2 flex gap-2 flex-col justify-around">
-                      <div class="card bg-white rounded-xl px-3 py-3">
+                      <div class="card bg-white rounded-xl px-3 py-10">
                         <div class="flex space-x-3 items-center">
-                            <div class="icon bg-dodger-blue-100 px-3 py-5 rounded-xl">
-                                <img class="w-6" src="{{asset('asset/icon/bulk/people.svg')}}" alt="">
+                            <div class="icon bg-dodger-blue-100 px-3 py-3 rounded-xl">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path fill="#0096FF" d="M22 6.25v5.1c0 1.27-.42 2.34-1.17 3.08-.74.75-1.81 1.17-3.08 1.17v1.81c0 .68-.76 1.09-1.32.71l-.97-.64c.09-.31.13-.65.13-1.01V12.4c0-2.04-1.36-3.4-3.4-3.4H5.4c-.14 0-.27.01-.4.02V6.25C5 3.7 6.7 2 9.25 2h8.5C20.3 2 22 3.7 22 6.25Z" opacity=".4"/>
+                                <path fill="#1B1B1B" d="M15.59 12.4v4.07c0 .36-.04.7-.13 1.01-.37 1.47-1.59 2.39-3.27 2.39H9.47l-3.02 2.01a.671.671 0 0 1-1.05-.56v-1.45c-1.02 0-1.87-.34-2.46-.93-.6-.6-.94-1.45-.94-2.47V12.4c0-1.9 1.18-3.21 3-3.38.13-.01.26-.02.4-.02h6.79c2.04 0 3.4 1.36 3.4 3.4Z"/>
+                              </svg>
                             </div>
                             <h1 class="text-neutral-06" >Jumlah Pengaduan</h1>
                         </div>
 
                         <div class="flex w-full mt-10 justify-between  items-center">
                             <h1 class="text-3xl font-semibold" >{{$semua['laporan']}}</h1>
-                            <a href="">show</a>
+                            <a href="{{url('dashboard/pengaduan')}}">show</a>
                         </div>
                         
 
                 </div>
-                <div class="card bg-white  rounded-xl px-3 py-3">
+                <div class="card bg-white  rounded-xl px-3 py-10">
                     <div class="flex space-x-3 items-center">
-                        <div class="icon bg-dodger-blue-100 px-3 py-5 rounded-xl">
-                            <img class="w-6" src="{{asset('asset/icon/bulk/shop.svg')}}" alt="">
+                        <div class="icon bg-dodger-blue-100 px-3 py-3 rounded-xl">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path fill="#1B1B1B" d="M18.69 11.53c-.57-.15-1.24-.23-2.04-.23-1.11 0-1.52.27-2.09.7-.03.02-.06.05-.09.08l-.95 1.01c-.79.85-2.24.85-3.04 0l-.95-1a.382.382 0 0 0-.09-.09c-.58-.43-.99-.7-2.09-.7-.8 0-1.47.07-2.04.23-2.38.64-2.38 2.53-2.38 4.19v.93c0 2.51 0 5.35 5.35 5.35h7.44c3.55 0 5.35-1.8 5.35-5.35v-.93c0-1.66 0-3.55-2.38-4.19Z"/>
+                            <path fill="#0096FF" d="M14.79 2H9.21C4.79 2 4.79 4.35 4.79 6.42v5.79c0 .22.1.42.27.55.17.13.4.18.61.12.45-.12 1.01-.18 1.68-.18.67 0 .81.08 1.21.38l.91.96a3.48 3.48 0 0 0 5.08 0l.91-.96c.4-.3.54-.38 1.21-.38.67 0 1.23.06 1.68.18.21.06.43.01.61-.12.17-.13.27-.34.27-.55V6.42C19.21 4.35 19.21 2 14.79 2Z" opacity=".4"/>
+                            <path fill="#1B1B1B" d="M13.55 9.91h-3.1c-.39 0-.7-.31-.7-.7 0-.39.31-.7.7-.7h3.1c.39 0 .7.31.7.7 0 .38-.32.7-.7.7Zm.78-2.79H9.67c-.39 0-.7-.31-.7-.7 0-.39.31-.7.7-.7h4.65a.7.7 0 0 1 .01 1.4Z"/>
+                          </svg>
 
                         </div>
                         <h1 class="text-neutral-06" >Jumlah Permohonan</h1>
@@ -80,7 +87,7 @@
 
                     <div class="flex w-full mt-10 justify-between  items-center">
                         <h1 class="text-3xl font-semibold" >{{$semua['pengajuan']}}</h1>
-                        <a href="">show</a>
+                        <a href="{{url('dashboard/pengajuan')}}">show</a>
                     </div>
                     
 
@@ -90,7 +97,7 @@
         </div>
      
         
-        <div class="justify-self-center py-5 h-[400px] md:min-h-full col-span-1 carousel w-full  xl:w-full">
+        <div class="justify-self-center pb-5 h-[400px] md:min-h-full col-span-1 carousel w-full  xl:w-full">
           <h1 class=" font-semibold mb-5  text-2xl text-black" >Pengumuman</h1>
           <div id="default-carousel" class="relative h-full w-full " data-carousel="slide">
               <!-- Carousel wrapper -->
@@ -339,7 +346,7 @@ $('.tab').click(function(index){
            },
                           success:function(data){
                             $("#loading-image").hide();
-                            document.getElementById("labels-chart").innerHTML='pengeluaran'
+                            document.getElementById("labels-chart").innerHTML=''
                              options.xaxis.categories = data.tgl
                              data.data.push(0); 
                              console.log(data);
@@ -357,7 +364,7 @@ $('.tab').click(function(index){
                         options.xaxis.categories = JSON.parse(tgl)
                              
                             options.series[0].data= data1;
-                            document.getElementById("labels-chart").innerHTML='Pemasukan'
+                            document.getElementById("labels-chart").innerHTML=''
                             if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined' ) {
                           console.log('langsung');
                           const chart = new ApexCharts(document.getElementById("labels-chart"), options);
@@ -376,7 +383,7 @@ $('.tab').click(function(index){
             
                 if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined' ) {
                           console.log('langsung');
-                          document.getElementById("labels-chart").innerHTML='pemasukan'
+                          document.getElementById("labels-chart").innerHTML=''
                           const chart = new ApexCharts(document.getElementById("labels-chart"), options);
                           chart.render();
                           }

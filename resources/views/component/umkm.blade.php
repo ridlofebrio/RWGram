@@ -74,7 +74,7 @@
 
                     </div>
                     <div x-data="{ open: false }">
-                        <button @click="open = true" onclick="loadGambar('{{$item->umkm_id}}')"  class="hover:border-none  before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  " type="button">
+                        <button @click="open = true"   class="hover:border-none  before:absolute text-blue-main bg-dodger-blue-50 hover:bg-dodger-blue-100  px-8 py-2 text-base font-medium rounded-full  " type="button">
                             Detail
                           </button>
                           
@@ -123,7 +123,7 @@
                                             {{-- @php($result = (array) (new $adminApi)->assetByAssetId("3c16fa34033ee2110ddceab721812f07")) --}}
                                             
                                               <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gambar</label>
-                                              <img src="{{$item->foto_umkm}}" loading="lazy" alt="Foto Bukti">
+                                              <img src="{{$item->foto_umkm == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1717600371/ovayldsch5461a8ffv3m.jpg':$item->foto_umkm}}" loading="lazy" alt="Foto Bukti">
                                           </div>
                                           <div class="col-span-2">
                                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Link Media Sosial</label>
