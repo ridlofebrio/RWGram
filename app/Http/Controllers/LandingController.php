@@ -29,4 +29,13 @@ class LandingController extends Controller
         return view('welcome', ['activeMenu' => 'beranda', 'metadata' => $metadata], compact('informasi', 'penduduk'));
 
     }
+
+    public function indexTim(){
+        $metadata = (object) [
+            'title' => 'Tim',
+            'description' => 'Tim Pengembang'
+        ];
+
+    return view('tim',['activeMenu' => 'tim', 'metadata' => $metadata]);
+    }
 }
