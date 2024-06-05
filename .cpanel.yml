@@ -1,4 +1,4 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=public
+    - export DEPLOYPATH=/home/rwgrammy/repositories/RWGram/public
