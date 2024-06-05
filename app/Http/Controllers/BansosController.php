@@ -6,6 +6,8 @@ use App\Models\BansosModel;
 use App\Models\KartuKeluargaModel;
 use App\Models\Kriteria;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\PDF;
 
 class BansosController extends Controller
 {
@@ -181,6 +183,9 @@ class BansosController extends Controller
         $maxValues = [];
         $minValues = [];
 
+        // Inisialisasi array untuk menyimpan langkah-langkah
+        $steps = [];
+
         // Cari nilai maksimum dan minimum dari setiap kolom c1 hingga c6
         foreach ($kriteria as $k) {
             $key = 'c' . $k->kriteria_id; // Asumsi id kriteria sesuai dengan urutan kolom c1, c2, ..., c6
@@ -188,9 +193,17 @@ class BansosController extends Controller
             $minValues[$key] = $bansos->min($key);
         }
 
+        $steps[] = ['maxValues' => $maxValues, 'minValues' => $minValues];
+
         // Normalisasi setiap item dan hitung SAW
+        $normalizedMatrix = [];
+        $weightedMatrix = [];
+        $sawScores = [];
+
         foreach ($bansos as $item) {
             $saw = 0; // Inisialisasi nilai SAW
+            $normalizedValues = [];
+            $weightedValues = [];
 
             foreach ($kriteria as $k) {
                 $key = 'c' . $k->kriteria_id;
@@ -208,12 +221,28 @@ class BansosController extends Controller
 
                 // Tambahkan ke nilai SAW
                 $saw += $weightedValue;
+
+                // Simpan nilai ternormalisasi dan ternormalisasi berbobot
+                $normalizedValues[$key] = $normalizedValue;
+                $weightedValues[$key] = $weightedValue;
             }
 
             // Simpan nilai SAW
             $item->saw = $saw;
             $item->save();
+
+            $normalizedMatrix[$item->bansos_id] = $normalizedValues;
+            $weightedMatrix[$item->bansos_id] = $weightedValues;
+            $sawScores[$item->bansos_id] = $saw;
         }
+
+        $steps[] = [
+            'normalizedMatrix' => $normalizedMatrix,
+            'weightedMatrix' => $weightedMatrix,
+            'sawScores' => $sawScores
+        ];
+
+        return $steps;
     }
 
     public function topsisMethod()
@@ -224,6 +253,7 @@ class BansosController extends Controller
 
         // Inisialisasi array untuk menyimpan nilai maksimum dan minimum dari setiap kriteria
         $sumSquares = [];
+        $steps = [];
 
         // Menghitung jumlah kuadrat dari setiap kolom c1 hingga c6
         foreach ($kriteria as $k) {
@@ -232,6 +262,8 @@ class BansosController extends Controller
                 return pow($item->$key, 2);
             }));
         }
+
+        $steps[] = ['sumSquares' => $sumSquares];
 
         // Normalisasi setiap item dan hitung normalisasi terbobot
         $normalizedMatrix = [];
@@ -248,6 +280,8 @@ class BansosController extends Controller
             $normalizedMatrix[] = $normalizedItem;
         }
 
+        $steps[] = ['normalizedMatrix' => $normalizedMatrix];
+
         // Hitung Solusi Ideal Positif dan Negatif
         $idealPositive = [];
         $idealNegative = [];
@@ -262,6 +296,8 @@ class BansosController extends Controller
                 $idealNegative[$key] = min(array_column($normalizedMatrix, $key));
             }
         }
+
+        $steps[] = ['idealPositive' => $idealPositive, 'idealNegative' => $idealNegative];
 
         // Menghitung jarak terhadap solusi ideal positif dan negatif
         $distances = [];
@@ -279,6 +315,8 @@ class BansosController extends Controller
             ];
         }
 
+        $steps[] = ['distances' => $distances];
+
         // Menghitung nilai preferensi untuk setiap alternatif
         $preferences = [];
         foreach ($distances as $index => $distance) {
@@ -290,6 +328,10 @@ class BansosController extends Controller
             $item->preference = $preferences[$index];
             $item->save();
         }
+
+        $steps[] = ['preferences' => $preferences];
+
+        return $steps;
     }
 
     public function show(string $id)
