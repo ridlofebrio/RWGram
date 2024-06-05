@@ -2,7 +2,7 @@
 @push('css')
 <style>
     #myId{
-        background: ;
+        
         border-radius: 13px;
         max-width: 100%;
         margin-left: auto;
@@ -171,16 +171,17 @@ animation: l11 1s infinite;
 
         <div>
             <label for="deskripsi_umkm" class="block text-sm font-medium leading-6 text-gray-900">Foto UMKM</label>
-            <div id="myId" class="h-52">
+            <div id="myId" class="h-52  relative">
                 <input type="hidden" name="foto_umkm" id="public_id" >
                 <input type="hidden" name="asset_id" id="asset_id" >
                 
-            <div id="text-main" class="flex flex-col  items-center w-full">
+            <div id="text-main" class="flex  flex-col absolute items-center w-fit">
                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="24" fill="none" viewBox="0 0 36 24">
                     <path fill="#0096FF" d="M29.025 9.06C28.005 3.885 23.46 0 18 0c-4.335 0-8.1 2.46-9.975 6.06A8.991 8.991 0 0 0 0 15c0 4.965 4.035 9 9 9h19.5c4.14 0 7.5-3.36 7.5-7.5 0-3.96-3.075-7.17-6.975-7.44ZM28.5 21H9c-3.315 0-6-2.685-6-6 0-3.075 2.295-5.64 5.34-5.955l1.605-.165.75-1.425C12.12 4.71 14.91 3 18 3c3.93 0 7.32 2.79 8.085 6.645l.45 2.25 2.295.165A4.47 4.47 0 0 1 33 16.5c0 2.475-2.025 4.5-4.5 4.5ZM12 13.5h3.825V18h4.35v-4.5H24l-6-6-6 6Z"/>
                 </svg>
-                <p>Seret file Anda atau Klik file dari perangkat Anda </p>
-                <p class="text-neutral-06">Ukuran file maksimal adalah 10 MB</p>
+                <p class="block sm:hidden">Upload </p>
+                <p class="hidden sm:block" >Seret file Anda atau Klik file dari perangkat Anda </p>
+                <p class="hidden sm:block text-neutral-06">Ukuran file maksimal adalah 10 MB</p>
         
             </div>
             <div style="z-index: 99999" id="loading-image"  class="hidden fixed top-1/2 left-1/2 justify-center items-center -translate-x-1/2 -translate-y-1/2  w-screen h-screen bg-white opacity-70" style="display: none;" ><div class="  loader " ></div></div>

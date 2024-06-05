@@ -76,15 +76,24 @@
         <div class="flex gap-12 flex-col md:flex-row w-full justify-center items-center h-full">
             <div class="img flex md:w-[300px] w-[200px] lg:w-[550px]  relative h-[350px]">
 
+<<<<<<< HEAD
                 <img class="w-64 scale-75 sm:scale-100 sm:w-64 absolute left-[1rem] top-5 md:top-0 rounded-xl"
                     src="{{ asset('asset/images/homepage.jpg') }}" alt="">
                 <img class="w-64 scale-75 sm:scale-100 md:w-64 absolute md:left-[3rem] left-[3rem] bottom-[4rem] md:bottom-[1rem] rounded-xl "
                     src="{{ asset('asset/images/homepage.jpg') }}" alt="">
                 <img class="w-64 scale-75 sm:scale-100 md:w-64 absolute md:right-[5rem] top-[6rem] right-[3rem] md:top-[5rem] rounded-xl "
+=======
+                <img class="w-56 md:w-64 absolute left-[1rem] top-5 md:top-0 rounded-xl"
+                    src="{{ asset('asset/images/homepage.jpg') }}" alt="">
+                <img class="w-56 md:w-64 absolute md:left-[3rem] left-[2rem] bottom-[4rem] md:bottom-[1rem] rounded-xl "
+                    src="{{ asset('asset/images/homepage.jpg') }}" alt="">
+                <img class="w-56 md:w-64 absolute md:right-[5rem] top-[5rem] right-[3rem] md:top-[5rem] rounded-xl "
+>>>>>>> 4fe1d6c4cbfb96f74a3efaf879e3008f8626218c
                     src="{{ asset('asset/images/homepage.jpg') }}" alt="">
 
             </div>
 
+<<<<<<< HEAD
             <div class="content w-3/4 text-center">
 
                 <h1 href="#" class="text-dodger-blue-950 font-body font-bold md:text-5xl text-3xl ">TENTANG <span
@@ -92,6 +101,15 @@
                 <br><br>
 
                 <p class="md:text-xl text-base text-neutral-10 font-normal ">RWGram bertujuan untuk mendigitalisasi sistem informasi di RW, memungkinkan akses yang
+=======
+            <div class="content w-full px-2 md:p-0  md:w-1/2">
+
+                <h1 href="#" class="text-center w-full text-4xl  md:text-left text-dodger-blue-950 font-body font-bold md:text-5xl ">TENTANG <span
+                        class=" text-dodger-blue-700">RW</span>GRAM</h1>
+                <br><br>
+
+                <p class="text-md w-full md:text-xl">RWGram bertujuan untuk mendigitalisasi sistem informasi di RW, memungkinkan akses yang
+>>>>>>> 4fe1d6c4cbfb96f74a3efaf879e3008f8626218c
                     lebih mudah dan efisien terhadap informasi penting, pengumuman, dan administrasi, serta memperkuat
                     interaksi dan kolaborasi antarwarga </p>
             </div>
@@ -100,15 +118,40 @@
 
     <div class="statis bg-dodger-blue-900">
         <div class="about mx-auto max-w-7xl py-10 px-2 sm:px-6 lg:px-8 ">
+<<<<<<< HEAD
             <div class="flex flex-col md:flex-row  text-white items-center h-full justify-center md:gap-24 gap-12">
                 <div class="info font-main font-bold">
                     <h2 class="text-dodger-blue-200 text-2xl mb-2">RT 01</h2>
                     <h1 class="text-white font-semibold text-4xl">{{ $penduduk[0] }}<span
                             class="ml-2 text-base font-normal">Penduduk</span>
                     </h1>
+=======
+            <div class="grid grid-cols-2 gap-5 md:gap-0 md:grid-cols-4  text-white justify-items-center  h-full ">
+                <div class="info w-full flex items-center justify-around font-main font-bold">
+                    <div>
+                        <h2 class="text-dodger-blue-200 text-2xl mb-2">RT 01</h2>
+                        <h1 class="text-white font-semibold text-4xl">{{$penduduk[0]}}<span class="text-base font-normal"> Penduduk</span>
+                           
+                        </h1>
+                    </div>
+                    
+                    <div class="hidden md:block bg-white w-[1px] h-[52px] opacity-60">
+                    </div>
+>>>>>>> 4fe1d6c4cbfb96f74a3efaf879e3008f8626218c
                 </div>
-                <div class="hidden md:block bg-white w-[1px] h-[52px] opacity-60">
+               
+                <div class="info w-full flex items-center justify-around font-main font-bold">
+
+                    <div>
+                        <h2 class="text-dodger-blue-200 text-2xl mb-2">RT 02</h2>
+                        <h1 class="text-white font-semibold text-4xl">{{$penduduk[1]}}<span class="text-base font-normal"> Penduduk</span>
+                        </h1>
+                    </div>
+                  
+                    <div class="hidden md:block bg-white w-[1px] h-[52px] opacity-60">
+                    </div>
                 </div>
+<<<<<<< HEAD
                 <div class="info font-main font-bold">
                     <h2 class="text-dodger-blue-200 text-2xl mb-2">RT 02</h2>
                     <h1 class="text-white font-semibold text-4xl">{{ $penduduk[1] }}<span
@@ -118,13 +161,26 @@
                 <div class="hidden md:block bg-white w-[1px] h-[52px] opacity-60">
                 </div>
                 <div class="info font-main font-bold">
+=======
+                 
+                <div class="info w-full flex items-center justify-around font-main font-bold">
+
+                   <div>
+>>>>>>> 4fe1d6c4cbfb96f74a3efaf879e3008f8626218c
                     <h2 class="text-dodger-blue-200 text-2xl mb-2">RT 03</h2>
                     <h1 class="text-white font-semibold text-4xl">{{ $penduduk[2] }}<span
                             class="ml-2 text-base font-normal">Penduduk</span>
                     </h1>
+                   </div>
+                    <div class="hidden md:block bg-white w-[1px] h-[52px] opacity-60">
+                    </div>
                 </div>
+<<<<<<< HEAD
                 <div class="hidden md:block bg-white w-[1px] h-[52px] opacity-60">
                 </div>
+=======
+                   
+>>>>>>> 4fe1d6c4cbfb96f74a3efaf879e3008f8626218c
                 <div class="info font-main font-bold">
                     <h2 class="text-dodger-blue-200 text-2xl mb-2">RT 04</h2>
                     <h1 class="text-white font-semibold text-4xl">{{ $penduduk[3] }}<span
@@ -136,16 +192,24 @@
     </div>
 
 
+<<<<<<< HEAD
     <div class="pelayanan bg-white">
         <div class="text-center font-main font-bold my-32" id="pelayanan">
             <h1 class="text-blue-main md:text-3xl text-xl pb-4">Sistem Informasi RW 06</h1>
             <h1 class="text-dodger-blue-950 md:text-5xl text-2xl font-bold">Pelayanan Yang Tersedia</h1>
+=======
+    <div class="pelayanan bg-white py-10">
+        <div class="text-center font-main font-bold my-32">
+
+            <h1 class="text-blue-main text-3xl">Sistem Informasi RW 06</h1>
+            <h1 class="text-dodger-blue-900 text-3xl md:text-5xl">Pelayanan Yang Tersedia</h1>
+>>>>>>> 4fe1d6c4cbfb96f74a3efaf879e3008f8626218c
         </div>
 
-        <div class="flex flex-wrap items-center gap-5 justify-around mb-32 px-10">
+        <div class="flex flex-wrap items-center gap-5 justify-around mb-32 px-5 md:px-10">
             <div class="card">
                 <div
-                    class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    class="max-w-sm p-6 md:p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img src="{{ asset('asset/icon/bulk/shop.svg') }}" alt="">
 
                     <h5 class="mb-2 mt-4 text-xl font-bold tracking-tight text-neutral-10 dark:text-white">UMKM</h5>
@@ -160,7 +224,7 @@
             </div>
             <div class="card">
                 <div
-                    class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    class="max-w-sm p-6 md:p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img src="{{ asset('asset/icon/bulk/profile-2user.svg') }}" alt="">
 
                     <h5 class="mb-2 mt-4 text-xl font-bold tracking-tight text-neutral-10 dark:text-white">Status Nikah</h5>
@@ -176,7 +240,7 @@
 
             <div class="card">
                 <div
-                    class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    class="max-w-sm p-6 md:p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img src="{{ asset('asset/icon/bulk/house.svg') }}" alt="">
 
                     <h5 class="mb-2 mt-4 text-xl font-bold tracking-tight text-neutral-10 dark:text-white">Status Tempat Tinggal
@@ -193,7 +257,7 @@
 
             <div class="card">
                 <div
-                    class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    class="max-w-sm p-6 md:p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img src="{{ asset('asset/icon/bulk/profile-delete.svg') }}" alt="">
 
                     <h5 class="mb-2 mt-4 text-xl font-bold tracking-tight text-neutral-10 dark:text-white">Status Meninggal</h5>
@@ -209,7 +273,7 @@
 
             <div class="card">
                 <div
-                    class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    class="max-w-sm p-6 md:p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img src="{{ asset('asset/icon/bulk/messages-3.svg') }}" alt="">
 
                     <h5 class="mb-2 mt-4 text-xl font-bold tracking-tight text-neutral-10 dark:text-white">Pengaduan</h5>
@@ -225,7 +289,7 @@
 
             <div class="card">
                 <div
-                    class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    class="max-w-sm p-6 md:p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img src="{{ asset('asset/icon/bulk/3d-square.svg') }}" alt="">
 
                     <h5 class="mb-2 mt-4 text-xl font-bold tracking-tight text-neutral-10 dark:text-white">Bantuan Sosial</h5>
@@ -241,7 +305,7 @@
 
             <div class="card">
                 <div
-                    class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    class="max-w-sm p-6 md:p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img src="{{ asset('asset/icon/bulk/message.svg') }}" alt="">
 
                     <h5 class="mb-2 mt-4 text-xl font-bold tracking-tight text-neutral-10 dark:text-white">Pengumuman</h5>
@@ -257,7 +321,7 @@
 
             <div class="card">
                 <div
-                    class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    class="max-w-sm p-6 md:p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img src="{{ asset('asset/icon/bulk/profile-circle.svg') }}" alt="">
 
                     <h5 class="mb-2 mt-4 text-xl font-bold tracking-tight text-neutral-10 dark:text-white">Melihat Data Diri</h5>
@@ -278,7 +342,7 @@
 
         <div class="logo mb-32">
             <div class="flex flex-shrink-0 flex-col  gap-10 items-center">
-                <img class="h-16 md:h-32 w-auto" src="{{ asset('asset/icon/logo.svg') }}" alt="Your Company">
+                <img class="h-16 md:h-32 w-auto" src="https://res.cloudinary.com/dtzlizlrs/image/upload/v1717481970/ioxdtp815fvw1w3smkcc.png" alt="Your Company">
                 <a href="#" class="text-dodger-blue-950 font-body font-bold text-3xl  md:text-7xl "> <span
                         class="text-dodger-blue-700">RW</span>GRAM</a>
             </div>

@@ -12,7 +12,7 @@
     </header>
 
     <div class="bg-white mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <div class="flex flex-col-reverse sm:flex-row gap-4 justify-between items-center mb-12">
+        <div class="flex flex-col sm:flex-row gap-4 justify-between items-center mb-12">
             <h2 class="font-bold dark:text-white text-neutral-10 text-2xl">
                 Pengumuman Terakhir
             </h2>
@@ -34,7 +34,7 @@
                 </button>
             </form>
         </div>
-        <div class="max-w-7xl mx-auto card p-8 mb-12"
+        <div class="max-w-7xl mx-auto card p-3 md:p-8 mb-12"
             style="box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
             <div class="grid grid-cols-1 gap-y-6 md:grid-cols-1 md:gap-x-6">
                 @if ($informasi->isEmpty())
@@ -52,7 +52,7 @@
                                         class="mb-1 font-semibold text-lg text-neutral dark:text-white text-black line-clamp-2">
                                         {{ $info->judul }}
                                     </p>
-                                    <p class="mb-3 text-base text-neutral-10 dark:text-white line-clamp-3">
+                                    <p class="mb-3 hidden md:block text-base text-neutral-10 dark:text-white line-clamp-3">
                                         {{ $info->deskripsi_informasi }}
                                     </p>
                                     <div class="flex items-center dark:text-white mb-2">

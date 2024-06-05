@@ -33,10 +33,10 @@
         @endif
     </div>
     <div class="bg-white mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <div class="flex justify-between mb-12 gap-3">
-            <div class="flex gap-3 drop-shadow-lg">
+        <div class="flex flex-wrap justify-end md:justify-between mb-12 gap-3">
+            <div class="flex gap-3 z-40 relative  justify-between md:justify-normal w-full md:w-[80%] drop-shadow-lg">
 
-                <form class="max-w-sm mx-auto" action="{{ route('nikah.penduduk.find') }}" method="GET">
+                <form class="w-full md:max-w-md  action="{{ route('nikah.penduduk.find') }}" method="GET">
                     <div class="relative">
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -51,12 +51,13 @@
                     </div>
                 </form>
 
-                <div class="">
+                <div class="h-full">
                     <button id="statusDropdownButton" data-dropdown-toggle="statusDropdown"
-                        class="p-2 font-medium text-sm text-gray-600 px-4 text-center inline-flex items-center rounded-full bg-white "
+                        class="p-2 font-medium text-sm h-full text-gray-600 px-4 text-center inline-flex items-center rounded-full bg-white "
                         type="button">
-                        {{ request('status') ? request('status') : '-Semua-' }}
-                        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        <i class="md:hidden fa-solid fa-filter"></i>
+                        <p class="hidden md:block">{{ request('status') ? request('status') : '-Semua-' }}</p>
+                        <svg class="hidden md:block  w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m1 1 4 4 4-4" />
@@ -66,7 +67,7 @@
 
                 <!-- Dropdown menu -->
                 <div id="statusDropdown"
-                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                    class="z-50 top-0 hidden  bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="statusDropdownButton">
                         <li>
                             <a href="{{ route('nikah.penduduk.index', ['status' => '']) }}"
@@ -89,7 +90,7 @@
 
             </div>
             <a href="{{ route('nikah.penduduk.create') }}"
-                class="text-white bg-blue-main px-8 py-2 font-semibold text-base rounded-full drop-shadow-button hover:bg-dodger-blue-800">Ajukan</a>
+                class="text-white bg-blue-main px-8 py-2 font-semibold text-base rounded-full drop-shadow-button relative z-10 hover:bg-dodger-blue-800">Ajukan</a>
         </div>
 
         <div class="mt-5 overflow-x-auto shadow-md rounded-lg mb-56">

@@ -31,7 +31,7 @@
             </div>
             <div class="flex  flex-1 items-center justify-between sm:items-stretch ">
                 <div class="flex flex-shrink-0 space-x-3 items-center">
-                    <img class="h-10 w-auto" src="{{ asset('asset/images/logo/logo.png') }}" alt="Your Company">
+                    <img class="h-10 w-auto" src="https://res.cloudinary.com/dtzlizlrs/image/upload/v1717481970/ioxdtp815fvw1w3smkcc.png" alt="Your Company">
                     <a href="/" class="text-dodger-blue-950 font-body font-bold text-xl "> <span
                             class="text-dodger-blue-700">RW</span>GRAM</a>
                 </div>

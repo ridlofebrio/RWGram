@@ -187,7 +187,7 @@ class PendudukController extends Controller
             $kartuKeluarga = KepalaKeluargaModel::with('penduduk', 'kartuKeluarga')->paginate(3);
 
 
-            return view('dashboard.penduduk', ['data' => $data, 'active' => 'penduduk']);
+            return view('dashboard.penduduk', ['data' => $data, 'active' => 'penduduk', 'kartuKeluarga' => $kartuKeluarga]);
         }
 
         if ($type == 'umkm') {
