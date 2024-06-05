@@ -29,13 +29,13 @@
 
     <hr>
       
-    <div class="flex mt-3 w-full justify-between items-center">
+    <div class="flex flex-wrap md:flex-nowrap mt-3 w-full gap-3 lg:gap-0  justify-between items-center">
         
         
         
           
           <!-- Main modal -->
-          <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+          <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
               <div  class="relative p-4  w-[900px] h-[80vh]">
                   <!-- Modal content -->
                   <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -196,15 +196,19 @@
           </div> 
           
     
-        <div class="filter flex space-x-2  items-center">
+        <div class="filter flex space-x-2  w-full h-full items-center ">
            
-            <div class="search border w-[70%] focus-within:ring-2 focus-within:ring-blue-main flex items-center justify-between  bg-white rounded-full px-3">
-                
-                <input id="search" data='umkm' type="text" class=" border-none bg-transparent" placeholder="cari apapun">  
-                <i class="fa-solid fa-magnifying-glass"></i>
+            <div class="relative w-full md:w-1/2 h-full">
+                <div class="absolute  inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </div>
+                <input name="search"  id="search" data="umkm" value="{{ request('search') }}" class="search pl-8 py-3 block w-full  p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari" required />
             </div>
-            <div  x-data="{open:false}" class="relative" x-cloak >
-                <button @click="open= !open" class="flex px-3 items-center hover:bg-blue-main hover:border-blue-main hover:text-white space-x-5 py-2 border-2 w-min border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p id="sort" class="w-[100px]">Filter</p> <i class="fa fa-chevron-down"></i></button>
+
+            <div  x-data="{open:false}" class="relative h-full" x-cloak >
+                <button @click="open= !open" class=" px-3 hover:bg-blue-main hover:border-blue-main hover:text-white items-center  w-fit  md:min-w-fit md:w-full h-full py-3  border border-gray-300 rounded-full" ><div class="flex min-w-fit lg:min-w-[100px] justify-around items-center h-full"><i class="h-full fa-solid fa-sliders"></i> <p class="hidden lg:block" id="sort">-semua-</p> <i class="hidden lg:block fa fa-chevron-down"></i></div></button>
                 <div class="absolute  left-1/2 -translate-x-1/2 w-min z-30 bg-white drop-shadow-card" x-show="open"  @click.outside="open=false" >
                    <ul>
                     <li><button @click="open= !open"  data="semua" value="Semua" class="sort hover:bg-blue-main hover:text-white py-2 w-[200px]" >Semua</button></li>
@@ -217,22 +221,23 @@
             </div>
           
         </div>
-        <div class="flex space-x-1">
-            <div x-cloak x-data="{ open: false }">
-                
-                <button @click="open= ! open" type="submit"   class="flex border-2 px-8 py-2  rounded-full justify-between space-x-2 items-center hover:bg-blue-main hover:border-blue-main ">
-    
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path fill="#1B1B1B" d="M13 11.748c-.19 0-.38-.07-.53-.22a.754.754 0 0 1 0-1.06l8.2-8.2c.29-.29.77-.29 1.06 0 .29.29.29.77 0 1.06l-8.2 8.2c-.15.15-.34.22-.53.22Z"/>
-                        <path fill="#1B1B1B" d="M22 7.55c-.41 0-.75-.34-.75-.75V2.75H17.2c-.41 0-.75-.34-.75-.75s.34-.75.75-.75H22c.41 0 .75.34.75.75v4.8c0 .41-.34.75-.75.75Zm-7 15.2H9c-5.43 0-7.75-2.32-7.75-7.75V9c0-5.43 2.32-7.75 7.75-7.75h2c.41 0 .75.34.75.75s-.34.75-.75.75H9C4.39 2.75 2.75 4.39 2.75 9v6c0 4.61 1.64 6.25 6.25 6.25h6c4.61 0 6.25-1.64 6.25-6.25v-2c0-.41.34-.75.75-.75s.75.34.75.75v2c0 5.43-2.32 7.75-7.75 7.75Z"/>
-                      </svg>
+        <div class="flex w-full space-x-1">
+            <button type="button"   class="flex border w-full md:w-1/2 px-3 py-3  h-full  rounded-full justify-center space-x-2 items-center hover:text-white hover:bg-blue-main hover:border-blue-main ">  <i class="fa-solid  fa-up-right-from-square"></i>
                       
-                      <p class="text-black font-semibold">Import CSV</p>
+                <p class="hidden sm:block md:hidden lg:block">Export CSV</p>
+            </button>
+            <div x-cloak x-data="{ open: false }" class="w-full md:w-1/2">
+                
+                <button @click="open= ! open" type="submit"   class="flex border w-full  px-3 py-3  h-full  rounded-full justify-center space-x-2 items-center hover:text-white hover:bg-blue-main hover:border-blue-main ">
+    
+                    <i class="fa-solid fa-file"></i>
+                      
+                    <p class="hidden  sm:block md:hidden lg:block">Import CSV</p>
                   </button>
                <!-- Main modal -->
-               <div x-cloak x-show="open"   tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed  z-40 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+               <div x-cloak x-show="open"   tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed  z-40 justify-center items-center w-full inset-0 h-[calc(100%-1rem)] max-h-full">
                               
-                <div x-cloak  class="absolute w-[920px] h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  p-4  z-50 ">
+                <div x-cloak  class="absolute w-full max-w-[920px] h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  p-4  z-50 ">
                       <!-- Modal content -->
                       <div @click.outside="open = false" class="relative bg-white w-full  rounded-lg shadow dark:bg-gray-700">
                           <!-- Modal header -->
@@ -256,7 +261,7 @@
                             </div>
                             <hr>
                            
-                            <button  class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800  mt-3  px-8 py-2 text-base font-medium rounded-full  " type="submit">
+                            <button  class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800 h-full mt-3  px-8 py-2 text-base font-medium rounded-full  " type="submit">
                                 Tambah
                               </button>
                         </form>
@@ -268,8 +273,8 @@
             </div>
            
          
-            <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-8 py-2 text-base font-medium rounded-full  " type="button">
-                Tambah
+            <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="text-neutral-01 w-full md:w-1/3 bg-blue-main hover:bg-dodger-blue-800    py-2 text-base font-medium rounded-full  " type="button">
+                <p class="hidden  sm:block md:hidden lg:block">Tambah</p><p class="block  sm:hidden md:block lg:hidden">+</p>
               </button>
              
     
@@ -308,7 +313,7 @@
                     @foreach ($data as $penduduk)
                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{$penduduk->penduduk_id}}
+                        {{ $loop->index +1 }}
                     </th>
                     <td class="px-6 py-4">
                         {{$penduduk->NIK}}
@@ -670,7 +675,7 @@
   
   
       
-    <div class="flex mt-3 w-full justify-between items-center">
+    <div class="flex flex-wrap md:flex-nowrap gap-3 mt-3 w-full justify-between items-center">
         
         
         
@@ -719,27 +724,31 @@
           
     {{-- Kepala Keluarga  --}}
 
-        <div class="filter flex space-x-2 items-center">
+    <div class="filter flex space-x-2  w-full h-full items-center ">
            
-            
-            <div class="search border w-[70%] focus-within:ring-2 focus-within:ring-blue-main flex items-center justify-between  bg-white rounded-full px-3">
-                
-                <input id="search" data='umkm1' type="text" class="border-none bg-transparent" placeholder="cari apapun">  
-                <i class="fa-solid fa-magnifying-glass"></i>
+        <div class="relative w-full md:w-1/2 h-full">
+            <div class="absolute  inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                </svg>
             </div>
-            <div  x-data="{open:false}" class="relative" x-cloak >
-                <button @click="open= !open" class="flex px-3 w-[130px] hover:bg-blue-main hover:border-blue-main hover:text-white items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p id="sort">Filter</p> <i class="fa fa-chevron-down"></i></button>
-                <div class="absolute  left-1/2 -translate-x-1/2 w-[200px]  z-30 bg-white drop-shadow-card" x-show="open"  @click.outside="open=false" >
-                   <ul>
-                    <li><button @click="open= !open"  data="semua" class="sort hover:bg-blue-main hover:text-white py-2 w-full" >Semua</button></li>
-                    <li><button @click="open= !open"  data="L" value="Laki-laki" class="sort hover:bg-blue-main hover:text-white py-2 w-full" >laki-laki</button></li>
-                    <li><button @click="open= !open"  data='P' value="Perempuan" class="sort hover:bg-blue-main hover:text-white py-2 w-full">Perempuan</button></li>
-                    
-                    
-                   </ul>
-                </div>
+            <input name="search"  id="search" data="umkm1" value="{{ request('search') }}" class="search pl-8 py-3 block w-full  p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari" required />
+        </div>
+
+        <div  x-data="{open:false}" class="relative h-full" x-cloak >
+            <button @click="open= !open" class=" px-3 hover:bg-blue-main hover:border-blue-main hover:text-white items-center  w-fit  md:min-w-fit md:w-full h-full py-3  border border-gray-300 rounded-full" ><div class="flex min-w-fit lg:min-w-[100px] justify-around items-center h-full"><i class="h-full fa-solid fa-sliders"></i> <p class="hidden lg:block" id="sort">-semua-</p> <i class="hidden lg:block fa fa-chevron-down"></i></div></button>
+            <div class="absolute  left-1/2 -translate-x-1/2 w-min z-30 bg-white drop-shadow-card" x-show="open"  @click.outside="open=false" >
+               <ul>
+                <li><button @click="open= !open"  data="semua" value="Semua" class="sort hover:bg-blue-main hover:text-white py-2 w-[200px]" >Semua</button></li>
+                <li><button @click="open= !open"  data="L" value="Laki-laki" class="sort hover:bg-blue-main hover:text-white py-2 w-[200px]" >laki-laki</button></li>
+                <li><button @click="open= !open"  data='P' value="Perempuan" class="sort hover:bg-blue-main hover:text-white py-2 w-[200px]">Perempuan</button></li>
+                
+                
+               </ul>
             </div>
         </div>
+      
+    </div>
         <div class="flex space-x-1">
          
          
@@ -777,7 +786,7 @@
                     @foreach ($kartuKeluarga as $penduduk)
                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ $loop->index }}
+                        {{ $loop->index +1}}
                     </th>
                     <td class="px-6 py-4">
                         {{$penduduk->kartuKeluarga->rt_id}}
@@ -987,8 +996,9 @@ document.addEventListener('alpine:init', () => {
                    })
                })
 
-    $('.search input').change(function (index) {
-        
+$(document).ready(function(){
+    $('.search').change(function (index) {
+            console.log(index.currentTarget.getAttribute('data'));
                     let data = ($(this).val())
                     if(data == null || data == ""){
                         data='kosong';
@@ -998,7 +1008,9 @@ document.addEventListener('alpine:init', () => {
                   
                     $.ajax({
                         url: "{{url('search/penduduk/type/')}}"+'/'+index.currentTarget.getAttribute('data')+'/'+data,
-                        method:'GET',
+                        method:'GET',beforeSend: function() {
+              $("#loading-image").show();
+           },
                         
                     }).done(function (data) {
                         const parser = new DOMParser();
@@ -1007,9 +1019,11 @@ document.addEventListener('alpine:init', () => {
                         const table = doc.getElementById(index.currentTarget.getAttribute('data'));
                         
                         $('#'+index.currentTarget.getAttribute('data')).html(table)   
+                        $("#loading-image").hide();
                     })
 
                 })
+})
                 
 </script>
 
