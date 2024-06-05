@@ -12,11 +12,26 @@ class KasDetailModel extends Model
     protected $table = 'kas';
     protected $primaryKey = 'id_kas';
 
-
+    protected $fillable = [
+        'kartu_keluarga_id',
+        'tahun',
+        'Januari',
+        'Februari',
+        'Maret',
+        'April',
+        'Mei',
+        'Juni',
+        'Juli',
+        'Agustus',
+        'September',
+        'Oktober',
+        'November',
+        'Desember'
+    ];
 
     public function kartuKeluarga()
     {
-        return $this->belongsTo(KepalaKeluargaModel::class, 'kartu_keluarga_id');
+        return $this->belongsTo(KepalaKeluargaModel::class, 'kartu_keluarga_id', 'kartu_keluarga_id');
     }
 
     public function user()
@@ -24,5 +39,5 @@ class KasDetailModel extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    
+
 }

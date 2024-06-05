@@ -9,19 +9,19 @@
        
     <ul x-data="{active: 'umkm'}" class="{{Auth::user()->user_id == '1'?'flex overflow-x-auto -mb-px':'hidden'}}">
         <li class="">
-            <button   @click="active = 'umkm'"  :class="active=='umkm' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"   data="umkm" >Semua RT</button>
+            <button   @click="active = 'umkm'"  :class="active=='umkm' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"   data="rw" >Semua RT</button>
         </li>
         <li class="">
-            <button @click="active = 'nikah'"  data="nikah"  :class="active=='nikah' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"  data="umkm" aria-current="page">RT 01</button>
+            <button @click="active = 'nikah'"   :class="active=='nikah' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"  data="1" aria-current="page">RT 01</button>
         </li>
         <li class="">
-            <button @click="active = 'tinggal'"  data="tinggal" :class="active=='tinggal' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"  data="umkm">RT 02</button>
+            <button @click="active = 'tinggal'"  :class="active=='tinggal' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"  data="2">RT 02</button>
         </l px-3i>
         <li class="">
-            <button @click="active = 'meninggal'"  data="meninggal"  :class="active=='meninggal' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"  data="umkm">RT 03</button>
+            <button @click="active = 'meninggal'"    :class="active=='meninggal' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"  data="3">RT 03</button>
         </li>
         <li class="">
-            <button @click="active = 'baru'"  data="meninggal"  :class="active=='baru' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"  data="umkm">RT 04</button>
+            <button @click="active = 'baru'"  :class="active=='baru' ?'tab text-blue-main border-b-2 border-blue-main  inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':'tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'"  data="4">RT 04</button>
         </li>
        
 
@@ -734,7 +734,7 @@
             </div>
             <input name="search"  id="search" data="umkm1" value="{{ request('search') }}" class="search pl-8 py-3 block w-full  p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari" required />
         </div>
-
+{{-- 
         <div  x-data="{open:false}" class="relative h-full" x-cloak >
             <button @click="open= !open" class=" px-3 hover:bg-blue-main hover:border-blue-main hover:text-white items-center  w-fit  md:min-w-fit md:w-full h-full py-3  border border-gray-300 rounded-full" ><div class="flex min-w-fit lg:min-w-[100px] justify-around items-center h-full"><i class="h-full fa-solid fa-sliders"></i> <p class="hidden lg:block" id="sort">-semua-</p> <i class="hidden lg:block fa fa-chevron-down"></i></div></button>
             <div class="absolute  left-1/2 -translate-x-1/2 w-min z-30 bg-white drop-shadow-card" x-show="open"  @click.outside="open=false" >
@@ -746,13 +746,13 @@
                 
                </ul>
             </div>
-        </div>
+        </div> --}}
       
     </div>
         <div class="flex space-x-1">
          
          
-            <button data-modal-target="crud-modal-1" data-modal-toggle="crud-modal-1" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-8 py-2 text-base font-medium rounded-full  " type="button">
+            <button data-modal-target="crud-modal-1" data-modal-toggle="crud-modal-1" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-8 py-3 text-base font-medium rounded-full  " type="button">
                 Tambah
               </button>
              
@@ -997,6 +997,41 @@ document.addEventListener('alpine:init', () => {
                })
 
 $(document).ready(function(){
+
+
+    $('.tab').click(function(index){
+        console.log(this.getAttribute('data'));
+
+        $.ajax({
+            url:"{{url('penduduk/rt/')}}"+'/'+this.getAttribute('data'),
+            method:'GET',
+            dataType : 'html',
+            beforeSend:function() {
+              $("#loading-image").show();
+           },
+           success:function(data){
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data, 'text/html');    
+            const table = doc.getElementById('umkm');
+            const table1 = doc.getElementById('umkm1');
+            const page = doc.querySelector('.page');
+            const page1 = doc.querySelector('.page1');
+                        
+            $('#umkm').html(table)   
+            $('.page').html(page)   
+            $('.page1').html(page1)   
+            $('#umkm1').html(table1)   
+        
+            $("#loading-image").hide();
+           },
+           error:function(data){
+            $("#loading-image").hide();
+           }
+        })
+    })
+    
+    
+
     $('.search').change(function (index) {
             console.log(index.currentTarget.getAttribute('data'));
                     let data = ($(this).val())

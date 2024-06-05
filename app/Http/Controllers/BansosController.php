@@ -17,8 +17,17 @@ class BansosController extends Controller
         $kriteria = Kriteria::all();
 
         $bansos = BansosModel::with('kartuKeluarga', 'kartuKeluarga.kartuKeluarga', 'kartuKeluarga.penduduk')->paginate(5);
+        // dd($bansos[0]->kartuKeluarga->kartukeluarga->NKK);
+        return view('dashboard.bansos', ['data' => $bansos, 'allData' => $allBansos, 'kriteria' => $kriteria, 'active' => 'bansos']);
+    }
 
+    public function sort($sort)
+    {
 
+        $allBansos = BansosModel::all();
+        $kriteria = Kriteria::all();
+
+        $bansos = BansosModel::where('status', $sort)->with('kartuKeluarga', 'kartuKeluarga.kartuKeluarga', 'kartuKeluarga.penduduk')->paginate(5);
         return view('dashboard.bansos', ['data' => $bansos, 'allData' => $allBansos, 'kriteria' => $kriteria, 'active' => 'bansos']);
     }
 
@@ -108,6 +117,19 @@ class BansosController extends Controller
         } else {
             return redirect()->route('bansos.penduduk.create')
                 ->with('error', 'Kartu keluarga tidak ditemukan.');
+        }
+    }
+
+
+    public function find($value)
+    {
+        if ($value == 'kosong') {
+            return $this->index();
+        } else {
+            $allBansos = BansosModel::all();
+            $kriteria = Kriteria::all();
+            $bansos = BansosModel::whereAny(['nama_pengaju'], 'like', '%' . $value . '%')->with('kartuKeluarga', 'kartuKeluarga.kartuKeluarga', 'kartuKeluarga.penduduk')->paginate(5);
+            return view('dashboard.bansos', ['data' => $bansos, 'allData' => $allBansos, 'kriteria' => $kriteria, 'active' => 'bansos']);
         }
     }
 
