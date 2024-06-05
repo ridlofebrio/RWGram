@@ -37,12 +37,12 @@
 
                 
                 <div class="user flex gap-3 items-center">
-                    <div class="w-12 h-12 rounded-full">
+                    <div class="w-10 h-10 rounded-full">
                         <img src="{{Auth::user()->foto_profil == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716898016/mcdjouvceefyfpoujo87.png' :Auth::user()->foto_profil}}"  class="w-full h-full object-cover rounded-full" alt="">
                     </div>
                   
                     <div class="info flex justify-center items-center gap-3">
-                        <div class="detail">
+                        <div class="hidden md:block detail">
                             <h1 class=" font-medium text-lg">{{Auth::user()->nama_user}}</h1>
                             <h2 class=" font-medium text-xs text-neutral-400">{{Auth::user()->role_id == 5 ? 'RW Admin' : 'RT Admin'}}</h2>
                         </div>

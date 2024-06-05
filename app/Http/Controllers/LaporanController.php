@@ -28,27 +28,33 @@ class LaporanController extends Controller
         return view('dashboard.pengaduan', ['data' => $laporan, 'active' => 'pengaduan']);
     }
 
-    public function indexPenduduk(Request $requets)
-    {
-        $laporan = LaporanModel::with('penduduk', 'penduduk.kartuKeluarga.rt')->get();
 
-        if ($requets->has('search')) {
-            $laporan->whereHas('penduduk', function ($query) use ($requets) {
-                $query->where('nama_penduduk', 'like', '%' . $requets->search . '%');
+    public function indexPenduduk(Request $request)
+    {
+        $laporan = LaporanModel::query()->with('penduduk', 'penduduk.kartuKeluarga.rt');
+    
+        if ($request->has('search')) {
+            $laporan = $laporan->whereHas('penduduk', function ($query) use ($request) {
+                $query->where('nama_penduduk', 'like', '%' . $request->search . '%');
             });
         }
-        // if ($status) {
-        //     $laporan->where('status_laporan', $status);
-        // }
-        // $laporan = $laporan->get();
-
+        if ($request->has('status_laporan')) {
+            $laporan = $laporan->where('status_laporan', $request->status_laporan);
+        }
+        $laporan = $laporan->orderBy('created_at', 'desc')->paginate(10);
+    
         $metadata = (object) [
             'title' => 'Pengaduan',
             'description' => 'Halaman Pengaduan Warga'
         ];
-
+    
         return view('laporan.penduduk.index', compact('laporan'))->with(['metadata' => $metadata, 'activeMenu' => 'pengaduan']);
     }
+    
+    
+
+
+
 
     /**
      * Show the form for creating a new resource.

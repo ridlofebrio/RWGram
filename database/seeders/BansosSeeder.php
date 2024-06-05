@@ -50,18 +50,7 @@ class BansosSeeder extends Seeder
                 'c5' => 2,
                 'c6' => 500,
             ],
-            [
-                'bansos_id' => 4,
-                'kartu_keluarga_id' => 4,
-                'tanggal_bansos' => now(),
-                'nama_pengaju' => 'Bambang Hatyo',
-                'c1' => 2500000,
-                'c2' => 4,
-                'c3' => 40,
-                'c4' => 90,
-                'c5' => 1,
-                'c6' => 300,
-            ],
+
             [
                 'bansos_id' => 5,
                 'kartu_keluarga_id' => 5,

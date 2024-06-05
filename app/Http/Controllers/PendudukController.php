@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\KartuKeluargaModel;
+use App\Models\KasDetailModel;
 use App\Models\KepalaKeluargaModel;
 use App\Models\PendudukModel;
 use App\Models\RtModel;
@@ -65,6 +66,27 @@ class PendudukController extends Controller
         return view('dashboard.penduduk', ['data' => $penduduk, 'active' => 'penduduk'], compact('kartuKeluarga'));
     }
 
+    public function rt($id)
+    {
+        if ($id == 'rw') {
+
+            return $this->index();
+        } else {
+            $penduduk = PendudukModel::with('kartuKeluarga', 'kartuKeluarga.rt')
+                ->join('kartu_keluarga', 'kartu_keluarga.kartu_keluarga_id', 'penduduk.kartu_keluarga_id')
+                ->join('rt', 'kartu_keluarga.rt_id', 'rt.rt_id')
+                ->where('isDelete', '=', '0')
+                ->where('rt.rt_id', $id)
+                ->paginate(3);
+            $kartuKeluarga = KepalaKeluargaModel::with('penduduk', 'kartuKeluarga')
+                ->join('kartu_keluarga', 'kartu_keluarga.kartu_keluarga_id', 'kepala_keluarga.kartu_keluarga_id')
+                ->join('rt', 'kartu_keluarga.rt_id', 'rt.rt_id')
+                ->where('rt.rt_id', $id)->paginate(3);
+        }
+
+        return view('dashboard.penduduk', ['data' => $penduduk, 'active' => 'penduduk'], compact('kartuKeluarga'));
+    }
+
     public function sort($sort)
     {
         //
@@ -121,54 +143,69 @@ class PendudukController extends Controller
                 dd($validate->messages());
             }
 
+            try {
+                $penduduk = PendudukModel::where('NIK', $request->NIK)->firstOrFail();
+                return redirect()->back()->with('flash', ['error', 'Data sudah ada']);
+            } catch (\Exception $e) {
+                if (PendudukModel::where('NIK', '=', $line['NIK'])->first()) {
 
-
-            if (PendudukModel::where('NIK', '=', $line['NIK'])->first()) {
-
-                continue;
-            }
-
-
-
-            $kk = KartuKeluargaModel::where('NKK', '=', $line['NKK'])->first();
-
-            if ($kk == null) {
-                $kk = KartuKeluargaModel::create([
-                    'NKK' => $line['NKK'],
-                    'rt_id' => RtModel::where('nomor_rt', '=', $line['rt'])->first()->rt_id,
-                    'tanggal_kk' => now(),
-                    'no_telepon' => '+62'
-                ]);
-            }
+                    continue;
+                }
 
 
 
+                $kk = KartuKeluargaModel::where('NKK', '=', $line['NKK'])->first();
+
+                if ($kk == null) {
+                    $kk = KartuKeluargaModel::create([
+                        'NKK' => $line['NKK'],
+                        'rt_id' => RtModel::where('nomor_rt', '=', $line['rt'])->first()->rt_id,
+                        'tanggal_kk' => now(),
+                        'no_telepon' => '+62'
+                    ]);
+
+                    try {
+                        $kas = KasDetailModel::create([
+                            'kartu_keluarga_id' => $kk->kartu_keluarga_id,
+                            'tahun' => date("Y"),
+                        ]);
+                    } catch (\Exception $e) {
+                        dd($e);
+                    }
+
+                }
 
 
-            $data = PendudukModel::create([
-                'kartu_keluarga_id' => $kk->kartu_keluarga_id,
-                'NIK' => $line['NIK'],
-                'nama_penduduk' => $line['nama'],
-                'tempat_lahir' => $line['Tempat_Lahir'],
-                'tanggal_lahir' => date('Y-m-d', strtotime($line['Tanggal_Lahir'])),
-                'jenis_kelamin' => $line['Jenis_Kelamin'],
-                'golongan_darah' => $line['golongan_darah'],
-                'agama' => $line['Agama'],
-                'alamat' => $line['Alamat'],
-                'status_perkawinan' => $line['Status_Perkawinan'],
-                'pekerjaan' => $line['Pekerjaan'],
-                'status_tinggal' => $line['status_tinggal'],
 
-            ]);
 
-            $kepalaKeluarga = KepalaKeluargaModel::where('kartu_keluarga_id', $kk->kartu_keluarga_id)->first();
-            if ($kepalaKeluarga == null) {
-                KepalaKeluargaModel::create([
+
+                $data = PendudukModel::create([
                     'kartu_keluarga_id' => $kk->kartu_keluarga_id,
-                    'penduduk_id' => $data->penduduk_id
+                    'NIK' => $line['NIK'],
+                    'nama_penduduk' => $line['nama'],
+                    'tempat_lahir' => $line['Tempat_Lahir'],
+                    'tanggal_lahir' => date('Y-m-d', strtotime($line['Tanggal_Lahir'])),
+                    'jenis_kelamin' => $line['Jenis_Kelamin'],
+                    'golongan_darah' => $line['golongan_darah'],
+                    'agama' => $line['Agama'],
+                    'alamat' => $line['Alamat'],
+                    'status_perkawinan' => $line['Status_Perkawinan'],
+                    'pekerjaan' => $line['Pekerjaan'],
+                    'status_tinggal' => $line['status_tinggal'],
+
                 ]);
+
+                $kepalaKeluarga = KepalaKeluargaModel::where('kartu_keluarga_id', $kk->kartu_keluarga_id)->first();
+                if ($kepalaKeluarga == null) {
+                    KepalaKeluargaModel::create([
+                        'kartu_keluarga_id' => $kk->kartu_keluarga_id,
+                        'penduduk_id' => $data->penduduk_id
+                    ]);
+                }
             }
         }
+
+
         return redirect()->back()->with('flash', ['success', 'Data CSV Berhasil Di import']);
     }
 
@@ -234,42 +271,61 @@ class PendudukController extends Controller
     {
         //  
 
-        $kk = KartuKeluargaModel::where('NKK', '=', $request->NKK)->first();
+        try {
+            $penduduk = PendudukModel::where('NIK', $request->NIK)->firstOrFail();
+            return redirect()->back()->with('flash', ['error', 'Data sudah ada']);
+        } catch (\Exception $e) {
+            $kk = KartuKeluargaModel::where('NKK', '=', $request->NKK)->first();
 
-        if ($kk == null) {
-            $kk = KartuKeluargaModel::create([
-                'NKK' => $request->NKK,
-                'rt_id' => RtModel::where('nomor_rt', '=', $request->rt)->first()->rt_id,
-                'tanggal_kk' => now(),
-                'no_telepon' => '+62'
-            ]);
-        }
+            if ($kk == null) {
+                $kk = KartuKeluargaModel::create([
+                    'NKK' => $request->NKK,
+                    'rt_id' => RtModel::where('nomor_rt', '=', $request->rt)->first()->rt_id,
+                    'tanggal_kk' => now(),
+                    'no_telepon' => '+62'
+                ]);
 
-        $kk = KartuKeluargaModel::where('NKK', '=', $request->NKK)->first();
 
-        $data = PendudukModel::create([
-            'kartu_keluarga_id' => $kk->kartu_keluarga_id,
-            'NIK' => $request->NIK,
-            'nama_penduduk' => $request->nama,
-            'tempat_lahir' => $request->tempat_lahir,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'golongan_darah' => $request->golongan_darah,
-            'agama' => $request->agama,
-            'alamat' => $request->alamat,
-            'status_perkawinan' => $request->status_kawin,
-            'pekerjaan' => $request->pekerjaan,
-            'status_tinggal' => $request->status_tinggal,
-            'status_kematian' => $request->status_meninggal
+                try {
+                    $kas = KasDetailModel::create([
+                        'kartu_keluarga_id' => $kk->kartu_keluarga_id,
+                        'tahun' => date("Y"),
+                    ]);
+                } catch (\Exception $e) {
+                    dd($e);
+                }
 
-        ]);
-        $kepalaKeluarga = KepalaKeluargaModel::where('kartu_keluarga_id', $kk->kartu_keluarga_id)->first();
-        if ($kepalaKeluarga == null) {
-            KepalaKeluargaModel::create([
+            }
+
+            $kk = KartuKeluargaModel::where('NKK', '=', $request->NKK)->first();
+
+            $data = PendudukModel::create([
                 'kartu_keluarga_id' => $kk->kartu_keluarga_id,
-                'penduduk_id' => $data->penduduk_id
+                'NIK' => $request->NIK,
+                'nama_penduduk' => $request->nama,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'golongan_darah' => $request->golongan_darah,
+                'agama' => $request->agama,
+                'alamat' => $request->alamat,
+                'status_perkawinan' => $request->status_kawin,
+                'pekerjaan' => $request->pekerjaan,
+                'status_tinggal' => $request->status_tinggal,
+                'status_kematian' => $request->status_meninggal
+
             ]);
+            $kepalaKeluarga = KepalaKeluargaModel::where('kartu_keluarga_id', $kk->kartu_keluarga_id)->first();
+            if ($kepalaKeluarga == null) {
+                KepalaKeluargaModel::create([
+                    'kartu_keluarga_id' => $kk->kartu_keluarga_id,
+                    'penduduk_id' => $data->penduduk_id
+                ]);
+            }
+
+
         }
+
 
         return redirect('/dashboard/penduduk')->with('flash', ['success', 'Data berhasil ditambah']);
     }

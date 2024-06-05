@@ -27,6 +27,28 @@ class PersuratanController extends Controller
         return view('persuratan.create');
     }
 
+    public function find($value)
+    {
+        if ($value == 'kosong') {
+            return $this->index();
+
+
+        } else {
+            try {
+                $id = PendudukModel::select('penduduk_id')->whereAny(['nama_penduduk'], 'like', '%' . $value . '%')->firstOrFail();
+
+                $data = PersuratanModel::whereAny(['penduduk_id'], $id->penduduk_id)->paginate(3);
+            } catch (\Exception $e) {
+                return '<p class="text-center font-bold text-xl text-neutral-10" id="umkm">Data Tidak Ditemukan <p>';
+            }
+
+
+            $active = 'persuratan';
+        }
+
+        return view('dashboard.persuratan', compact('data', 'active'));
+    }
+
     /**
      * Store a newly created resource in storage.
      */

@@ -42,7 +42,7 @@ class DetailKas extends Seeder
         );
         DB::table('detail_kas')->insert(
             [
-                'id_kas' => 6,
+                'id_kas' => 4,
                 'bulan' => 'januari',
                 'jumlah_kas' => 15000,
                 'tanggal_kas' => now(),

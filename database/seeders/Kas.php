@@ -31,7 +31,7 @@ class Kas extends Seeder
                 'tahun' => 2024,
                 'Januari' => true
             ],
-           
+
 
         ];
         DB::table('kas')->insert(

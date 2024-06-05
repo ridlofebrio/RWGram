@@ -11,4 +11,6 @@ class KaslogModel extends Model
 
     protected $table = "kas_log";
     protected $primaryKey = "kas_log_id";
+
+    protected $fillable = ['user_id', 'jumlah', 'keterangan_kas_log'];
 }

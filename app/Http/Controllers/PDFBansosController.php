@@ -28,4 +28,28 @@ class PDFBansosController extends Controller
         $pdf = PDF::loadView('dashboard.bansos_generate_pdf', $data)->setPaper('A4', 'landscape');
         return $pdf->download('data-penerimaan-bansos.pdf');
     }
+
+    public function generateDetailPDF()
+    {
+        $bansosController = new BansosController();
+
+        $sawSteps = $bansosController->sawMethod();
+        $topsisSteps = $bansosController->topsisMethod();
+        $kriteria = Kriteria::all();
+        $bansos = BansosModel::all();
+
+        $date = Carbon::now()->isoFormat('D MMMM YYYY', 'id');
+
+        $data = [
+            'title' => 'Detail Langkah Pengerjaan SAW dan TOPSIS',
+            'date' => $date,
+            'sawSteps' => $sawSteps,
+            'topsisSteps' => $topsisSteps,
+            'bansos' => $bansos,
+            'kriteria' => $kriteria,
+        ];
+
+        $pdf = PDF::loadView('dashboard.detail_bansos_generate_pdf', $data)->setPaper('A4', 'portrait');
+        return $pdf->download('detail-pengerjaan-saw-topsis.pdf');
+    }
 }

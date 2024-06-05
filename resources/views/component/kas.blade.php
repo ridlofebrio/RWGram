@@ -49,7 +49,13 @@
         </tr>
     </thead>
     <tbody id="body">
+            @if(count($kas) == 0)
         
+            <td colspan="15" class="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+               <h1 class="font-bold text-black text-xl">Data Tidak Ada</h1>
+            </td>
+    
+            @endif
             @foreach ($kas as $item)
               
                   <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -66,40 +72,40 @@
                    
                     <td scope="col" class="px-6 py-3">
                       
-                      {{$item->Januari ? 'yes':'-'}}
+                      <i class=" fa-solid {{$item->Januari ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i>
                   </td>
                   <td scope="col" class="px-6 py-3">
-                    {{$item->Februari ? 'yes':'-'}}
+                    <i class=" fa-solid {{$item->Februari ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i>
                   </td>
                   <td scope="col" class="px-6 py-3">
-                    {{$item->Maret ? 'yes':'-'}}
+                    <i class=" fa-solid {{$item->Maret ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i>
                   </td>
                   <td scope="col" class="px-6 py-3">
-                    {{$item->April ? 'yes':'-'}}
+                    <i class=" fa-solid {{$item->April ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i>
                 </td>
                 <td scope="col" class="px-6 py-3">
-                  {{$item->Mei ? 'yes':'-'}}
+                  <i class=" fa-solid {{$item->Mei ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i>
               </td>
               <td scope="col" class="px-6 py-3">
-                {{$item->Juni ? 'yes':'-'}}
+                <i class=" fa-solid {{$item->Juni ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i>
                       </td>
                       <td scope="col" class="px-6 py-3">
-                        {{$item->Juli ? 'yes':'-'}}
+                        <i class=" fa-solid {{$item->Juli ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i>
                     </td>
                     <td scope="col" class="px-6 py-3">
-                      {{$item->Agustus ? 'yes':'-'}}
+                      <i class=" fa-solid {{$item->Agustus ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i>
                   </td>
                   <td scope="col" class="px-6 py-3">
-                    {{$item->September ? 'yes':'-'}}
+                    <i class=" fa-solid {{$item->September ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i>
                   </td>
                   <td scope="col" class="px-6 py-3">
-                    {{$item->Oktober ? 'yes':'-'}}
+                    <i class=" fa-solid {{$item->Oktober ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i>
                   </td>
                   <td scope="col" class="px-6 py-3">
-                    {{$item->November ? 'yes':'-'}}
+                    <i class=" fa-solid {{$item->November ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i>
                   </td>
                   <td scope="col" class="px-6 py-3">
-                    {{$item->Desember ? 'yes':'-'}}
+                    <i class=" fa-solid {{$item->Desember ? 'fa-circle-check text-blue-main text-xl':'fa-minus'}}"></i>
                   </td>
         <td class="flex">
           <div x-cloak x-data="{ open: false }">
