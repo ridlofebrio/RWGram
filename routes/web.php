@@ -106,6 +106,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::get('/bansos', [BansosController::class, 'index'])->middleware('RW');
         Route::post('/bansos', [BansosController::class, 'normalize'])->middleware('RW')->name('normalize');
         Route::get('/bansos/generate-pdf', [PDFBansosController::class, 'generatePDF'])->middleware('RW')->name('generatePDF');
+        Route::get('/generate-detail-pdf', [PDFBansosController::class, 'generateDetailPDF'])->name('generateDetailPDF');
         Route::get('/akun', [UserController::class, 'index'])->middleware('RW');
         Route::get('/persuratan', [PersuratanController::class, 'index'])->middleware('RW');
         Route::get('/kas', [KasController::class, 'index']);

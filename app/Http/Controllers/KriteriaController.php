@@ -24,12 +24,23 @@ class KriteriaController extends Controller
             'attribut' => 'required',
         ]);
 
+        // Hitung total bobot saat ini tanpa kriteria yang akan diupdate
+        $totalBobot = Kriteria::where('kriteria_id', '!=', $id)->sum('bobot');
+
+        // Tambahkan bobot baru
+        $totalBobot += $request->bobot;
+
+        // Cek jika total bobot melebihi 1
+        if ($totalBobot > 1) {
+            return redirect('/dashboard/bansos')->with('flash', ['error', 'Total bobot tidak boleh melebihi 1']);
+        }
+
         $kriteria->update([
             'nama_kriteria' => $request->nama_kriteria,
             'bobot' => $request->bobot,
             'attribut' => $request->attribut,
         ]);
 
-        return redirect('/dashboard/bansos')->with('flash', ['success', 'data berhasil diupdate']);
+        return redirect('/dashboard/bansos')->with('flash', ['success', 'Data kriteria berhasil diupdate']);
     }
 }
