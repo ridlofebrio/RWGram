@@ -28,7 +28,7 @@
     <div class="bg-white mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <div class="flex flex-wrap justify-end md:justify-between mb-12 gap-3">
             <div class="flex gap-3 z-40 relative  justify-between md:justify-normal w-full md:w-[80%] drop-shadow-lg">
-                <form class="w-full md:max-w-md" action="{{ route('hidup.penduduk.find') }}" method="GET">
+                <form class="w-full md:max-w-md" action="{{ route('hidup.penduduk.index') }}" method="GET">
                     <div class="relative">
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">

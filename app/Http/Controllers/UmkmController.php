@@ -24,6 +24,7 @@ class UmkmController extends Controller
         UmkmModel::where('terbaca', '=', '0')->update([
             'terbaca' => 1
         ]);
+
         return view('dashboard.pengajuan', compact('umkm', 'active'));
     }
 
@@ -69,31 +70,29 @@ class UmkmController extends Controller
      * Show the form for creating a new resource.
      */
 
-    public function indexPenduduk(Request $request)
-    {
-        // Mendapatkan semua data UMKM
-        $umkm = UmkmModel::with('penduduk')->where('status_pengajuan', 'diterima')->get();
+     public function indexPenduduk(Request $request)
+     {
+         $query = UmkmModel::with('penduduk')->where('status_pengajuan', 'diterima');
+     
+   
+         if ($request->has('search')) {
+             $query->where('nama_umkm', 'like', '%' . $request->input('search') . '%');
+         }
 
-        // Filter berdasarkan pencarian nama UMKM jika ada
-        // if ($request->has('search')) {
-        //     $umkm->where('nama_umkm', 'like', '%' . $request->input('search') . '%');
-        // }
+         $umkm = $query->get();
 
-        // // Ambil data UMKM setelah diterapkan filter
-        // $umkm = $umkm->get();
+         $metadata = (object) [
+             'title' => 'UMKM',
+             'description' => 'UMKM untuk penduduk'
+         ];
 
-
-        $metadata = (object) [
-            'title' => 'UMKM',
-            'description' => 'UMKM untuk penduduk'
-        ];
-
-        return view('umkm.penduduk.index', [
-            'umkm' => $umkm,
-            'metadata' => $metadata,
-            'activeMenu' => 'permohonan'
-        ]);
-    }
+         return view('umkm.penduduk.index', [
+             'umkm' => $umkm,
+             'metadata' => $metadata,
+             'activeMenu' => 'permohonan'
+         ]);
+     }
+     
 
 
     public function create()
