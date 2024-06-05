@@ -19,15 +19,12 @@
 <hr>
 
 {{-- chart --}}
-  <div class="w-full mt-5 border-2 border-neutral-02 bg-white rounded-lg shadow dark:bg-gray-800">
-    <div class="flex justify-between p-4 md:p-6 pb-0 md:pb-0">
-     
-      
-    </div>
+  <div class="w-full mt-5 border-2 h-full max-h-[500px] pb-7 border-neutral-02 bg-white rounded-lg shadow dark:bg-gray-800">
+   
 
 
     <div id="labels-chart" class="px-2.5"></div>
-    <div id="labels-chart1" class="px-2.5"></div>
+   
 
     
   </div>
@@ -35,7 +32,7 @@
    {{-- end chart --}}
 
 
-   <div class="flex mt-3 w-full justify-between items-center">
+   <div class="flex mt-3 flex-wrap md:flex-nowrap gap-3 w-full justify-between items-center">
         
         
         
@@ -43,42 +40,34 @@
 
     
 
-  <div class="filter flex space-x-2 mt-5 items-center">
+  <div class="filter flex space-x-2  items-center w-full">
      
-      <div  x-data="{open:false}" class="relative" x-cloak >
-          <button @click="open= !open" class="flex px-3 w-[150px] hover:bg-blue-main hover:border-blue-main hover:text-white items-center space-x-5 py-2 border-2 border-neutral-400 rounded-full" ><i class="fa-solid fa-sliders"></i> <p>-semua-</p> <i class="fa fa-chevron-down"></i></button>
-          <div class="absolute left-1/2 -translate-x-1/2  px-3 py-3 z-30 bg-white drop-shadow-card" x-show="open" @click.outside="open=false" >
-             <ul>
-              <li><button data="semua" class="sort" >Semua</button></li>
-              <li><button data="L" class="sort" >laki-laki</button></li>
-              <li><button data='P' class="sort" >Perempuan</button></li>
-              
-              
-             </ul>
-          </div>
+    <div class="{{Auth::user()->user_id== 1 ? 'hidden':' relative w-full md:w-1/2 h-full'}}">
+      <div class="absolute  inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" strokclass="{{Auth::user()->user_id== 1 ? 'hidden':' relative w-full md:w-1/2 h-full'}}"e-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+          </svg>
       </div>
-      <div class="{{Auth::user()->user_id== 1 ? 'hidden':' search border w-[70%] focus-within:ring-2 focus-within:ring-blue-main flex items-center justify-between  bg-white rounded-full px-3'}}">
-          <i class="fa-solid fa-magnifying-glass"></i>
-
-          <input id="search" type="text" class="border-none bg-transparent" placeholder="cari apapun">  
-      </div>
+      <input name="search"  id="search" data="umkm" value="{{ request('search') }}" class="search pl-8 py-3 block w-full  p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari" required />
   </div>
-  <div class="flex space-x-1">
-      <div x-data="{ open: false }">
+      
+  </div>
+  <div class="flex w-full md:w-1/2 justify-end ">
+      <div x-data="{ open: false }" class="w-fit">
           
-          <button @click="open= ! open" type="submit"   class="flex border-2 px-8 py-2  rounded-full justify-between space-x-2 items-center hover:bg-blue-main hover:border-blue-main ">
+          <button @click="open= ! open" type="submit"   class="flex border-2 px-8 py-2 w-fit  rounded-full   items-center hover:bg-blue-main group-hover:text-white  hover:border-blue-main ">
 
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <svg class="" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                   <path fill="#1B1B1B" d="M13 11.748c-.19 0-.38-.07-.53-.22a.754.754 0 0 1 0-1.06l8.2-8.2c.29-.29.77-.29 1.06 0 .29.29.29.77 0 1.06l-8.2 8.2c-.15.15-.34.22-.53.22Z"/>
                   <path fill="#1B1B1B" d="M22 7.55c-.41 0-.75-.34-.75-.75V2.75H17.2c-.41 0-.75-.34-.75-.75s.34-.75.75-.75H22c.41 0 .75.34.75.75v4.8c0 .41-.34.75-.75.75Zm-7 15.2H9c-5.43 0-7.75-2.32-7.75-7.75V9c0-5.43 2.32-7.75 7.75-7.75h2c.41 0 .75.34.75.75s-.34.75-.75.75H9C4.39 2.75 2.75 4.39 2.75 9v6c0 4.61 1.64 6.25 6.25 6.25h6c4.61 0 6.25-1.64 6.25-6.25v-2c0-.41.34-.75.75-.75s.75.34.75.75v2c0 5.43-2.32 7.75-7.75 7.75Z"/>
                 </svg>
                 
-                <p class="text-black font-semibold">Import CSV</p>
+                <p class="text-black  hidden w-[100px] sm:block md:hidden lg:block font-semibold">Export CSV</p>
             </button>
          <!-- Main modal -->
-         <div  x-show="open"   tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed  z-40 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+         <div  x-show="open"   tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed  z-40 justify-center items-center w-full inset-0 h-[calc(100%-1rem)] max-h-full">
                         
-          <div  class="absolute w-[920px] h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  p-4  z-50 ">
+          <div  class="absolute w-full max-w-[920px] h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  p-4  z-50 ">
                 <!-- Modal content -->
                 <div @click.outside="open = false" class="relative bg-white w-full  rounded-lg shadow dark:bg-gray-700">
                     <!-- Modal header -->
@@ -114,18 +103,18 @@
       </div>
      
    
-      <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-8 py-2 text-base font-medium rounded-full  " type="button">
+      <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="w-full md:w-1/3 text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-8 py-2 text-base font-medium rounded-full  " type="button">
           Tambah
         </button>
-     
-        <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-          <div  class="relative p-4  w-[900px] h-[80vh]">
+
+        <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full inset-0 h-[calc(100%-1rem)] max-h-full">
+          <div  class="relative p-4 w-full  max-w-[900px] h-[80vh]">
               <!-- Modal content -->
               <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                   <!-- Modal header -->
                   <div class="flex items-center  justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                       <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                          Create New Product
+                          Tambah Pengeluaran
                       </h3>
                       <button type="button" class="absolute -top-5 -right-4 bg-blue-main   text-white border-2 border-white hover:bg-gray-200 hover:text-gray-900 rounded-full text-sm w-8 h-8 ms-auto inline-flex justify-center items-center " data-modal-toggle="crud-modal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -135,280 +124,20 @@
                     </button>
                   </div>
                   <!-- Modal body -->
-                  <form action="{{url('/kas')}}" method="POST" class="p-4 md:p-5 text-left">
+                  <form action="{{url('/kas/pengeluaran')}}" method="POST" class="p-4 md:p-5 text-left">
                     @csrf
                     @method('POST')
                       <div class="grid gap-4 mb-4 grid-cols-2">
+                        <input type="hidden" name="user_id" value="{{Auth::user()->user_id}}">
                           <div class="col-span-2">
-                              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NKK</label>
-                              <input type="text" name="NKK" id="name" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="NKK" required="">
+                              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keterangan </label>
+                              <input type="text" name="keterangan_kas_log" id="name" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Keterangan" required="">
                           </div>
-                          
-                        
+                          <div class="col-span-2">
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah</label>
+                            <input type="number" name="Jumlah" id="name" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Jumlah" required="">
                         </div>
-
-                          <div class="flex w-full justify-between">
-                            <div class=" flex flex-col">
-                              <label for="">Pilih</label>
-                             <div class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                              <input class=" border border-gray-900 rounded-lg   focus:ring-primary-600 focus:border-primary-600 block  p-2.5 " type="checkbox" name='cek[]' value="januari" id="">
-                             </div>
-                            </div>
-                            <div class=" flex flex-col">
-                              <label for="">Bulan</label>
-                              <input value="Januari" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="januari" name="januari[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                              <label for="">Tanggal</label>
-                              <input class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="date" name="januari[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                              <label for="">Jumlah</label>
-                              <input value="15000" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="number" name="januari[]" id="">
-                            </div>
-                          </div>
-
-                          <div class="flex w-full justify-between mt-5">
-                            <div class=" flex flex-col">
-                            
-                             <div class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                              <input class=" border border-gray-900 rounded-lg   focus:ring-primary-600 focus:border-primary-600 block  p-2.5 " type="checkbox" name='cek[]' value="februari"id="">
-                             </div>
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="Februari" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="januari" name="februari[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="date" name="februari[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="15000" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="number" name="februari[]" id="">
-                            </div>
-                          </div>
-
-                          <div class="flex w-full justify-between mt-5">
-                            <div class=" flex flex-col">
-                            
-                             <div class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                              <input class=" border border-gray-900 rounded-lg   focus:ring-primary-600 focus:border-primary-600 block  p-2.5 " type="checkbox" name='cek[]' value='maret' id="">
-                             </div>
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="Maret" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="januari" name='maret[]' id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="date" name='maret[]' id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="15000" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="number" name='maret[]' id="">
-                            </div>
-                          </div>
-
-                          <div class="flex w-full justify-between mt-5">
-                            <div class=" flex flex-col">
-                            
-                             <div class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                              <input class=" border border-gray-900 rounded-lg   focus:ring-primary-600 focus:border-primary-600 block  p-2.5 " type="checkbox" name='cek[]' value="april" id="">
-                             </div>
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="April" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="januari" name="april[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="date" name="april[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="15000" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="number" name="april[]" id="">
-                            </div>
-                          </div>
-
-
-                          <div class="flex w-full justify-between mt-5">
-                            <div class=" flex flex-col">
-                            
-                             <div class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                              <input class=" border border-gray-900 rounded-lg   focus:ring-primary-600 focus:border-primary-600 block  p-2.5 " type="checkbox" name='cek[]' value="mei" id="">
-                             </div>
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="Mei" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="januari" name="mei[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="date" name="mei[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="15000" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="number" name="mei[]" id="">
-                            </div>
-                          </div>
-                          
-
-                          <div class="flex w-full justify-between mt-5">
-                            <div class=" flex flex-col">
-                            
-                             <div class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                              <input class=" border border-gray-900 rounded-lg   focus:ring-primary-600 focus:border-primary-600 block  p-2.5 " type="checkbox" name='cek[]' value="juni" id="">
-                             </div>
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="Juni" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="januari" name="juni[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="date" name="juni[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="15000" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="number" name="juni[]" id="">
-                            </div>
-                          </div>
-
-
-                          <div class="flex w-full justify-between mt-5">
-                            <div class=" flex flex-col">
-                            
-                             <div class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                              <input class=" border border-gray-900 rounded-lg   focus:ring-primary-600 focus:border-primary-600 block  p-2.5 " type="checkbox" name='cek[]' value="juli" id="">
-                             </div>
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="Juli" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="januari" name="juli[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="date" name="juli[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="15000" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="number" name="juli[]" id="">
-                            </div>
-                          </div>
-
-
-                          <div class="flex w-full justify-between mt-5">
-                            <div class=" flex flex-col">
-                            
-                             <div class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                              <input class=" border border-gray-900 rounded-lg   focus:ring-primary-600 focus:border-primary-600 block  p-2.5 " type="checkbox" name='cek[]' value="agustus" id="">
-                             </div>
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="Agustus" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="januari" name="agustus[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="date" name="agustus[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="15000" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="number" name="agustus[]" id="">
-                            </div>
-                          </div>
-
-                          <div class="flex w-full justify-between mt-5">
-                            <div class=" flex flex-col">
-                            
-                             <div class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                              <input class=" border border-gray-900 rounded-lg   focus:ring-primary-600 focus:border-primary-600 block  p-2.5 " type="checkbox" name='cek[]' value="september" id="">
-                             </div>
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="September" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="januari" name="september[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="date" name="september[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="15000" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="number" name="september[]" id="">
-                            </div>
-                          </div>
-
-
-                          <div class="flex w-full justify-between mt-5">
-                            <div class=" flex flex-col">
-                            
-                             <div class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                              <input class=" border border-gray-900 rounded-lg   focus:ring-primary-600 focus:border-primary-600 block  p-2.5 " type="checkbox" name='cek[]' value="oktober" id="">
-                             </div>
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="Oktober" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="januari" name="oktober[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="date" name="oktober[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="15000" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="number" name="oktober[]" id="">
-                            </div>
-                          </div>
-                       
-
-                          <div class="flex w-full justify-between mt-5">
-                            <div class=" flex flex-col">
-                            
-                             <div class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                              <input class=" border border-gray-900 rounded-lg   focus:ring-primary-600 focus:border-primary-600 block  p-2.5 " type="checkbox" name='cek[]' value="november" id="">
-                             </div>
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="November" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="januari" name="november[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="date" name="november[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="15000" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="number" name="november[]" id="">
-                            </div>
-                          </div>
-
-
-                          <div class="flex w-full justify-between mt-5">
-                            <div class=" flex flex-col">
-                            
-                             <div class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                              <input class=" border border-gray-900 rounded-lg   focus:ring-primary-600 focus:border-primary-600 block  p-2.5 " type="checkbox" name='cek[]' value="desember" id="">
-                             </div>
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="Desember" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="januari" name="desember[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="date" name="desember[]" id="">
-                            </div>
-                            <div class=" flex flex-col">
-                            
-                              <input value="15000" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="number" name="desember[]" id="">
-                            </div>
-                          </div>
-                          
-                          
-                          
-                    
+                        </div>
                       <button type="submit" class="text-white inline-flex items-center bg-blue-700 mt-5 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                           <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                           Simpan
@@ -533,9 +262,9 @@
                 </button>
                 
                 <!-- Main modal -->
-                <div  x-show="open"  x-transition tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed  z-40 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div  x-show="open"  x-transition tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed  z-40 justify-center items-center w-full inset-0 h-[calc(100%-1rem)] max-h-full">
                 
-                  <div  class="absolute w-[920px] h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  p-4  z-50 ">
+                  <div  class="absolute w-full max-w-[920px] h-[80vh] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  p-4  z-50 ">
                         <!-- Modal content -->
                         <div @click.outside="open = false" id='modal-{{$item->id_kas}}' class="relative bg-white w-full  rounded-lg shadow dark:bg-gray-700">
                             <!-- Modal header -->
@@ -570,13 +299,10 @@
                      @endif
                                   
                               </div>
-    
-            
-    
                               <div id="list" >
                            
                               </div>
-                              <button type="button" class="block w-full text-center text-white py-3 hover:bg-blue-main" onclick="addDetail(event,'modal-{{$item->id_kas}}')">+</button>
+                              <button type="button" class="block w-full text-center bg-blue-main text-white py-3 hover:bg-dodger-blue-600 mt-5 rounded-xl" onclick="addDetail(event,'modal-{{$item->id_kas}}')">+</button>
                               <button type="submit" class="text-white inline-flex items-center bg-blue-700 mt-5 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                                 Simpan
@@ -683,13 +409,13 @@ event.preventDefault()
     <div class=" flex flex-col">
       <label for="">Pilih</label>
      <div class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-      <input checked id ="checkbox" class=" border border-gray-900 rounded-lg   focus:ring-primary-600 focus:border-primary-600 block  p-2.5 " type="checkbox" name='cek[]' value="" id="">
+      <input checked id ="checkbox" class=" border border-gray-900 rounded-lg   focus:ring-primary-600 focus:border-primary-600 block  p-2.5 " type="checkbox" name='cek[]' value="Januari" id="">
      </div>
     </div>
     <div class=" flex flex-col">
       <label for="">Bulan</label>
      
-      <select name="" onchange="changeName(event)" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[200px] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" id="">
+      <select name="Januari[]" onchange="changeName(event)" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[200px] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" id="">
   <option value="Januari">Januari</option>
   <option value="Februari">Februari</option>
   <option value="Maret">Maret</option>
@@ -706,11 +432,11 @@ event.preventDefault()
     </div>
     <div class=" flex flex-col">
       <label for="">Tanggal</label>
-      <input class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="date" name="" id="tanggal">
+      <input class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="date" name="Januari[]" id="tanggal">
     </div>
     <div class=" flex flex-col">
       <label for="">Jumlah</label>
-      <input value="15000" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="number" name="" id="jumlah">
+      <input value="15000" readonly class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="number" name="Januari[]" id="jumlah">
     </div>
   </div>
 `
@@ -849,7 +575,7 @@ $(document).ready(function () {
                           url:"{{url('data/chart')}}"+'/'+index.currentTarget.getAttribute('data'),
                           datatype:'json',
                           success:function(data){
-                            document.getElementById("labels-chart").innerHTML='pengeluaran'
+                            document.getElementById("labels-chart").innerHTML=''
                              options.xaxis.categories = data.tgl
                              data.data.push(0);
                             options.series[0].data= data.data;
@@ -873,7 +599,7 @@ $(document).ready(function () {
                         options.xaxis.categories = JSON.parse(tgl)
                              
                             options.series[0].data= data1;
-                            document.getElementById("labels-chart").innerHTML='Pemasukan'
+                            document.getElementById("labels-chart").innerHTML=''
                             if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined' ) {
                           console.log('langsung');
                           const chart = new ApexCharts(document.getElementById("labels-chart"), options);
@@ -913,7 +639,7 @@ $(document).ready(function () {
 
                 if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined' ) {
                           console.log('langsung');
-                          document.getElementById("labels-chart").innerHTML='pemasukan'
+                          document.getElementById("labels-chart").innerHTML=''
                           const chart = new ApexCharts(document.getElementById("labels-chart"), options);
                           chart.render();
                         }

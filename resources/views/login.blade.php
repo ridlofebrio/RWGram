@@ -46,7 +46,7 @@
                 @method('POST')
 
                 <div class="logo flex items-center flex-col ">
-                    <img class="max-w-20 mb-3   " src="{{ asset('asset/images/logo/Logo.png') }}" alt="">
+                    <img class="max-w-20 mb-3   " src="https://res.cloudinary.com/dtzlizlrs/image/upload/v1717481970/ioxdtp815fvw1w3smkcc.png" alt="">
                     <p href="#" class="text-dodger-blue-950 font-body font-bold text-2xl "> <span
                             class="text-dodger-blue-700">RW</span>GRAM</p>
                 </div>

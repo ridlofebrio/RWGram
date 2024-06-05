@@ -10,6 +10,7 @@ use App\Models\PendudukModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 
 class KasController extends Controller
 {
@@ -60,7 +61,7 @@ class KasController extends Controller
                     ->with('kartuKeluarga.penduduk', 'kartuKeluarga.kartuKeluarga')
                     ->whereRaw('kartu_keluarga.rt_id = 1')
                     ->get();
-
+                // dd($kas);
                 break;
             case '5':
                 # code...
@@ -152,7 +153,14 @@ class KasController extends Controller
     public function detailKas($kk)
     {
 
-        $data = KasModel::where('id_kas', $kk)->with('kas')->get();
+
+        try {
+
+            $data = KasModel::where('id_kas', $kk)->with('kas')->get();
+
+        } catch (\Exception $e) {
+            dd($e);
+        }
 
         // dd($data);
         return view('component.detail_kas', compact('data'));
@@ -215,7 +223,7 @@ class KasController extends Controller
 
                 $id = PendudukModel::with('kartuKeluarga', 'kartuKeluarga.rt')->whereAny(['nama_penduduk', 'NIK'], 'like', '%' . $value . '%')->firstOrFail();
             } catch (\Exception $e) {
-                return '<p id="umkm">Data Tidak Ditemukan <p>';
+                return '<p class="text-center font-bold text-xl text-neutral-10" id="umkm">Data Tidak Ditemukan <p>';
             }
             // dd($id);
 
@@ -227,8 +235,6 @@ class KasController extends Controller
                 } else {
                     $kas = KasDetailModel::where('kartu_keluarga_id', '=', 0)->paginate(3);
                 }
-            } else {
-                return '<p id="umkm">Data Tidak Ditemukan <p>';
             }
 
 
@@ -259,16 +265,19 @@ class KasController extends Controller
                 break;
 
             default:
+                try {
 
-                $kk = KartuKeluargaModel::where('NKK', '=', $request->NKK)->first();
+                    $kk = KartuKeluargaModel::where('NKK', '=', $request->NKK)->first();
 
-                $kas = KasDetailModel::findOrFail($kk->kartu_keluarga_id);
+                    $kas = KasDetailModel::where('kartu_keluarga_id', $kk->kartu_keluarga_id)->firstOrFail();
 
-                break;
+                    break;
+                } catch (\Exception $e) {
+                    return $e;
+                }
         }
 
         foreach ($request->cek as $key => $value) {
-
 
             KasModel::create([
                 'id_kas' => $kas->id_kas,
@@ -321,6 +330,34 @@ class KasController extends Controller
         ]);
 
         return redirect('/kas')->with('success', 'Data berhasil diupdate');
+    }
+
+    public function storePengeluaran(Request $request)
+    {
+
+        // dd($request);
+        $validate = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'keterangan_kas_log' => 'required',
+            'Jumlah' => 'required'
+        ]);
+
+        if ($validate->fails()) {
+
+            return redirect()->back()->with('flash', ['error', 'data gagal ditambah']);
+        }
+
+        try {
+            KaslogModel::create([
+                'user_id' => $request->user_id,
+                'keterangan_kas_log' => $request->keterangan_kas_log,
+                'jumlah' => $request->Jumlah
+            ]);
+        } catch (\Exception $e) {
+            return $e;
+        }
+
+        return redirect(url('/dashboard/kas'))->with('flash', ['success', 'Data berhasil ditambah']);
     }
 
     /**

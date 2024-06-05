@@ -26,10 +26,7 @@ class KepalaKeluargaSeeder extends Seeder
                 'kartu_keluarga_id' => 3,
                 'penduduk_id' => 5,
             ],
-            [
-                'kartu_keluarga_id' => 4,
-                'penduduk_id' => 2,
-            ],
+
             [
                 'kartu_keluarga_id' => 5,
                 'penduduk_id' => 4,
