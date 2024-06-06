@@ -81,7 +81,7 @@
                 <img src="{{asset('images\WhatsApp 이미지 2024-06-05, 22.32.37_de8f15fa.jpg')}}" alt="foto" class="top-0 ml-4 -mt-20 scale-125">
             </div>
             <div class="text-neutral-10 text-base font-medium">
-                Albyan Agung Safiqri
+                Albyan Agung Shafiqri
             </div>
 
         </div>
