@@ -32,10 +32,10 @@
            
             <div class="flex items-center md:w-fit w-full gap-1">
                 <!-- Button to open modal -->
-                <div x-data="{ open: false }" class="w-full">
-                    <button @click="open = true" class="flex w-full hover:bg-blue-main hover:border-blue-main hover:text-white px-3 items-center space-x-3 py-2 border border-gray-300 rounded-full">
+                <div x-data="{ open: false }" class="w-full md:w-fit">
+                    <button @click="open = true" class="flex w-fit hover:bg-blue-main hover:border-blue-main hover:text-white px-3 items-center space-x-3 py-3 border border-gray-300 rounded-full">
                         <i class="fa-solid fa-sync"></i>
-                        <p class="block sm:block md:hidden lg:block">Normalize</p>
+                        <p class="hidden sm:block md:hidden xl:block">Normalize</p>
                     </button>
 
 
@@ -74,11 +74,12 @@
                     </div>
                 </div>
                 <!-- Button to download PDF -->
-                <a href="{{ route('generatePDF') }}" class="flex w-full hover:bg-blue-main hover:border-blue-main hover:text-white px-3 items-center  py-2 border border-gray-300 rounded-full">
-                    <i class="fa-solid fa-file-pdf"></i> <p class="block  sm:block md:hidden lg:block w-[100px]">Export PDF</p>
+                <a href="{{ route('generatePDF') }}" class="flex w-fit hover:bg-blue-main hover:border-blue-main hover:text-white px-3 items-center  py-3 border border-gray-300 rounded-full">
+                    <i class="fa-solid fa-file-pdf"></i> <p class="hidden sm:block md:hidden xl:block w-[100px]">Export PDF</p>
                 </a>
-                <a href="{{ route('generateDetailPDF') }}" class="flex w-[210px] hover:bg-blue-main hover:border-blue-main hover:text-white px-3 items-center space-x-4 py-2 border-2 border-neutral-400 rounded-full">
-                    <i class="fa-solid fa-file-pdf"></i> <p>Detail SPK</p>
+                <a href="{{ route('generateDetailPDF') }}" class="flex w-fit  hover:bg-blue-main hover:border-blue-main hover:text-white px-3 items-center space-x-4 py-3 border  border-gray-300 rounded-full">
+                    <i class="fa-solid fa-circle-info"></i>
+                     <p class="hidden sm:block md:hidden xl:block w-[80px]">Detail SPK</p>
                 </a>
 
                
