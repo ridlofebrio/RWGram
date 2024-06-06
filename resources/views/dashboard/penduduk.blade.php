@@ -3,7 +3,7 @@
 @section('content')
 
 
-<h1>Data Penduduk</h1>
+<h1 class="text-xl font-bold text-black my-2">Data Penduduk</h1>
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white  text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
        
        
@@ -222,10 +222,11 @@
           
         </div>
         <div class="flex w-full space-x-1">
-            <button type="button"   class="flex border w-full md:w-1/2 px-3 py-3  h-full  rounded-full justify-center space-x-2 items-center hover:text-white hover:bg-blue-main hover:border-blue-main ">  <i class="fa-solid  fa-up-right-from-square"></i>
+            <a href="{{url('penduduk/pdf')}}" type="button"   class="flex border w-full md:w-1/2 px-3 py-3  h-full  rounded-full justify-center space-x-2 items-center hover:text-white hover:bg-blue-main hover:border-blue-main "> 
+                 <i class="fa-solid  fa-up-right-from-square"></i>
                       
                 <p class="hidden sm:block md:hidden lg:block">Export CSV</p>
-            </button>
+        </a>
             <div x-cloak x-data="{ open: false }" class="w-full md:w-1/2">
                 
                 <button @click="open= ! open" type="submit"   class="flex border w-full  px-3 py-3  h-full  rounded-full justify-center space-x-2 items-center hover:text-white hover:bg-blue-main hover:border-blue-main ">
@@ -668,7 +669,7 @@
 
 
 {{-- kartu Keluarga --}}
-<h1 class="my-3">Data Kartu Keluarga</h1>
+<h1 class="text-xl font-bold text-black my-2">Data Kartu Keluarga</h1>
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white  text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
        
        
@@ -749,15 +750,7 @@
         </div> --}}
       
     </div>
-        <div class="flex space-x-1">
-         
-         
-            <button data-modal-target="crud-modal-1" data-modal-toggle="crud-modal-1" class="text-neutral-01 bg-blue-main hover:bg-dodger-blue-800   px-8 py-3 text-base font-medium rounded-full  " type="button">
-                Tambah
-              </button>
-             
-    
-           </div>
+
     </div>        
     <div class="relative mt-5 overflow-x-auto shadow-md sm:rounded-lg ">
     

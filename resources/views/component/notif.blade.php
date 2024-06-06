@@ -29,7 +29,7 @@
 }
 </style>
 
-<div class="scrollbar-sangar bg-white absolute   w-[270px] md:w-[500px] p-3 z-50 overflow-y-auto h-[500px] -right-48 md:right-0  drop-shadow-card rounded-xl top-2 ">
+<div class="scrollbar-sangar bg-white absolute   w-[270px] md:w-[500px] p-3 z-50 overflow-y-auto h-fit min-h-[100px] max-h-[500px] -right-48 md:right-0  drop-shadow-card rounded-xl top-2 ">
   
     
 

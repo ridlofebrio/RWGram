@@ -13,13 +13,13 @@
                     <span class="text-blue-main text-md hover:text-blue-main">Permohonan Bantuan Sosial</span>
                 </a>
             </div>
-            <h1 class="text-3xl font-bold tracking-tight text-gray-900">Form Permohonan Bantuan Sosial</h1>
-            <p class="mt-2 text-base leading-6 text-gray-600 max-w-xl">Silakan mengisi form permohonan bantuan sosial dengan benar, ya!</p>
+            <h1 class="text-3xl font-bold tracking-tight text-neutral-10">Form Permohonan Bantuan Sosial</h1>
+            <p class="mt-2 text-base leading-6 text-neutral-10 max-w-xl">Silakan mengisi form permohonan bantuan sosial dengan benar, ya!</p>
         </div>
     </header>
     <div class="container mx-auto">
         @if ($message = Session::get('error'))
-            <div id="alert" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mx-auto w-1/2" role="alert">
+            <div id="alert" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mx-auto w-2/3" role="alert">
                 <strong class="font-bold">Maaf!</strong>
                 <span class="block sm:inline">{{ $message }}</span>
                 <!-- Tombol Close -->
@@ -35,10 +35,10 @@
             <form action="{{ route('bansos.penduduk.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="sm:col-span-4">
-                    <label for="nomer_kk" class="block text-sm font-medium leading-6 text-gray-900">Nomor Kartu Keluarga Anda</label>
+                    <label for="nomer_kk" class="block text-sm font-medium leading-6 text-neutral-10">Nomor Kartu Keluarga Anda</label>
                     <div class="mt-1 mb-4">
                         <input id="nomer_kk" name="nomer_kk" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3
-                            text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset
+                            text-neutral-10 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset
                             focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nomor Kartu Keluarga Anda" value="{{ old('nomer_kk') }}">
                         @error('nomer_kk')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
@@ -46,10 +46,10 @@
                     </div>
                 </div>
                 <div class="sm:col-span-4">
-                    <label for="nama_pengaju" class="block text-sm font-medium leading-6 text-gray-900">Nama Anda</label>
+                    <label for="nama_pengaju" class="block text-sm font-medium leading-6 text-neutral-10">Nama Anda</label>
                     <div class="mt-1 mb-4">
                         <input id="nama_pengaju" name="nama_pengaju" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3
-                            text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset
+                            text-neutral-10 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset
                             focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nama Anda" value="{{ old('nama_pengaju') }}">
                         @error('nama_pengaju')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
@@ -65,10 +65,10 @@
                         $count++;
                     @endphp
                     <div class="sm:col-span-4">
-                        <label for="c.$count" class="block text-sm font-medium leading-6 text-gray-900">{{ $item->nama_kriteria }}</label>
+                        <label for="c.$count" class="block text-sm font-medium leading-6 text-neutral-10">{{ $item->nama_kriteria }}</label>
                         <div class="mt-1 mb-4">
                             <input id="c{{ $count }}" name="c{{ $count }}" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3
-                                text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset
+                                text-neutral-10 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset
                                 focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan {{ $item->nama_kriteria }} Anda" value="{{ old('c'.$count) }}">
                             @error("c{$count}")
                                 <span class="text-red-500 text-xs">{{ $message }}</span>
@@ -78,10 +78,10 @@
                 @endforeach
                 {{-- One Drive --}}
                 <div class="sm:col-span-4 relative">
-                    <label for="depan_rumah" class="block text-sm font-medium leading-6 text-gray-900">Foto Depan Rumah</label>
+                    <label for="depan_rumah" class="block text-sm font-medium leading-6 text-neutral-10">Foto Depan Rumah</label>
                     <div class="mt-1 mb-4">
                         <input id="depan_rumah" name="depan_rumah" type="file" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3
-                            text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:border-blue-600
+                            text-neutral-10 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:border-blue-600
                             focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nama Sosial Media Anda" value="{{ old('depan_rumah') }}">
                         @error('depan_rumah')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
@@ -89,10 +89,10 @@
                     </div>
                 </div>
                 <div class="sm:col-span-4 relative">
-                    <label for="ruang_tamu" class="block text-sm font-medium leading-6 text-gray-900">Foto Ruang Tamu</label>
+                    <label for="ruang_tamu" class="block text-sm font-medium leading-6 text-neutral-10">Foto Ruang Tamu</label>
                     <div class="mt-1 mb-4">
                         <input id="ruang_tamu" name="ruang_tamu" type="file" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3
-                            text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:border-blue-600
+                            text-neutral-10 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:border-blue-600
                             focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nama Sosial Media Anda" value="{{ old('ruang_tamu') }}">
                         @error('ruang_tamu')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
@@ -100,10 +100,10 @@
                     </div>
                 </div>
                 <div class="sm:col-span-4 relative">
-                    <label for="kamar_tidur" class="block text-sm font-medium leading-6 text-gray-900">Foto Kamar Tidur</label>
+                    <label for="kamar_tidur" class="block text-sm font-medium leading-6 text-neutral-10">Foto Kamar Tidur</label>
                     <div class="mt-1 mb-4">
                         <input id="kamar_tidur" name="kamar_tidur" type="file" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3
-                            text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:border-blue-600
+                            text-neutral-10 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:border-blue-600
                             focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nama Sosial Media Anda" value="{{ old('kamar_tidur') }}">
                         @error('kamar_tidur')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
@@ -111,10 +111,10 @@
                     </div>
                 </div>
                 <div class="sm:col-span-4 relative">
-                    <label for="kamar_mandi" class="block text-sm font-medium leading-6 text-gray-900">Foto Kamar Mandi</label>
+                    <label for="kamar_mandi" class="block text-sm font-medium leading-6 text-neutral-10">Foto Kamar Mandi</label>
                     <div class="mt-1 mb-4">
                         <input id="kamar_mandi" name="kamar_mandi" type="file" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3
-                            text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:border-blue-600
+                            text-neutral-10 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:border-blue-600
                             focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nama Sosial Media Anda" value="{{ old('kamar_mandi') }}">
                         @error('kamar_mandi')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
@@ -122,10 +122,10 @@
                     </div>
                 </div>
                 <div class="sm:col-span-4 relative h-24">
-                    <label for="dapur" class="block text-sm font-medium leading-6 text-gray-900">Foto Dapur</label>
+                    <label for="dapur" class="block text-sm font-medium leading-6 text-neutral-10">Foto Dapur</label>
                     <div class="mt-1 mb-4">
                         <input id="dapur" name="dapur" type="file" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3
-                            text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:border-blue-600
+                            text-neutral-10 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset focus:border-blue-600
                             focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nama Sosial Media Anda" value="{{ old('dapur') }}">
                         @error('dapur')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
@@ -133,8 +133,8 @@
                     </div>
                 </div>
                 <div class="flex items-center mt-6">
-                    <input id="agree" type="checkbox" class="form-checkbox h-4 w-4 text-blue-600" />
-                    <label for="agree" class="ml-2 block text-sm text-gray-900">
+                    <input id="agree" type="checkbox" class="form-checkbox h-4 w-4 text-blue-600 rounded-md" />
+                    <label for="agree" class="ml-2 block text-sm text-neutral-10">
                         Apakah data Anda sudah benar?
                     </label>
                 </div>

@@ -21,7 +21,7 @@
 width: 90px;
 height: 14px;
 --c:#0096FF 92%,white;
-background: 
+background:
   radial-gradient(circle 7px at bottom,var(--c)) 0 0,
   radial-gradient(circle 7px at top   ,var(--c)) 0 100%;
 background-size: calc(100%/4) 50%;
@@ -54,19 +54,19 @@ animation: l11 1s infinite;
                 <a href="{{ route('nikah.penduduk.request') }}" class="text-blue-main hover:text-blue-main mr-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5M12 5l-7 7 7 7" />
-                    </svg>              
+                    </svg>
                 </a>
                 <a href="{{ route('nikah.penduduk.index') }}">
                     <span class="text-blue-main text-md hover:text-blue-main">Permohonan Status Nikah</span>
                 </a>
             </div>
-            <h1 class="text-4xl font-bold tracking-tight text-gray-900">Form Permohonan Ubah Status Nikah</h1>
-            <p class="mt-2 text-base leading-6 text-gray-600 max-w-xl">Silakan mengisi form permohonan ubah status nikah dengan benar, ya!</p>
-        </div>                
+            <h1 class="text-4xl font-bold tracking-tight text-neutral-10">Form Permohonan Ubah Status Nikah</h1>
+            <p class="mt-2 text-base leading-6 text-neutral-10 max-w-xl">Silakan mengisi form permohonan ubah status nikah dengan benar, ya!</p>
+        </div>
     </header>
     <div class="container mx-auto">
         @if ($message = Session::get('error'))
-            <div id="alert" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mx-auto w-1/2" role="alert">
+            <div id="alert" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mx-auto w-2/3" role="alert">
                 <strong class="font-bold">Ops!</strong>
                 <span class="block sm:inline">{{ $message }}</span>
                 <!-- Tombol Close -->
@@ -79,10 +79,10 @@ animation: l11 1s infinite;
             <form action="{{ route('nikah.penduduk.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="sm:col-span-4">
-                    <label for="NIK_pengaju" class="block text-sm font-medium leading-6 text-gray-900">NIK Anda</label>
+                    <label for="NIK_pengaju" class="block text-sm font-medium leading-6 text-neutral-10">NIK Anda</label>
                     <div class="mt-1 mb-4">
-                        <input id="NIK_pengaju" name="NIK_pengaju" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                            text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
+                        <input id="NIK_pengaju" name="NIK_pengaju" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3
+                            text-neutral-10 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset
                             focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan NIK Anda" value="{{ old('NIK_pengaju') }}">
                         @error('NIK_pengaju')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
@@ -90,22 +90,22 @@ animation: l11 1s infinite;
                     </div>
                 </div>
                 <div class="sm:col-span-4">
-                    <label for="NIK_pasangan" class="block text-sm font-medium leading-6 text-gray-900">NIK Pasangan Anda</label>
+                    <label for="NIK_pasangan" class="block text-sm font-medium leading-6 text-neutral-10">NIK Pasangan Anda</label>
                     <div class="mt-1 mb-4">
-                        <input id="NIK_pasangan" name="NIK_pasangan" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                            text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
+                        <input id="NIK_pasangan" name="NIK_pasangan" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3
+                            text-neutral-10 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset
                             focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan NIK Pasangan Anda" value="{{ old('NIK_pasangan') }}">
                         @error('NIK_pasangan')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
-                        @enderror    
+                        @enderror
                     </div>
                 </div>
                 <div style="z-index: 99999" id="loading-image"  class="hidden fixed top-1/2 left-1/2 justify-center items-center -translate-x-1/2 -translate-y-1/2  w-screen h-screen bg-white opacity-70" style="display: none;" ><div class="  loader " ></div></div>
                 <div class="sm:col-span-4">
-                    <label for="nama_pasangan" class="block text-sm font-medium leading-6 text-gray-900">Nama Pasangan Anda</label>
+                    <label for="nama_pasangan" class="block text-sm font-medium leading-6 text-neutral-10">Nama Pasangan Anda</label>
                     <div class="mt-1 mb-4">
-                        <input id="nama_pasangan" name="nama_pasangan" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3 
-                            text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset 
+                        <input id="nama_pasangan" name="nama_pasangan" type="text" autocomplete="off" class="block w-full rounded-md border-0 py-1.5 pl-2 pr-3
+                            text-neutral-10 shadow-sm ring-1 ring-inset ring-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-inset
                             focus:ring-blue-600 sm:text-sm sm:leading-6" placeholder="Masukkan Nama Pasangan Anda" value="{{ old('nama_pasangan') }}">
                         @error('nama_pasangan')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
@@ -114,7 +114,7 @@ animation: l11 1s infinite;
                 </div>
 
                 <div class="sm:col-span-4">
-                    <label for="status" class="block text-sm font-medium leading-6 text-gray-900">Status Pernikahan</label>
+                    <label for="status" class="block text-sm font-medium leading-6 text-neutral-10">Status Pernikahan</label>
                     <div class="status mt-2 mb-4">
                         <div class="flex items-center">
                             <input type="radio" id="kawin" name="status" value="kawin" class="form-radio h-4 w-4 text-blue-600 border-blue-main">
@@ -130,11 +130,11 @@ animation: l11 1s infinite;
                     @enderror
                 </div>
                 <div>
-                    <label for="deskripsi_umkm" class="block text-sm font-medium leading-6 text-gray-900">Bukti</label>
+                    <label for="deskripsi_umkm" class="block text-sm font-medium leading-6 text-neutral-10">Bukti</label>
                     <div id="myId" class="h-52">
                         <input type="hidden" name="foto_umkm" id="public_id" >
                         <input type="hidden" name="asset_id" id="asset_id" >
-                        
+
                        <div id="text-main" class="flex flex-col  items-center w-fit">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="24" fill="none" viewBox="0 0 36 24">
                             <path fill="#0096FF" d="M29.025 9.06C28.005 3.885 23.46 0 18 0c-4.335 0-8.1 2.46-9.975 6.06A8.991 8.991 0 0 0 0 15c0 4.965 4.035 9 9 9h19.5c4.14 0 7.5-3.36 7.5-7.5 0-3.96-3.075-7.17-6.975-7.44ZM28.5 21H9c-3.315 0-6-2.685-6-6 0-3.075 2.295-5.64 5.34-5.955l1.605-.165.75-1.425C12.12 4.71 14.91 3 18 3c3.93 0 7.32 2.79 8.085 6.645l.45 2.25 2.295.165A4.47 4.47 0 0 1 33 16.5c0 2.475-2.025 4.5-4.5 4.5ZM12 13.5h3.825V18h4.35v-4.5H24l-6-6-6 6Z"/>
@@ -142,19 +142,19 @@ animation: l11 1s infinite;
                           <p class="block sm:hidden">Upload </p>
                           <p class="hidden sm:block" >Seret file Anda atau Klik file dari perangkat Anda </p>
                           <p class="hidden sm:block text-neutral-06">Ukuran file maksimal adalah 10 MB</p>
-                 
+
                        </div>
                        <div style="z-index: 99999" id="loading-image"  class="hidden fixed top-1/2 left-1/2 justify-center items-center -translate-x-1/2 -translate-y-1/2  w-screen h-screen bg-white opacity-70" style="display: none;" ><div class="  loader " ></div></div>
                     </div>
                     <p id="Error-Messages" class="text-red-600" ></p>
-                    
+
                 </div>
-                
+
                 <div class="flex items-center mt-6">
-                    <input id="agree" name="agree" type="checkbox" class="form-checkbox h-4 w-4 text-blue-600" />
-                    <label for="agree" class="ml-2 block text-sm text-gray-900">
+                    <input id="agree" name="agree" type="checkbox" class="form-checkbox h-4 w-4 text-blue-600 rounded-md" />
+                    <label for="agree" class="ml-2 block text-sm text-neutral-10">
                         Apakah data Anda sudah benar?
-                    </label>    
+                    </label>
                 </div>
                 <div
                     class="flex flex-col-reverse gap-4 sm:flex-row justify-center mt-12 space-y-4 sm:space-x-8 sm:space-y-0">
@@ -176,14 +176,14 @@ const errorMessage = $('#dzErrorMessage');
 const placeHolder = $('#dzPlaceholder');
 
 
-let myDropzone = new Dropzone("div#myId", { 
+let myDropzone = new Dropzone("div#myId", {
   thumbnailHeight: 120,
   thumbnailWidth: 120,
   uploadMultiple:false,
   maxFiles:1,
   addRemoveLinks:true,
   maxFilesize: 10,
-    url: '{{url("cloudinary/upload")}}', 
+    url: '{{url("cloudinary/upload")}}',
 
     headers:{
         'x-csrf-token': '{{csrf_token()}}',
@@ -199,7 +199,7 @@ let myDropzone = new Dropzone("div#myId", {
 
     }
 },
-  
+
   success:function(file,response) {
     var progressElement = document.querySelector("#loading-image");
     progressElement.classList.remove("flex");
@@ -279,7 +279,7 @@ myDropzone.on('error', function(file, response) {
 
     function resetForm() {
         // Reset nilai input
-        document.getElementById("NIK_pengaju").value = ""; 
+        document.getElementById("NIK_pengaju").value = "";
         document.getElementById("NIK_pasangan").value = "";
         document.getElementById("nama_pasangan").value = "";
         document.querySelector('input[name="status"]:checked').checked = false; // Uncheck radio buttons

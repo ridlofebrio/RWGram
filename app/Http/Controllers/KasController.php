@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
+use Barryvdh\DomPDF\Facade\PDF;
 
 class KasController extends Controller
 {
@@ -208,6 +209,15 @@ class KasController extends Controller
     {
         //
         return view("kas.create");
+    }
+
+    public function viewPDF()
+    {
+
+        $pdf = PDF::loadView('dashboard.pdf.kas')
+            ->setPaper('a4', 'portrait');
+
+        return $pdf->stream();
     }
 
 

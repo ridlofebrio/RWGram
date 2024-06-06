@@ -20,8 +20,7 @@ class UmkmSeeder extends Seeder
                 'umkm_id' => 1,
                 'penduduk_id' => 1,
                 'nama_umkm' => 'Sambel Bakar',
-                'asset_id' => "3c16fa34033ee2110ddceab721812f07",
-                'foto_umkm' => 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1717250202/nmphbv4yi4xyjbrd1uuc.jpg',
+
                 'no_wa' => '081210293647',
                 'link_medsos' => 'https://www.instagram.com/sambel_bakar/',
                 'nama_medsos' => '@sambalbakariben',
@@ -35,8 +34,7 @@ class UmkmSeeder extends Seeder
                 'umkm_id' => 2,
                 'penduduk_id' => 2,
                 'nama_umkm' => 'Warung Makan Padang',
-                'asset_id' => "3c16fa34033ee2110ddceab721812f07",
-                'foto_umkm' => 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1717250202/nmphbv4yi4xyjbrd1uuc.jpg',
+
                 'no_wa' => '081210293521',
                 'link_medsos' => 'https://www.instagram.com/warung_padang/',
                 'nama_medsos' => '@warungpadangmurah',
@@ -50,8 +48,7 @@ class UmkmSeeder extends Seeder
                 'umkm_id' => 3,
                 'penduduk_id' => 3,
                 'nama_umkm' => 'Bakso Pak Kress',
-                'asset_id' => "3c16fa34033ee2110ddceab721812f07",
-                'foto_umkm' => 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1717250202/nmphbv4yi4xyjbrd1uuc.jpg',
+
                 'no_wa' => '081210296487',
                 'link_medsos' => 'https://www.instagram.com/bakso/',
                 'nama_medsos' => '@baksoenak',
@@ -65,8 +62,7 @@ class UmkmSeeder extends Seeder
                 'umkm_id' => 4,
                 'penduduk_id' => 1,
                 'nama_umkm' => 'Sambel Bakar',
-                'asset_id' => "3c16fa34033ee2110ddceab721812f07",
-                'foto_umkm' => 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1717250202/nmphbv4yi4xyjbrd1uuc.jpg',
+
                 'no_wa' => '081210293647',
                 'link_medsos' => 'https://www.instagram.com/sambel_bakar/',
                 'nama_medsos' => '@sambalbakariben',
@@ -80,8 +76,7 @@ class UmkmSeeder extends Seeder
                 'umkm_id' => 5,
                 'penduduk_id' => 2,
                 'nama_umkm' => 'Warung Makan Padang',
-                'asset_id' => "3c16fa34033ee2110ddceab721812f07",
-                'foto_umkm' => 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1717250202/nmphbv4yi4xyjbrd1uuc.jpg',
+
                 'no_wa' => '081210293521',
                 'link_medsos' => 'https://www.instagram.com/warung_padang/',
                 'nama_medsos' => '@warungpadangmurah',
@@ -95,8 +90,7 @@ class UmkmSeeder extends Seeder
                 'umkm_id' => 6,
                 'penduduk_id' => 3,
                 'nama_umkm' => 'Bakso Pak Kress',
-                'asset_id' => "3c16fa34033ee2110ddceab721812f07",
-                'foto_umkm' => 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1717250202/nmphbv4yi4xyjbrd1uuc.jpg',
+
                 'no_wa' => '081210296487',
                 'link_medsos' => 'https://www.instagram.com/bakso/',
                 'nama_medsos' => '@baksoenak',

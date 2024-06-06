@@ -15,7 +15,8 @@ class BansosController extends Controller
     {
 
 
-        $allBansos = BansosModel::all();
+        $allBansos = BansosModel::selectRaw('count(bansos_id) as jumlah')->first();
+
         $kriteria = Kriteria::all();
 
         $bansos = BansosModel::with('kartuKeluarga', 'kartuKeluarga.kartuKeluarga', 'kartuKeluarga.penduduk')->paginate(5);

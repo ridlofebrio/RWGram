@@ -19,7 +19,7 @@
 <div class="text-sm px-5 overflow-x-auto py-5 font-medium text-center rounded-xl w-full bg-white  text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
         
     <div class="flex flex-wrap gap-3 w-full justify-between items-center">
-        <h2 class="text-xl " > {{count($data)}} Laporan</h2>
+        <h2 class="text-xl " > {{ $dataAll }} Laporan</h2>
         <div class="filter flex space-x-2">
             <div x-cloak x-data="{open:false}" class="relative " >
                 <button @click="open= !open" class=" px-3 hover:bg-blue-main hover:border-blue-main hover:text-white items-center py-2 w-fit  md:min-w-fit md:w-full h-full  border border-gray-300 rounded-full" ><div class="flex min-w-fit md:min-w-[100px] justify-around items-center"><i class=" fa-solid fa-sliders"></i> <p class="hidden md:block" id="sort">-semua-</p> <i class="hidden md:block fa fa-chevron-down"></i></div></button>
@@ -52,13 +52,13 @@
                         No
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Nama Pengaju
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Tanggal
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Nama
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Nama UMKM
+                        Deskripsi
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Status
@@ -73,10 +73,14 @@
                     @foreach ($data as $umkm)
                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{$umkm->penduduk->nama_penduduk}}
+                        {{$loop->index+1}}
                     </th>
+                    
                     <td class="px-6 py-4">
-                        {{$umkm->jenis_laporan}}
+                        {{$umkm->penduduk->nama_penduduk}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{$umkm->tanggal_laporan}}
                     </td>
                     <td class="px-6 py-4  " style="  white-space: nowrap;
                     overflow: hidden;
@@ -84,11 +88,9 @@
                     max-width: 150px; ">
                         {{$umkm->deskripsi_laporan}}
                     </td>
+              
                     <td class="px-6 py-4">
-                        {{$umkm->tanggal_laporan}}
-                    </td>
-                    <td class="px-6 py-4">
-                        <div x-cloak x-data="{ open: false }">
+                        <div x-cloak x-data="{ open: false }" class="w-full">
                             @php($class = array('Menunggu'=>'bg-[#FBF4CF]  w-[150px]  text-[#E9C90E] border border-yellow-100 px-3 py-2 rounded-full font-bold hover:border hover:border-yellow-400',
                                                  'Selesai'=>'bg-green-100 text-green-400 w-[150px]  border border-green-100 px-3 py-2 rounded-full font-bold hover:border hover:border-green-400',
                                                  'Proses'=>'bg-blue-100 text-blue-main  w-[150px] border border-blue-100 px-3 py-2 rounded-full font-bold hover:border hover:border-blue-400',

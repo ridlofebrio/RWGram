@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PendudukModel;
 use App\Models\StatusNikahModel;
 use Illuminate\Http\Request;
+use Validator;
 
 class StatusNikahController extends Controller
 {
@@ -47,6 +48,12 @@ class StatusNikahController extends Controller
 
         $status = $request->query('status');
         $query = StatusNikahModel::query();
+
+        if ($request->has('search')) {
+            $nikah = $query->whereHas('penduduk', function ($query) use ($request) {
+                $query->where('nama_penduduk', 'like', '%' . $request->search . '%');
+            });
+        }
 
         if ($status) {
             $query->where('status_pengajuan', $status);
@@ -107,11 +114,27 @@ class StatusNikahController extends Controller
 
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'status_pengajuan' => 'required'
+        $validate = Validator::make($request->all(), [
+            'status_pengajuan' => 'required',
+            'status' => 'required',
+            'penduduk_id' => 'required'
         ]);
 
-        StatusNikahModel::find($id)->update($request->all());
+        if ($validate->fails()) {
+            dd($validate->messages());
+        }
+
+        StatusNikahModel::find($id)->update([
+            'status_pengajuan' => $request->status_pengajuan
+        ]);
+
+        try {
+            $penduduk = PendudukModel::findOrFail($request->penduduk_id);
+            $penduduk->status_perkawinan = $request->status;
+            $penduduk->save();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('flash', ['error', 'Data Penduduk Tidak Ada']);
+        }
         return redirect('dashboard/pengajuan')->with('flash', ['success', 'Data berhasil dikonfirmasi']);
     }
 
@@ -119,7 +142,7 @@ class StatusNikahController extends Controller
     {
         $laporan = StatusNikahModel::findOrFail($id)->delete();
     }
-    public function indexFind(Request $request) 
+    public function indexFind(Request $request)
     {
         $metadata = (object) [
             'title' => 'Status Nikah',
