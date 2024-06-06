@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             RwSeeder::class,
             RtSeeder::class,
             kartuKeluargaSeeder::class,
+
             PendudukSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,

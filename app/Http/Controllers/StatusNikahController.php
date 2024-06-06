@@ -126,5 +126,23 @@ class StatusNikahController extends Controller
     {
         $laporan = StatusNikahModel::findOrFail($id)->delete();
     }
-   
+    public function indexFind(Request $request)
+    {
+        $metadata = (object) [
+            'title' => 'Status Nikah',
+            'description' => 'Halaman Ubah Status Warga'
+        ];
+
+        $search = $request->input('search');
+        if (empty($search)) {
+            $data = StatusNikahModel::paginate(5);
+        } else {
+            $data = StatusNikahModel::whereHas('penduduk', function ($query) use ($search) {
+                $query->where('nama_penduduk', 'like', '%' . $search . '%')
+                    ->orWhere('NIK', 'like', '%' . $search . '%');
+            })->paginate(3);
+        }
+
+        return view('statusNikah.index', ['nikah' => $data])->with(['metadata' => $metadata, 'activeMenu' => 'permohonan']);
+    }
 }
