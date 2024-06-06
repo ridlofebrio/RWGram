@@ -16,10 +16,17 @@ return new class extends Migration {
             $table->foreign('penduduk_id')->references('penduduk_id')->on('penduduk');
             $table->string('nama_umkm', 50);
             $table->string('foto_umkm', 250)->nullable();
+            $table->string('asset_id', 250)->nullable();
+            $table->string('no_wa', 20);
             $table->string('link_medsos', 250)->nullable();
+            $table->string('nama_medsos', 250)->nullable();
             $table->text('deskripsi_umkm');
             $table->string('lokasi_umkm', 100);
             $table->dateTime('tanggal_umkm');
+
+            $table->enum('status_pengajuan', ['diterima', 'menunggu', 'ditolak'])->default('menunggu');
+
+            $table->boolean('terbaca')->default(false);
             $table->timestamps();
         });
     }

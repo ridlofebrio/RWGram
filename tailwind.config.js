@@ -8,6 +8,7 @@ module.exports = {
         "./resources/**/*.js",
         "./resources/**/*.vue",
         "./node_modules/flowbite/**/*.js",
+        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
     ],
     theme: {
         extend: {
@@ -40,10 +41,15 @@ module.exports = {
                 main: [Manrope],
             },
             dropShadow: {
-                button: "0 4px 4px rgba(0, 0, 0, 0.40)",
+                button: "0 4px 4px rgba(0, 0, 0, 0.20)",
                 card: "0 4px 10px rgba(0, 0, 0, 0.25)",
             },
         },
     },
-    plugins: [require("flowbite/plugin")],
+    plugins: [
+        require("flowbite/plugin")({
+            charts: true,
+        }),
+        
+    ],
 };

@@ -14,11 +14,15 @@ return new class extends Migration {
             $table->id('laporan_id');
             $table->unsignedBigInteger('penduduk_id')->index();
             $table->foreign('penduduk_id')->references('penduduk_id')->on('penduduk');
-            $table->string('jenis_laporan', 20);
             $table->text('deskripsi_laporan');
             $table->string('foto_laporan', 250)->nullable();
-            $table->string('status_laporan', 15);
+            $table->string('asset_id', 250)->nullable();
+
+            $table->enum('status_laporan', ['Menunggu', 'Selesai', 'Proses', 'Ditolak']);
             $table->dateTime('tanggal_laporan');
+            $table->text('pesan')->nullable();
+            $table->boolean('terbaca')->default(0);
+
             $table->timestamps();
         });
     }

@@ -12,11 +12,17 @@ class LaporanModel extends Model
     protected $table = "laporan";
     protected $primaryKey = "laporan_id";
 
-    protected $fillable =[
+    protected $fillable = [
         'penduduk_id',
-        'jenis_laporan',
         'deskripsi_laporan',
         'tanggal_laporan',
-        'status_laporan'
+        'status_laporan',
+        'foto_laporan',
+        'asset_id'
     ];
+
+    public function penduduk()
+    {
+        return $this->belongsTo(PendudukModel::class, 'penduduk_id');
+    }
 }

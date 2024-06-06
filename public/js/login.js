@@ -1,17 +1,36 @@
-const button = document.getElementById("button_reveal");
+const iconn = document.getElementById("icon_reveal");
 
-button.addEventListener("click", (e) => {
+iconn.addEventListener("click", (e) => {
     e.preventDefault();
     const form = document.getElementById("password");
     const icon = document.getElementById("eye");
 
     if (form.getAttribute("type") === "password") {
         form.setAttribute("type", "text");
-        icon.classList.remove("fa-eye");
-        icon.classList.add("fa-eye-slash");
+        icon.src = "/asset/icon/Eye-slash.svg";
     } else {
         form.setAttribute("type", "password");
-        icon.classList.remove("fa-eye-slash");
-        icon.classList.add("fa-eye");
+        icon.src = "/asset/icon/Eye.svg";
     }
 });
+
+const inputUsername = document.getElementById("username");
+const inputPassword = document.getElementById("password");
+const button  = document.getElementById("button_login");
+
+inputUsername.addEventListener("input", buttonColor);
+inputPassword.addEventListener("input", buttonColor);
+
+function buttonColor(){
+    const username = inputUsername.value.trim();
+    const password = inputPassword.value.trim();
+
+
+    if(username !== "" && password !== ""){
+        button.classList.remove("bg-neutral-05");
+        button.classList.add("bg-blue-main");
+    }else{
+        button.classList.remove("bg-blue-main");
+        button.classList.add("bg-neutral-05");
+    }
+}

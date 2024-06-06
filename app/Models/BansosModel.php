@@ -16,23 +16,27 @@ class BansosModel extends Model
     protected $fillable = [
         'kartu_keluarga_id',
         'nama_pengaju',
-        'total_pendapatan',
-        'jumlah_tanggungan',
-        'jumlah_kendaraan',
-        'luas_rumah',
-        'luas_tanah',
-        'jumlah_watt',
+        'c1',
+        'c2',
+        'c3',
+        'c4',
+        'c5',
+        'c6',
         'tanggal_bansos',
         'foto_dapur',
         'foto_depan_rumah',
         'foto_kamar_mandi',
         'foto_kamar_tidur',
-        'foto_kamar_tamu',
+        'foto_ruang_tamu',
         'status',
+        'keterangan',
+        'saw',
+        'preference',
+        'score',
     ];
 
     public function kartuKeluarga(): BelongsTo
     {
-        return $this->belongsTo(KartuKeluargaModel::class, 'kartu_keluarga_id', 'kartu_keluarga_id');
+        return $this->belongsTo(KepalaKeluargaModel::class, 'kartu_keluarga_id', 'kartu_keluarga_id');
     }
 }

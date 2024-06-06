@@ -9,8 +9,18 @@ class KasModel extends Model
 {
     use HasFactory;
 
-    protected $table = "kas";
-    protected $primaryKey = "kas_id";
+    protected $table = "detail_kas";
+    protected $primaryKey = "id_detail_kas";
 
-    protected $fillable = ['kartu_keluarga_id', 'jumlah_kas', 'tanggal_kas'];
+    protected $fillable = ['jumlah_kas', 'id_kas', 'tanggal_kas', 'bulan'];
+
+
+
+    public function kas()
+    {
+        return $this->belongsTo(KasDetailModel::class, 'id_kas');
+    }
+
+
+
 }
