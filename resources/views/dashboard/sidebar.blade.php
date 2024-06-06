@@ -18,7 +18,7 @@
                     <ul class="mt-12 space-y-2 font-medium">
                         <li>
                             <a href="{{ url('dashboard') }}"
-                                class="{{ $active == 'beranda' ? 'bg-blue-main hover:bg-blue-main text-white ' : 'hover:bg-gray-100' }}  flex items-center p-2 text-black rounded-lg dark:text-white  dark:hover:bg-gray-700 group">
+                                class="{{ $active == 'beranda' ? 'bg-blue-main hover:bg-blue-main text-white ' : 'hover:bg-gray-100' }}  flex items-center p-2 text-neutral-10 rounded-lg dark:text-white  dark:hover:bg-gray-700 group">
                                 @if ($active == 'beranda')
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                         viewBox="0 0 24 24">
@@ -39,7 +39,7 @@
                         </li>
                         <li>
                             <a href="{{ url('dashboard/pengajuan') }}"
-                                class="flex items-center {{ $active == 'pengajuan' ? 'bg-blue-main hover:bg-blue-main text-white' : 'hover:bg-gray-100' }}  p-2 text-black rounded-lg dark:text-white  dark:hover:bg-gray-700 group">
+                                class="flex items-center {{ $active == 'pengajuan' ? 'bg-blue-main hover:bg-blue-main text-white' : 'hover:bg-gray-100' }}  p-2 text-neutral-10 rounded-lg dark:text-white  dark:hover:bg-gray-700 group">
                                 @if ($active == 'pengajuan')
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                         viewBox="0 0 24 24">
@@ -64,7 +64,7 @@
                         </li>
                         <li>
                             <a href="{{ url('dashboard/pengaduan') }}"
-                                class="flex items-center active:bg-blue-main p-2 text-black rounded-lg dark:text-white  dark:hover:bg-gray-700 group {{ $active == 'pengaduan' ? 'bg-blue-main hover:bg-blue-main text-white' : 'hover:bg-gray-100' }}">
+                                class="flex items-center p-2 text-neutral-10 rounded-lg dark:text-white  dark:hover:bg-gray-700 group {{ $active == 'pengaduan' ? 'bg-blue-main hover:bg-blue-main text-white' : 'hover:bg-gray-100' }}">
                                 @if ($active == 'pengaduan')
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                         viewBox="0 0 24 24">
@@ -95,7 +95,7 @@
                     <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
                         <li>
                             <a href="{{ url('dashboard/penduduk') }}"
-                                class="{{ $active == 'penduduk' ? 'bg-blue-main hover:bg-blue-main text-white' : 'hover:bg-gray-100' }}  flex items-center p-2 text-black transition duration-75 rounded-lg  dark:hover:bg-gray-700 dark:text-white group">
+                                class="{{ $active == 'penduduk' ? 'bg-blue-main hover:bg-blue-main text-white' : 'hover:bg-gray-100' }}  flex items-center p-2 text-neutral-10 transition duration-75 rounded-lg  dark:hover:bg-gray-700 dark:text-white group">
                                 @if ($active == 'penduduk')
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                         viewBox="0 0 24 24">
@@ -115,7 +115,7 @@
                         </li>
                         <li>
                             <a href="{{ url('dashboard/bansos') }}"
-                                class="{{ $active == 'bansos' ? 'bg-blue-main hover:bg-blue-main text-white' : 'hover:bg-gray-100' }}  flex items-center p-2 text-black transition duration-75 rounded-lg  dark:hover:bg-gray-700 dark:text-white group">
+                                class="{{ $active == 'bansos' ? 'bg-blue-main hover:bg-blue-main text-white' : 'hover:bg-gray-100' }}  flex items-center p-2 text-neutral-10 transition duration-75 rounded-lg  dark:hover:bg-gray-700 dark:text-white group">
                                 @if ($active == 'bansos')
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         fill="none" viewBox="0 0 24 24">
@@ -140,7 +140,7 @@
                         </li>
                         <li>
                             <a href="{{ url('dashboard/kas') }}"
-                                class="{{ $active == 'kas' ? 'bg-blue-main hover:bg-blue-main text-white' : 'hover:bg-gray-100' }}  flex items-center p-2 text-black transition duration-75 rounded-lg  dark:hover:bg-gray-700 dark:text-white group">
+                                class="{{ $active == 'kas' ? 'bg-blue-main hover:bg-blue-main text-white' : 'hover:bg-gray-100' }}  flex items-center p-2 text-neutral-10 transition duration-75 rounded-lg  dark:hover:bg-gray-700 dark:text-white group">
                                 @if ($active == 'kas')
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         fill="none" viewBox="0 0 24 24">
@@ -165,7 +165,7 @@
                         </li>
                         <li>
                             <a href="{{ url('/dashboard/persuratan') }}"
-                                class="{{ $active == 'persuratan' ? 'bg-blue-main hover:bg-blue-main text-white' : 'hover:bg-gray-100' }} flex items-center p-2 text-black transition duration-75 rounded-lg  dark:hover:bg-gray-700 dark:text-white group">
+                                class="{{ $active == 'persuratan' ? 'bg-blue-main hover:bg-blue-main text-white' : 'hover:bg-gray-100' }} flex items-center p-2 text-neutral-10 transition duration-75 rounded-lg  dark:hover:bg-gray-700 dark:text-white group">
                                 @if ($active == 'persuratan')
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         fill="none" viewBox="0 0 24 24">
@@ -194,7 +194,7 @@
                 <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
                     <li>
                         <a href="{{ url('logout') }}"
-                            class="flex items-center active:bg-blue-main p-2 text-black rounded-lg dark:text-white  dark:hover:bg-gray-700 group hover:bg-gray-100">
+                            class="flex items-center active:bg-blue-main p-2 text-neutral-10 rounded-lg dark:text-white  dark:hover:bg-gray-700 group hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                 viewBox="0 0 24 24">
                                 <path stroke="#EE0B0B" stroke-linecap="round" stroke-linejoin="round"
@@ -242,7 +242,7 @@
                     <ul class="mt-12 space-y-2 font-medium">
                         <li>
                             <a href="{{ url('karangTaruna/') }}"
-                                class="{{ $active == 'beranda' ? 'bg-blue-main hover:bg-blue-main text-white' : 'hover:bg-gray-100' }}  flex items-center p-2 text-black rounded-lg dark:text-white  dark:hover:bg-gray-700 group">
+                                class="{{ $active == 'beranda' ? 'bg-blue-main hover:bg-blue-main text-white' : 'hover:bg-gray-100' }}  flex items-center p-2 text-neutral-10 rounded-lg dark:text-white  dark:hover:bg-gray-700 group">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
                                     <path fill="{{ $active == 'beranda' ? 'white' : '#1B1B1B' }}"
@@ -256,7 +256,7 @@
                         </li>
                         <li>
                             <a href="{{ url('karangTaruna/informasi') }}"
-                                class="flex items-center {{ $active == 'informasi' ? 'bg-blue-main hover:bg-blue-main text-white' : 'hover:bg-gray-100' }}  p-2 text-black rounded-lg dark:text-white  dark:hover:bg-gray-700 group">
+                                class="flex items-center {{ $active == 'informasi' ? 'bg-blue-main hover:bg-blue-main text-white' : 'hover:bg-gray-100' }}  p-2 text-neutral-10 rounded-lg dark:text-white  dark:hover:bg-gray-700 group">
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
@@ -274,7 +274,7 @@
                         </li>
                         <li>
                             <a href="{{ url('karangTaruna/pengumuman') }}"
-                                class="flex items-center active:bg-blue-main p-2 text-black rounded-lg dark:text-white  dark:hover:bg-gray-700 group {{ $active == 'pengumuman' ? 'bg-blue-main hover:bg-blue-main text-white' : 'hover:bg-gray-100' }}">
+                                class="flex items-center active:bg-blue-main p-2 text-neutral-10 rounded-lg dark:text-white  dark:hover:bg-gray-700 group {{ $active == 'pengumuman' ? 'bg-blue-main hover:bg-blue-main text-white' : 'hover:bg-gray-100' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
                                     <path stroke="{{ $active == 'pengumuman' ? 'white' : '#1B1B1B' }}"
@@ -300,7 +300,7 @@
                 <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
                     <li>
                         <a href="{{ url('logout') }}"
-                            class="flex items-center active:bg-blue-main p-2 text-black rounded-lg dark:text-white  dark:hover:bg-gray-700 group hover:bg-gray-100">
+                            class="flex items-center active:bg-blue-main p-2 text-neutral-10 rounded-lg dark:text-white  dark:hover:bg-gray-700 group hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                 viewBox="0 0 24 24">
                                 <path stroke="#EE0B0B" stroke-linecap="round" stroke-linejoin="round"
