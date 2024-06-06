@@ -251,6 +251,7 @@
                                         d="M12 18.75c-.41 0-.75-.34-.75-.75v-3c0-.41.34-.75.75-.75s.75.34.75.75v3c0 .41-.34.75-.75.75Z" />
                                 </svg>
 
+
                                 <span class="ms-3">Beranda</span>
                             </a>
                         </li>
@@ -318,6 +319,7 @@
 
             </div>
             {{-- <div class="end pb-5 px-3 w-full flex items-end">
+
          <ul class="mt-12 space-y-2 w-full font-medium">
             <li>
                <a href="#" class="flex items-center p-2 text-red-600 transition duration-75 rounded-lg hover:bg-gray-100  dark:hover:bg-gray-700 dark:text-white group">

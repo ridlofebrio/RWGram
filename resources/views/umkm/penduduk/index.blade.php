@@ -51,7 +51,7 @@
                             <div class="shrink-0 mb-4 md:mb-6">
 
                                 
-                                <img src="{{$data->foto_umkm}}" class="rounded-lg object-cover w-full h-[280px] md:h-[280px] lg:h-[280px]" alt="{{ $data->nama_umkm }}">
+                                <img src="{{$data->foto_umkm == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1717600371/ovayldsch5461a8ffv3m.jpg' : $data->foto_umkm}}" class="rounded-lg object-cover w-full h-[280px] md:h-[280px] lg:h-[280px]" alt="{{ $data->nama_umkm }}">
 
                             </div>
                             <p class="mb-2 font-bold text-lg text-neutral dark:text-white text-black line-clamp-2">{{ $data->nama_umkm }}</p>

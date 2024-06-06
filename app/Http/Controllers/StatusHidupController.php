@@ -16,7 +16,13 @@ class StatusHidupController extends Controller
         ];
 
         $status = $request->query('status');
+
         $query = StatusHidupModel::query();
+        if ($request->has('search')) {
+            $hidup = $query->whereHas('penduduk', function ($query) use ($request) {
+                $query->where('nama_penduduk', 'like', '%' . $request->search . '%');
+            });
+        }
 
         if ($status) {
             $query->where('status_pengajuan', $status);
@@ -119,7 +125,6 @@ class StatusHidupController extends Controller
             $status = StatusHidupModel::findOrFail($id);
             $status->status_pengajuan = $request->status_pengajuan;
             $status->save();
-
         } catch (\Exception $e) {
             dd($e);
         }
@@ -128,7 +133,6 @@ class StatusHidupController extends Controller
             $penduduk = PendudukModel::findOrFail($request->id_penduduk);
             $penduduk->status_kematian = 1;
             $penduduk->save();
-
         } catch (\Exception $e) {
             dd($e);
         }

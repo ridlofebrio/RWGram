@@ -17,7 +17,7 @@
             <p class="mt-2 text-base leading-6 text-gray-600 max-w-xl">Silakan melihat data bansos Anda, ya!</p>
         </div>
     </header>
-    <div class="container mx-auto max-w-7xl mt-2 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
         @if ($bansos->status == 'menerima')
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mx-auto" role="alert">
                 <strong class="font-bold">Selamat! </strong>
@@ -35,7 +35,7 @@
             </div>
         @endif
     </div>
-    <main class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+    <main class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <!-- Your content -->
         <div class="max-w-7xl mx-auto card p-8 mb-12" style="box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
             <div class="sm:col-span-4">

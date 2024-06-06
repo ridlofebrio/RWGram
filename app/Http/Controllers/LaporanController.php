@@ -14,18 +14,20 @@ class LaporanController extends Controller
      */
     public function index($sort)
     {
-        $laporan = LaporanModel::with('penduduk')->where('status_laporan', $sort)->paginate(3);
+        $laporan = LaporanModel::with('penduduk')->where('status_laporan', $sort)->paginate(5);
+        $dataAll = count(LaporanModel::with('penduduk')->where('status_laporan', $sort)->get());
 
-        return $laporan;
+        return ['laporan'=> $laporan, 'dataAll' => $dataAll];
     }
 
     public function keluhan($sort = 'Menunggu')
     {
-        $laporan = LaporanModel::with('penduduk')->where('status_laporan', $sort)->paginate(3);
+        $laporan = LaporanModel::with('penduduk')->where('status_laporan', $sort)->paginate(5);
         LaporanModel::where('terbaca', '=', '0')->update([
             'terbaca' => 1
         ]);
-        return view('dashboard.pengaduan', ['data' => $laporan, 'active' => 'pengaduan']);
+        $dataAll = count(LaporanModel::with('penduduk')->where('status_laporan', 'menunggu')->get());
+        return view('dashboard.pengaduan', ['data' => $laporan, 'active' => 'pengaduan', 'dataAll'=> $dataAll]);
     }
 
 
