@@ -17,34 +17,34 @@
             </svg>
          </button>
          <div class=" ml-0 md:ml-72 flex-col hidden md:flex    font-main">
-             <h1 class="text-neutral-07 text-lg">{{$i[$num]}}, {{date('d F Y',strtotime(now()))}}</h1>
-            <h1 class="font-bold text-lg" >{{ucwords($active)}}</h1>
+             <h1 class="text-neutral-07 text-base font-medium">{{$i[$num]}}, {{date('d F Y',strtotime(now()))}}</h1>
+            <h1 class="font-bold text-xl text-neutral-10" >{{ucwords($active)}}</h1>
          </div>
 
 
         <div class="flex gap-5 justify-end items-center h-full">
-      
+
             <div x-cloak x-data="{ open: false }">
                 <button @click="open = ! open" class="notif relative bg-neutral-03 hover:bg-blue-main hover:text-white px-3 py-2 rounded-full">
-                   <div style="display:none;" id="dotred" class="p-1 bg-red-500 rounded-full absolute top-2 right-2"></div> 
+                   <div style="display:none;" id="dotred" class="p-1 bg-red-500 rounded-full absolute top-2 right-2"></div>
                     <i class="fa-regular fa-bell"></i>
                 </button>
-             
+
                 <div x-show="open" @click.outside="open = false" class="relative"  id="notif">
 
                 </div>
             </div>
 
-                
+
                 <div class="user flex gap-3 items-center">
                     <div class="w-10 h-10 rounded-full">
                         <img src="{{Auth::user()->foto_profil == null ? 'https://res.cloudinary.com/dtzlizlrs/image/upload/v1716898016/mcdjouvceefyfpoujo87.png' :Auth::user()->foto_profil}}"  class="w-full h-full object-cover rounded-full" alt="">
                     </div>
-                  
+
                     <div class="info flex justify-center items-center gap-3">
                         <div class="hidden md:block detail">
-                            <h1 class=" font-medium text-lg">{{Auth::user()->nama_user}}</h1>
-                            <h2 class=" font-medium text-xs text-neutral-400">{{Auth::user()->role_id == 5 ? 'RW Admin' : 'RT Admin'}}</h2>
+                            <h1 class=" font-medium text-base text-neutral-10">{{Auth::user()->nama_user}}</h1>
+                            <h2 class=" font-medium text-xs text-neutral-07">{{Auth::user()->role_id == 5 ? 'RW Admin' : 'RT Admin'}}</h2>
                         </div>
                         <a href="{{url('dashboard/detail-akun')}}" class="text-blue-main flex items-center hover:bg-blue-main hover:text-white text-2xl px-2 py-2 rounded-full" ><i class="fa-solid fa-gear"></i></a>
 
@@ -53,27 +53,27 @@
         </div>
 
     </div>
- 
+
 </div>
 
 <script>
-    
+
     $(document).ready(function () {
         $.ajax({
                         url: "{{url('data/notif')}}",
-                        
+
            success:function(data){
             $('#notif').html(data)
            },
 
-                        
+
                     })
 
                     $.ajax({
                         url: "{{url('data/notifcount')}}",
-                        
+
                         success:function(data){
-                            
+
                          if(data != 0){
                                 $('#dotred').css('display','block');
                          }
